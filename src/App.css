@@ -1,0 +1,44 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+@media print {
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .receipt {
+    width: 48%;
+    page-break-inside: avoid;
+  }
+
+  .receipt-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  /* Hide print button on print */
+  .print-button {
+    display: none;
+  }
+
+  /* Ensuring no page breaks inside the receipts */
+  .receipt-wrapper {
+    page-break-inside: avoid;
+  }
+}

@@ -1,20 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import {Container,Frame} from "./SubjectStyle"
 
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f3f3f3;
-`;
 
-const Frame = styled.iframe`
-  width: 80%;
-  height: 90vh;
-  border: none;
-`;
 
 const Paper = () => {
   // Manually defined JSON data

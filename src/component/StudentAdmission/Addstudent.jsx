@@ -5,7 +5,7 @@ import RequireSymbol from "../RequireSymbol";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
-import {Container,StyledInput,SuggestionsList,SuggestionItem,MainDashboard,SubmitButton,StepContent,Section,InputContainer1,Step,StepIndicatorContainer,Select,Title,Form,Heading,Main,FormContainer,InputContainer,Label,Input,Label2} from '../../Style/AddStudentsStyles'
+import {Container,StyledInput,SuggestionsList,SuggestionItem,MainDashboard,SubmitButton,StepContent,Section,InputContainer1,Step,StepIndicatorContainer,Select,Title,Form,Heading,Main,FormContainer,InputContainer,Label,Input,Label2} from './StudentAdmission'
 const AddStudentdata = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

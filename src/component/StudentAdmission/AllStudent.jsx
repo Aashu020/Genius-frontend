@@ -1,161 +1,12 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Eye, Edit } from "lucide-react";
 import { SiMicrosoftexcel } from "react-icons/si";
 import { IoMdPrint } from "react-icons/io";
 import * as XLSX from "xlsx";
 import axios from "axios";
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-const MainDashboard = styled.div`
-  flex: 1;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
-
-const TableContainer = styled.div`
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  margin-bottom: 20px;
-  justify-content: space-between;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  width: 100%;
-`;
-
-const OpenButton = styled(Button)`
-  background-color: #688af6;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-`;
-
-const Th = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-weight: 400;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-`;
-const Photo = styled.img`
-  width: 115px;
-  height: 110px;
-  background-color: gray;
-  border-radius: 50%;
-`;
-const ActionButton = styled.button`
-  background-color: ${(props) => props.color};
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  margin-right: 5px;
-`;
-
-const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  padding: 10px 20px;
-  border-top: 1px solid #e0e0e0;
-  background-color: #fff;
-`;
-
-const PaginationInfo = styled.div`
-  display: flex;
-  align-items: center;
-  color: #888;
-`;
-
-const PaginationButton = styled.button`
-  background-color: #fff;
-  color: ${(props) => (props.disabled ? "#ccc" : "#000")};
-  border: none;
-  padding: 5px 15px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  font-size: 14px;
-
-  &:hover {
-    background-color: ${(props) => (props.disabled ? "#fff" : "#f0f0f0")};
-  }
-`;
-
-const RowsPerPageDropdown = styled.select`
-  margin: 0 10px;
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  font-size: 14px;
-  cursor: pointer;
-`;
-
-const SearchContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: 10px 0;
-`;
-
-const ButtonSection = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: end;
-  gap: 0.5px;
-  button {
-    border: none;
-    background: transparent;
-    font-size: 25px;
-    padding: 5px;
-  }
-`;
-
-const SearchInput = styled.input`
-  margin: 8px;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 200px;
-`;
+import{ Input,Th,Td,SearchContainer,SearchInput,ButtonSection,ActionButton,RowsPerPageDropdown,PaginationButton,PaginationInfo,PaginationContainer,Photo1,OpenButton,Table1, MainDashboard, TableContainer1,ButtonGroup,Button} from "./StudentAdmission"
 
 const AllStudent = () => {
   const navigate = useNavigate();
@@ -416,7 +267,7 @@ const AllStudent = () => {
 
   return (
     <MainDashboard>
-      <TableContainer>
+      <TableContainer1>
         <ButtonGroup>
           <OpenButton>All Students</OpenButton>
         </ButtonGroup>
@@ -444,7 +295,7 @@ const AllStudent = () => {
         </ButtonSection>
 
         <div id="student-table">
-          <Table>
+          <Table1>
             <thead>
               <tr>
                 <Th>Student Photo</Th>
@@ -461,7 +312,7 @@ const AllStudent = () => {
             <tbody>
               {filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((studentMember) => (
                 <tr key={studentMember._id}>
-                  <Td><Photo src={`https://api.edspride.in/uploads/${studentMember?.Document?.StudentPhoto}`} alt="Student" /></Td>
+                  <Td><Photo1 src={`https://api.edspride.in/uploads/${studentMember?.Document?.StudentPhoto}`} alt="Student" /></Td>
                   <Td>{studentMember.StudentId}</Td>
                   <Td>{studentMember.StudentName}</Td>
                   <Td>{studentMember.MobileNo}</Td>
@@ -480,7 +331,7 @@ const AllStudent = () => {
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </Table1>
         </div>
 
         <PaginationContainer>
@@ -509,7 +360,7 @@ const AllStudent = () => {
             </PaginationButton>
           </div>
         </PaginationContainer>
-      </TableContainer>
+      </TableContainer1>
     </MainDashboard>
   );
 };

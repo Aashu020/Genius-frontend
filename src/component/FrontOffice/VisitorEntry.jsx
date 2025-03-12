@@ -471,7 +471,7 @@ const VisitorEntry = () => {
 
     try {
       const response = await axios.post(
-        "https://api.edspride.in/visitor/add",
+        "http://localhost:8007/visitor/add",
         formData
       );
       console.log(response.data);
@@ -501,7 +501,7 @@ const VisitorEntry = () => {
 
   const fetchData = () => {
     axios
-      .get("https://api.edspride.in/visitor/all")
+      .get("http://localhost:8007/visitor/all")
       .then((response) => {
         setData(response.data.reverse());
 
@@ -531,7 +531,7 @@ const VisitorEntry = () => {
 
   const handleMarkOut = async (id) => {
     try {
-      const response = await axios.put(`https://api.edspride.in/visitor/${id}/outtime`);
+      const response = await axios.put(`http://localhost:8007/visitor/${id}/outtime`);
       // Update the local state with the new data
       // setData((prevData) =>
       //   prevData.map((item) =>
@@ -574,7 +574,7 @@ const VisitorEntry = () => {
   useEffect(() => {
     const fetchPurposes = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/purpose/all");
+        const response = await axios.get("http://localhost:8007/purpose/all");
         setPurposes(response.data);
       } catch (error) {
         console.error("Error fetching purposes:", error);
@@ -591,7 +591,7 @@ const VisitorEntry = () => {
     }
 
     try {
-      await axios.post("https://api.edspride.in/purpose/add", { PurposeTitle: newPurpose });
+      await axios.post("http://localhost:8007/purpose/add", { PurposeTitle: newPurpose });
       setPurposes([...purposes, { PurposeTitle: newPurpose }]); // Update local state
       setNewPurpose(""); // Clear the input field
       alert("Purpose added successfully!");

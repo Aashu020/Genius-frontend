@@ -92,7 +92,7 @@ const Navbar = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -145,7 +145,7 @@ const Navbar = () => {
         <InstituteName>
           <img
             style={{ height: "45px"}}
-            src={`https://api.edspride.in/uploads/${formData?.SchoolLogo.replace(/^uploads\//, '')}`}
+            src={`http://localhost:8007/uploads/${formData?.SchoolLogo.replace(/^uploads\//, '')}`}
             alt="School-Logo"
           />
 

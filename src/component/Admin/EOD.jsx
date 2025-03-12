@@ -22,7 +22,7 @@ const SchoolReport = () => {
     useEffect(() => {
         // Fetch school data
         axios
-            .get('https://api.edspride.in/schoolsetup/all')
+            .get('http://localhost:8007/schoolsetup/all')
             .then((response) => {
                 if (response.data.length > 0) {
                     setSchool(response.data[0]);
@@ -38,7 +38,7 @@ const SchoolReport = () => {
         // Fetch and process the attendance data on component mount
         const getClassWiseAttendance = async () => {
             try {
-                const response = await fetch('https://api.edspride.in/student-attendance/all');
+                const response = await fetch('http://localhost:8007/student-attendance/all');
                 const data = await response.json();
                 const todayDate = new Date().toISOString().split('T')[0]; // Get today’s date
 
@@ -116,14 +116,14 @@ const SchoolReport = () => {
         const fetchCombinedData = async () => {
             try {
                 const [studentResponse, staffResponse, feeResponse, studentAttendanceResponse, staffAttendanceResponse, feeReceiptResponse, revenueResponse, homeworkResponse] = await Promise.all([
-                    axios.get('https://api.edspride.in/student/all'),
-                    axios.get('https://api.edspride.in/staff/all'),
-                    axios.get('https://api.edspride.in/fee-data/all'),
-                    axios.get('https://api.edspride.in/student-attendance/all'),
-                    axios.get('https://api.edspride.in/staff-attendance/all'),
-                    axios.get('https://api.edspride.in/fee-receipt/all'),
-                    axios.get('https://api.edspride.in/revenue/all'),
-                    axios.get('https://api.edspride.in/homework/all'),
+                    axios.get('http://localhost:8007/student/all'),
+                    axios.get('http://localhost:8007/staff/all'),
+                    axios.get('http://localhost:8007/fee-data/all'),
+                    axios.get('http://localhost:8007/student-attendance/all'),
+                    axios.get('http://localhost:8007/staff-attendance/all'),
+                    axios.get('http://localhost:8007/fee-receipt/all'),
+                    axios.get('http://localhost:8007/revenue/all'),
+                    axios.get('http://localhost:8007/homework/all'),
                 ]);
 
                 const studentData = studentResponse.data;
@@ -207,7 +207,7 @@ const SchoolReport = () => {
                 <View style={styles.header}>
                     {school?.SchoolLogo && (
                         <Image
-                            src={`https://api.edspride.in/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`}
+                            src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`}
                             style={styles.logo}
                             alt="School Logo"
                         />

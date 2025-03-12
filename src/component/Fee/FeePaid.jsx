@@ -12,8 +12,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 // Define your API endpoints (replace with actual URLs)
-const studentApiUrl = 'https://api.edspride.in/student/all'; // Replace with actual student API
-const feeApiUrl = 'https://api.edspride.in/fee-data/all'; // Replace with actual fee API
+const studentApiUrl = 'http://localhost:8007/student/all'; // Replace with actual student API
+const feeApiUrl = 'http://localhost:8007/fee-data/all'; // Replace with actual fee API
 
 // Styled-components for your CSS
 const Container = styled.div`
@@ -148,7 +148,7 @@ const FeePaid = () => {
     useEffect(() => {
         const create = async () => {
             try {
-                axios.post("https://api.edspride.in/student/create-fee-data-for-all-students");
+                axios.post("http://localhost:8007/student/create-fee-data-for-all-students");
                 setUpdate("Yes");
             } catch (error) {
                 console.error(error);

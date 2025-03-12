@@ -111,7 +111,7 @@ const EditStaff = () => {
         if (location.state && location.state.Id) {
             const fetchStaff = async () => {
                 try {
-                    const response = await fetch(`https://api.edspride.in/staff/get/${location.state.Id}`);
+                    const response = await fetch(`http://localhost:8007/staff/get/${location.state.Id}`);
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
@@ -206,7 +206,7 @@ const EditStaff = () => {
         console.log(formData)
 
         try {
-            const response = await axios.put(`https://api.edspride.in/staff/update/${staffId}`, formDataToSubmit, {
+            const response = await axios.put(`http://localhost:8007/staff/update/${staffId}`, formDataToSubmit, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -265,7 +265,7 @@ const EditStaff = () => {
     useEffect(() => {
         const fetchFeeCategories = async () => {
             try {
-                const response = await fetch('https://api.edspride.in/discount/all');
+                const response = await fetch('http://localhost:8007/discount/all');
                 const data = await response.json();
                 setFeeCategories(data);
             } catch (error) {
@@ -278,7 +278,7 @@ const EditStaff = () => {
     useEffect(() => {
         const fetchRoutes = async () => {
             try {
-                const response = await axios.get("https://api.edspride.in/route/all");
+                const response = await axios.get("http://localhost:8007/route/all");
                 setRoutes(response.data);
                 setLoading(false);
             } catch (err) {
@@ -292,7 +292,7 @@ const EditStaff = () => {
     useEffect(() => {
         const fetchClasses = async () => {
             try {
-                const response = await axios.get('https://api.edspride.in/class/all');
+                const response = await axios.get('http://localhost:8007/class/all');
                 setClasses(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -305,7 +305,7 @@ const EditStaff = () => {
     useEffect(() => {
         const fetchHouses = async () => {
             try {
-                const response = await axios.get('https://api.edspride.in/house/all');
+                const response = await axios.get('http://localhost:8007/house/all');
                 setHouses(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -320,7 +320,7 @@ const EditStaff = () => {
             if (selectedClass) {
                 try {
                     const response = await axios.get(
-                        `https://api.edspride.in/class/get/${selectedClass}`
+                        `http://localhost:8007/class/get/${selectedClass}`
                     );
                     console.log('Sections Response:', response.data);
                     setSections(response.data.Section || []);
@@ -362,7 +362,7 @@ const EditStaff = () => {
 
         if (classId) {
             try {
-                const response = await axios.get(`https://api.edspride.in/class/get/${classId}`);
+                const response = await axios.get(`http://localhost:8007/class/get/${classId}`);
                 setSections(response.data.Section || []);
                 setSubjects(response.data.Subjects || []);
             } catch (error) {
@@ -431,7 +431,7 @@ const EditStaff = () => {
     useEffect(() => {
         const fetchClasses = async () => {
             try {
-                const response = await axios.get("https://api.edspride.in/class/all");
+                const response = await axios.get("http://localhost:8007/class/all");
                 setClasseS(response.data);
             } catch (error) {
                 console.error("Error fetching classes:", error);
@@ -445,7 +445,7 @@ const EditStaff = () => {
             if (selectedClassS) {
                 try {
                     const response = await axios.get(
-                        `https://api.edspride.in/class/get/${selectedClassS}`
+                        `http://localhost:8007/class/get/${selectedClassS}`
                     );
                     console.log('Sections Response:', response.data);
                     setSectionS(response.data.Section || []);
@@ -465,7 +465,7 @@ const EditStaff = () => {
         const fetchStudents = async () => {
             if (selectedClassS && selectedSectionS) {
                 try {
-                    const response = await axios.get("https://api.edspride.in/student/all", {
+                    const response = await axios.get("http://localhost:8007/student/all", {
                         params: { classId: selectedClassS, section: selectedSectionS },
                     });
                     console.log('Students Response:', response.data);
@@ -524,13 +524,13 @@ const EditStaff = () => {
     useEffect(() => {
         // Fetch all departments
         const fetchDepartments = async () => {
-            const response = await fetch('https://api.edspride.in/department/all');
+            const response = await fetch('http://localhost:8007/department/all');
             const data = await response.json();
             setDepartments(data);
         };
 
         const fetchJobGrades = async () => {
-            const response = await fetch('https://api.edspride.in/grade/all');
+            const response = await fetch('http://localhost:8007/grade/all');
             const data = await response.json();
             setJobGrades(data); // Assuming data is an array of job grades
         };

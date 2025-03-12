@@ -32,7 +32,7 @@ const AddDesignation = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/department/all");
+      const response = await axios.get("http://localhost:8007/department/all");
       setDepartments(response.data);
     } catch (error) {
       console.error("Error fetching departments:", error);
@@ -83,7 +83,7 @@ const AddDesignation = () => {
 
     try {
       const payload = { Designation: designationFields };
-      await axios.put(`https://api.edspride.in/department/update/${selectedDepartment}`, payload);
+      await axios.put(`http://localhost:8007/department/update/${selectedDepartment}`, payload);
       toast.success("Designations added successfully!");
       resetForm();
       fetchDepartments();

@@ -29,7 +29,7 @@ const ViewStudent = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -48,7 +48,7 @@ const ViewStudent = () => {
       const fetchStudent = async () => {
         try {
           const response = await fetch(
-            `https://api.edspride.in/student/get/${location.state.Id}`
+            `http://localhost:8007/student/get/${location.state.Id}`
           );
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -85,7 +85,7 @@ const ViewStudent = () => {
     <Container>
       <AdmissionLetterContainer>
         <Header>
-          <Logo style={{height:"80px"}} src={`https://api.edspride.in/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
+          <Logo style={{height:"80px"}} src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
           <Title1>{school?.SchoolName}</Title1>
           <p>{school?.EmailId} | {school?.PhoneNo} </p>
           <p>{school?.Website}</p>
@@ -93,7 +93,7 @@ const ViewStudent = () => {
         </Header>
 
         <PhotoContainer>
-          <Photo src={`https://api.edspride.in/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
+          <Photo src={`http://localhost:8007/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
         </PhotoContainer>
         <Section1>
           <LeftColumn>
@@ -180,6 +180,12 @@ const ViewStudent = () => {
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Email}
+            </Valuevs>
+            <Labelviewstud>Medium:</Labelviewstud>
+            <Valuevs>
+              {" "}
+              <BsArrowReturnRight style={{ color: "black" }} />
+              &nbsp;{student?.Medium}
             </Valuevs>
             <Labelviewstud>City:</Labelviewstud>
             <Valuevs>

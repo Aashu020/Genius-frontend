@@ -39,19 +39,19 @@ const SalaryForm = () => {
 
 
   const fetchData = async () => {
-    const response = await axios.get(`https://api.edspride.in/staff/get/${location.state.StaffId}`);
+    const response = await axios.get(`http://localhost:8007/staff/get/${location.state.StaffId}`);
     setEmployee(response.data);
   };
 
   const fetchAttendanceData = async () => {
-    const response = await axios.get(`https://api.edspride.in/staff-attendance/all`);
+    const response = await axios.get(`http://localhost:8007/staff-attendance/all`);
     const roleAttendance = response.data.filter(data => data.Role === employee?.Department);
     setAttendanceData(roleAttendance);
   };
 
   const payrollPastData = async () => {
     try {
-      const response = await axios.get(`https://api.edspride.in/payroll-data/get/${location.state.StaffId}`);
+      const response = await axios.get(`http://localhost:8007/payroll-data/get/${location.state.StaffId}`);
       setPastData(response.data);
       // console.log(response.data);
       const monthsFromData = [...new Set(response.data.Payments.map(payment => payment.Month))];
@@ -63,7 +63,7 @@ const SalaryForm = () => {
 
 
   const fetchPayrollHeaders = async () => {
-    const response = await axios.get("https://api.edspride.in/payroll-header/all");
+    const response = await axios.get("http://localhost:8007/payroll-header/all");
     const allowances = response.data.filter(item => item.Type === "Allowance");
     const deductions = response.data.filter(item => item.Type === "Deduction");
     setAllowanceTitles(allowances);
@@ -71,7 +71,7 @@ const SalaryForm = () => {
   };
 
   const fetchAcademicYearInfo = async () => {
-    const response = await axios.get("https://api.edspride.in/academic-year-info/active");
+    const response = await axios.get("http://localhost:8007/academic-year-info/active");
     generateMonths(response.data);
   };
 
@@ -249,7 +249,7 @@ const SalaryForm = () => {
     console.log(formData)
     try {
       await axios.post(
-        "https://api.edspride.in/payroll-data/add",
+        "http://localhost:8007/payroll-data/add",
         formData
       );
       alert("Payment Added successfully!");

@@ -41,7 +41,7 @@ const AddHouse = () => {
 
   const fetchHouses = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/house/all");
+      const response = await axios.get("http://localhost:8007/house/all");
       setHouses(response.data);
     } catch (error) {
       console.error("Error fetching houses:", error);
@@ -109,7 +109,7 @@ const AddHouse = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/house/delete/${deleteId}`);
+      await axios.delete(`http://localhost:8007/house/delete/${deleteId}`);
       setHouses(houses.filter((dep) => dep._id !== deleteId));
       toast.success("House deleted successfully!");
       setShowModal(false);

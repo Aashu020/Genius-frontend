@@ -260,7 +260,7 @@ const PostalDispatch = () => {
 
     try {
       const response = await axios.post(
-        "https://api.edspride.in/postal/add",
+        "http://localhost:8007/postal/add",
         formData
       );
       alert("Form Submitted Successfully!");

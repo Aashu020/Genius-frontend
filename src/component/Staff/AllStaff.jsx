@@ -49,7 +49,7 @@ const AllStaff = () => {
     const fetchStaff = async () => {
       try {
         const response = await fetch(
-          "https://api.edspride.in/staff/all"
+          "http://localhost:8007/staff/all"
         );
         const data = await response.json();
         setStaff(data);
@@ -215,7 +215,7 @@ const AllStaff = () => {
     }
 
     try {
-      const response = await axios.delete(`https://api.edspride.in/staff/delete/${staffId}`);
+      const response = await axios.delete(`http://localhost:8007/staff/delete/${staffId}`);
 
       if (response.status === 204) {
         alert('Staff member deleted successfully!');
@@ -340,7 +340,7 @@ const AllStaff = () => {
         console.log("Formatted Data to Send to API:", formattedData);
   
         try {
-          const response = await axios.post("https://api.edspride.in/staff/bulk-upload", formattedData, {
+          const response = await axios.post("http://localhost:8007/staff/bulk-upload", formattedData, {
             headers: { 'Content-Type': 'application/json' },
           });
   
@@ -444,7 +444,7 @@ const AllStaff = () => {
               <tbody>
                 {currentData.map((staffMember) => (
                   <tr key={staffMember._id}>
-                    <Td><Photo src={`https://api.edspride.in/uploads/${staffMember?.Documents?.Photo}`} alt="Staff" /></Td>
+                    <Td><Photo src={`http://localhost:8007/uploads/${staffMember?.Documents?.Photo}`} alt="Staff" /></Td>
                     <Td>{staffMember.EmployeeId}</Td>
                     <Td>{staffMember.Name}</Td>
                     <Td>{staffMember.Department}</Td>

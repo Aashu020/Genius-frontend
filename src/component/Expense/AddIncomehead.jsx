@@ -32,7 +32,7 @@ const AddIncomehead = () => {
     const fetchIncomeHeads = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/expense-header/all"
+          "http://localhost:8007/expense-header/all"
         );
         setIncome(response.data);
       } catch (error) {
@@ -61,7 +61,7 @@ const AddIncomehead = () => {
       if (editId) {
         // Update existing income head
         const response = await axios.put(
-          `https://api.edspride.in/expense-header/update/${editId}`,
+          `http://localhost:8007/expense-header/update/${editId}`,
           newIncomeHead
         );
         setIncome(
@@ -71,7 +71,7 @@ const AddIncomehead = () => {
       } else {
         // Create new income head
         const response = await axios.post(
-          "https://api.edspride.in/expense-header/add",
+          "http://localhost:8007/expense-header/add",
           newIncomeHead
         );
         setIncome([...income, response.data]);
@@ -97,7 +97,7 @@ const AddIncomehead = () => {
     if (confirmDelete) {
       try {
         await axios.delete(
-          `https://api.edspride.in/expense-header/delete/${id}`
+          `http://localhost:8007/expense-header/delete/${id}`
         );
         setIncome(income.filter((head) => head._id !== id)); // Remove the deleted income head from state
       } catch (error) {

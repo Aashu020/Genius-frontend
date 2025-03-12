@@ -132,7 +132,7 @@ const StaffDocument = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -147,7 +147,7 @@ const StaffDocument = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `https://api.edspride.in/class/get/${selectedClass}`
+            `http://localhost:8007/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -166,7 +166,7 @@ const StaffDocument = () => {
     const fetchSubjects = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}/${selectedSection}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}/${selectedSection}`);
           setSubjects(response.data);
         } catch (error) {
           console.error("Error fetching subjects:", error);
@@ -193,7 +193,7 @@ const StaffDocument = () => {
     // Fetch sections and subjects for the selected class
     if (classId) {
       try {
-        const response = await axios.get(`https://api.edspride.in/class/get/${classId}`);
+        const response = await axios.get(`http://localhost:8007/class/get/${classId}`);
         setSections(response.data.Section || []);
         setSubjects(response.data.Subjects || []); // Set subjects based on class data
       } catch (error) {
@@ -275,7 +275,7 @@ const StaffDocument = () => {
       });
 
       try {
-        await axios.post("https://api.edspride.in/staff/add", formDataToSend, {
+        await axios.post("http://localhost:8007/staff/add", formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

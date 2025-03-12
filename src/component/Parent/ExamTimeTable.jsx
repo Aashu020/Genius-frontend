@@ -103,7 +103,7 @@ const ExamTimeTable = () => {
         if (studentId) {
             const fetchStudentDetails = async () => {
                 try {
-                    const response = await fetch(`https://api.edspride.in/student/get/${studentId}`);
+                    const response = await fetch(`http://localhost:8007/student/get/${studentId}`);
                     const studentData = await response.json();
                     console.log("Student Data:", studentData); // Log the student data
                     if (studentData && studentData.ClassName) {
@@ -126,7 +126,7 @@ const ExamTimeTable = () => {
             const fetchDateSheet = async () => {
                 try {
                     // Fetch the date sheet for all classes
-                    const response = await fetch("https://api.edspride.in/datesheet/all");
+                    const response = await fetch("http://localhost:8007/datesheet/all");
                     const data = await response.json();
                     console.log("Fetched Date Sheet Data:", data); // Log the entire date sheet data
 

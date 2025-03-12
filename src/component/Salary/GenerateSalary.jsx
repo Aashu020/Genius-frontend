@@ -52,7 +52,7 @@ const GenerateSalary = () => {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/department/all');
+        const response = await fetch('http://localhost:8007/department/all');
         const data = await response.json();
         setDepartments(data);
       } catch (error) {
@@ -68,7 +68,7 @@ const GenerateSalary = () => {
     const fetchStaff = async () => {
       if (selectDepartment) {
         try {
-          const response = await fetch('https://api.edspride.in/staff/all');
+          const response = await fetch('http://localhost:8007/staff/all');
           const data = await response.json();
           console.log(data)
           const filteredStaff = data.filter(staffMember => staffMember.Department.trim() === selectDepartment);

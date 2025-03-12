@@ -20,7 +20,7 @@ const OfferLetter = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await fetch("https://api.edspride.in/staff/all");
+        const response = await fetch("http://localhost:8007/staff/all");
         const data = await response.json();
         setEmployees(data);
       } catch (error) {

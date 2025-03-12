@@ -18,7 +18,7 @@ const AddSubject = () => {
     const fetchSubjects = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/add-subject/all"
+          "http://localhost:8007/add-subject/all"
         );
         setSubjects(response.data);
       } catch (error) {
@@ -48,7 +48,7 @@ const AddSubject = () => {
     if (!validate()) return;
     try {
       const response = await axios.post(
-        "https://api.edspride.in/add-subject/add",
+        "http://localhost:8007/add-subject/add",
         {
           Subject: subject,
         }
@@ -71,7 +71,7 @@ const AddSubject = () => {
     if (!validate()) return;
     try {
       const response = await axios.put(
-        `https://api.edspride.in/add-subject/update/${editingSubject._id}`,
+        `http://localhost:8007/add-subject/update/${editingSubject._id}`,
         {
           Subject: subject,
         }
@@ -92,7 +92,7 @@ const AddSubject = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://api.edspride.in/add-subject/delete/${id}`
+        `http://localhost:8007/add-subject/delete/${id}`
       );
       setSubjects(subjects.filter((sub) => sub._id !== id)); // Remove deleted subject from state
     } catch (error) {

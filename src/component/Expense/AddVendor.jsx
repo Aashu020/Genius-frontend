@@ -38,7 +38,7 @@ const AddVendor = () => {
     const fetchVendors = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/vendor/all"
+          "http://localhost:8007/vendor/all"
         );
         setVendors(response.data);
       } catch (error) {
@@ -109,7 +109,7 @@ const AddVendor = () => {
     try {
       if (isEditing) {
         await axios.put(
-          `https://api.edspride.in/vendor/update/${currentVendorId}`,
+          `http://localhost:8007/vendor/update/${currentVendorId}`,
           vendorData
         );
         setVendors(
@@ -123,7 +123,7 @@ const AddVendor = () => {
         setIsEditing(false);
       } else {
         const response = await axios.post(
-          "https://api.edspride.in/vendor/add",
+          "http://localhost:8007/vendor/add",
           vendorData
         );
         setVendors([...vendors, response.data]);
@@ -163,7 +163,7 @@ const AddVendor = () => {
     if (confirmDelete) {
       try {
         await axios.delete(
-          `https://api.edspride.in/vendor/delete/${id}`
+          `http://localhost:8007/vendor/delete/${id}`
         );
         setVendors(vendors.filter((vendor) => vendor._id !== id));
         alert("Vendor deleted successfully!"); // Alert for successful deletion

@@ -84,13 +84,13 @@ const AddStaff = () => {
   useEffect(() => {
     // Fetch all departments
     const fetchDepartments = async () => {
-      const response = await fetch('https://api.edspride.in/department/all');
+      const response = await fetch('http://localhost:8007/department/all');
       const data = await response.json();
       setDepartments(data);
     };
 
     const fetchJobGrades = async () => {
-      const response = await fetch('https://api.edspride.in/grade/all');
+      const response = await fetch('http://localhost:8007/grade/all');
       const data = await response.json();
       setJobGrades(data); // Assuming data is an array of job grades
     };
@@ -164,7 +164,7 @@ const AddStaff = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
         console.log(response.data);
       } catch (error) {
@@ -180,7 +180,7 @@ const AddStaff = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `https://api.edspride.in/class/get/${selectedClass}`
+            `http://localhost:8007/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -221,7 +221,7 @@ const AddStaff = () => {
 
     if (classId) {
       try {
-        const response = await axios.get(`https://api.edspride.in/class/get/${classId}`);
+        const response = await axios.get(`http://localhost:8007/class/get/${classId}`);
         setSections(response.data.Section || []);
         setSubjects(response.data.Subjects || []);
       } catch (error) {
@@ -293,7 +293,7 @@ const AddStaff = () => {
   useEffect(() => {
     const fetchRoutes = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/route/all");
+        const response = await axios.get("http://localhost:8007/route/all");
         setRoutes(response.data);
         setLoading(false);
       } catch (err) {

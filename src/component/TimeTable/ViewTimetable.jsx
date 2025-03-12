@@ -13,7 +13,7 @@ const Timetable = () => {
   useEffect(() => {
     const fetchTimetable = async () => {
       try {
-        const response = await axios.get(`https://api.edspride.in/timetable/get/${classId}`); // Replace with your API endpoint
+        const response = await axios.get(`http://localhost:8007/timetable/get/${classId}`); // Replace with your API endpoint
         setTimetableData(response.data);
         setLoading(false);
       } catch (err) {

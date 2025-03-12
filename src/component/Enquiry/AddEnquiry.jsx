@@ -59,7 +59,7 @@ const AddEnquiryForm = () => {
     // Fetch sections based on the selected class
     if (selectedClass) {
       try {
-        const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+        const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
         setSections(response.data.Section || []);
       } catch (error) {
         console.error("Error fetching sections:", error);
@@ -122,7 +122,7 @@ const AddEnquiryForm = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/class/all');
+        const response = await fetch('http://localhost:8007/class/all');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -174,7 +174,7 @@ const AddEnquiryForm = () => {
 
     try {
       const response = await axios.post(
-        "https://api.edspride.in/enquiry/add",
+        "http://localhost:8007/enquiry/add",
         formData
       );
       console.log(response.data);

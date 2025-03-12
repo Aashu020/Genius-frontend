@@ -30,7 +30,7 @@ const StudentProfile = () => {
     if (studentId) {
       const fetchStudent = async () => {
         try {
-          const response = await fetch(`https://api.edspride.in/student/get/${studentId}`);
+          const response = await fetch(`http://localhost:8007/student/get/${studentId}`);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -70,7 +70,7 @@ const StudentProfile = () => {
         </Header>
 
         <PhotoContainer>
-          <Photo src={`https://api.edspride.in/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
+          <Photo src={`http://localhost:8007/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
         </PhotoContainer>
         <Section1>
           <LeftColumn>
@@ -157,6 +157,12 @@ const StudentProfile = () => {
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Email}
+            </Value>
+            <Label>Medium:</Label>
+            <Value>
+              {" "}
+              <BsArrowReturnRight style={{ color: "black" }} />
+              &nbsp;{student?.Medium}
             </Value>
             <Label>City:</Label>
             <Value>

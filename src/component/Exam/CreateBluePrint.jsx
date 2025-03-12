@@ -38,7 +38,7 @@ const CreateBluePrint = () => {
       const fetchBlueprint = async () => {
         try {
           const response = await axios.get(
-            `https://api.edspride.in/exam/get/${examId}`
+            `http://localhost:8007/exam/get/${examId}`
           );
           setExamName(response.data.ExamName);
           setTotalMarksFromAPI(response.data.TotalMarks);
@@ -96,7 +96,7 @@ const CreateBluePrint = () => {
 
     try {
       const response = await axios.put(
-        `https://api.edspride.in/exam/update/${examId}`,
+        `http://localhost:8007/exam/update/${examId}`,
         dataToSend
       );
       console.log("Exam blueprint updated successfully:", response.data);

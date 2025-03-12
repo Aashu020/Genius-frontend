@@ -37,7 +37,7 @@ const AcademicPlan = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('https://api.edspride.in/academic-year-plan/all');
+      const response = await axios.get('http://localhost:8007/academic-year-plan/all');
       setEvents(response.data);
     } catch (error) {
       console.error('Error fetching events:', error);
@@ -93,7 +93,7 @@ const AcademicPlan = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
-        await axios.delete(`https://api.edspride.in/academic-year-plan/delete/${id}`);
+        await axios.delete(`http://localhost:8007/academic-year-plan/delete/${id}`);
         toast.success("Event deleted successfully!");
         const updatedEvents = events.filter(event => event._id !== id);
         setEvents(updatedEvents);

@@ -4,212 +4,9 @@ import styled from "styled-components";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Edit, Trash2 } from "lucide-react";
-
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-
-  @media (max-width: 480px) {
-    font-size: 12px;
-    height: 30px;
-    width: 50%;
-    margin-bottom: 30px;
-    margin-top: 20px;
-  }
-`;
-
-const Section = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-
-  @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-
-  @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
-  }
-`;
-
-const HomeworkListContainer = styled.div`
-  margin-top: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const HomeworkListTitle = styled.h3`
-  color: #0d47a1;
-  margin-bottom: 15px;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
-`;
-
-const Th = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-weight: 400;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-`;
-
-const Td1 = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  gap: 1rem;
-`;
-
-const EditButton = styled.div`
-  background-color: #209a16bf;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  width: 20%;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-`;
-
-const DeleteButton = styled.div`
-  background-color: red;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  width: 10%;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-`;
-
-const NoHomeworkMessage = styled.p`
-  color: #777;
-`;
+import { 
+  MainDashboard1,Title,Form,Heading,Section,Main,InputContainer,Label,Input ,Select,SubmitButton,HomeworkListContainer, HomeworkListTitle, Table, Th, Td, Td1, EditButton, DeleteButton, ViewButton, ConfirmationModal,  ModalContent, ConfirmButton, DetailModalContent 
+} from "./HomeworkStyle.jsx";
 
 const HomeworkTypeDropdown = ({ formData, handleChange, errors }) => {
   const [homeworkTypes, setHomeworkTypes] = useState([]);
@@ -217,7 +14,7 @@ const HomeworkTypeDropdown = ({ formData, handleChange, errors }) => {
   useEffect(() => {
     const fetchHomeworkTypes = async () => {
       try {
-        const response = await axios.get('https://api.edspride.in/homeworktype/all');
+        const response = await axios.get('http://localhost:8007/homeworktype/all');
         setHomeworkTypes(response.data);
       } catch (error) {
         console.error('Error fetching homework types:', error);
@@ -316,7 +113,7 @@ const Homework = () => {
     // Fetch homework types
     const fetchHomeworkTypes = async () => {
       try {
-        const response = await axios.get('https://api.edspride.in/homeworktype/all');
+        const response = await axios.get('http://localhost:8007/homeworktype/all');
         setHomeworkTypes(response.data);
       } catch (error) {
         console.error('Error fetching homework types:', error);
@@ -326,7 +123,7 @@ const Homework = () => {
     // Fetch available classes
     const fetchClasses = async () => {
       try {
-        const response = await axios.get('https://api.edspride.in/class/all');
+        const response = await axios.get('http://localhost:8007/class/all');
         setClasses(response.data);
         console.log(response.data);
       } catch (error) {
@@ -342,7 +139,7 @@ const Homework = () => {
     const fetchSections = async () => {
       if (formData.Class) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${classId}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${classId}`);
           setSections(response.data.Section || []);
           setSubjects(response.data.Subjects)
         } catch (error) {
@@ -358,7 +155,7 @@ const Homework = () => {
   //   const fetchSubjects = async () => {
   //     if (formData.Class && formData.Section) {
   //       try {
-  //         const response = await axios.get(`https://api.edspride.in/subjects/get/${formData.Class}-${formData.Section}`);
+  //         const response = await axios.get(`http://localhost:8007/subjects/get/${formData.Class}-${formData.Section}`);
   //         setSubjects(response.data);
   //       } catch (error) {
   //         console.error('Error fetching subjects:', error);
@@ -373,7 +170,7 @@ const Homework = () => {
   //   const fetchChapters = async () => {
   //     if (formData.Subject) {
   //       try {
-  //         const response = await axios.get(`https://api.edspride.in/chapters/${formData.Subject}`);
+  //         const response = await axios.get(`http://localhost:8007/chapters/${formData.Subject}`);
   //         setChapters(response.data);
   //       } catch (error) {
   //         console.error('Error fetching chapters:', error);
@@ -387,7 +184,7 @@ const Homework = () => {
   const fetchHomework = async () => {
     if (formData.Class && formData.Section && formData.Subject) {
       try {
-        const response = await axios.get(`https://api.edspride.in/homework/get/${formData.Class}-${formData.Section}`);
+        const response = await axios.get(`http://localhost:8007/homework/get/${formData.Class}-${formData.Section}`);
         const homeworkList = response.data;
         console.log(homeworkList)
 
@@ -454,7 +251,7 @@ const Homework = () => {
     homeworkData.append('Status', status);
 
     try {
-      await axios.post("https://api.edspride.in/homework/add", homeworkData, {
+      await axios.post("http://localhost:8007/homework/add", homeworkData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }
@@ -488,7 +285,7 @@ const Homework = () => {
 
   const handleDeleteHomework = async (homeworkId) => {
     try {
-      await axios.delete(`https://api.edspride.in/homework/delete/${homeworkId}`);
+      await axios.delete(`http://localhost:8007/homework/delete/${homeworkId}`);
       toast.success("Homework deleted successfully!");
       fetchHomework(); // Refresh homework list
     } catch (error) {
@@ -497,7 +294,7 @@ const Homework = () => {
   };
 
   return (
-    <MainDashboard>
+    <MainDashboard1>
       <Title>Homework Management</Title>
       <Form onSubmit={handleSubmit}>
         <Heading>Create New Homework</Heading>
@@ -637,7 +434,7 @@ const Homework = () => {
       /> */}
 
       <ToastContainer />
-    </MainDashboard>
+    </MainDashboard1>
   );
 };
 

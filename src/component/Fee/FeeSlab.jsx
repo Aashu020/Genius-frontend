@@ -1,215 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { Eye, Edit, Trash2 } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-// Styled Components
-const Container = styled.div`
-  display: flex;
-  background-color: #f4f4f4;
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Main = styled.div`
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-`;
-
-const SubmitButton = styled.button`
-  width: 50%;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-`;
-
-const ErrorMessage = styled.div`
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-`;
-
-const TableContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Table = styled.table`
-  width: 70%;
-  border-collapse: collapse;
-  margin-top: 30px;
-`;
-
-const Th = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-weight: 400;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-`;
-
-const Td1 = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  gap: 1rem;
-`;
-
-const EditButton = styled.div`
-  background-color: #209a16bf;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const DeleteButton = styled.div`
-  background-color: red;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  display: flex;
-  justify-content: center;
-`;
-
-const ConfirmationModal = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-`;
-
-const ModalContent = styled.div`
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-`;
-
-const ConfirmButton = styled.button`
-  padding: 10px 15px;
-  margin: 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  &.yes {
-    background-color: #4caf50;
-    color: white;
-  }
-  &.no {
-    background-color: #f44336;
-    color: white;
-  }
-`;
-
-const DetailModalContent = styled.div`
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: left;
-  width: 50%;
-`;
+import { Container, MainDashboard, Title, Form, Main, FormContainer, InputContainer, Label, Input, Select, SubmitButton, ErrorMessage, TableContainer, Table, Th, Td, Td1, EditButton, DeleteButton, ConfirmationModal, ModalContent, ConfirmButton, DetailModalContent } from "./FeeStyles";
 
 const FeeSlab = () => {
   const [classList, setClassList] = useState([]);
@@ -234,7 +29,7 @@ const FeeSlab = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/class/all");
+      const response = await axios.get("http://localhost:8007/class/all");
       setClassList(response.data);
     } catch (error) {
       console.error("Error fetching classes:", error);
@@ -244,7 +39,7 @@ const FeeSlab = () => {
 
   const fetchFeeHeaders = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/feeHeader/all");
+      const response = await axios.get("http://localhost:8007/feeHeader/all");
       const arr = response.data.map(feeHeader => ({
         Name: feeHeader.Name,
         FeeMode: feeHeader.FeeMode,
@@ -258,7 +53,7 @@ const FeeSlab = () => {
 
   const fetchFeeSlabs = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/feeslab/all");
+      const response = await axios.get("http://localhost:8007/feeslab/all");
       setFeeSlabList(response.data);
     } catch (error) {
       console.error("Error fetching fee slabs:", error);
@@ -313,10 +108,10 @@ const FeeSlab = () => {
 
     try {
       if (editingClassId) {
-        await axios.put(`https://api.edspride.in/feeslab/update/${editingClassId}`, payload);
+        await axios.put(`http://localhost:8007/feeslab/update/${editingClassId}`, payload);
         toast.success("Fee slab updated successfully.");
       } else {
-        await axios.post("https://api.edspride.in/feeslab/add", payload);
+        await axios.post("http://localhost:8007/feeslab/add", payload);
         toast.success("Fee slab added successfully.");
       }
       resetForm();
@@ -351,7 +146,7 @@ const FeeSlab = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://api.edspride.in/feeslab/delete/${id}`);
+      await axios.delete(`http://localhost:8007/feeslab/delete/${id}`);
       toast.success("Fee slab deleted successfully.");
       fetchFeeSlabs();
     } catch (error) {

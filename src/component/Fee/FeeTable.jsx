@@ -100,7 +100,7 @@ const FeeTable = () => {
     useEffect(() => {
         setLoading(true);
         axios
-            .get("https://api.edspride.in/fee-receipt/all")
+            .get("http://localhost:8007/fee-receipt/all")
             .then((response) => {
                 // console.log(response.data)
                 setFeeData(response.data.reverse());

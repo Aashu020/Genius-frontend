@@ -1,110 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Logoimgage from "../assets/Images/EDSP3.jpg";
+import Logoimgage from "../assets/Images/geniuslogo.jpg";
 import WhatsAppIcon from "./Whatsapp";
 import NotificationModal from "./Notification";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// Styled Components for the Header
-const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #64b5f6;
-  padding: 10px 20px;
-  height: 60px;
-  box-sizing: border-box;
-`;
-
-const Logo = styled.div`
-  height: 50px;
-  width: 130px;
-  
-  img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-`;
-
-const SearchContainer = styled.div`
-  display: flex;
-  gap: 15px;
-  position: relative; /* Ensure the dropdown is positioned correctly */
-`;
-
-const SearchBox = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: #f0f0f5;
-  border-radius: 30px;
-  padding: 5px 15px;
-  width: 100%;
-`;
-
-const SearchInput = styled.input`
-  border: none;
-  background-color: transparent;
-  outline: none;
-  padding: 8px;
-  font-size: 14px;
-  width: 100%;
-  
-  ::placeholder {
-    color: #666;
-  }
-`;
-
-const SearchIcon = styled.span`
-  margin-left: 10px;
-  font-size: 16px;
-`;
-
-const MenuIcon = styled.span`
-  margin-right: 10px;
-  font-size: 16px;
-  color: black;
-`;
-
-const InstituteSection = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const InstituteName = styled.div`
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-`;
-
-const DropdownIcon = styled.span`
-  margin-left: 5px;
-`;
-
-// Styled component for the dropdown list
-const DropdownList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
-  position: absolute;
-  background-color: white;
-  z-index: 10;
-  width: 100%; /* Ensures it aligns with the search box */
-`;
-
-const DropdownItem = styled.li`
-  padding: 10px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-`;
+import {
+  HeaderContainer, Logo, SearchContainer, SearchBox, SearchInput, SearchIcon, MenuIcon,
+  InstituteSection, InstituteName, DropdownList, DropdownItem
+} from './Outerstyle2';
 
 const Navbar = () => {
   var navigate = useNavigate()
@@ -187,7 +92,7 @@ const Navbar = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -240,7 +145,7 @@ const Navbar = () => {
         <InstituteName>
           <img
             style={{ height: "45px"}}
-            src={`https://api.edspride.in/uploads/${formData?.SchoolLogo.replace(/^uploads\//, '')}`}
+            src={`http://localhost:8007/uploads/${formData?.SchoolLogo.replace(/^uploads\//, '')}`}
             alt="School-Logo"
           />
 

@@ -84,7 +84,7 @@ const NewAdmissions = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/student/all');
+        const response = await fetch('http://localhost:8007/student/all');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -103,12 +103,6 @@ const NewAdmissions = () => {
         // Filter students based on the admission date
         const recentAdmissions = data.filter(student => {
           const admissionDate = new Date(student.AdmissionDate.split("-").reverse().join("-"));
-          // console.log(admissionDate)
-
-          // console.log(admissionDate >= twoDaysAgo);
-          // console.log(admissionDate <= threeDaysAgo);
-          // console.log(admissionDate >= threeDaysAgo || admissionDate <= twoDaysAgo);
-          // console.log(admissionDate, twoDaysAgo, threeDaysAgo);
           return admissionDate >= threeDaysAgo || admissionDate <= twoDaysAgo;
         });
 
@@ -161,7 +155,7 @@ const NewAdmissions = () => {
           students.map((student) => (
             <Card key={student._id}>
               <PhotoContainer>
-                <Photo src={`https://api.edspride.in/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
+                <Photo src={`http://localhost:8007/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
               </PhotoContainer>
               <StudentID>Student ID: {student.StudentId}</StudentID>
               <StudentInfo>Name: {student.StudentName}</StudentInfo>

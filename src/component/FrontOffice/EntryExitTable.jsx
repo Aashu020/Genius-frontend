@@ -15,7 +15,7 @@ const EntryExitTable = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/visitor/all")
+      .get("http://localhost:8007/visitor/all")
       .then((response) => {
         setData(response.data);
       })
@@ -40,7 +40,7 @@ const EntryExitTable = () => {
 
   const handleMarkOut = async (id) => {
     try {
-      const response = await axios.put(`https://api.edspride.in/visitor/${id}/outtime`);
+      const response = await axios.put(`http://localhost:8007/visitor/${id}/outtime`);
       // Update the local state with the new data
       setData((prevData) =>
         prevData.map((item) =>

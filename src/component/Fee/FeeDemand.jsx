@@ -1,237 +1,13 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import axios from "axios";
 import Select from 'react-dropdown-select';
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-
-const Container = styled.div`
-  width: 950px;
-  margin: 20px auto;
-  border: 2px solid #00a9ce;
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 10px;
-`;
-
-const SchoolLogo = styled.img`
-  /* width: 50px; */
-  height: 50px;
-`;
-
-const SchoolName = styled.h1`
-  color: #b55700;
-  font-size: 18px;
-  font-weight: bold;
-  margin: 5px 0;
-`;
-
-const Address = styled.p`
-  font-size: 14px;
-  color: #444;
-  margin: 0;
-`;
-
-const SubHeader = styled.h2`
-  font-size: 14px;
-  font-weight: bold;
-  margin-top: 20px;
-  color: #444;
-  text-align: center;
-`;
-
-const FeeDetails = styled.div`
-  font-size: 14px;
-  margin: 20px 0;
-`;
-
-const DetailRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 0;
-`;
-
-const DetailLabel = styled.span`
-  font-weight: bold;
-  color: #333;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-`;
-
-const TableHeader = styled.th`
-  border: 1px solid #ddd;
-  padding: 8px;
-  background-color: #f9f9f9;
-  text-align: left;
-  font-weight: bold;
-`;
-
-const TableData = styled.td`
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-`;
-
-const TotalRow = styled.tr`
-  font-weight: bold;
-  background-color: #f2f2f2;
-`;
-
-const Signature = styled.div`
-  text-align: right;
-  font-weight: bold;
-  color: #333;
-  margin-top: 50px;
-`;
-
-const PrintButton = styled.button`
-  padding: 10px 20px;
-  background-color: #00a9ce;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
-  align-self: center;
-  margin-top: 20px;
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const StyledSelect = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-`;
-
-const TableContainer = styled.div`
-  margin-top: 40px;
-  overflow-x: auto;
-`;
-
-const TableRow = styled.tr`
-  cursor: pointer;
-  &:hover {
-    background-color: #f1f1f1;
-  }
-`;
-
-const SmallButton = styled.button`
-  background: #ef5350;
-  border: none;
-  padding: 5px 10px;
-  color: white;
-  border-radius: 5px;
-  font-size: 12px;
-  cursor: pointer;
-  margin-left: 5px;
-
-  &:hover {
-    background: #d32f2f;
-  }
-`;
+import { 
+  Container,Heading,MainDashboard,Title,Form,Main,InputContainer,Label,TableContainer,Table,Header, SchoolLogo, SchoolName, Address, SubHeader, FeeDetails, DetailRow,
+   DetailLabel, TableHeader, TableData, TotalRow, Signature, PrintButton, StyledSelect,  SubmitButton, TableRow, SmallButton 
+} from "./FeeStyles";
 
 const FeeDemandFormat = ({ admitCardData, selectedMonth, feeData, feeSlab, selectedFees, school }) => {
   const { student } = admitCardData;
@@ -247,7 +23,7 @@ const FeeDemandFormat = ({ admitCardData, selectedMonth, feeData, feeSlab, selec
   return (
     <Container style={{ padding: '20px', width: '90%', height: 'auto', background: '#fff' }}>
       <Header style={{ textAlign: 'center', marginBottom: '20px' }}>
-        <SchoolLogo src={`https://api.edspride.in/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
+        <SchoolLogo src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
         <SchoolName>{school?.SchoolName}</SchoolName>
         <Address>{school?.EmailId} | {school?.PhoneNo}</Address>
         <Address>{school?.Website}</Address>
@@ -307,7 +83,7 @@ const FeeDemand = () => {
   useEffect(() => {
     const fetchFeeData = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/fee-data/all");
+        const response = await axios.get("http://localhost:8007/fee-data/all");
         setFeeData(response.data);
         console.log(response.data);
       } catch (error) {
@@ -319,7 +95,7 @@ const FeeDemand = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -334,7 +110,7 @@ const FeeDemand = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const academicResponse = await axios.get("https://api.edspride.in/academic-year-info/active");
+        const academicResponse = await axios.get("http://localhost:8007/academic-year-info/active");
         const academicData = academicResponse.data;
 
         const startYear = academicData.StartYear;
@@ -369,7 +145,7 @@ const FeeDemand = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -382,7 +158,7 @@ const FeeDemand = () => {
     const fetchSections = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           setSections(response.data.Section || []);
         } catch (error) {
           console.error("Error fetching sections:", error);
@@ -398,7 +174,7 @@ const FeeDemand = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("https://api.edspride.in/student/all");
+          const response = await axios.get("http://localhost:8007/student/all");
           const filteredStudents = response.data.filter(
             (student) =>
               student.AdmissionInClass === selectedClass && student.Section === selectedSection
@@ -418,7 +194,7 @@ const FeeDemand = () => {
     const fetchFeeSlab = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get("https://api.edspride.in/feeSlab/all");
+          const response = await axios.get("http://localhost:8007/feeSlab/all");
           const feeData = response.data.find(fee => fee.ClassId === selectedClass);
           setFeeSlab(feeData ? feeData.Fees : []);
           // console.log(feeData ? feeData.Fees : []);

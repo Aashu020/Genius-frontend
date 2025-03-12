@@ -8,195 +8,12 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Container = styled.div`
-  display: flex;
-  background-color: #f4f4f4;
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const MainDashboard = styled.div`
-  padding: 20px;
-  border-radius: 10px;
-  flex: 1;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  padding: 20px;
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-`;
-
-const TableWrapper = styled.div`
-  width: 100%;
-  margin: 20px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: white;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-const TableHeader = styled.thead``;
-
-const HeaderRow = styled.tr``;
-
-const HeaderCell = styled.th`
-  padding: 12px;
-  text-align: left;
-  font-weight: 600;
-  color: #666;
-`;
-
-const TableBody = styled.tbody``;
-
-const BodyRow = styled.tr`
-  &:nth-child(odd) {
-    background-color: #f9f9f9;
-  }
-`;
-
-const BodyCell = styled.td`
-  padding: 12px;
-  text-align: left;
-  font-size: 14px;
-`;
-
-const ActionButton = styled.button`
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 5px 10px;
-  margin-right: 5px;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: 4px;
-  background-color: ${(props) => (props.edit ? "#4caf50" : "#f44336")};
-  color: #fff;
-
-  &:hover {
-    opacity: 0.9;
-  }
-`;
-
-const EditIcon = styled(FaEdit)`
-  color: #fff;
-`;
-
-const DeleteIcon = styled(FaTrashAlt)`
-  color: #fff;
-`;
-
-const ErrorMessage = styled.span`
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-`;
-
-// Confirmation Modal
-const ConfirmationModal = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-`;
-
-const ModalContent = styled.div`
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-`;
-
-const ConfirmButton = styled.button`
-  padding: 10px 15px;
-  margin: 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  &.yes {
-    background-color: #4caf50;
-    color: white;
-  }
-  &.no {
-    background-color: #f44336;
-    color: white;
-  }
-`;
+import {
+  Container, MainDashboard, Title, Form, InputContainer, Label, Input, SubmitButton,
+  TableWrapper, Table, TableHeader, HeaderRow, HeaderCell, TableBody, BodyRow,
+  BodyCell, ActionButton, EditIcon, DeleteIcon, ErrorMessage, ConfirmationModal,
+  ModalContent, ConfirmButton
+} from "./SalayStyle";
 
 const Allowence = () => {
   const [formData, setFormData] = useState({ allowenceHeadName: "" });
@@ -209,7 +26,7 @@ const Allowence = () => {
   // Fetch allowance heads from the API
   const fetchAllowanceHeads = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/payroll-header/all");
+      const response = await axios.get("http://localhost:8007/payroll-header/all");
       // Filter allowance heads to include only those with Type "Allowance"
       const filteredData = response.data.filter(item => item.Type === "Allowance");
       setAllowenceHeads(filteredData);
@@ -247,13 +64,13 @@ const Allowence = () => {
     if (Object.keys(errors).length === 0) {
       try {
         if (isEditing) {
-          await axios.put(`https://api.edspride.in/payroll-header/update/${itemToDelete}`, {
+          await axios.put(`http://localhost:8007/payroll-header/update/${itemToDelete}`, {
             Title: formData.allowenceHeadName,
             Type: "Allowance",
           });
           toast.success("Allowance Head updated successfully!");
         } else {
-          await axios.post("https://api.edspride.in/payroll-header/add", {
+          await axios.post("http://localhost:8007/payroll-header/add", {
             Title: formData.allowenceHeadName,
             Type: "Allowance",
           });
@@ -282,7 +99,7 @@ const Allowence = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/payroll-header/delete/${itemToDelete}`);
+      await axios.delete(`http://localhost:8007/payroll-header/delete/${itemToDelete}`);
       toast.success("Allowance Head deleted successfully!");
       fetchAllowanceHeads(); // Refresh the list after deletion
       setShowModal(false); // Close modal

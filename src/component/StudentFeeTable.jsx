@@ -6,93 +6,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import styled from 'styled-components'; // Import styled-components
 
 // Define your API endpoints (replace with actual URLs)
-const studentApiUrl = 'https://api.edspride.in/student/all'; // Replace with actual student API
-const feeApiUrl = 'https://api.edspride.in/fee-data/all'; // Replace with actual fee API
+const studentApiUrl = 'http://localhost:8007/student/all'; // Replace with actual student API
+const feeApiUrl = 'http://localhost:8007/fee-data/all'; // Replace with actual fee API
 
-// Styled-components for your CSS
-const Container = styled.div`
-  width: 100%;
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: #f4f6f9;
-`;
-
-const Heading = styled.h2`
-  font-size: 24px;
-  color: #333;
-`;
-
-const FilterWrapper = styled.div`
-  margin-bottom: 20px;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-`;
-
-const TableHeader = styled.th`
-  padding: 10px;
-  text-align: left;
-  background-color: #f2f2f2;
-  color: #333;
-`;
-
-const TableRow = styled.tr`
-  &:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  &:hover {
-    background-color: #f1f1f1;
-  }
-`;
-
-const TableData = styled.td`
-  padding: 10px;
-  border: 1px solid #ddd;
-  color: #555;
-`;
-
-const TotalPaidFee = styled.div`
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 18px;
-`;
-
-const DateRangeWrapper = styled.div`
-  margin-top: 10px;
-`;
-
-const DatePickerWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-`;
-
-const DateInput = styled(DatePicker)`
-  width: 150px;
-  padding: 8px;
-  font-size: 14px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-`;
-
-const DropdownWrapper = styled.div`
-  margin-bottom: 20px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-`;
-
-const DropdownContainer = styled.div`
-  flex: 1;
-  min-width: 200px;
-`;
+import {
+    Container, Heading, FilterWrapper, Table, TableHeader, TableRow, TableData, TotalPaidFee,
+    DateRangeWrapper, DateInput, DropdownWrapper, DropdownContainer
+  } from './Outerstyle2';
 
 // Main Component
 const StudentFeeTable = () => {
@@ -115,7 +35,7 @@ const StudentFeeTable = () => {
     useEffect(() => {
         const create = async () => {
             try {
-                axios.post("https://api.edspride.in/student/create-fee-data-for-all-students");
+                axios.post("http://localhost:8007/student/create-fee-data-for-all-students");
                 setUpdate("Yes");
             } catch (error) {
                 console.error(error);
@@ -271,159 +191,147 @@ const StudentFeeTable = () => {
 
     return (
         <Container>
-            <Heading>Student Fee Details</Heading>
-
-            {/* Total Paid Fee */}
-            {filteredData.length > 0 && (
-                <TotalPaidFee>
-                    <strong>Total Paid Fee for Selected Filters: </strong>
-                    <span>{totalPaidFee.toFixed(2)}</span>
-                </TotalPaidFee>
-            )}
-
-            {/* Dropdowns for filtering */}
-            <FilterWrapper>
-                <DropdownWrapper>
-                    <DropdownContainer>
-                        <Select
-                            options={classNameOptions.length > 0 ? classNameOptions : [{ label: 'No options', value: '' }]}
-                            values={selectedClassName}
-                            onChange={setSelectedClassName}
-                            labelField="label"
-                            valueField="value"
-                            placeholder="Select Class Name"
-                            multi
-                        />
-                    </DropdownContainer>
-                    <DropdownContainer>
-                        <Select
-                            options={sectionOptions.length > 0 ? sectionOptions : [{ label: 'No options', value: '' }]}
-                            values={selectedSection}
-                            onChange={setSelectedSection}
-                            labelField="label"
-                            valueField="value"
-                            placeholder="Select Section"
-                            multi
-                        />
-                    </DropdownContainer>
-                    <DropdownContainer>
-                        <Select
-                            options={genderOptions.length > 0 ? genderOptions : [{ label: 'No options', value: '' }]}
-                            values={selectedGender}
-                            onChange={setSelectedGender}
-                            labelField="label"
-                            valueField="value"
-                            placeholder="Select Gender"
-                            multi
-                        />
-                    </DropdownContainer>
-                </DropdownWrapper>
-
-                {/* Payment Mode, Month filters */}
-                <DropdownWrapper>
-                    <DropdownContainer>
-                        <Select
-                            options={houseOptions.length > 0 ? houseOptions : [{ label: 'No options', value: '' }]}
-                            values={selectedHouse}
-                            onChange={setSelectedHouse}
-                            labelField="label"
-                            valueField="value"
-                            placeholder="Select House"
-                            multi
-                        />
-                    </DropdownContainer>
-                    <DropdownContainer>
-                        <Select
-                            options={modeOptions.length > 0 ? modeOptions : [{ label: 'No options', value: '' }]}
-                            values={selectedMode}
-                            onChange={setSelectedMode}
-                            labelField="label"
-                            valueField="value"
-                            placeholder="Select Payment Mode"
-                            multi
-                        />
-                    </DropdownContainer>
-                    <DropdownContainer>
-                        <Select
-                            options={monthOptions.length > 0 ? monthOptions : [{ label: 'No options', value: '' }]}
-                            values={selectedMonths}
-                            onChange={setSelectedMonths}
-                            labelField="label"
-                            valueField="value"
-                            placeholder="Select Payment Month"
-                            multi
-                        />
-                    </DropdownContainer>
-                </DropdownWrapper>
-
-                {/* Date filter */}
-                <DateInput
-                    selected={selectedDate}
-                    onChange={date => setSelectedDate(date)}
-                    dateFormat="yyyy-MM-dd"
-                    placeholderText="Select a Date"
+          <Heading>Student Fee Details</Heading>
+          {filteredData.length > 0 && (
+            <TotalPaidFee>
+              <strong>Total Paid Fee for Selected Filters: </strong>
+              <span>{totalPaidFee.toFixed(2)}</span>
+            </TotalPaidFee>
+          )}
+          <FilterWrapper>
+            <DropdownWrapper>
+              <DropdownContainer>
+                <Select
+                  options={classNameOptions.length > 0 ? classNameOptions : [{ label: 'No options', value: '' }]}
+                  values={selectedClassName}
+                  onChange={setSelectedClassName}
+                  labelField="label"
+                  valueField="value"
+                  placeholder="Select Class Name"
+                  multi
                 />
-
-                {/* Date Range filter */}
-                <DateRangeWrapper>
-                    <span>From: </span>
-                    <DateInput
-                        selected={selectedDateRange[0]}
-                        onChange={date => setSelectedDateRange([date, selectedDateRange[1]])}
-                        dateFormat="yyyy-MM-dd"
-                        placeholderText="Start Date"
-                    />
-                    <span> To: </span>
-                    <DateInput
-                        selected={selectedDateRange[1]}
-                        onChange={date => setSelectedDateRange([selectedDateRange[0], date])}
-                        dateFormat="yyyy-MM-dd"
-                        placeholderText="End Date"
-                    />
-                </DateRangeWrapper>
-            </FilterWrapper>
-
-            {/* Table */}
-            <Table>
-                <thead>
-                    <tr>
-                        <TableHeader>Student Name</TableHeader>
-                        <TableHeader>Student ID</TableHeader>
-                        <TableHeader>Class Name</TableHeader>
-                        <TableHeader>Section</TableHeader>
-                        <TableHeader>House</TableHeader>
-                        <TableHeader>Father's Name</TableHeader>
-                        <TableHeader>Total Fee</TableHeader>
-                        <TableHeader>Paid Amount</TableHeader>
-                        <TableHeader>Remaining Fee</TableHeader>
-                        <TableHeader>Fee Payment Dates</TableHeader>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredData.length > 0 ? (
-                        filteredData.map(student => (
-                            <TableRow key={student._id}>
-                                <TableData>{getSafeValue(student.StudentName)}</TableData>
-                                <TableData>{getSafeValue(student.StudentId)}</TableData>
-                                <TableData>{getSafeValue(student.ClassName)}</TableData>
-                                <TableData>{getSafeValue(student.Section)}</TableData>
-                                <TableData>{getSafeValue(student.House)}</TableData>
-                                <TableData>{getSafeValue(student.FatherName)}</TableData>
-                                <TableData>{getSafeValue(student.feeDetails?.TotalFee)}</TableData>
-                                <TableData>{getSafeValue(student.feeDetails?.Payments?.reduce((sum, payment) => sum + payment.PaidAmount, 0), 0)}</TableData>
-                                <TableData>{getSafeValue(student.feeDetails?.RemainingFee)}</TableData>
-                                <TableData>{getSafeValue(student.feeDetails?.Payments?.map(payment => new Date(payment.Date).toLocaleDateString()).join(', '), 'No Data')}</TableData>
-                            </TableRow>
-                        ))
-                    ) : (
-                        <TableRow>
-                            <TableData colSpan="10">No data available for the selected filters.</TableData>
-                        </TableRow>
-                    )}
-                </tbody>
-            </Table>
+              </DropdownContainer>
+              <DropdownContainer>
+                <Select
+                  options={sectionOptions.length > 0 ? sectionOptions : [{ label: 'No options', value: '' }]}
+                  values={selectedSection}
+                  onChange={setSelectedSection}
+                  labelField="label"
+                  valueField="value"
+                  placeholder="Select Section"
+                  multi
+                />
+              </DropdownContainer>
+              <DropdownContainer>
+                <Select
+                  options={genderOptions.length > 0 ? genderOptions : [{ label: 'No options', value: '' }]}
+                  values={selectedGender}
+                  onChange={setSelectedGender}
+                  labelField="label"
+                  valueField="value"
+                  placeholder="Select Gender"
+                  multi
+                />
+              </DropdownContainer>
+            </DropdownWrapper>
+            <DropdownWrapper>
+              <DropdownContainer>
+                <Select
+                  options={houseOptions.length > 0 ? houseOptions : [{ label: 'No options', value: '' }]}
+                  values={selectedHouse}
+                  onChange={setSelectedHouse}
+                  labelField="label"
+                  valueField="value"
+                  placeholder="Select House"
+                  multi
+                />
+              </DropdownContainer>
+              <DropdownContainer>
+                <Select
+                  options={modeOptions.length > 0 ? modeOptions : [{ label: 'No options', value: '' }]}
+                  values={selectedMode}
+                  onChange={setSelectedMode}
+                  labelField="label"
+                  valueField="value"
+                  placeholder="Select Payment Mode"
+                  multi
+                />
+              </DropdownContainer>
+              <DropdownContainer>
+                <Select
+                  options={monthOptions.length > 0 ? monthOptions : [{ label: 'No options', value: '' }]}
+                  values={selectedMonths}
+                  onChange={setSelectedMonths}
+                  labelField="label"
+                  valueField="value"
+                  placeholder="Select Payment Month"
+                  multi
+                />
+              </DropdownContainer>
+            </DropdownWrapper>
+            <DateInput
+              selected={selectedDate}
+              onChange={date => setSelectedDate(date)}
+              dateFormat="yyyy-MM-dd"
+              placeholderText="Select a Date"
+            />
+            <DateRangeWrapper>
+              <span>From: </span>
+              <DateInput
+                selected={selectedDateRange[0]}
+                onChange={date => setSelectedDateRange([date, selectedDateRange[1]])}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="Start Date"
+              />
+              <span> To: </span>
+              <DateInput
+                selected={selectedDateRange[1]}
+                onChange={date => setSelectedDateRange([selectedDateRange[0], date])}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="End Date"
+              />
+            </DateRangeWrapper>
+          </FilterWrapper>
+          <Table>
+            <thead>
+              <tr>
+                <TableHeader>Student Name</TableHeader>
+                <TableHeader>Student ID</TableHeader>
+                <TableHeader>Class Name</TableHeader>
+                <TableHeader>Section</TableHeader>
+                <TableHeader>House</TableHeader>
+                <TableHeader>Father's Name</TableHeader>
+                <TableHeader>Total Fee</TableHeader>
+                <TableHeader>Paid Amount</TableHeader>
+                <TableHeader>Remaining Fee</TableHeader>
+                <TableHeader>Fee Payment Dates</TableHeader>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredData.length > 0 ? (
+                filteredData.map(student => (
+                  <TableRow key={student._id}>
+                    <TableData>{getSafeValue(student.StudentName)}</TableData>
+                    <TableData>{getSafeValue(student.StudentId)}</TableData>
+                    <TableData>{getSafeValue(student.ClassName)}</TableData>
+                    <TableData>{getSafeValue(student.Section)}</TableData>
+                    <TableData>{getSafeValue(student.House)}</TableData>
+                    <TableData>{getSafeValue(student.FatherName)}</TableData>
+                    <TableData>{getSafeValue(student.feeDetails?.TotalFee)}</TableData>
+                    <TableData>{getSafeValue(student.feeDetails?.Payments?.reduce((sum, payment) => sum + payment.PaidAmount, 0), 0)}</TableData>
+                    <TableData>{getSafeValue(student.feeDetails?.RemainingFee)}</TableData>
+                    <TableData>{getSafeValue(student.feeDetails?.Payments?.map(payment => new Date(payment.Date).toLocaleDateString()).join(', '), 'No Data')}</TableData>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableData colSpan="10">No data available for the selected filters.</TableData>
+                </TableRow>
+              )}
+            </tbody>
+          </Table>
         </Container>
-    );
+      );
 };
 
 export default StudentFeeTable;

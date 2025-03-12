@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {   MainDashboard,
+import { FaFileExcel } from "react-icons/fa"; // Import Excel icon from react-icons
+import * as XLSX from "xlsx"; // Import xlsx for Excel generation
+import { 
+  MainDashboard,
   Title,
   Form,
   Heading,
@@ -16,13 +19,15 @@ import {   MainDashboard,
   TableContainer,
   Table,
   TdAction,
-  SmallButton,} from './ConsolidateStyle';
+  SmallButton,
+} from './ConsolidateStyle';
 
 const Consolidated = () => {
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     Class: "",
     Section: "",
+    Exam: "", // Added Exam to formData for clarity
   });
   const [classes, setClasses] = useState([]);
   const [sections, setSections] = useState([]);
@@ -33,13 +38,13 @@ const Consolidated = () => {
   const [selectedClass, setSelectedClass] = useState("");
   const [selectedClassName, setSelectedClassName] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
-  const navigate = useNavigate(); // Use navigate for navigation
+  const navigate = useNavigate();
 
   // Fetch available classes when component mounts
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -53,7 +58,7 @@ const Consolidated = () => {
     const fetchSections = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           setSections(response.data.Section || []);
         } catch (error) {
           console.error("Error fetching sections:", error);
@@ -65,6 +70,48 @@ const Consolidated = () => {
     fetchSections();
   }, [selectedClass]);
 
+  // Fetch exams
+  useEffect(() => {
+    const fetchExams = async () => {
+      try {
+        const response = await axios.get("http://localhost:8007/exam/all");
+        setExams(response.data);
+      } catch (error) {
+        console.error("Error fetching exams:", error);
+      }
+    };
+    fetchExams();
+  }, []);
+
+  // Fetch subjects and results based on selected class, section, and exam
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      if (selectedClass && selectedSection && formData.Exam) {
+        try {
+          const response = await axios.get("http://localhost:8007/result/all", {
+            params: {
+              ClassId: selectedClass,
+              Section: selectedSection,
+              ExamName: formData.Exam,
+            },
+          });
+
+          var filData = response.data.filter(val => 
+            val.ClassId === selectedClass && 
+            val.Section === selectedSection && 
+            val.ExamName === formData.Exam
+          );
+          const fetchedSubjects = filData.length > 0 ? filData[0].Subjects : [];
+          setSubjects(fetchedSubjects);
+          setResults(filData);
+        } catch (error) {
+          console.error("Error fetching subjects and results:", error);
+        }
+      }
+    };
+    fetchSubjects();
+  }, [selectedClass, selectedSection, formData.Exam]);
+
   const handleClassChange = (e) => {
     setSelectedClass(e.target.value);
     const selectedClass = classes.find((cls) => cls.ClassId === e.target.value);
@@ -75,16 +122,14 @@ const Consolidated = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name)
-    if(name === "Exam"){
+    if (name === "Exam") {
       var exam = exams.find(val => val.ExamName === value);
-      setExamId(exam.ExamId)
+      setExamId(exam?.ExamId || "");
     }
     setFormData({
       ...formData,
       [name]: value,
     });
-
     setErrors({
       ...errors,
       [name]: "",
@@ -93,7 +138,9 @@ const Consolidated = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.Type) newErrors.Type = "Type is required";
+    if (!formData.Class) newErrors.Class = "Class is required";
+    if (!formData.Section) newErrors.Section = "Section is required";
+    if (!formData.Exam) newErrors.Exam = "Exam is required";
     return newErrors;
   };
 
@@ -107,61 +154,59 @@ const Consolidated = () => {
     alert("Submitted");
   };
 
-  // Fetch exams
-  useEffect(() => {
-    const fetchExams = async () => {
-      try {
-        const response = await axios.get("https://api.edspride.in/exam/all");
-        setExams(response.data);
-      } catch (error) {
-        console.error("Error fetching exams:", error);
-      }
-    };
-    fetchExams();
-  }, []);
-
-  // Fetch subjects based on selected class, section, and exam
-  useEffect(() => {
-    const fetchSubjects = async () => {
-      if (selectedClass && selectedSection && formData.Exam) {
-        try {
-          const response = await axios.get("https://api.edspride.in/result/all", {
-            params: {
-              ClassId: selectedClass,
-              Section: selectedSection,
-              ExamName: formData.Exam,
-            },
-          });
-
-          // Assume response contains subjects and student results
-          var filData = response.data.filter(val => val.ClassId === selectedClass && val.Section === selectedSection && val.ExamName === formData.Exam);
-          // console.log(filData);
-          const fetchedSubjects = filData.length > 0 ? filData[0].Subjects : [];
-          setSubjects(fetchedSubjects);
-          setResults(filData);
-        } catch (error) {
-          console.error("Error fetching subjects and results:", error);
-        }
-      }
-    };
-
-    fetchSubjects();
-  }, [selectedClass, selectedSection, formData.Exam]);
-
-  // Function to navigate to the ViewResult page
   const handleViewResult = (studentId, examId) => {
-    const role = localStorage.getItem("Role")
-    if (role == "Superadmin" || role == "Admin") {
-      navigate(`/admin/viewresult/${studentId}`, { state: { examId } }); // Navigate to /view-result/{studentId}
+    const role = localStorage.getItem("Role");
+    if (role === "Superadmin" || role === "Admin") {
+      navigate(`/admin/viewresult/${studentId}`, { state: { examId } });
     } else {
-      navigate(`/employee/viewresult/${studentId}`, { state: { examId } }); // Navigate to /view-result/{studentId}
+      navigate(`/employee/viewresult/${studentId}`, { state: { examId } });
     }
+  };
+
+  // Function to export results to Excel
+  const exportToExcel = () => {
+    if (results.length === 0) {
+      alert("No data available to export!");
+      return;
+    }
+
+    // Prepare data for Excel
+    const excelData = results.map((student) => {
+      const totalMarks = student.Subjects.reduce((acc, subject) => acc + subject.ObtainedMarks, 0);
+      const totalMaxMarks = student.Subjects.reduce((acc, subject) => acc + subject.MaxMarks, 0);
+      const percentage = ((totalMarks / totalMaxMarks) * 100).toFixed(2);
+
+      // Create an object with student details and subject marks
+      const row = {
+        "Adm No.": student.StudentId,
+        "Roll No.": student.RollNo,
+        "Student Name": student.StudentName,
+        ...student.Subjects.reduce((acc, subject) => {
+          acc[subject.SubjectName] = subject.ObtainedMarks;
+          return acc;
+        }, {}),
+        "Total Marks": `${totalMarks}/${totalMaxMarks}`,
+        "Percentage": `${percentage}%`,
+      };
+      return row;
+    });
+
+    // Create a worksheet
+    const ws = XLSX.utils.json_to_sheet(excelData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Results");
+
+    // Generate file name based on class, section, and exam
+    const fileName = `${selectedClassName}_${selectedSection}_${formData.Exam}_Results.xlsx`;
+
+    // Download the Excel file
+    XLSX.writeFile(wb, fileName);
   };
 
   return (
     <MainDashboard>
       <FormContainer>
-        <Title>Consolidate Mark list</Title>
+        <Title>Consolidate Mark List</Title>
         <Form onSubmit={handleSubmit}>
           <Main>
             <InputContainer>
@@ -182,7 +227,11 @@ const Consolidated = () => {
 
             <InputContainer>
               <Label>Select Section</Label>
-              <Select value={selectedSection} onChange={handleSectionChange} disabled={!selectedClass}>
+              <Select 
+                value={selectedSection} 
+                onChange={handleSectionChange} 
+                disabled={!selectedClass}
+              >
                 <option value="">Select Section</option>
                 {sections.map((section, index) => (
                   <option key={index} value={section}>
@@ -209,19 +258,20 @@ const Consolidated = () => {
             </InputContainer>
           </Main>
 
-          <div
-            style={{
-              display: "flex",
-              gap: "10px",
-              justifyContent: "center",
-            }}
-          >
+          <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
             <SubmitButton type="submit">Search</SubmitButton>
           </div>
         </Form>
       </FormContainer>
 
       <TableContainer>
+        {/* Add Excel Export Button */}
+        <div style={{ textAlign: "right", marginBottom: "10px" }}>
+          <SmallButton onClick={exportToExcel} title="Export to Excel">
+            <FaFileExcel style={{ color: "green", fontSize: "20px" }} />
+          </SmallButton>
+        </div>
+
         <Table>
           <thead>
             <tr>
@@ -233,7 +283,7 @@ const Consolidated = () => {
               ))}
               <th>Total Marks</th>
               <th>Result</th>
-              <th>Actions</th> {/* Add Actions column */}
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -254,7 +304,6 @@ const Consolidated = () => {
                   <td>{totalMarks}/{totalMaxMarks}</td>
                   <td>{percentage}%</td>
                   <TdAction>
-                    {/* View button for each student */}
                     <SmallButton onClick={() => handleViewResult(student.StudentId, examId)}>View</SmallButton>
                   </TdAction>
                 </tr>
@@ -268,4 +317,3 @@ const Consolidated = () => {
 };
 
 export default Consolidated;
-

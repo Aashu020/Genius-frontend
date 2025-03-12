@@ -1,110 +1,31 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import axios from "axios";
+import {
+  MainDashboard,
+  Wrapper,
+  Heading,
+  Header,
+  SubHeader,
+  Table,
+  TableHeader,
+  TableRow,
+  TableData,
+  FooterNote,
+  PrincipalSign,
+  Dropdown,
+} from "./SchoolSetup2Style";
 
-// Styled components for the table and dropdown
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
-
-const Wrapper = styled.div`
-  background-color: white;
-  padding: 20px;
-  margin-top: 50px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const Heading = styled.div`
-  width: 15%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-  position: absolute;
-  right: 30px;
-`;
-
-const Header = styled.h1`
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
-
-const SubHeader = styled.h2`
-  text-align: center;
-  color: red;
-  font-size: 20px;
-  margin-bottom: 20px;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-`;
-
-const TableHeader = styled.th`
-  background-color: #ffeb3b;
-  font-weight: bold;
-  padding: 8px;
-  border: 1px solid #000;
-`;
-
-const TableRow = styled.tr`
-  border: 1px solid #000;
-`;
-
-const TableData = styled.td`
-  padding: 8px;
-  border: 1px solid #000;
-`;
-
-const FooterNote = styled.div`
-  font-size: 12px;
-  margin-top: 20px;
-  text-align: left;
-`;
-
-const PrincipalSign = styled.div`
-  margin-top: 30px;
-  font-size: 14px;
-  text-align: right;
-`;
-
-const Dropdown = styled.select`
-  padding: 10px;
-  margin: 20px auto;
-  display: block;
-  border-radius: 5px;
-  font-size: 16px;
-  width: 200px;
-`;
-
-// DateSheet component
 const DateSheet = () => {
   const [examData, setExamData] = useState([]);
-  const [classes, setClasses] = useState([]); // To store unique class names
-  const [exams, setExams] = useState([]); // To store exam list
-  const [selectedExam, setSelectedExam] = useState(""); // To store selected exam
+  const [classes, setClasses] = useState([]);
+  const [exams, setExams] = useState([]);
+  const [selectedExam, setSelectedExam] = useState("");
 
-  // Fetch exams list from the API
   useEffect(() => {
     const fetchExams = async () => {
       try {
         const response = await axios.get("https://api.edspride.in/exam/all");
-        console.log("Fetched exams:", response.data); // Debugging log
+        console.log("Fetched exams:", response.data);
         setExams(response.data);
       } catch (error) {
         console.error("Error fetching exams:", error);
@@ -114,33 +35,26 @@ const DateSheet = () => {
     fetchExams();
   }, []);
 
-  // Fetch date sheet for the selected exam when the selected exam changes
   useEffect(() => {
     if (selectedExam) {
       const fetchDateSheetData = async () => {
         try {
-          console.log(`Fetching data for exam: ${selectedExam}`); // Debugging log
+          console.log(`Fetching data for exam: ${selectedExam}`);
           const response = await axios.get(
-            `https://api.edspride.in/datesheet/getByExam/${selectedExam}`
+            `http://localhost:8007/datesheet/getByExam/${selectedExam}`
           );
-          console.log("Fetched date sheet data:", response.data); // Debugging log
+          console.log("Fetched date sheet data:", response.data);
 
-          // Extract unique classes from the response data
-          const uniqueClasses = [
-            ...new Set(response.data.map((item) => item.Class)),
-          ];
+          const uniqueClasses = [...new Set(response.data.map((item) => item.Class))];
           setClasses(uniqueClasses);
 
-          // Group the data by Date
           const groupedData = {};
-
           response.data.forEach((item) => {
             const dateKey = item.Date;
             const day = new Date(item.Date).toLocaleDateString("en-US", {
               weekday: "long",
             });
 
-            // If the date doesn't exist in groupedData, create it
             if (!groupedData[dateKey]) {
               groupedData[dateKey] = {
                 date: item.Date,
@@ -149,7 +63,6 @@ const DateSheet = () => {
               };
             }
 
-            // Add the subject to the correct class column
             if (!groupedData[dateKey].subjects[item.Class]) {
               groupedData[dateKey].subjects[item.Class] = [];
             }
@@ -157,7 +70,6 @@ const DateSheet = () => {
             groupedData[dateKey].subjects[item.Class].push(item.Subject);
           });
 
-          // Convert the grouped data into an array for rendering
           const formattedData = Object.values(groupedData);
           setExamData(formattedData);
         } catch (error) {
@@ -171,8 +83,8 @@ const DateSheet = () => {
 
   const handleExamChange = (event) => {
     const exam = event.target.value;
-    console.log("Selected exam:", exam); // Debugging log
-    setSelectedExam(exam); // Update selected exam
+    console.log("Selected exam:", exam);
+    setSelectedExam(exam);
   };
 
   return (
@@ -182,7 +94,6 @@ const DateSheet = () => {
         <Header>Saint G.S. Convent School, Tajoke</Header>
         <SubHeader>Date Sheet for Final Exam 2023</SubHeader>
 
-        {/* Dropdown for selecting the exam */}
         <Dropdown value={selectedExam} onChange={handleExamChange}>
           <option value="">Select Exam</option>
           {exams.map((exam) => (
@@ -192,7 +103,6 @@ const DateSheet = () => {
           ))}
         </Dropdown>
 
-        {/* Render the table with the date sheet data */}
         <Table>
           <thead>
             <TableRow>
@@ -210,10 +120,7 @@ const DateSheet = () => {
                 <TableData>{row.day}</TableData>
                 {classes.map((className) => (
                   <TableData key={className}>
-                    {/* Display subjects for the class */}
-                    {row.subjects[className]
-                      ? row.subjects[className].join(", ")
-                      : ""}
+                    {row.subjects[className] ? row.subjects[className].join(", ") : ""}
                   </TableData>
                 ))}
               </TableRow>

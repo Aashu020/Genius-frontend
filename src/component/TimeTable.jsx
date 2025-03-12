@@ -2,144 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-// Styled Components (no changes here) (no changes here)
-const TableWrapper = styled.div`
-  width: 100%;
-  margin: auto;
-  margin-top: 20px;
-  @media (max-width: 480px) {
-    width: 100%;
-    margin: 0;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  h2 {
-    font-size: 20px;
-    margin-right: 20px;
-  }
-`;
-
-const HeaderWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-
-  @media (max-width: 480px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-
-const DropdownWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-
-  select {
-    padding: 4px;
-    font-size: 16px;
-    border-radius: 10px;
-  }
-
-  @media (max-width: 480px) {
-    margin-top: 10px;
-    select {
-      font-size: 10px;
-    }
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-`;
-
-const Table = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  background-color: #fff;
-  grid-gap: 2px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(7, 1fr);
-    font-size: 6px;
-  }
-`;
-
-const TableHeader = styled.div`
-  background-color: #64b5f6;
-  text-align: center;
-  padding: 10px;
-  font-weight: bold;
-  border-radius: 5px;
-  color: white;
-font-size: 12px;
-  @media (max-width: 480px) {
-    padding: 5px;
-  }
-`;
-
-const TableItem = styled.div`
-  background-color: #e0e0e0;
-  padding: 10px;
-  text-align: center;
-  border-radius: 5px;
-  font-size: 12px;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    font-size: 8px;
-    padding: 5px;
-  }
-`;
-
-const TableItem1 = styled.div`
-  background-color: #64b5f6;
-  padding: 10px;
-  text-align: center;
-  border-radius: 5px;
-  font-size: 10px;
-  font-weight: bold;
-  color: white;
-  @media (max-width: 480px) {
-    font-size: 8px;
-    padding: 5px;
-  }
-`;
+import {
+  TableWrapper, HeaderWrapper, InputContainer, Select, TimeTableGrid, TableHeader,
+  TableItem, TableItem1
+} from './Outerstyle2';
 
 // TimeTable Component
 const TimeTable = () => {
@@ -220,7 +86,7 @@ const TimeTable = () => {
     <TableWrapper>
       <HeaderWrapper>
         <h2>Time Table</h2>
-        <DropdownWrapper>
+        <div style={{ display: 'flex', gap: '10px' }}>
           <InputContainer>
             <Select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)}>
               <option value="">Select Class</option>
@@ -245,11 +111,10 @@ const TimeTable = () => {
               ))}
             </Select>
           </InputContainer>
-        </DropdownWrapper>
+        </div>
       </HeaderWrapper>
-
       {timetable && (
-        <Table>
+        <TimeTableGrid>
           <div style={{ gridColumn: 'span 7', textAlign: 'center', fontWeight: 'bold', padding: '10px', backgroundColor: '#e0e0e0' }}>
             Periods
           </div>
@@ -257,11 +122,11 @@ const TimeTable = () => {
             <div key={periodIndex} style={{ display: 'contents' }}>
               {!lecture.Period.toLowerCase().includes('period') && lecture.Period.trim() !== "" ? (
                 <TableItem1 style={{ gridColumn: 'span 7' }}>
-                  {lecture.Period.trim()}<p>{(periods.find(val=> val.Title.trim() === lecture.Period.trim())).StartTime} - {(periods.find(val=> val.Title.trim() === lecture.Period.trim())).EndTime}</p>
+                  {lecture.Period.trim()}<p>{(periods.find(val => val.Title.trim() === lecture.Period.trim()))?.StartTime} - {(periods.find(val => val.Title.trim() === lecture.Period.trim()))?.EndTime}</p>
                 </TableItem1>
               ) : (
                 <>
-                  <TableHeader>{lecture.Period}<p>{(periods.find(val=> val.Title.trim() === lecture.Period.trim())).StartTime} - {(periods.find(val=> val.Title.trim() === lecture.Period.trim())).EndTime}</p></TableHeader>
+                  <TableHeader>{lecture.Period}<p>{(periods.find(val => val.Title.trim() === lecture.Period.trim()))?.StartTime} - {(periods.find(val => val.Title.trim() === lecture.Period.trim()))?.EndTime}</p></TableHeader>
                   {timetable.Days.map((dayData, dayIndex) => {
                     const currentLecture = dayData.Lectures[periodIndex] || {};
                     return (
@@ -275,7 +140,7 @@ const TimeTable = () => {
               )}
             </div>
           ))}
-        </Table>
+        </TimeTableGrid>
       )}
     </TableWrapper>
   );

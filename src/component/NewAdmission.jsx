@@ -103,12 +103,6 @@ const NewAdmissions = () => {
         // Filter students based on the admission date
         const recentAdmissions = data.filter(student => {
           const admissionDate = new Date(student.AdmissionDate.split("-").reverse().join("-"));
-          // console.log(admissionDate)
-
-          // console.log(admissionDate >= twoDaysAgo);
-          // console.log(admissionDate <= threeDaysAgo);
-          // console.log(admissionDate >= threeDaysAgo || admissionDate <= twoDaysAgo);
-          // console.log(admissionDate, twoDaysAgo, threeDaysAgo);
           return admissionDate >= threeDaysAgo || admissionDate <= twoDaysAgo;
         });
 

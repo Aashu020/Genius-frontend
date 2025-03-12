@@ -6,241 +6,29 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
+import {
+    MainDashboard,
+    Title,
+    Form,
+    Heading,
+    Main,
+    FormContainer,
+    InputContainer,
+    InputContainer1,
+    Label,
+    Label2,
+    Input,
+    StyledInput,
+    Select,
+    SubmitButton,
+    StepIndicatorContainer,
+    Step,
+    StepContent,
+    SuggestionsList,
+    SuggestionItem,
+    Section,
+  } from "./StaffStyle";
 
-const MainDashboard = styled.div`
-  flex: 1;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-  padding: 20px;
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-  font-weight: bold;
-
-  @media (max-width: 480px) {
-    font-size: 12px;
-    height: 30px;
-    width: 50%;
-    margin-bottom: 30px;
-    margin-top: 20px;
-  }
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Label2 = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #6c6c6c 0%, #525252 100%);
-
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
-  }
-`;
-
-const StepIndicatorContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  background-color: #f0f0f0;
-  padding: 10px;
-  margin-bottom: 30px;
-
-  @media (max-width: 480px) {
-    gap: 0.1rem;
-  }
-`;
-
-const Step = styled(Link)`
-  background-color: ${(props) => (props.active ? "#8a2be2" : "#4a0e8f")};
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 14px;
-  text-decoration: none; /* Remove underline */
-
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 7px;
-    width: 40%;
-  }
-`;
-
-const StepContent = styled.span`
-  margin-left: 5px;
-`;
-
-const InputContainer1 = styled.div`
-  position: relative;
-  width: 35%;
-
-  margin-bottom: 20px;
-  datalist {
-    background-color: blue;
-  }
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Section = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const StyledInput = styled.input`
-  width: 88%;
-  padding: 12px 15px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-`;
-
-const SuggestionsList = styled.ul`
-  position: absolute;
-  z-index: 999;
-  background-color: white;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-`;
-
-const SuggestionItem = styled.li`
-  padding: 10px;
-  cursor: pointer;
-  &:hover {
-    background-color: #f4f4f4;
-  }
-`;
 
 const EditStaff = () => {
     const location = useLocation();
@@ -388,19 +176,7 @@ const EditStaff = () => {
         // Create a new FormData object
         const formDataToSubmit = new FormData();
 
-        // Append all fields from state to FormData
-        // Object.keys(formData).forEach((key) => {
-        //     const value = formData[key];
-
-        //     if (value && typeof value === 'object' && !Array.isArray(value)) {
-        //         // For nested objects, iterate over their keys
-        //         Object.keys(value).forEach((subKey) => {
-        //             formDataToSubmit.set(`${key}.${subKey}`, value[subKey]);
-        //         });
-        //     } else {
-        //         formDataToSubmit.set(key, value);
-        //     }
-        // });
+       
         Object.entries(formData).forEach(([key, value]) => {
             if (typeof value === 'object' && value !== null) {
                 // Stringify nested objects
@@ -415,18 +191,6 @@ const EditStaff = () => {
         if (files.QualificationCertificate) formDataToSubmit.append('QualificationCertificate', files.QualificationCertificate);
         if (files.ExperienceLetter) formDataToSubmit.append('ExperienceLetter', files.ExperienceLetter);
 
-        // Handle file uploads separately
-        // const documents = formData.Document;
-        // if (documents) {
-        //     Object.keys(documents).forEach((key) => {
-        //         const file = documents[key];
-        //         if (file) {
-        //             formDataToSubmit.set(`Document.${key}`, file);
-        //         }
-        //     });
-        // }
-
-        // Fetch StaffId from location
         const staffId = location.state?.Id; // Optional chaining for safety
 
         if (!staffId) {
@@ -476,43 +240,7 @@ const EditStaff = () => {
 
 
 
-    // CSS styles
-    const styles = {
-        inputContainer: {
-            position: "relative",
-            width: "100%",
-            marginBottom: "20px",
-        },
-        input: {
-            width: "88%",
-            padding: "12px 15px",
-            border: "2px solid #7d3cff",
-            borderRadius: "30px",
-            fontSize: "16px",
-            color: "#7a7a7a",
-            backgroundColor: "#f4f6fc",
-            fontWeight: "bold",
-        },
-        suggestionsList: {
-            position: "absolute",
-            top: "100%",
-            left: "0",
-            right: "0",
-            backgroundColor: "white",
-            border: "1px solid #ddd",
-            borderRadius: "5px",
-            maxHeight: "150px",
-            overflowY: "auto",
-            zIndex: "1",
-        },
-        suggestionItem: {
-            padding: "10px",
-            cursor: "pointer",
-        },
-        suggestionItemHover: {
-            backgroundColor: "#f4f4f4",
-        },
-    };
+    
 
 
 
@@ -1075,33 +803,7 @@ const EditStaff = () => {
                                 />
                             </InputContainer>
                         </Main>
-                        {/* <Heading>Permissions</Heading> */}
-
-                        {/* <InputContainer>
-                                <Label2>Home Work Publish</Label2>
-                                <Select
-                                    name="HomeWorkPublish"
-                                    value={formData.HomeWorkPublish ? "Yes" : "No"}
-                                    onChange={(e) => handleChange({ target: { name: 'HomeWorkPublish', value: e.target.value === "Yes" } })}
-                                >
-                                    <option value="">Select</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                </Select>
-                            </InputContainer>
-
-                            <InputContainer>
-                                <Label2>Class Teacher</Label2>
-                                <Select
-                                    name="ClassTeacher"
-                                    value={formData.ClassTeacher ? "Yes" : "No"}
-                                    onChange={(e) => handleChange({ target: { name: 'ClassTeacher', value: e.target.value === "Yes" } })}
-                                >
-                                    <option value="">Select</option>
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                </Select>
-                            </InputContainer> */}
+                        
 
                         {formData.Role.trim() === 'Teacher' && (
                             <>
@@ -1200,76 +902,13 @@ const EditStaff = () => {
 
                                     </div>
 
-                                    {/* <InputContainer>
-                    <Label>Home Work Publish</Label>
-                    <Select
-                      name="HomeWorkPublish"
-                      value={formData.HomeWorkPublish}
-                      onChange={handleChange}
-                    >
-                      <option value="">Select</option>
-                      <option value="false">No</option>
-                      <option value="true">Yes</option>
-                    </Select>
-                  </InputContainer> */}
-                                    {/* <InputContainer>
-                    <Label>Select Class</Label>
-                    <Select value={selectedClass} onChange={handleClassChange}>
-                      <option value="">Select Class</option>
-                      {classes.map((cls) => (
-                        <option key={cls.ClassId} value={cls.ClassId}>
-                          {cls.Class}
-                        </option>
-                      ))}
-                    </Select>
-                    {errors.selectedClass && <ErrorMessage>{errors.selectedClass}</ErrorMessage>}
-                  </InputContainer>
-
-                  <InputContainer>
-                    <Label>Select Section</Label>
-                    <Select
-                      value={selectedSection}
-                      onChange={handleSectionChange}
-                      disabled={!selectedClass}
-                    >
-                      <option value="">Select Section</option>
-                      {sections.map((section, index) => (
-                        <option key={index} value={section}>
-                          {section}
-                        </option>
-                      ))}
-                    </Select>
-                    {errors.selectedSection && <ErrorMessage>{errors.selectedSection}</ErrorMessage>}
-                  </InputContainer> */}
+                                   
                                 </div>
                             </>
                         )}
 
 
-                        {/* <Heading>Educational Details</Heading>
-                        <Main>
-                            <InputContainer>
-                                <Label2>Teaching Subject</Label2>
-                                <Input
-                                    type="text"
-                                    name="TeachingSubject"
-                                    value={formData.TeachingSubject.join(', ')} // Assuming it's an array
-                                    onChange={handleChange}
-                                    placeholder="Enter teaching subjects"
-                                />
-                            </InputContainer>
-                            <InputContainer>
-                                <Label2>Language Known</Label2>
-                                <Input
-                                    type="text"
-                                    name="LanguageKnown"
-                                    value={formData.LanguageKnown.join(', ')} // Assuming it's an array
-                                    onChange={handleChange}
-                                    placeholder="Enter languages known"
-                                />
-                            </InputContainer>
-                        </Main> */}
-
+                        
                         {/* Special Condition */}
                         <Heading>Referral Information</Heading>
                         <Main>

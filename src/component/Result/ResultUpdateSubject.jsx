@@ -321,15 +321,7 @@ const SubjectWise = () => {
                     onChange={(e) => handleSubjectMarksChange(index, e)}
                   />
                 </td>
-                {/* <td>
-                  <input
-                    type="number"
-                    name="totalMarks"
-                    value={student.totalMarks}
-                    onChange={(e) => handleSubjectMarksChange(index, e)}
-                    required
-                  />
-                </td> */}
+           
                 <td>
                   <input
                     type="text"

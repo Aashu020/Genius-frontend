@@ -202,6 +202,87 @@ const SmallButton = styled.button`
   }
 `;
 
+// ------------------------------------------------
+// Result
+
+
+const Container = styled.div`
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+`;
+
+const Header = styled.h2`
+  color: #1d1d8f;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+`;
+
+const InfoSection = styled.div`
+  margin: 10px 0;
+  font-size: 1rem;
+  span {
+    font-weight: bold;
+  }
+`;
+
+const Input1 = styled.input`
+  width: 50px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const Button = styled.button`
+  background-color: #1d1d8f;
+  color: white;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: #3333cc;
+  }
+`;
+
+const DetailsSection = styled.div`
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #333;
+
+  .optional {
+    font-style: italic;
+    color: #777;
+  }
+`;
+
+const DetailsTable = styled(Table)`
+  margin-top: 5px;
+  td, th {
+    padding: 6px;
+    font-size: 0.9rem;
+  }
+  input {
+    width: 95%;
+  }
+`;
+
+const SubmitButton1 = styled(Button)`
+  background-color: #3f3fbf;
+  padding: 10px 20px;
+  font-size: 1rem;
+  width: 100px;
+`;
+
+
+
 export {
     MainDashboard,
     Title,
@@ -219,5 +300,13 @@ export {
     Table,
     TdAction,
     SmallButton,
+    Container,
+    Header,
+    InfoSection,
+    Input1,
+    Button,
+    DetailsSection,
+    DetailsTable,
+    SubmitButton1
   };
   

@@ -3,154 +3,8 @@ import styled from "styled-components";
 import Navbar from "../Navbar";
 import FeeSidebar from "./FeeSidebar";
 import Sidebar from "../Sidebar";
-
-const Container = styled.div`
-  display: flex;
-  
-  background-color: #f4f4f4;
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  height: calc(100vh - 100px);
-overflow-y: auto;
-  background-color: #f9f9f9;
-  padding: 20px;
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const FeeSlipWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px;
-  background-color: #f4f6f9;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-`;
-
-const SlipContainer = styled.div`
-  width: 90%;
-  max-width: 800px;
-  background-color: white;
-  padding: 20px;
-  border: 1px solid #d4d4d4;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-`;
-
-const Header = styled.div`
-  text-align: center;
-  margin-bottom: 20px;
-`;
-
-const Logo = styled.img`
-  width: 100px;
-`;
-
-const SchoolName = styled.h1`
-  font-size: 28px;
-  margin: 10px 0 5px 0;
-  @media (max-width: 480px) {
-    font-size: 10px;
-  }
-`;
-
-const Subtext = styled.p`
-  font-size: 14px;
-  color: #777;
-  @media (max-width: 480px) {
-    font-size: 10px;
-  }
-`;
-
-const Title = styled.h2`
-  font-size: 22px;
-  color: #db2a2a;
-  margin-top: 10px;
-  @media (max-width: 480px) {
-    font-size: 10px;
-  }
-`;
-
-const InfoRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-`;
-
-const InfoBlock = styled.div`
-  flex: 0 0 48%;
-  font-size: 14px;
-  margin-bottom: 10px;
-`;
-
-const InfoLabel = styled.p`
-  font-weight: bold;
-  display: inline-block;
-  margin-right: 5px;
-  @media (max-width: 480px) {
-    font-size: 9px;
-  }
-`;
-
-const InfoValue = styled.span`
-  font-weight: normal;
-  @media (max-width: 480px) {
-    font-size: 8px;
-  }
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-`;
-
-const TableHeader = styled.th`
-  border: 1px solid #d4d4d4;
-  padding: 10px;
-  text-align: center;
-  background-color: #f9f9f9;
-  font-size: 14px;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    font-size: 6px;
-  }
-`;
-
-const TableData = styled.td`
-  border: 1px solid #d4d4d4;
-  padding: 10px;
-  text-align: center;
-  font-size: 14px;
-  @media (max-width: 480px) {
-    font-size: 6px;
-  }
-`;
-
-const TotalAmount = styled.div`
-  text-align: right;
-  font-weight: bold;
-  margin-top: 10px;
-  font-size: 16px;
-`;
-
-const Note = styled.p`
-  font-size: 14px;
-  text-align: center;
-  margin-top: 20px;
-  color: #db2a2a;
-  font-style: italic;
-  @media (max-width: 480px) {
-    font-size: 10px;
-  }
-`;
+import { Container, MainDashboard, FeeSlipWrapper, SlipContainer, Head, Logo, SchoolName1, Subtext, Title1, InfoRow, InfoBlock, InfoLabel, InfoValue, Table, TableHeader1, TableData, TotalAmount, Note } from "./FeeStyles";
+import { Heading } from "lucide-react";
 
 const FeeSlip = () => {
   return (
@@ -159,13 +13,13 @@ const FeeSlip = () => {
       <MainDashboard>
         <FeeSlipWrapper>
           <SlipContainer>
-            <Header>
+            <Head>
               <Logo src="lego-logo-url" alt="School Logo" />
-              <SchoolName>sanjivanee</SchoolName>
+              <SchoolName1>sanjivanee</SchoolName1>
               <Subtext>"I don't know"</Subtext>
               <Subtext>9552698702 | India | sanjivanee.com</Subtext>
-              <Title>Fee Submission Slip</Title>
-            </Header>
+              <Title1>Fee Submission Slip</Title1>
+            </Head>
 
             <InfoRow>
               <InfoBlock>
@@ -210,12 +64,12 @@ const FeeSlip = () => {
               </InfoBlock>
             </InfoRow>
 
-            <Table>
+            <Table style={{width:'100%'}}>
               <thead>
                 <tr>
-                  <TableHeader>Sr. No.</TableHeader>
-                  <TableHeader>Particulars</TableHeader>
-                  <TableHeader>Amount</TableHeader>
+                  <TableHeader1>Sr. No.</TableHeader1>
+                  <TableHeader1>Particulars</TableHeader1>
+                  <TableHeader1>Amount</TableHeader1>
                 </tr>
               </thead>
               <tbody>
@@ -300,15 +154,15 @@ const FeeSlip = () => {
 
             <Note>Fee Submission Record Of "asde S/D/O uygqiyuhio"</Note>
 
-            <Table>
+            <Table style={{width:'100%'}}>
               <thead>
                 <tr>
-                  <TableHeader>Sr.#</TableHeader>
-                  <TableHeader>Submission Date</TableHeader>
-                  <TableHeader>Fee Month</TableHeader>
-                  <TableHeader>Total Amount</TableHeader>
-                  <TableHeader>Deposit</TableHeader>
-                  <TableHeader>Due-able</TableHeader>
+                  <TableHeader1>Sr.#</TableHeader1>
+                  <TableHeader1>Submission Date</TableHeader1>
+                  <TableHeader1>Fee Month</TableHeader1>
+                  <TableHeader1>Total Amount</TableHeader1>
+                  <TableHeader1>Deposit</TableHeader1>
+                  <TableHeader1>Due-able</TableHeader1>
                 </tr>
               </thead>
               <tbody>

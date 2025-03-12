@@ -4,189 +4,8 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
-const MainDashboard = styled.div`
-  flex: 1;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  padding: 20px;
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const FeeCollectionWrapper = styled.div`
-  max-width: 600px;
-  width: 85%;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #f3f4f6;
-  border-radius: 8px;
-  font-family: Arial, sans-serif;
-`;
-
-const Title = styled.h1`
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: #2b2d7b;
-  margin-bottom: 20px;
-`;
-
-const Section = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 30px;
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 45%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const DropdownHeader = styled.div`
-  width: 85%;
-  padding: 10px 18px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  cursor: pointer;
-`;
-
-const DropdownList = styled.div`
-  position: absolute;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  z-index: 1;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-`;
-
-const CheckboxLabel = styled.label`
-  display: block;
-  padding: 8px;
-  cursor: pointer;
-  &:hover {
-    background-color: #f0f0f0;
-  }
-`;
-
-const CheckboxInput = styled.input`
-  margin-right: 10px;
-`;
-
-const InfoGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-  @media (max-width: 468px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const InfoItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  width: 100%;
-
-  & > label {
-    margin-bottom: 5px;
-    color: #666;
-    @media (max-width: 480px) {
-      font-size: 12px;
-    }
-  }
-
-  & > input {
-    padding: 6px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    @media (max-width: 480px) {
-      width: 85%;
-      font-size: 12px;
-    }
-  }
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-
-  th,
-  td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-    font-size: 14px;
-    @media (max-width: 480px) {
-      font-size: 12px;
-    }
-  }
-
-  th {
-    background-color: #f0f0f0;
-    color: #555;
-    font-weight: bold;
-  }
-
-  tfoot td {
-    font-weight: bold;
-  }
-`;
-
-const SubmitButton = styled.button`
-  display: block;
-  width: 150px;
-  margin: 0 auto;
-  padding: 10px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-
-  &:hover {
-    background: linear-gradient(90deg, #8269ff, #624de3);
-  }
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-`;
+// import styled from "styled-components";
+import { MainDashboard, FeeCollectionWrapper, Title, Section, InputContainer, Label, DropdownHeader, DropdownList, CheckboxLabel, CheckboxInput, InfoGrid, InfoItem, TableDetail, SubmitButton, Select } from "./FeeStyles";
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -585,7 +404,7 @@ const Payment = () => {
         </Section>
 
         <Section>
-          <InputContainer>
+          <InputContainer style={{width:'45%'}}>
             <DropdownHeader onClick={toggleMonthDropdown}>
               Select Months ({selectedMonths.length})
             </DropdownHeader>
@@ -606,7 +425,7 @@ const Payment = () => {
             )}
           </InputContainer>
 
-          <InputContainer>
+          <InputContainer style={{width:'45%'}}>
             <DropdownHeader onClick={toggleFeeDropdown}>
               Select Fees ({selectedFees?.length})
             </DropdownHeader>
@@ -672,7 +491,7 @@ const Payment = () => {
           </InfoItem>
         </InfoGrid>
 
-        <Table>
+        <TableDetail>
           <thead>
             <tr>
               <th>SR. NO.</th>
@@ -737,7 +556,7 @@ const Payment = () => {
 
             </tr>
           </tfoot>
-        </Table>
+        </TableDetail>
 
         <InputContainer>
           <Label>FEE MODE</Label>

@@ -1,11 +1,150 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  Container, Tabs, Tab, Table, TableHead, TableRow, TableHeader,
-  TableData, ActionButton, PaginationContainer, PaginationInfo,
-  PaginationButton, RowsPerPageDropdown
-} from './FrontOfficeStyles1';
+import styled from "styled-components";
 
+const Container = styled.div`
+  width: 100%;
+  margin: 50px auto;
+  background-color: #f9f9f9;
+`;
+
+const Tabs = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Tab = styled.button`
+  background-color: ${(props) => (props.active ? "#688AF6" : "#222D78")};
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: -webkit-fill-available;
+  padding: 10px 30px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0 5px;
+
+  &:hover {
+    background-color: #6c8cf1;
+  }
+  @media (max-width: 480px) {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+`;
+
+const TableHead = styled.thead`
+  background-color: #f4f4f4;
+`;
+
+const TableRow = styled.tr`
+  background-color: #fff;
+  &:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+`;
+
+const TableHeader = styled.th`
+  padding: 15px;
+  text-align: left;
+  font-size: 14px;
+  color: #666;
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 5px;
+  }
+  @media (max-width: 376px) {
+    font-size: 8px;
+    padding: 2px;
+  }
+`;
+
+const TableData = styled.td`
+  padding: 15px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 5px;
+  }
+  @media (max-width: 376px) {
+    font-size: 8px;
+    padding: 2px;
+  }
+`;
+
+const ActionButton = styled.button`
+  padding: 8px 20px;
+  border-radius: 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a049;
+  }
+  @media (max-width: 480px) {
+    font-size: 9px;
+    padding: 5px;
+    width: 46px;
+  }
+`;
+
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 10px 20px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #fff;
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 5px;
+  }
+`;
+
+const PaginationInfo = styled.div`
+  display: flex;
+  align-items: center;
+  color: #888;
+`;
+
+const PaginationButton = styled.button`
+  background-color: #fff;
+  color: ${(props) => (props.disabled ? "#ccc" : "#000")};
+  border: none;
+  padding: 5px 15px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+
+  &:hover {
+    background-color: ${(props) => (props.disabled ? "#fff" : "#f0f0f0")};
+  }
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 5px;
+  }
+`;
+
+const RowsPerPageDropdown = styled.select`
+  margin: 0 10px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  cursor: pointer;
+  @media (max-width: 480px) {
+    font-size: 10px;
+  }
+`;
 
 const LeavingStudentTable = () => {
   const [activeTab, setActiveTab] = useState("entry");
@@ -17,7 +156,7 @@ const LeavingStudentTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/student-leaving/all")
+      .get("https://api.edspride.in/student-leaving/all")
       .then((response) => {
         setVisitorData(response.data);
         setEntryData(response.data.filter(item => item.Time && !item.TimeOfLeaving));
@@ -59,9 +198,8 @@ const LeavingStudentTable = () => {
   };
 
   return (
-    <>
-      <Container>
-        <Tabs style={{display: "flex"}}>
+    <Container>
+      <Tabs>
         <Tab active={activeTab === "entry"} onClick={() => setActiveTab("entry")}>
           Entry List
         </Tab>
@@ -69,8 +207,6 @@ const LeavingStudentTable = () => {
           Exit List
         </Tab>
       </Tabs>
-      </Container>
-    <Container>
 
       <Table>
         <TableHead>
@@ -133,7 +269,6 @@ const LeavingStudentTable = () => {
         </div>
       </PaginationContainer>
     </Container>
-    </>
   );
 };
 

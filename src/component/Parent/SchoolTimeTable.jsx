@@ -177,28 +177,7 @@ const TimeTable = () => {
         };
         fetchPeriods();
     }, []);
-
-    // Fetch sections based on selected class
-    // useEffect(() => {
-    //     const fetchSections = async () => {
-    //         if (selectedClass) {
-    //             try {
-    //                 const response = await axios.get(
-    //                     `http://localhost:8007/class/get/${selectedClass}`
-    //                 );
-    //                 console.log('Sections Response:', response.data);
-    //                 setSections(response.data.Section || []);
-    //             } catch (error) {
-    //                 console.error("Error fetching sections:", error);
-    //             }
-    //         } else {
-    //             setSections([]);
-    //         }
-    //     };
-    //     fetchSections();
-    // }, [selectedClass]);
-
-    // Fetch timetable when class or section is selected
+    
     useEffect(() => {
         const fetchTimetable = async () => {
             if (student) {
@@ -221,32 +200,6 @@ const TimeTable = () => {
         <TableWrapper>
             <HeaderWrapper>
                 <h2>Time Table</h2>
-                {/* <DropdownWrapper>
-                    <InputContainer>
-                        <Select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)}>
-                            <option value="">Select Class</option>
-                            {classes.map((cls) => (
-                                <option key={cls.ClassId} value={cls.ClassId}>
-                                    {cls.Class}
-                                </option>
-                            ))}
-                        </Select>
-                    </InputContainer>
-                    <InputContainer>
-                        <Select
-                            value={selectedSection}
-                            onChange={(e) => setSelectedSection(e.target.value)}
-                            disabled={!selectedClass}
-                        >
-                            <option value="">Select Section</option>
-                            {sections.map((section, index) => (
-                                <option key={index} value={section}>
-                                    {section}
-                                </option>
-                            ))}
-                        </Select>
-                    </InputContainer>
-                </DropdownWrapper> */}
             </HeaderWrapper>
 
             {timetable && (

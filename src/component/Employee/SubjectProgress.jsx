@@ -1,159 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
-import jsPDF from 'jspdf';
-import { saveAs } from 'file-saver';
-import * as XLSX from 'xlsx';
+import React, { useState, useEffect } from "react";
+import { Doughnut } from "react-chartjs-2";
+import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
+import jsPDF from "jspdf";
+import { saveAs } from "file-saver";
+import * as XLSX from "xlsx";
+import styled from "styled-components";
+import {
+  Container, LeftSection, RightSection, Button, ProgressContainer,
+  ProgressBar, SubjectName, Progress, ProgressInner, ChartContainer,
+  TitleWrapper, Section, Select, Option
+} from "../Employee/SubjectStyle";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-// Styled Components
-const Container = styled.div`
-  display: flex;
-  justify-content: space-around;
-  width: 98%;
-  margin: 20px auto;
-  @media (max-width: 468px) {
-    display: block;
-  }
-`;
+const CLASSES_API_URL = "https://api.edspride.in/class/all";
+const HOMEWORK_API_URL = "https://api.edspride.in/homework/all";
+const ATTENDANCE_API_URL = "https://api.edspride.in/staff-attendance/all";
 
-const LeftSection = styled.div`
-  width: 50%;
-  @media (max-width: 468px) {
-    width: 100%;
-  }
-`;
-
-const RightSection = styled.div`
-  width: 40%;
-  @media (max-width: 468px) {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-`;
-
-const Button = styled.button`
-  background-color: transparent;
-  color: ${(props) => (props.color === 'red' ? '#d32f2f' : '#388e3c')};
-  border: 1px solid ${(props) => (props.color === 'red' ? '#d32f2f' : '#388e3c')};
-  padding: 8px 16px;
-  font-size: 14px;
-  margin-right: 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: none;
-  transition: background-color 0.3s, color 0.3s;
-
-  &:hover {
-    background-color: ${(props) => (props.color === 'red' ? '#d32f2f' : '#388e3c')};
-    color: white;
-  }
-
-  @media (max-width: 468px) {
-    padding: 5px 10px;
-    font-size: 12px;
-    margin: 5px 0;
-    height: 30px;
-    width: 45%;
-  }
-`;
-
-
-const ProgressContainer = styled.div`
-  margin-top: 30px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  h2 {
-    margin-bottom: 15px;
-    font-size: 20px;
-    color: #0d47a1;
-  }
-`;
-
-const ProgressBar = styled.div`
-  margin-bottom: 20px;
-`;
-
-const SubjectName = styled.div`
-  font-size: 16px;
-  color: #1a237e;
-  margin-bottom: 5px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Progress = styled.div`
-  background-color: #e3f2fd;
-  border-radius: 10px;
-  overflow: hidden;
-  height: 8px;
-`;
-
-const ProgressInner = styled.div`
-  height: 100%;
-  width: ${(props) => props.width}%;
-  background-color: #0d47a1;
-`;
-
-const ChartContainer = styled.div`
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  @media (max-width: 468px) {
-    width: 87%;
-    margin-top: 20px;
-  }
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const Section = styled.div`
-  @media (max-width: 468px) {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-`;
-
-const Select = styled.select`
-  padding: 10px;
-  border-radius: 5px;
-  margin: 10px;
-  width: 45%;
-`;
-
-const Option = styled.option``;
-
-const CLASSES_API_URL = 'http://localhost:8007/class/all';
-const HOMEWORK_API_URL = 'http://localhost:8007/homework/all';
-const ATTENDANCE_API_URL = 'http://localhost:8007/staff-attendance/all';
-
-const App = () => {
+const SubjectProgress = () => {
   const [classesData, setClassesData] = useState([]);
   const [homeworkData, setHomeworkData] = useState([]);
-  const [selectedClass, setSelectedClass] = useState('');
-  const [selectedSection, setSelectedSection] = useState('');
+  const [selectedClass, setSelectedClass] = useState("");
+  const [selectedSection, setSelectedSection] = useState("");
   const [progress, setProgress] = useState({});
   const [attendanceData, setAttendanceData] = useState({
-    labels: ['Present', 'Absent', 'Leave'],
+    labels: ["Present", "Absent", "Leave"],
     datasets: [
       {
-        label: 'Attendance',
+        label: "Attendance",
         data: [0, 0, 0], // Default data
-        backgroundColor: ['#688AF6', '#FC858F', '#0D47A1'],
+        backgroundColor: ["#688AF6", "#FC858F", "#0D47A1"],
         hoverOffset: 4,
       },
     ],
@@ -162,7 +38,7 @@ const App = () => {
 
   useEffect(() => {
     // Get the Employee ID from localStorage
-    const storedEmployeeId = localStorage.getItem('Id');
+    const storedEmployeeId = localStorage.getItem("Id");
     if (storedEmployeeId) {
       setEmployeeId(storedEmployeeId);
     }
@@ -176,7 +52,7 @@ const App = () => {
         const currentMonthAttendance = processAttendanceData(data);
         setAttendanceData(currentMonthAttendance);
       } catch (error) {
-        console.error('Error fetching attendance data:', error);
+        console.error("Error fetching attendance data:", error);
       }
     };
 
@@ -203,13 +79,13 @@ const App = () => {
         );
         if (attendance) {
           switch (attendance.Status) {
-            case 'Present':
+            case "Present":
               presentCount += 1;
               break;
-            case 'Absent':
+            case "Absent":
               absentCount += 1;
               break;
-            case 'Leave':
+            case "Leave":
               leaveCount += 1;
               break;
             default:
@@ -220,12 +96,12 @@ const App = () => {
     });
 
     return {
-      labels: ['Present', 'Absent', 'Leave'],
+      labels: ["Present", "Absent", "Leave"],
       datasets: [
         {
-          label: 'Attendance',
+          label: "Attendance",
           data: [presentCount, absentCount, leaveCount],
-          backgroundColor: ['#688AF6', '#FC858F', '#0D47A1'],
+          backgroundColor: ["#688AF6", "#FC858F", "#0D47A1"],
           hoverOffset: 4,
         },
       ],
@@ -240,7 +116,7 @@ const App = () => {
         const data = await response.json();
         setClassesData(data);
       } catch (error) {
-        console.error('Error fetching classes data:', error);
+        console.error("Error fetching classes data:", error);
       }
     };
 
@@ -250,7 +126,7 @@ const App = () => {
         const data = await response.json();
         setHomeworkData(data);
       } catch (error) {
-        console.error('Error fetching homework data:', error);
+        console.error("Error fetching homework data:", error);
       }
     };
 
@@ -260,7 +136,7 @@ const App = () => {
 
   const handleClassChange = (e) => {
     setSelectedClass(e.target.value);
-    setSelectedSection('');
+    setSelectedSection("");
   };
 
   const handleSectionChange = (e) => {
@@ -303,15 +179,15 @@ const App = () => {
   }, [selectedClass, selectedSection]);
 
   const downloadCSV = (data, filename) => {
-    const csvData = data.map((row) => row.join(',')).join('\n');
-    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const csvData = data.map((row) => row.join(",")).join("\n");
+    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
     saveAs(blob, `${filename}.csv`);
   };
 
   const downloadExcel = (data, filename) => {
     const worksheet = XLSX.utils.aoa_to_sheet(data);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     XLSX.writeFile(workbook, `${filename}.xlsx`);
   };
 
@@ -389,9 +265,13 @@ const App = () => {
               <Button
                 onClick={() =>
                   downloadPDF(
-                    'Attendance Report',
-                    ['Status', 'Count'],
-                    [['Present', attendanceData.datasets[0].data[0]], ['Absent', attendanceData.datasets[0].data[1]], ['Leave', attendanceData.datasets[0].data[2]]]
+                    "Attendance Report",
+                    ["Status", "Count"],
+                    [
+                      ["Present", attendanceData.datasets[0].data[0]],
+                      ["Absent", attendanceData.datasets[0].data[1]],
+                      ["Leave", attendanceData.datasets[0].data[2]],
+                    ]
                   )
                 }
               >
@@ -400,8 +280,13 @@ const App = () => {
               <Button
                 onClick={() =>
                   downloadCSV(
-                    [['Status', 'Count'], ['Present', attendanceData.datasets[0].data[0]], ['Absent', attendanceData.datasets[0].data[1]], ['Leave', attendanceData.datasets[0].data[2]]],
-                    'attendance'
+                    [
+                      ["Status", "Count"],
+                      ["Present", attendanceData.datasets[0].data[0]],
+                      ["Absent", attendanceData.datasets[0].data[1]],
+                      ["Leave", attendanceData.datasets[0].data[2]],
+                    ],
+                    "attendance"
                   )
                 }
               >
@@ -410,8 +295,13 @@ const App = () => {
               <Button
                 onClick={() =>
                   downloadExcel(
-                    [['Status', 'Count'], ['Present', attendanceData.datasets[0].data[0]], ['Absent', attendanceData.datasets[0].data[1]], ['Leave', attendanceData.datasets[0].data[2]]],
-                    'attendance'
+                    [
+                      ["Status", "Count"],
+                      ["Present", attendanceData.datasets[0].data[0]],
+                      ["Absent", attendanceData.datasets[0].data[1]],
+                      ["Leave", attendanceData.datasets[0].data[2]],
+                    ],
+                    "attendance"
                   )
                 }
               >
@@ -426,4 +316,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default SubjectProgress;

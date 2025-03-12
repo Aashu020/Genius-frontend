@@ -29,26 +29,6 @@ const RightSection = styled.div`
     justify-content: center;
   }
 `;
-
-// const Button = styled.button`
-//   background-color: ${(props) => (props.color === 'red' ? '#d32f2f' : '#388e3c')};
-//   color: white;
-//   border: none;
-//   padding: 15px 30px;
-//   font-size: 18px;
-//   margin-right: 20px;
-//   border-radius: 8px;
-//   cursor: pointer;
-//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-//   @media (max-width: 468px) {
-//     padding: 5px 5px;
-//     font-size: 12px;
-//     margin: 0;
-//     height: 30px;
-//     width: 45%;
-//   }
-// `;
-
 const ChartContainer = styled.div`
   background-color: #fff;
   padding: 20px;

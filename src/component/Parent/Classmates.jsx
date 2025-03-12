@@ -3,7 +3,7 @@ import axios from 'axios'; // Import axios for API requests
 import styled from 'styled-components'; // Import styled-components for styling
 
 // Styled Components
-const Container = styled.div`
+const Container1 = styled.div`
   width: 100%;
   margin: auto;
   font-family: "Arial", sans-serif;
@@ -157,7 +157,7 @@ const Classmates = () => {
     }
 
     return (
-        <Container>
+        <Container1>
 
             <SectionTitle>Classmates in {studentClass}</SectionTitle>
             <CardGrid>
@@ -177,7 +177,7 @@ const Classmates = () => {
                     <p>No classmates found in this class.</p>
                 )}
             </CardGrid>
-        </Container>
+        </Container1>
     );
 };
 

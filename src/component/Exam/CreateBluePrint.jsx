@@ -6,102 +6,115 @@ import ExamPage from "./ExamPage";  // Import ExamPage
 import { toast, ToastContainer } from "react-toastify";  // Import toast from react-toastify
 import "react-toastify/dist/ReactToastify.css";
 
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
+import {
+  MainDashboard,
+  Title,
+  Form,
+  Section,
+  Main,
+  InputContainer,
+  Label,
+  Input,
+  Select,
+  SubmitButton,
+} from "./ExamStyles";
 
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
+// const MainDashboard = styled.div`
+//   flex: 1;
+//   padding: 20px;
+//   height: calc(100vh - 100px);
+//   overflow-y: auto;
+//   background-color: #f9f9f9;
+// `;
 
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
+// const Title = styled.h2`
+//   color: #0d47a1;
+//   text-align: center;
+//   margin-bottom: 30px;
+//   font-weight: bold;
+// `;
 
-const Section = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+// const Form = styled.form`
+//   width: 100%;
+//   max-width: 1200px;
+//   margin: 0 auto;
+// `;
 
-const Main = styled.div`
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
+// const Section = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+// `;
+
+// const Main = styled.div`
+//   display: grid;
+//   gap: 20px;
+//   grid-template-columns: repeat(3, 1fr);
   
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
+//   @media (max-width: 480px) {
+//     grid-template-columns: 1fr;
+//   }
+// `;
 
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-`;
+// const InputContainer = styled.div`
+//   position: relative;
+//   width: 100%;
+//   margin-bottom: 20px;
+// `;
 
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
+// const Label = styled.span`
+//   position: absolute;
+//   top: -10px;
+//   left: 20px;
+//   background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
+//   color: white;
+//   padding: 2px 10px;
+//   border-radius: 20px;
+//   font-size: 12px;
+// `;
 
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-`;
+// const Input = styled.input`
+//   width: 88%;
+//   padding: 15px 20px;
+//   border: 2px solid #7d3cff;
+//   border-radius: 30px;
+//   font-size: 16px;
+//   color: #7a7a7a;
+//   background-color: #f4f6fc;
+//   font-weight: bold;
+//   outline: none;
+// `;
 
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-`;
+// const Select = styled.select`
+//   width: 100%;
+//   padding: 15px 20px;
+//   border: 2px solid #7d3cff;
+//   border-radius: 30px;
+//   font-size: 16px;
+//   color: #7a7a7a;
+//   background-color: #f4f6fc;
+//   font-weight: bold;
+// `;
 
-const SubmitButton = styled.button`
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 20px;
+// const SubmitButton = styled.button`
+//   padding: 12px;
+//   background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
+//   border: none;
+//   border-radius: 30px;
+//   color: white;
+//   font-size: 16px;
+//   cursor: pointer;
+//   font-weight: bold;
+//   margin-top: 20px;
 
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
+//   &:hover {
+//     background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
+//   }
 
-  &:disabled {
-    background: #cccccc;
-    cursor: not-allowed;
-  }
-`;
+//   &:disabled {
+//     background: #cccccc;
+//     cursor: not-allowed;
+//   }
+// `;
 
 const CreateBluePrint = () => {
   const location = useLocation();

@@ -176,57 +176,6 @@ const BirthdayWishesTable = () => {
     );
 };
 
-// Styled-components
-
-const TableContainer = styled.div`
-    margin: 20px;
-    padding: 20px;
-    width: 100%;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 1.5rem;
-        color: #333;
-    }
-
-    p {
-        text-align: center;
-        font-size: 1.1rem;
-        color: #555;
-    }
-`;
-
-const Table = styled.table`
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-`;
-
-const TableRow = styled.tr`
-    background-color: #fff;
-    &:nth-child(even) {
-        background-color: #f4f4f4;
-    }
-    &:hover {
-        background-color: #e8e8e8;
-    }
-`;
-
-const TableHeader = styled.th`
-    padding: 12px 15px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
-    font-weight: bold;
-`;
-
-const TableData = styled.td`
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-`;
+import { TableContainer, Table, TableRow, TableHeader, TableData } from './Outerstyle';
 
 export default BirthdayWishesTable;

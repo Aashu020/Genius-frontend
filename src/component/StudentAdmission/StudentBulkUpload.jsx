@@ -3,32 +3,15 @@ import * as XLSX from 'xlsx';
 import styled from 'styled-components';
 // import test from "../../assets/file/student.xlsx"
 import {FileInput,SubmitButton1,Td,ImageCell,ResponseContainer,CellContent} from "./StudentAdmission"
+import { Title, TableContainer, Table, Th} from "../Subject/SubjectStyle"
+
 
 // Styled Components
 const Container = styled.div`
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
-`;
-
-const Title = styled.h1`
   text-align: center;
-`;
-
-const TableContainer = styled.div`
-  max-height: 500px;
-  overflow-y: auto;
-`;
-
-const Table = styled.table`
-  border-collapse: collapse;
-  width: 100%;
-`;
-const Th = styled.th`
-  padding: 10px;
-  text-align: left;
-  background-color: #f4f4f4;
-  border: 1px solid #ddd;
 `;
 
 const StudentBulkUpload = () => {

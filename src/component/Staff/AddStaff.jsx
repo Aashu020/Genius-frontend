@@ -3,201 +3,23 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
-const Container = styled.div`
-  display: flex;
-  background-color: #f4f4f4;
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  height: calc(100vh - 100px);
-
-  overflow-y: auto;
-  background-color: #f9f9f9;
-  padding: 20px;
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-  font-weight: bold;
-
-  @media (max-width: 480px) {
-    font-size: 12px;
-    height: 30px;
-    width: 50%;
-    margin-bottom: 30px;
-    margin-top: 20px;
-  }
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-`;
-const Label2 = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #6c6c6c 0%, #525252 100%);
-
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
-  }
-`;
-
-const StepIndicatorContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  background-color: #f0f0f0;
-  padding: 10px;
-  margin-bottom: 30px;
-
-  @media (max-width: 480px) {
-    gap: 0.1rem;
-  }
-`;
-
-const Step = styled.div`
-  background-color: ${(props) => (props.active ? "#8a2be2" : "#4a0e8f")};
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 14px;
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 7px;
-    width: 40%;
-  }
-`;
-
-const StepContent = styled.span`
-  margin-left: 5px;
-`;
+import {
+  MainDashboard,
+  Title,
+  FormContainer,
+  Form,
+  Heading,
+  Main,
+  InputContainer,
+  Label,
+  Label2,
+  Input,
+  Select,
+  SubmitButton,
+  StepIndicatorContainer,
+  Step,
+  StepContent,
+} from "./StaffStyle";
 
 const AddStaff = () => {
   const navigate = useNavigate();
@@ -337,55 +159,7 @@ const AddStaff = () => {
   const [selectedSubject, setSelectedSubject] = useState('');
   const [isSubjectDropdownOpen, setIsSubjectDropdownOpen] = useState(false);
 
-  // useEffect(() => {
-  //   const fetchClasses = async () => {
-  //     try {
-  //       const response = await axios.get("http://localhost:8007/class/all");
-  //       setClasses(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching classes:", error);
-  //     }
-  //   };
-  //   fetchClasses();
-  // }, []);
-
-  // // Fetch sections based on selected class
-  // useEffect(() => {
-  //   const fetchSections = async () => {
-  //     if (selectedClass) {
-  //       try {
-  //         const response = await axios.get(
-  //           `http://localhost:8007/class/get/${selectedClass}`
-  //         );
-  //         console.log('Sections Response:', response.data);
-  //         setSections(response.data.Section || []);
-  //       } catch (error) {
-  //         console.error("Error fetching sections:", error);
-  //       }
-  //     } else {
-  //       setSections([]);
-  //     }
-  //   };
-
-  //   fetchSections();
-  // }, [selectedClass]);
-  // const handleClassChange = (e) => {
-  //   setSelectedClass(e.target.value);
-  //   setErrors((prevErrors) => {
-  //     const newErrors = { ...prevErrors };
-  //     delete newErrors.selectedClass;
-  //     return newErrors;
-  //   });
-  // };
-
-  // const handleSectionChange = (e) => {
-  //   setSelectedSection(e.target.value);
-  //   setErrors((prevErrors) => {
-  //     const newErrors = { ...prevErrors };
-  //     delete newErrors.selectedSection;
-  //     return newErrors;
-  //   });
-  // };
+ 
 
   useEffect(() => {
     const fetchClasses = async () => {
@@ -421,22 +195,6 @@ const AddStaff = () => {
     fetchSections();
   }, [selectedClass]);
 
-  // useEffect(() => {
-  //   const fetchSubjects = async () => {
-  //     if (selectedClass && selectedSection) {
-  //       try {
-  //         const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}/${selectedSection}`);
-  //         setSubjects(response.data);
-  //       } catch (error) {
-  //         console.error("Error fetching subjects:", error);
-  //       }
-  //     } else {
-  //       setSubjects([]); // Clear subjects if class or section is not selected
-  //     }
-  //   };
-
-  //   fetchSubjects();
-  // }, [selectedClass, selectedSection]);
 
   const handleClassChange = async (e, index) => {
     const classId = e.target.value;
@@ -908,48 +666,6 @@ const AddStaff = () => {
                     </button>
 
                   </div>
-
-                  {/* <InputContainer>
-                    <Label>Home Work Publish</Label>
-                    <Select
-                      name="HomeWorkPublish"
-                      value={formData.HomeWorkPublish}
-                      onChange={handleChange}
-                    >
-                      <option value="">Select</option>
-                      <option value="false">No</option>
-                      <option value="true">Yes</option>
-                    </Select>
-                  </InputContainer> */}
-                  {/* <InputContainer>
-                    <Label>Select Class</Label>
-                    <Select value={selectedClass} onChange={handleClassChange}>
-                      <option value="">Select Class</option>
-                      {classes.map((cls) => (
-                        <option key={cls.ClassId} value={cls.ClassId}>
-                          {cls.Class}
-                        </option>
-                      ))}
-                    </Select>
-                    {errors.selectedClass && <ErrorMessage>{errors.selectedClass}</ErrorMessage>}
-                  </InputContainer>
-
-                  <InputContainer>
-                    <Label>Select Section</Label>
-                    <Select
-                      value={selectedSection}
-                      onChange={handleSectionChange}
-                      disabled={!selectedClass}
-                    >
-                      <option value="">Select Section</option>
-                      {sections.map((section, index) => (
-                        <option key={index} value={section}>
-                          {section}
-                        </option>
-                      ))}
-                    </Select>
-                    {errors.selectedSection && <ErrorMessage>{errors.selectedSection}</ErrorMessage>}
-                  </InputContainer> */}
                 </div>
               </>
             )}

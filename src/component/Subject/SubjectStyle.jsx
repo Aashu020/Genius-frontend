@@ -1,34 +1,74 @@
 import styled from "styled-components";
 
-const Main = styled.div`
+export const Main = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
 `;
-const TableContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-const Main1 = styled.div`
+
+export const Main1 = styled.div`
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr;
   margin-top: 50px;
 `;
-const Table = styled.table`
-  width: 60%;
+
+export const Container = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f3f3;
+  padding: 20px; /* Merged from StudentBulkUpload.jsx */
+  max-width: 1200px; /* Merged from StudentBulkUpload.jsx */
+  margin: 0 auto; /* Merged from StudentBulkUpload.jsx */
+`;
+
+export const TableContainer = styled.div`
+  display: flex; /* From styles file */
+  flex-direction: column; /* From styles file */
+  justify-content: center; /* From styles file */
+  align-items: center; /* From styles file */
+  max-height: 500px; /* From StudentBulkUpload.jsx */
+  overflow-y: auto; /* From StudentBulkUpload.jsx */
+`;
+
+export const Table = styled.table`
+  width: 60%; /* From styles file */
+  border-collapse: collapse;
+  margin-top: 30px; /* From styles file and StudentBulkUpload.jsx */
+  /* Merged properties from StudentBulkUpload.jsx */
+  width: 100%; /* Override from StudentBulkUpload.jsx takes precedence */
+`;
+
+export const Table100 = styled.table`
+  width: 100%;
   border-collapse: collapse;
   margin-top: 30px;
 `;
-const Td1 = styled.td`
+
+export const Td = styled.td`
+  padding: 10px;
+  border: 1px solid #ddd; /* From StudentBulkUpload.jsx */
+  text-align: center; /* From StudentBulkUpload.jsx */
+`;
+
+export const Td1 = styled.td`
   padding: 10px;
   border-bottom: 1px solid #ddd;
   display: flex;
   gap: 1rem;
 `;
-const EditButton = styled.div`
+
+export const Th = styled.th`
+  padding: 10px;
+  text-align: left; /* From StudentBulkUpload.jsx */
+  background-color: #f4f4f4; /* From StudentBulkUpload.jsx */
+  border: 1px solid #ddd; /* From StudentBulkUpload.jsx */
+`;
+
+export const EditButton = styled.div`
   background-color: #209a16bf;
   padding: 5px 10px;
   border-radius: 5px;
@@ -38,13 +78,14 @@ const EditButton = styled.div`
   justify-content: center;
   cursor: pointer;
 `;
-const ErrorMessage = styled.div`
+
+export const ErrorMessage = styled.div`
   color: red;
   font-size: 14px;
   margin-top: 5px;
 `;
 
-const DeleteButton = styled.div`
+export const DeleteButton = styled.div`
   background-color: red;
   padding: 5px 10px;
   border-radius: 5px;
@@ -55,7 +96,7 @@ const DeleteButton = styled.div`
   cursor: pointer;
 `;
 
-const ViewButton = styled.div`
+export const ViewButton = styled.div`
   background-color: #2c3e50;
   padding: 5px 10px;
   border-radius: 5px;
@@ -65,7 +106,7 @@ const ViewButton = styled.div`
   align-items: center;
 `;
 
-const ProgressContainer = styled.div`
+export const ProgressContainer = styled.div`
   width: 50%;
   margin-bottom: 20px;
   margin-top: 30px;
@@ -73,6 +114,7 @@ const ProgressContainer = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
   h2 {
     margin-bottom: 15px;
     font-size: 20px;
@@ -80,11 +122,11 @@ const ProgressContainer = styled.div`
   }
 `;
 
-const ProgressBar = styled.div`
+export const ProgressBar = styled.div`
   margin-bottom: 20px;
 `;
 
-const SubjectName = styled.div`
+export const SubjectName = styled.div`
   font-size: 16px;
   color: #1a237e;
   margin-bottom: 5px;
@@ -93,23 +135,25 @@ const SubjectName = styled.div`
   justify-content: space-between;
 `;
 
-const Progress = styled.div`
+export const Progress = styled.div`
   background-color: #e3f2fd;
   border-radius: 10px;
   overflow: hidden;
   height: 8px;
 `;
 
-const ProgressInner = styled.div`
+export const ProgressInner = styled.div`
   height: 100%;
   width: ${(props) => props.width}%;
   background-color: #0d47a1;
 `;
-const SelectContainer = styled.div`
+
+export const SelectContainer = styled.div`
   width: 88%;
   cursor: pointer;
 `;
-const Dropdown = styled.div`
+
+export const Dropdown = styled.div`
   width: 100%;
   padding: 15px 20px;
   border: 2px solid #7d3cff;
@@ -120,7 +164,7 @@ const Dropdown = styled.div`
   color: #7a7a7a;
 `;
 
-const CheckboxContainer = styled.div`
+export const CheckboxContainer = styled.div`
   position: absolute;
   top: 50px;
   left: 0;
@@ -134,13 +178,13 @@ const CheckboxContainer = styled.div`
   padding: 10px;
 `;
 
-const Checkbox = styled.label`
+export const Checkbox = styled.label`
   display: block;
   margin-bottom: 10px;
   font-size: 16px;
 `;
 
-const ClearButton = styled.button`
+export const ClearButton = styled.button`
   width: 100px;
   padding: 5px;
   background-color: red;
@@ -153,10 +197,10 @@ const ClearButton = styled.button`
 
   &:hover {
     background-color: darkred;
-
   }
 `;
-const Label = styled.span`
+
+export const Label = styled.span`
   position: absolute;
   top: -10px;
   left: 20px;
@@ -167,7 +211,8 @@ const Label = styled.span`
   font-size: 12px;
   z-index: 1;
 `;
-const Button = styled.button`
+
+export const Button = styled.button`
   background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
   padding: 12px 20px;
   margin: 10px;
@@ -177,41 +222,24 @@ const Button = styled.button`
   border-radius: 50%;
   margin-left: 20px;
 `;
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f3f3f3;
-`;
-const Frame = styled.iframe`
+
+export const Frame = styled.iframe`
   width: 80%;
   height: 90vh;
   border: none;
 `;
-const TimetableWrapper = styled.div`
+
+export const TimetableWrapper = styled.div`
   width: 80%;
   margin: 0 auto;
 `;
-const Td = styled.td`
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center;
-`;
-const Th = styled.th`
-  background-color: #0073e6;
-  color: white;
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center;
-  font-weight: bold;
-`;
-const Heading1 = styled.h2`
+
+export const Heading1 = styled.h2`
   text-align: center;
   margin-top: 20px;
 `;
-const ModalOverlay = styled.div`
+
+export const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -223,14 +251,16 @@ const ModalOverlay = styled.div`
   align-items: center;
   z-index: 1000;
 `;
-const ModalContent = styled.div`
+
+export const ModalContent = styled.div`
   background: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
 `;
-const YesButton = styled.button`
+
+export const YesButton = styled.button`
   margin: 5px;
   padding: 10px 15px;
   border: none;
@@ -238,11 +268,13 @@ const YesButton = styled.button`
   background-color: green;
   color: white;
   cursor: pointer;
+
   &:hover {
     opacity: 0.8;
   }
 `;
-const NoButton = styled.button`
+
+export const NoButton = styled.button`
   margin: 5px;
   padding: 10px 15px;
   border: none;
@@ -250,25 +282,27 @@ const NoButton = styled.button`
   background-color: red;
   color: white;
   cursor: pointer;
+
   &:hover {
     opacity: 0.8;
   }
 `;
 
-const TableItem = styled.div`
+export const TableItem = styled.div`
   background-color: #e0e0e0;
   padding: 10px;
   text-align: center;
   border-radius: 5px;
   font-size: 12px;
   font-weight: bold;
+
   @media (max-width: 480px) {
     font-size: 8px;
     padding: 5px;
   }
 `;
 
-const TableItem1 = styled.div`
+export const TableItem1 = styled.div`
   background-color: #64b5f6;
   padding: 10px;
   text-align: center;
@@ -276,15 +310,18 @@ const TableItem1 = styled.div`
   font-size: 10px;
   font-weight: bold;
   color: white;
+
   @media (max-width: 480px) {
     font-size: 8px;
     padding: 5px;
   }
 `;
-const TableWrapper = styled.div`
+
+export const TableWrapper = styled.div`
   width: 100%;
   margin: auto;
   margin-top: 20px;
+
   @media (max-width: 480px) {
     width: 100%;
     margin: 0;
@@ -297,7 +334,8 @@ const TableWrapper = styled.div`
     margin-right: 20px;
   }
 `;
-const HeaderWrapper = styled.div`
+
+export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -308,7 +346,8 @@ const HeaderWrapper = styled.div`
     align-items: flex-start;
   }
 `;
-const DropdownWrapper = styled.div`
+
+export const DropdownWrapper = styled.div`
   display: flex;
   gap: 10px;
 
@@ -325,15 +364,18 @@ const DropdownWrapper = styled.div`
     }
   }
 `;
-const InputContainer = styled.div`
+
+export const InputContainer = styled.div`
   position: relative;
   width: 100%;
   margin-bottom: 20px;
+
   @media (max-width: 480px) {
     margin-bottom: 12px;
   }
 `;
-const Table1 = styled.div`
+
+export const Table1 = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   background-color: #fff;
@@ -341,34 +383,39 @@ const Table1 = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+
   @media (max-width: 480px) {
     grid-template-columns: repeat(7, 1fr);
     font-size: 6px;
   }
 `;
-const TableHeader = styled.div`
+
+export const TableHeader = styled.div`
   background-color: #64b5f6;
   text-align: center;
   padding: 10px;
   font-weight: bold;
   border-radius: 5px;
   color: white;
-font-size: 12px;
+  font-size: 12px;
+
   @media (max-width: 480px) {
     padding: 5px;
   }
 `;
-const TimetableContainer = styled.div`
+
+export const TimetableContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(${props => props.numColumns}, 1fr);
+  grid-template-columns: repeat(${(props) => props.numColumns}, 1fr);
   gap: 1px;
   border: 1px solid #ccc;
   background-color: #e0e0e0;
   width: 80%;
   margin: 2rem 0;
 `;
-const Header = styled.div`
-  grid-column: span ${props => props.numColumns};
+
+export const Header = styled.div`
+  grid-column: span ${(props) => props.numColumns};
   background-color: #6da8e5;
   color: white;
   font-weight: bold;
@@ -376,7 +423,8 @@ const Header = styled.div`
   padding: 10px;
   font-size: 1.2em;
 `;
-const RowHeader = styled.div`
+
+export const RowHeader = styled.div`
   background-color: #d1d1d1;
   color: black;
   font-weight: bold;
@@ -384,19 +432,20 @@ const RowHeader = styled.div`
   padding: 8px;
 `;
 
-const SubjectCell = styled.div`
+export const SubjectCell = styled.div`
   text-align: center;
   padding: 8px;
   color: black;
   font-weight: bold;
 `;
 
-const PeriodCell = styled.div`
+export const PeriodCell = styled.div`
   text-align: center;
   padding: 8px;
-  font-weight: ${props => (props.bold ? 'bold' : 'normal')};
+  font-weight: ${(props) => (props.bold ? "bold" : "normal")};
 `;
-const ConfirmationModal = styled.div`
+
+export const ConfirmationModal = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -408,90 +457,86 @@ const ConfirmationModal = styled.div`
   align-items: center;
   z-index: 1000;
 `;
-const ConfirmButton = styled.button`
+
+export const ConfirmButton = styled.button`
   margin: 0 10px;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
   &.yes {
     background-color: green;
     color: white;
   }
+
   &.no {
     background-color: red;
     color: white;
   }
 `;
-const Table100 = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
-`;
-const Title = styled.h2`
-    text-align: center;
-`;
-const Input = styled.input`
-    display: block;
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-`;
-const Select = styled.select`
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-`;
-const Buttonbg = styled.button`
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #28a745;
-    color: white;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
 
-    &:hover {
-        background-color: #218838;
-    }
+export const Title = styled.h2`
+  text-align: center; /* Merged from both, using h2 from styles file */
+  margin-top: 20px; /* Merged from both, using h2 from styles file */
 `;
-const TimeTable = styled.div`
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    margin-top: 20px;
+
+export const Input = styled.input`
+  display: block;
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 `;
-const TimeTableHeader = styled.div`
-    font-weight: bold;
-    background-color: #f2f2f2;
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #ddd;
+
+export const Select = styled.select`
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 `;
-const TimeTableCell = styled.div`
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+
+export const Buttonbg = styled.button`
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: #218838;
+  }
 `;
-const SubjectInput = styled(Input)`
-    margin: 5px 0;
+
+export const TimeTable = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-top: 20px;
 `;
-export{
-    Main,TableContainer,ConfirmationModal,Table,Td1,EditButton,ErrorMessage,DeleteButton,
-    ProgressContainer,ProgressBar,SubjectName,Progress,ProgressInner,
-    SelectContainer,ClearButton,Checkbox,CheckboxContainer,Dropdown,Main1,
-    Label,Button,Container,Frame,TimetableWrapper,Td,Th,Heading1,ViewButton,
-    ModalOverlay,ModalContent,YesButton,NoButton,TableWrapper,HeaderWrapper,
-    DropdownWrapper,InputContainer,Table1,TableHeader,TimetableContainer,Table100,
-    Header,RowHeader,SubjectCell,PeriodCell,Title,TableItem,TableItem1,
-    ConfirmButton,Input,Select,Buttonbg,TimeTable,TimeTableHeader,TimeTableCell,
-    SubjectInput,
-}
+
+export const TimeTableHeader = styled.div`
+  font-weight: bold;
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+`;
+
+export const TimeTableCell = styled.div`
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const SubjectInput = styled(Input)`
+  margin: 5px 0;
+`;

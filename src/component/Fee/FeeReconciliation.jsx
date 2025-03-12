@@ -289,7 +289,7 @@ const FeeReconciliation = () => {
     // Fetch the fee data from the API
     const fetchFeeData = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/fee-data/all");
+        const response = await axios.get("http://localhost:8007/fee-data/all");
         setFeeData(response.data); // Assuming the response is an array of student fee data
 
         // Calculate totalFee and remainingFee by iterating over the response data
@@ -315,7 +315,7 @@ const FeeReconciliation = () => {
     // Fetch the fee data from the API
     const fetchStudent = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/student/all");
+        const response = await axios.get("http://localhost:8007/student/all");
         setAllStudent(response.data); 
       } catch (error) {
         console.error("Error fetching Student data:", error);
@@ -362,7 +362,7 @@ const FeeReconciliation = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -377,7 +377,7 @@ const FeeReconciliation = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `https://api.edspride.in/class/get/${selectedClass}`
+            `http://localhost:8007/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -413,7 +413,7 @@ const FeeReconciliation = () => {
   useEffect(() => {
     const fetchMonths = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/academic-year-info/active");
+        const response = await axios.get("http://localhost:8007/academic-year-info/active");
         const academicData = response.data;
 
         const monthNames = [
@@ -454,7 +454,7 @@ const FeeReconciliation = () => {
   useEffect(() => {
     const fetchHouses = async () => {
       try {
-        const response = await axios.get('https://api.edspride.in/house/all');
+        const response = await axios.get('http://localhost:8007/house/all');
         setHouses(response.data);
         console.log(response.data);
       } catch (error) {
@@ -468,7 +468,7 @@ const FeeReconciliation = () => {
   useEffect(() => {
     const fetchFines = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/fine-setup/all");
+        const response = await axios.get("http://localhost:8007/fine-setup/all");
         setFines(response.data);
       } catch (error) {
         console.error("Error fetching fines:", error);
@@ -488,7 +488,7 @@ const FeeReconciliation = () => {
   useEffect(() => {
     const fetchDiscounts = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/discount/all");
+        const response = await axios.get("http://localhost:8007/discount/all");
         setDiscounts(response.data); // Assuming the response is an array of discounts
       } catch (error) {
         console.error("Error fetching discounts:", error);

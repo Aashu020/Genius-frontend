@@ -203,7 +203,7 @@ const Electricity = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/electricity/all");
+        const response = await axios.get("http://localhost:8007/electricity/all");
         setData(response.data.reverse());
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -226,7 +226,7 @@ const Electricity = () => {
             Total: Number(reading7AM) + Number(reading3PM) + Number(reading7PM),
           },
         };
-        await axios.put(`https://api.edspride.in/electricity/update/${editId}`, meterReadings);
+        await axios.put(`http://localhost:8007/electricity/update/${editId}`, meterReadings);
         // Reset input fields
         setMeterNo("");
         setReading7AM("");
@@ -244,7 +244,7 @@ const Electricity = () => {
             Total: Number(reading7AM) + Number(reading3PM) + Number(reading7PM),
           },
         };
-        await axios.post("https://api.edspride.in/electricity/add", meterReadings);
+        await axios.post("http://localhost:8007/electricity/add", meterReadings);
         // Reset input fields
         setMeterNo("");
         setReading7AM("");
@@ -253,7 +253,7 @@ const Electricity = () => {
         setEditId(null);
       }
       // Re-fetch data
-      const response = await axios.get("https://api.edspride.in/electricity/all");
+      const response = await axios.get("http://localhost:8007/electricity/all");
       setData(response.data);
     } catch (error) {
       console.error("Error adding meter reading:", error.response ? error.response.data : error.message);

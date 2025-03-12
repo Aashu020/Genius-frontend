@@ -107,7 +107,7 @@ const Classmates = () => {
     useEffect(() => {
         if (studentId) {
             axios
-                .get(`https://api.edspride.in/student/get/${studentId}`)
+                .get(`http://localhost:8007/student/get/${studentId}`)
                 .then((response) => {
                     setStudentData(response.data); // Set student data from API response
                     setStudentClass(response.data.ClassName); // Set student class
@@ -125,7 +125,7 @@ const Classmates = () => {
     // Fetch all students (not filtered by class)
     useEffect(() => {
         axios
-            .get('https://api.edspride.in/student/all') // Fetch all students
+            .get('http://localhost:8007/student/all') // Fetch all students
             .then((response) => {
                 setAllStudents(response.data); // Store all students data
             })
@@ -165,7 +165,7 @@ const Classmates = () => {
                     classmates.map((classmate) => (
                         <Card key={classmate._id}>
                             <PhotoContainer>
-                            <Photo src={`https://api.edspride.in/uploads/${classmate?.Document?.StudentPhoto}`} alt="Student" />
+                            <Photo src={`http://localhost:8007/uploads/${classmate?.Document?.StudentPhoto}`} alt="Student" />
                             </PhotoContainer>
                             <StudentID>{classmate.StudentName}</StudentID>
                             <StudentID>{classmate.RollNo}</StudentID>

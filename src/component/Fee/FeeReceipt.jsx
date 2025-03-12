@@ -173,7 +173,7 @@ const FeeReceipt = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://api.edspride.in/fee-data/get/${location.state.StudentId}`);
+                const response = await fetch(`http://localhost:8007/fee-data/get/${location.state.StudentId}`);
                 const data = await response.json();
                 var filData = data.Payments.filter(val => val.ReceiptId === location.state.ReceiptId);
                 // console.log(filData.Fee)
@@ -195,7 +195,7 @@ const FeeReceipt = () => {
 
     useEffect(() => {
         axios
-            .get("https://api.edspride.in/schoolsetup/all")
+            .get("http://localhost:8007/schoolsetup/all")
             .then((response) => {
                 if (response.data.length > 0) {
                     setSchool(response.data[0])

@@ -6,219 +6,242 @@ import Sidebar from "../Sidebar";
 import { Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-// Styled components
-const Container = styled.div`
-  display: flex;
+import {
+  Container,
+  MainDashboard,
+  Title,
+  Form,
+  Heading,
+  Section,
+  Main,
+  FormContainer,
+  InputContainer,
+  Label,
+  Input,
+  Select,
+  SubmitButton,
+  Table,
+  Th,
+  Td,
+  Td1,
+  Status,
+  Button,
+  DeleteButton,
+} from "./ExamStyles";
 
-  background-color: #f4f4f4;
-`;
+// // Styled components
+// const Container = styled.div`
+//   display: flex;
 
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
+//   background-color: #f4f4f4;
+// `;
 
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
+// const MainDashboard = styled.div`
+//   flex: 1;
+//   padding: 20px;
+//   height: calc(100vh - 100px);
+//   overflow-y: auto;
+//   background-color: #f9f9f9;
+// `;
 
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
+// const Title = styled.h2`
+//   color: #0d47a1;
+//   text-align: center;
+//   margin-bottom: 30px;
+//   font-weight: bold;
+// `;
 
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-  @media (max-width: 480px) {
-    font-size: 12px;
-    height: 30px;
-    width: 50%;
-    margin-bottom: 30px;
-    margin-top: 20px;
-  }
-`;
+// const Form = styled.form`
+//   width: 100%;
+//   max-width: 1200px;
+//   margin: 0 auto;
+// `;
 
-const Section = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+// const Heading = styled.div`
+//   width: 30%;
+//   background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
+//   color: white;
+//   border-radius: 25px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 40px;
+//   margin-bottom: 40px;
+//   @media (max-width: 480px) {
+//     font-size: 12px;
+//     height: 30px;
+//     width: 50%;
+//     margin-bottom: 30px;
+//     margin-top: 20px;
+//   }
+// `;
 
-const Main = styled.div`
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
+// const Section = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+// `;
 
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
+// const Main = styled.div`
+//   display: grid;
+//   gap: 20px;
+//   grid-template-columns: repeat(3, 1fr);
 
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
+//   @media (max-width: 480px) {
+//     grid-template-columns: repeat(2, 1fr);
+//   }
+//   @media (max-width: 480px) {
+//     grid-template-columns: 1fr;
+//   }
+// `;
 
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
+// const FormContainer = styled.div`
+//   background-color: white;
+//   padding: 20px;
+//   border-radius: 10px;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//   @media (max-width: 480px) {
+//     padding: 10px;
+//   }
+// `;
 
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
+// const InputContainer = styled.div`
+//   position: relative;
+//   width: 100%;
+//   margin-bottom: 20px;
+//   @media (max-width: 480px) {
+//     margin-bottom: 12px;
+//   }
+// `;
 
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
+// const Label = styled.span`
+//   position: absolute;
+//   top: -10px;
+//   left: 20px;
+//   background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
+//   color: white;
+//   padding: 2px 10px;
+//   border-radius: 20px;
+//   font-size: 12px;
+// `;
 
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    width: 94%;
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-`;
+// const Input = styled.input`
+//   width: 88%;
+//   padding: 15px 20px;
+//   border: 2px solid #7d3cff;
+//   border-radius: 30px;
+//   font-size: 16px;
+//   color: #7a7a7a;
+//   background-color: #f4f6fc;
+//   font-weight: bold;
+//   outline: none;
+//   @media (max-width: 480px) {
+//     width: 80%;
+//     font-size: 12px;
+//     padding: 12px 18px;
+//   }
+// `;
 
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
+// const Select = styled.select`
+//   width: 100%;
+//   padding: 15px 20px;
+//   border: 2px solid #7d3cff;
+//   border-radius: 30px;
+//   font-size: 16px;
+//   color: #7a7a7a;
+//   background-color: #f4f6fc;
+//   font-weight: bold;
+//   @media (max-width: 480px) {
+//     width: 94%;
+//     font-size: 12px;
+//     padding: 10px 12px;
+//   }
+// `;
 
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
+// const SubmitButton = styled.button`
+//   width: 320px;
+//   padding: 12px;
+//   background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
+//   border: none;
+//   border-radius: 30px;
+//   color: white;
+//   font-size: 16px;
+//   cursor: pointer;
+//   font-weight: bold;
+//   transition: background 0.3s;
+//   margin-top: 20px;
 
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
-  }
-`;
+//   &:hover {
+//     background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
+//   }
 
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
-`;
+//   @media (max-width: 768px) {
+//     width: 100%;
+//     font-size: 12px;
+//     padding: 5px;
+//   }
+// `;
 
-const Th = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-weight: 400;
-`;
+// const Table = styled.table`
+//   width: 100%;
+//   border-collapse: collapse;
+//   margin-top: 30px;
+// `;
 
-const Td = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-`;
+// const Th = styled.th`
+//   background-color: #f2f2f2;
+//   padding: 10px;
+//   text-align: left;
+//   border-bottom: 1px solid #ddd;
+//   font-weight: 400;
+// `;
 
-const Status = styled.button`
-  background-color: #209a16bf;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 5px;
-  color: white;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// const Td = styled.td`
+//   padding: 10px;
+//   border-bottom: 1px solid #ddd;
+// `;
 
-const Td1 = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  gap: 1rem;
-`;
+// const Status = styled.button`
+//   background-color: #209a16bf;
+//   border: none;
+//   padding: 8px 20px;
+//   border-radius: 5px;
+//   color: white;
+//   width: 50%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
-const Button = styled.button`
-  background-color: #209a16bf;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 5px;
-  color: white;
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// const Td1 = styled.td`
+//   padding: 10px;
+//   border-bottom: 1px solid #ddd;
+//   display: flex;
+//   gap: 1rem;
+// `;
 
-const DeleteButton = styled.button`
-  background-color: red;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  width: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// const Button = styled.button`
+//   background-color: #209a16bf;
+//   border: none;
+//   padding: 8px 10px;
+//   border-radius: 5px;
+//   color: white;
+//   width: 50%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
+
+// const DeleteButton = styled.button`
+//   background-color: red;
+//   border: none;
+//   padding: 5px 10px;
+//   border-radius: 5px;
+//   color: white;
+//   width: 20%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
 const AddExam = () => {
   const [examDetails, setExamDetails] = useState({
@@ -268,7 +291,7 @@ const AddExam = () => {
 
     try {
       const response = await axios.post(
-        "https://api.edspride.in/exam/add",
+        "http://localhost:8007/exam/add",
         examDetails
       );
       console.log(response.data);
@@ -283,7 +306,7 @@ const AddExam = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/exam/all")
+      .get("http://localhost:8007/exam/all")
       .then((response) => {
         setExamData(response.data);
         console.log(response.data);
@@ -296,7 +319,7 @@ const AddExam = () => {
   const Publish = (state) => {
     var dataToSend = { ...state, Status: "Published" };
     axios
-      .put(`https://api.edspride.in/exam/update/${state.ExamId}`, dataToSend)
+      .put(`http://localhost:8007/exam/update/${state.ExamId}`, dataToSend)
       .then((response) => {
         console.log(response.data);
         setExamData((prevData) =>
@@ -314,7 +337,7 @@ const AddExam = () => {
 
   const handleDelete = async (examId) => {
     try {
-      await axios.delete(`https://api.edspride.in/exam/delete/${examId}`);
+      await axios.delete(`http://localhost:8007/exam/delete/${examId}`);
       setExamData((prevData) =>
         prevData.filter((exam) => exam.ExamId !== examId)
       );

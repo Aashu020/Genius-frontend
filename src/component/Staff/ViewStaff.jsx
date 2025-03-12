@@ -103,7 +103,7 @@ const ViewStaff = () => {
     if (location.state && location.state.Id) {
       const fetchStaff = async () => {
         try {
-          const response = await fetch(`https://api.edspride.in/staff/get/${location.state.Id}`);
+          const response = await fetch(`http://localhost:8007/staff/get/${location.state.Id}`);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -126,7 +126,7 @@ const ViewStaff = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -149,7 +149,7 @@ const ViewStaff = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`https://api.edspride.in/student/update/${location.state.Id}`, staff);
+      const response = await axios.put(`http://localhost:8007/student/update/${location.state.Id}`, staff);
       if (response.status === 200) {
         alert('Staff data updated successfully!');
       }
@@ -174,7 +174,7 @@ const ViewStaff = () => {
     <Container>
       <AdmissionLetterContainer>
         <Header>
-          <Logo style={{height:"80px"}} src={`https://api.edspride.in/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
+          <Logo style={{height:"80px"}} src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
           <Title>{school?.SchoolName}</Title>
           <p>{school?.EmailId} | {school?.PhoneNo} </p>
           <p>{school?.Website}</p>
@@ -182,7 +182,7 @@ const ViewStaff = () => {
         </Header>
 
         <PhotoContainer>
-          <Photo src={`https://api.edspride.in/uploads/${staff?.Documents?.Photo}`} alt="Staff" />
+          <Photo src={`http://localhost:8007/uploads/${staff?.Documents?.Photo}`} alt="Staff" />
         </PhotoContainer>
 
         <Section1>

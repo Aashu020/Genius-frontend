@@ -20,6 +20,7 @@ const Document = () => {
     AadharNumber: "",
     MobileNo: "",
     Email: "",
+    Medium:"",
     Address: "",
     City: "",
     Area: "",
@@ -115,7 +116,7 @@ const Document = () => {
   //     });
 
   //     try {
-  //       await axios.post("https://api.edspride.in/student/add", formDataToSend, {
+  //       await axios.post("http://localhost:8007/student/add", formDataToSend, {
   //         headers: {
   //           'Content-Type': 'multipart/form-data',
   //         },
@@ -162,7 +163,7 @@ const Document = () => {
       });
 
       try {
-        await axios.post("https://api.edspride.in/student/add", formDataToSend, {
+        await axios.post("http://localhost:8007/student/add", formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

@@ -4,174 +4,31 @@ import { Eye, Edit, Trash2 } from "lucide-react";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import axios from "axios";
+import {
+    Container,
+    MainDashboard,
+    TableContainer,
+    ButtonGroup,
+    Button,
+    OpenButton,
+    FollowUpButton,
+    HotButton,
+    Table,
+    Th,
+    Td,
+    StatusButton,
+    ActionButton,
+    PaginationContainer,
+    PaginationInfo,
+    PaginationButton,
+    RowsPerPageDropdown,
+    ModalContainer,
+    ModalContent,
+    CloseButton,
+    DetailRow,
+    InputAlternate,
+  } from "./EnquiryStyles";
 
-// Styled components
-const Container = styled.div`
-  display: flex;
-
-  background-color: #f4f4f4;
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  background-color: #f9f9f9;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-`;
-
-const TableContainer = styled.div`
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  margin-bottom: 20px;
-  justify-content: space-between;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  width: 32%;
-`;
-
-const OpenButton = styled(Button)`
-  background-color: #7b68ee;
-`;
-
-const FollowUpButton = styled(Button)`
-  background-color: #191970;
-`;
-
-const HotButton = styled(Button)`
-  background-color: #fc858f;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-const Th = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-weight: 400;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-`;
-
-const StatusButton = styled.button`
-  background-color: #ebedeb;
-  color: black;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 15px;
-`;
-
-const ActionButton = styled.button`
-  background-color: ${(props) => props.color};
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  margin-right: 5px;
-`;
-
-const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  padding: 10px 20px;
-  border-top: 1px solid #e0e0e0;
-  background-color: #fff;
-`;
-
-const PaginationInfo = styled.div`
-  display: flex;
-  align-items: center;
-  color: #888;
-`;
-
-const PaginationButton = styled.button`
-  background-color: #fff;
-  color: ${(props) => (props.disabled ? "#ccc" : "#000")};
-  border: none;
-  padding: 5px 15px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  font-size: 14px;
-
-  &:hover {
-    background-color: ${(props) => (props.disabled ? "#fff" : "#f0f0f0")};
-  }
-`;
-
-const RowsPerPageDropdown = styled.select`
-  margin: 0 10px;
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  font-size: 14px;
-  cursor: pointer;
-`;
-
-// Modal Component
-const ModalContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-`;
-
-const ModalContent = styled.div`
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  height: 400px;
-  overflow: scroll;
-`;
-
-const CloseButton = styled.button`
-  background-color: #ff4500;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
-const DetailRow = styled.div`
-  margin-bottom: 10px;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-`;
 
 // Modal for Editing and Deleting
 const Modal = ({ student, onClose, onUpdate, onDelete }) => {
@@ -232,7 +89,7 @@ const StudentTable = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/enquiry/all");
+        const response = await axios.get("http://localhost:8007/enquiry/all");
         setStudents(response.data);
         setFilteredData(response.data);
       } catch (error) {
@@ -258,7 +115,7 @@ const StudentTable = () => {
 
   const handleUpdateStudent = async (updatedStudent) => {
     try {
-      await axios.put(`https://api.edspride.in/enquiry/update/${updatedStudent.RegistrationNo}`, updatedStudent);
+      await axios.put(`http://localhost:8007/enquiry/update/${updatedStudent.RegistrationNo}`, updatedStudent);
       setStudents(students.map(student => (student.RegistrationNo === updatedStudent.RegistrationNo ? updatedStudent : student)));
       setFilteredData(filteredData.map(student => (student.RegistrationNo === updatedStudent.RegistrationNo ? updatedStudent : student)));
       handleCloseModal();
@@ -275,7 +132,7 @@ const StudentTable = () => {
     }
 
     try {
-      await axios.delete(`https://api.edspride.in/enquiry/delete/${registrationNo}`);
+      await axios.delete(`http://localhost:8007/enquiry/delete/${registrationNo}`);
       setStudents(students.filter(student => student.RegistrationNo !== registrationNo));
       setFilteredData(filteredData.filter(student => student.RegistrationNo !== registrationNo));
       handleCloseModal();

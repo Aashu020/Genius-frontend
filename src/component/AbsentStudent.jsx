@@ -1,75 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-// Styled Components
-const Wrapper = styled.div`
-  width: 90%;
-  margin: auto;
-  margin-top: 20px;
-  @media (max-width: 480px) {
-    width: 100%;
-    margin: 0;
-  }
-`;
-
-const HeaderTitle = styled.h2`
-  font-size: 20px;
-  color: #1a237e;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    font-size: 14px;
-  }
-`;
-
-const StyledTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-`;
-
-const TableHead = styled.thead`
-  background-color: #f0f0f0;
-`;
-
-const HeadCell = styled.th`
-  padding: 12px 15px;
-  text-align: left;
-  color: #666;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 8px 8px;
-  }
-`;
-
-const TableBody = styled.tbody`
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-`;
-
-const BodyCell = styled.td`
-  padding: 12px 15px;
-  text-align: left;
-  font-size: 16px;
-  color: #333;
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 8px 8px;
-  }
-`;
-
-const ProfileImage = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  @media (max-width: 480px) {
-    height: 2rem;
-    width: 2rem;
-    padding: 1px 0;
-  }
-`;
+import { StaffWrapper, HeaderTitle, StyledTable, TableHead, HeadCell, TableBody, BodyCell, ProfileImage } from './Outerstyle';
 
 const AbsentStudentList = () => {
   const [absentStudents, setAbsentStudents] = useState([]);
@@ -82,7 +14,7 @@ const AbsentStudentList = () => {
         console.log("Fetching attendance data...");
 
         // Fetching attendance data
-        const attendanceResponse = await fetch("https://api.edspride.in/student-attendance/all");
+        const attendanceResponse = await fetch("http://localhost:8007/student-attendance/all");
         if (!attendanceResponse.ok) {
           throw new Error("Failed to fetch attendance data");
         }
@@ -104,7 +36,7 @@ const AbsentStudentList = () => {
               class: entry.Class, // Fetch class and section from the main attendance entry
               section: entry.Section,
               image: student?.Document?.StudentPhoto
-                ? `https://api.edspride.in/uploads/${student.Document.StudentPhoto}`
+                ? `http://localhost:8007/uploads/${student.Document.StudentPhoto}`
                 : "https://via.placeholder.com/40", // Default image if no student photo
             }))
           );
@@ -128,16 +60,16 @@ const AbsentStudentList = () => {
 
   // Loading state
   if (loading) {
-    return <Wrapper>Loading absent students...</Wrapper>;
+    return <StaffWrapper>Loading absent students...</StaffWrapper>;
   }
 
   // Error state
   if (error) {
-    return <Wrapper>{error}</Wrapper>;
+    return <StaffWrapper>{error}</StaffWrapper>;
   }
 
   return (
-    <Wrapper>
+    <StaffWrapper>
       <HeaderTitle>Today's Absent Students</HeaderTitle>
       <StyledTable>
         <TableHead>
@@ -171,7 +103,7 @@ const AbsentStudentList = () => {
           )}
         </TableBody>
       </StyledTable>
-    </Wrapper>
+    </StaffWrapper>
   );
 };
 

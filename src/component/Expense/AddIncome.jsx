@@ -4,156 +4,12 @@ import styled from "styled-components";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import { Eye, Edit, Trash2 } from "lucide-react";
+import { 
+  Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
+  InputContainer, Label, Input, Select, SubmitButton, Table, Th, Td, 
+  Td1, EditButton, DeleteButton, ErrorMessage 
+} from './ExpenseStyles';
 
-const Container = styled.div`
-  display: flex;
-  background-color: #f4f4f4;
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  background-color: #f9f9f9;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
-`;
-
-const Th = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-`;
-
-const Td1 = styled.td`
-  padding: 10px;
-  display: flex;
-  gap: 1rem;
-`;
-
-const EditButton = styled.div`
-  background-color: #209a16bf;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-`;
-
-const DeleteButton = styled.div`
-  background-color: red;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  width: 15%;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-`;
-
-const ErrorMessage = styled.div`
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-`;
 
 
 const AddIncome = () => {
@@ -191,7 +47,7 @@ const AddIncome = () => {
     const fetchIncomeHeads = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/expense-header/all"
+          "http://localhost:8007/expense-header/all"
         );
         setIncomeHeads(response.data);
       } catch (error) {
@@ -207,7 +63,7 @@ const AddIncome = () => {
     const fetchVendors = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/vendor/all"
+          "http://localhost:8007/vendor/all"
         );
         setVendors(response.data);
       } catch (error) {
@@ -223,7 +79,7 @@ const AddIncome = () => {
     const fetchIncomeList = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/revenue/all"
+          "http://localhost:8007/revenue/all"
         );
         setIncomeList(response.data);
       } catch (error) {
@@ -256,7 +112,7 @@ const AddIncome = () => {
     try {
       if (isEditing) {
         // Update existing income
-        await axios.put(`https://api.edspride.in/revenue/update/${currentIncomeId}`, newIncome);
+        await axios.put(`http://localhost:8007/revenue/update/${currentIncomeId}`, newIncome);
         setIncomeList(incomeList.map((income) => (income._id === currentIncomeId ? { ...income, ...newIncome } : income)));
         alert("Income updated successfully!"); // Alert for update
         setIsEditing(false);
@@ -264,7 +120,7 @@ const AddIncome = () => {
       } else {
         // Add new income
         const response = await axios.post(
-          "https://api.edspride.in/revenue/add",
+          "http://localhost:8007/revenue/add",
           newIncome
         );
         setIncomeList([...incomeList, response.data]);
@@ -301,7 +157,7 @@ const AddIncome = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this income?");
     if (confirmDelete) {
       try {
-        await axios.delete(`https://api.edspride.in/revenue/delete/${id}`);
+        await axios.delete(`http://localhost:8007/revenue/delete/${id}`);
         setIncomeList(incomeList.filter((income) => income._id !== id));
       } catch (error) {
         console.error("Error deleting income:", error);

@@ -116,7 +116,7 @@ const ViewResult = () => {
 
     const fetchResultData = async () => {
       try {
-        const response = await axios.get(`https://api.edspride.in/result/get/one/${examId}/${studentId}`);
+        const response = await axios.get(`http://localhost:8007/result/get/one/${examId}/${studentId}`);
         setStudentData(response.data);
       } catch (error) {
         console.error("Error fetching student result data:", error);
@@ -131,7 +131,7 @@ const ViewResult = () => {
 
     const fetchStudentData = async () => {
       try {
-        const response = await axios.get(`https://api.edspride.in/student/get/${studentId}`);
+        const response = await axios.get(`http://localhost:8007/student/get/${studentId}`);
         setStudent(response.data);
       } catch (error) {
         console.error("Error fetching student data:", error);
@@ -143,7 +143,7 @@ const ViewResult = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         if (response.data.length > 0) {
           setSchool(response.data[0]);
@@ -156,7 +156,7 @@ const ViewResult = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/academic-year-info/active")
+      .get("http://localhost:8007/academic-year-info/active")
       .then((response) => {
         SetAcademic(response.data);
       })
@@ -196,7 +196,7 @@ const ViewResult = () => {
   return (
     <MarksheetContainer>
       <Header>
-        <Logo style={{ height: "80px" }} src={`https://api.edspride.in/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
+        <Logo style={{ height: "80px" }} src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
         <Title>{school?.SchoolName}</Title>
         <p>{school?.EmailId} | {school?.PhoneNo}</p>
         <p>{school?.Website}</p>
@@ -218,7 +218,7 @@ const ViewResult = () => {
         </InfoBox>
         <InfoBox>
           <PhotoContainer>
-            <Photo src={`https://api.edspride.in/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
+            <Photo src={`http://localhost:8007/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
           </PhotoContainer>
           <p><strong>Result Date:</strong> {studentData.ResultDate}</p>
         </InfoBox>
@@ -258,7 +258,7 @@ const ViewResult = () => {
         <SignatureBox> <Logo style={{ height: "80px" }} src={white} alt="School Logo" />CLASS TEACHER SIGN</SignatureBox>
         
         <SignatureBox>
-        <Logo style={{ height: "80px" }} src={`https://api.edspride.in/uploads/${school?.PrincipleSign.replace(/^uploads\//, '')}`} alt="Signature" />
+        <Logo style={{ height: "80px" }} src={`http://localhost:8007/uploads/${school?.PrincipleSign.replace(/^uploads\//, '')}`} alt="Signature" />
         PRINCIPAL SIGN</SignatureBox>
       </Signatures>
     </MarksheetContainer>

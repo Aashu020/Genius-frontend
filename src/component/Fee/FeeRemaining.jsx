@@ -9,8 +9,8 @@ import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 
 // Define your API endpoints (replace with actual URLs)
-const studentApiUrl = 'https://api.edspride.in/student/all';
-const feeApiUrl = 'https://api.edspride.in/fee-data/all';
+const studentApiUrl = 'http://localhost:8007/student/all';
+const feeApiUrl = 'http://localhost:8007/fee-data/all';
 
 // Styled-components for your CSS
 const Container = styled.div`

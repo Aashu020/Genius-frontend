@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const CLASSES_API_URL = 'https://api.edspride.in/class/all';
-const HOMEWORK_API_URL = 'https://api.edspride.in/homework/all';
+const CLASSES_API_URL = 'http://localhost:8007/class/all';
+const HOMEWORK_API_URL = 'http://localhost:8007/homework/all';
 
 const App = () => {
   const [classesData, setClassesData] = useState([]);

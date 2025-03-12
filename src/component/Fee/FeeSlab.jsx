@@ -234,7 +234,7 @@ const FeeSlab = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/class/all");
+      const response = await axios.get("http://localhost:8007/class/all");
       setClassList(response.data);
     } catch (error) {
       console.error("Error fetching classes:", error);
@@ -244,7 +244,7 @@ const FeeSlab = () => {
 
   const fetchFeeHeaders = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/feeHeader/all");
+      const response = await axios.get("http://localhost:8007/feeHeader/all");
       const arr = response.data.map(feeHeader => ({
         Name: feeHeader.Name,
         FeeMode: feeHeader.FeeMode,
@@ -258,7 +258,7 @@ const FeeSlab = () => {
 
   const fetchFeeSlabs = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/feeslab/all");
+      const response = await axios.get("http://localhost:8007/feeslab/all");
       setFeeSlabList(response.data);
     } catch (error) {
       console.error("Error fetching fee slabs:", error);
@@ -313,10 +313,10 @@ const FeeSlab = () => {
 
     try {
       if (editingClassId) {
-        await axios.put(`https://api.edspride.in/feeslab/update/${editingClassId}`, payload);
+        await axios.put(`http://localhost:8007/feeslab/update/${editingClassId}`, payload);
         toast.success("Fee slab updated successfully.");
       } else {
-        await axios.post("https://api.edspride.in/feeslab/add", payload);
+        await axios.post("http://localhost:8007/feeslab/add", payload);
         toast.success("Fee slab added successfully.");
       }
       resetForm();
@@ -351,7 +351,7 @@ const FeeSlab = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://api.edspride.in/feeslab/delete/${id}`);
+      await axios.delete(`http://localhost:8007/feeslab/delete/${id}`);
       toast.success("Fee slab deleted successfully.");
       fetchFeeSlabs();
     } catch (error) {

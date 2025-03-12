@@ -113,7 +113,7 @@ const AttendanceTable = () => {
   const fetchStudentData = async (date) => {
     setLoadingStudent(true);
     try {
-      const response = await fetch(`https://api.edspride.in/student-attendance/all?date=${date}`);
+      const response = await fetch(`http://localhost:8007/student-attendance/all?date=${date}`);
       const result = await response.json();
   
       // Logging the result to check the data structure
@@ -150,7 +150,7 @@ const AttendanceTable = () => {
     console.log(date)
     setLoadingStaff(true);
     try {
-      const response = await fetch(`https://api.edspride.in/staff-attendance/all?date=${date}`);
+      const response = await fetch(`http://localhost:8007/staff-attendance/all?date=${date}`);
       const result = await response.json();
   
       // Logging the result to check the data structure

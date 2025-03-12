@@ -2,168 +2,26 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-  @media (max-width: 480px) {
-    font-size: 12px;
-    height: 30px;
-    width: 50%;
-    margin-bottom: 30px;
-    margin-top: 20px;
-  }
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const FormContainer = styled.div`
-    height: calc(-100px + 100vh);
-    overflow-y: auto;
-    background-color: rgb(249, 249, 249);
-    flex: 1 1 0%;
-    padding: 20px;
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Label2 = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #6c6c6c 0%, #525252 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-`;
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
-  }
-`;
-const ErrorMessage = styled.span`
-  color: #15ff00;
-  font-size: 12px;
-`;
-const ErrorText = styled.span`
-  color: red;
-  font-size: 12px;
-
-`;
+import {
+  Title,
+  Form,
+  Heading,
+  FormContainer,
+  Main,
+  InputContainer,
+  Label,
+  Label2,
+  Input,
+  Select,
+  SubmitButton,
+  ErrorMessage,
+  ErrorText,
+} from "./EnquiryStyles";
 
 
 // Validation functions
 const isValidMobileNumber = (number) => /^\d{10}$/.test(number);
 const isValidName = (name) => /^[A-Za-z\s]+$/.test(name);
-
-
-
-
-
 
 const AddEnquiryForm = () => {
   const [formData, setFormData] = useState({
@@ -201,7 +59,7 @@ const AddEnquiryForm = () => {
     // Fetch sections based on the selected class
     if (selectedClass) {
       try {
-        const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+        const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
         setSections(response.data.Section || []);
       } catch (error) {
         console.error("Error fetching sections:", error);
@@ -264,7 +122,7 @@ const AddEnquiryForm = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/class/all');
+        const response = await fetch('http://localhost:8007/class/all');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -316,7 +174,7 @@ const AddEnquiryForm = () => {
 
     try {
       const response = await axios.post(
-        "https://api.edspride.in/enquiry/add",
+        "http://localhost:8007/enquiry/add",
         formData
       );
       console.log(response.data);
@@ -346,7 +204,6 @@ const AddEnquiryForm = () => {
   };
 
   
-
 
   return (
     <FormContainer>

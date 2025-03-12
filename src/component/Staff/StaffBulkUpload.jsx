@@ -190,7 +190,7 @@ const formatDate = (excelDate) => {
         console.log(jsonData);
         try {
             // Send the data to the server
-            const response = await fetch('https://api.edspride.in/bulk/save-staff', {
+            const response = await fetch('http://localhost:8007/bulk/save-staff', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 import styled from 'styled-components';
 // import test from "../../assets/file/student.xlsx"
+import {FileInput,SubmitButton1,Td,ImageCell,ResponseContainer,CellContent} from "./StudentAdmission"
 
 // Styled Components
 const Container = styled.div`
@@ -14,31 +15,6 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-const FileInput = styled.input`
-  margin-bottom: 20px;
-  display: block;
-  width: 200px;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const SubmitButton = styled.button`
-  display: block;
-  width: 200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-top: 20px;
-
-  &:hover {
-    background-color: #45a049;
-  }
-`;
-
 const TableContainer = styled.div`
   max-height: 500px;
   overflow-y: auto;
@@ -48,33 +24,11 @@ const Table = styled.table`
   border-collapse: collapse;
   width: 100%;
 `;
-
 const Th = styled.th`
   padding: 10px;
   text-align: left;
   background-color: #f4f4f4;
   border: 1px solid #ddd;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-  border: 1px solid #ddd;
-`;
-
-const CellContent = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ImageCell = styled.img`
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-`;
-
-const ResponseContainer = styled.div`
-  margin-top: 20px;
-  text-align: center;
 `;
 
 const StudentBulkUpload = () => {
@@ -402,8 +356,8 @@ const mapToMongooseModel = (row) => {
             <Title>Excel File Upload and Display</Title>
             <FileInput type="file" accept=".xlsx, .xls, .csv" onChange={handleFileUpload} />
             {renderTable()}
-            <SubmitButton onClick={handleSubmit}>Submit Data</SubmitButton>
-            <SubmitButton style={{ backgroundColor: "blue" }} onClick={handleDownload}>Download Template</SubmitButton>
+            <SubmitButton1 onClick={handleSubmit}>Submit Data</SubmitButton1>
+            <SubmitButton1 style={{ backgroundColor: "blue" }} onClick={handleDownload}>Download Template</SubmitButton1>
             {renderResponse()}
         </Container>
     );

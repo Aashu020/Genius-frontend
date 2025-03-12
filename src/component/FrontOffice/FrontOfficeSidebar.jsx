@@ -1,11 +1,9 @@
 
 import React, { useState } from "react";
 import { AiFillAppstore } from "react-icons/ai";
-
 import styled from 'styled-components';
 import { AiOutlinePlus, AiOutlineDashboard } from 'react-icons/ai'; // Using icons for the sidebar items
 import { Link } from 'react-router-dom';
-
 
 const SidebarContainer = styled.div`
   width: 250px;
@@ -15,7 +13,6 @@ const SidebarContainer = styled.div`
   position: ${(props) => (props.isVisible ? "absolute" : "none")} ;
   z-index: 10;
   }
- 
 `;
 const SidebarContainer1 = styled.div`
   background-color: #fff;
@@ -28,7 +25,6 @@ const SidebarContainer1 = styled.div`
     text-decoration: none;
   }
 `;
-
 
 const DropdownIcon = styled.span`
   margin-left: 5px;
@@ -90,7 +86,6 @@ const PlusIcon = styled.div`
   font-size: 16px;
 `;
 
-
 const FrontOfficeSidebar = () => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
@@ -104,7 +99,6 @@ const FrontOfficeSidebar = () => {
 
     <SidebarContainer1>
       <SidebarMenuTitle>Menu</SidebarMenuTitle>
-
       <Link to="/visitorentry"> <MenuItem>
         <MenuLabel>
           <MenuIcon>
@@ -116,8 +110,6 @@ const FrontOfficeSidebar = () => {
           <AiOutlinePlus />
         </PlusIcon>
       </MenuItem></Link>
-
-     
 
       <Link to="/earlyliving">  <MenuItem>
         <MenuLabel>
@@ -142,8 +134,7 @@ const FrontOfficeSidebar = () => {
           <AiOutlinePlus />
         </PlusIcon>
       </MenuItem></Link>
-      
-
+    
       <Link to="/postaldispatch"> <MenuItem>
         <MenuLabel>
           <MenuIcon>
@@ -155,18 +146,14 @@ const FrontOfficeSidebar = () => {
           <AiOutlinePlus />
         </PlusIcon>
       </MenuItem></Link>
-   
     </SidebarContainer1>
    
     </SidebarContainer>
      <DropdownIcon onClick={toggleSidebar}>
      
-     
-     
      {sidebarVisible ? "☰" : "☰"} {/* Change icon based on visibility */}
    </DropdownIcon>
    </>
- 
   );
 };
 

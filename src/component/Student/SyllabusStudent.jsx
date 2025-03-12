@@ -3,98 +3,11 @@ import axios from 'axios'; // Importing axios
 import styled from 'styled-components'; // Importing styled-components
 
 // Styled components for layout and styling
-const Container = styled.div`
-   display: flex;
-  background-color: #f4f4f4;
-  width: calc(100vw - 250px);
-`;
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 50px;
-  height: calc(100vh - 100px);
-  background-color: #f9f9f9;
-`;
-const Title = styled.h2`
-  text-align: center;
-  color: #1f1f1f;
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 20px;
-`;
-
-const ClassDetails = styled.div`
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-`;
-
-const Section = styled.p`
-  font-size: 18px;
-  font-weight: bold;
-  color: #3e3e3e;
-`;
-
-const SubjectList = styled.div`
-  margin-top: 40px;
-`;
-
-const SubjectItem = styled.div`
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: #f8f8f8;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-`;
-
-const SubjectTitle = styled.h4`
-  color: #5a3eff;
-  font-size: 22px;
-  margin-bottom: 15px;
-  font-weight: 600;
-`;
-
-const SyllabusList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-`;
-
-const SyllabusItem = styled.li`
-  margin-bottom: 15px;
-`;
-
-const SyllabusTitle = styled.p`
-  font-weight: bold;
-  color: #333;
-  font-size: 18px;
-  margin-bottom: 10px;
-`;
-
-const TopicList = styled.ul`
-  list-style-type: none;
-  padding-left: 20px;
-`;
-
-const TopicItem = styled.li`
-  color: #666;
-  font-size: 16px;
-  margin-bottom: 5px;
-`;
-
-const LoadingMessage = styled.div`
-  text-align: center;
-  font-size: 18px;
-  color: #333;
-  margin-top: 20px;
-`;
-
-const ErrorMessage = styled.div`
-  text-align: center;
-  font-size: 18px;
-  color: red;
-  margin-top: 20px;
-`;
+import {
+    Container2, MainDashboard, Title, ClassDetails, Section, SubjectList,
+    SubjectItem, SubjectTitle, SyllabusList, SyllabusItem, SyllabusTitle,
+    TopicList, TopicItem, LoadingMessage, ErrorMessage
+  } from '../Subject/SubjectStyle';
 
 const SyllabusStudent = () => {
     const [studentId, setStudentId] = useState(null);

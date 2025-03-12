@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Logoimgage from "../assets/Images/EDSP3.jpg";
+import Logoimgage from "../assets/Images/geniuslogo.jpg";
 import WhatsAppIcon from "./Whatsapp";
 import NotificationModal from "./Notification";
 import { useNavigate } from "react-router-dom";

@@ -158,6 +158,12 @@ const StudentProfile = () => {
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Email}
             </Value>
+            <Label>Medium:</Label>
+            <Value>
+              {" "}
+              <BsArrowReturnRight style={{ color: "black" }} />
+              &nbsp;{student?.Medium}
+            </Value>
             <Label>City:</Label>
             <Value>
               {" "}

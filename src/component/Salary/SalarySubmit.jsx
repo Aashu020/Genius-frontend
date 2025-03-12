@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Navbar from "../Navbar";
-import SalarySidebar from "./SalarySidebar";
-import Sidebar from "../Sidebar";
+
 const Salary = styled.div`
   display: flex;
   flex-direction: column;

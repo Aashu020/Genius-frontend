@@ -230,10 +230,10 @@ const FineSetUp = () => {
 
     try {
       if (editingFine) {
-        await axios.put(`https://api.edspride.in/fine-setup/update/${editingFine._id}`, payload);
+        await axios.put(`http://localhost:8007/fine-setup/update/${editingFine._id}`, payload);
         toast.success("Fine updated successfully!");
       } else {
-        await axios.post("https://api.edspride.in/fine-setup/add", payload);
+        await axios.post("http://localhost:8007/fine-setup/add", payload);
         toast.success("Fine added successfully!");
       }
       resetForm();
@@ -246,7 +246,7 @@ const FineSetUp = () => {
 
   const fetchFines = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/fine-setup/all");
+      const response = await axios.get("http://localhost:8007/fine-setup/all");
       setFines(response.data);
     } catch (error) {
       console.error("Error fetching fines:", error);
@@ -266,7 +266,7 @@ const FineSetUp = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/fine-setup/delete/${fineToDelete._id}`);
+      await axios.delete(`http://localhost:8007/fine-setup/delete/${fineToDelete._id}`);
       toast.success("Fine deleted successfully!");
       setShowModal(false);
       fetchFines();

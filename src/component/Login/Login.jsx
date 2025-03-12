@@ -17,7 +17,7 @@ const Login = () => {
   
     try {
       // Send login request
-      const response = await fetch("https://api.edspride.in/user/login", {
+      const response = await fetch("http://localhost:8007/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +40,7 @@ const Login = () => {
         // Fetch and store additional data for students and employees
         if (data.role === "Student") {
           const studentId = localStorage.getItem("Id");
-          const studentResponse = await fetch(`https://api.edspride.in/student/get/${studentId}`);
+          const studentResponse = await fetch(`http://localhost:8007/student/get/${studentId}`);
           const studentData = await studentResponse.json();
           console.log("Student data:", studentData); // Log student data
   
@@ -51,7 +51,7 @@ const Login = () => {
           }
         } else {
           const employeeId = data.Data.Id;
-          const employeeResponse = await fetch(`https://api.edspride.in/staff/get/${employeeId}`);
+          const employeeResponse = await fetch(`http://localhost:8007/staff/get/${employeeId}`);
           const employeeData = await employeeResponse.json();
           console.log("Employee data:", employeeData); // Log employee data
   

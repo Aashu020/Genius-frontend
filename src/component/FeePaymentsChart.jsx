@@ -11,7 +11,7 @@ const FeePaymentChart = () => {
   // Fetch data from the backend API
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://api.edspride.in/fee-data/all');
+      const response = await axios.get('http://localhost:8007/fee-data/all');
       processPaymentData(response.data);
     } catch (err) {
       setError('Failed to fetch data');

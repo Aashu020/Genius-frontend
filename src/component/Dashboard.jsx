@@ -34,43 +34,6 @@ ChartJS.register(
   BarElement
 );
 
-// Fake data for Pie chart (Fee Received)
-const pieData = {
-  labels: ["Fee Remaining", "Received"],
-  datasets: [
-    {
-      label: "Fees",
-      data: [40, 60], //
-      backgroundColor: ["#FF6384", "#36A2EB"],
-      hoverBackgroundColor: ["#FF6384", "#36A2EB"],
-    },
-  ],
-};
-
-// Fake data for Bar chart (Per Day Income)
-const barData = {
-  labels: ["Sunday", "Monday", "Tuesday", "Today"],
-  datasets: [
-    {
-      label: "Income",
-      data: [120000, 150000, 100000, 180000], // Fake data
-      backgroundColor: "#FF6384",
-    },
-  ],
-};
-
-// Main container holding the entire layout
-const Container = styled.div`
-  display: flex;
-  background-color: #f4f4f4;
-`;
-
-// Sidebar container (assuming Sidebar.js is already created and imported)
-const SidebarContainer = styled.div`
-  width: 250px;
-  border-right: 1px solid #e0e0e0;
-`;
-
 // Main content area (dashboard)
 const MainDashboard = styled.div`
   flex: 1;
@@ -78,21 +41,6 @@ const MainDashboard = styled.div`
   height: calc(100vh - 100px);
   overflow-y: auto;
   background-color: #f9f9f9;
-`;
-
-// Header with search bars
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-`;
-
-const SearchBar = styled.input`
-  padding: 10px;
-  width: 220px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
 `;
 
 // Statistics container holding boxes
@@ -106,20 +54,6 @@ const StatsContainer = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     justify-items: center;
-  }
-`;
-
-const StatBox = styled.div`
-  width: 15%;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  /* border-top: 4px solid ${(props) => props.color || "#ddd"}; */
-  background-color: ${(props) => props.backgroundColor || "#ddd"};
-  @media (max-width: 480px) {
-    width: 70%;
   }
 `;
 
@@ -144,23 +78,6 @@ const ChartSection = styled.div`
   margin-bottom: 20px;
 `;
 
-const ChartBox = styled.div`
-  flex: 1;
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  margin-right: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  &:last-child {
-    margin-right: 0;
-  }
-`;
-
-const ChartTitle = styled.h4`
-  margin-bottom: 20px;
-  font-size: 16px;
-  color: #666;
-`;
 
 // Calendar and birthday boxes
 
@@ -242,7 +159,7 @@ const Dashboard = () => {
       try {
         // Call the API only if 'update' is not set to "Yes"
         if (update !== "Yes") {
-          await axios.post("https://api.edspride.in/student/create-fee-data-for-all-students");
+          await axios.post("http://localhost:8007/student/create-fee-data-for-all-students");
           setUpdate("Yes");  // Set update to "Yes" to prevent further calls
         }
       } catch (error) {
@@ -258,7 +175,7 @@ const Dashboard = () => {
     // Fetch the fee data from the API
     const fetchFeeData = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/fee-data/all");
+        const response = await axios.get("http://localhost:8007/fee-data/all");
         // setStudents(response.data); // Assuming the response is an array of student fee data
 
         // Calculate totalFee and remainingFee by iterating over the response data
@@ -295,7 +212,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchTotalStudents = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/student/all');
+        const response = await fetch('http://localhost:8007/student/all');
         const data = await response.json();
 
         // Assuming the API returns an array of students
@@ -312,7 +229,7 @@ const Dashboard = () => {
     };
     const fetchTotalStaff = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/staff/all');
+        const response = await fetch('http://localhost:8007/staff/all');
         const data = await response.json();
 
         // Assuming the API returns an array of staff members

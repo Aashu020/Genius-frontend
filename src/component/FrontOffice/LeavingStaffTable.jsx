@@ -129,7 +129,7 @@ const LeavingStaffTable = () => {
   const [staffData, setStaffDta] = useState([]);
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/staff-leaving/all")
+      .get("http://localhost:8007/staff-leaving/all")
       .then((response) => {
         setStaffDta(response.data);
       })

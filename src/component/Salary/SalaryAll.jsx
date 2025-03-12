@@ -101,7 +101,7 @@ const PayrollTable = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://api.edspride.in/pay-slip/all")
+      .get("http://localhost:8007/pay-slip/all")
       .then((response) => {
         console.log(response.data)
         setPayrollData(response.data);

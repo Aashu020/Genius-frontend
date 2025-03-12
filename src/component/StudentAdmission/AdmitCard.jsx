@@ -49,7 +49,7 @@ const AdmitCardFormat = ({ student, exam }) => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -67,7 +67,7 @@ const AdmitCardFormat = ({ student, exam }) => {
       console.log(exam)
       try {
         const response = await fetch(
-          `https://api.edspride.in/datesheet/all`
+          `http://localhost:8007/datesheet/all`
         );
         const data = await response.json();
 
@@ -182,7 +182,7 @@ const AdmitCardFormat = ({ student, exam }) => {
         <Header>
           <Logo
             style={{ height: "80px" }}
-            src={`https://api.edspride.in/uploads/${school?.SchoolLogo.replace(
+            src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(
               /^uploads\//,
               ""
             )}`}
@@ -238,7 +238,7 @@ const AdmitCardFormat = ({ student, exam }) => {
             <PhotoSection>
               <PhotoContainer>
                 <Photo
-                  src={`https://api.edspride.in/uploads/${student?.Document?.StudentPhoto}`}
+                  src={`http://localhost:8007/uploads/${student?.Document?.StudentPhoto}`}
                   alt="Student"
                 />
               </PhotoContainer>
@@ -313,7 +313,7 @@ const AdmitCard = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -328,7 +328,7 @@ const AdmitCard = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -343,7 +343,7 @@ const AdmitCard = () => {
       console.log(selectedExam)
       try {
         const response = await fetch(
-          `https://api.edspride.in/datesheet/all`
+          `http://localhost:8007/datesheet/all`
         );
         const data = await response.json();
 
@@ -376,7 +376,7 @@ const AdmitCard = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `https://api.edspride.in/class/get/${selectedClass}`
+            `http://localhost:8007/class/get/${selectedClass}`
           );
           setSections(response.data.Section || []);
         } catch (error) {
@@ -392,7 +392,7 @@ const AdmitCard = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/exam/all");
+        const response = await axios.get("http://localhost:8007/exam/all");
         setExams(response.data);
       } catch (error) {
         console.error("Error fetching exams:", error);
@@ -405,7 +405,7 @@ const AdmitCard = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("https://api.edspride.in/student/all");
+          const response = await axios.get("http://localhost:8007/student/all");
           const filteredStudents = response.data.filter(
             (student) =>
               student.AdmissionInClass === selectedClass &&

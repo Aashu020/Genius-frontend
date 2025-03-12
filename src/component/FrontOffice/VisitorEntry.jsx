@@ -116,7 +116,7 @@ const VisitorEntry = () => {
 
     try {
       const response = await axios.post(
-        "https://api.edspride.in/visitor/add",
+        "http://localhost:8007/visitor/add",
         formData
       );
       console.log(response.data);
@@ -144,7 +144,7 @@ const VisitorEntry = () => {
 
   const fetchData = () => {
     axios
-      .get("https://api.edspride.in/visitor/all")
+      .get("http://localhost:8007/visitor/all")
       .then((response) => {
         setData(response.data.reverse());
       })
@@ -193,7 +193,7 @@ const VisitorEntry = () => {
   useEffect(() => {
     const fetchPurposes = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/purpose/all");
+        const response = await axios.get("http://localhost:8007/purpose/all");
         setPurposes(response.data);
       } catch (error) {
         console.error("Error fetching purposes:", error);

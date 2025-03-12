@@ -41,7 +41,7 @@ const DateSheet = () => {
         try {
           console.log(`Fetching data for exam: ${selectedExam}`);
           const response = await axios.get(
-            `https://api.edspride.in/datesheet/getByExam/${selectedExam}`
+            `http://localhost:8007/datesheet/getByExam/${selectedExam}`
           );
           console.log("Fetched date sheet data:", response.data);
 

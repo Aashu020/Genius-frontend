@@ -37,7 +37,7 @@ const AddRoute = () => {
 
   const fetchRoutes = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/route/all");
+      const response = await axios.get("http://localhost:8007/route/all");
       setRoutes(response.data);
     } catch (error) {
       console.error("Error fetching routes:", error);

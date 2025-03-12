@@ -117,7 +117,7 @@ const SyllabusStudent = () => {
     useEffect(() => {
         if (studentId) {
             axios
-                .get(`https://api.edspride.in/student/get/${studentId}`)
+                .get(`http://localhost:8007/student/get/${studentId}`)
                 .then((response) => {
                     const data = response.data;
                     if (data && data.ClassName) {
@@ -137,7 +137,7 @@ const SyllabusStudent = () => {
     useEffect(() => {
         if (studentClass) {
             axios
-                .get('https://api.edspride.in/class/all')
+                .get('http://localhost:8007/class/all')
                 .then((response) => {
                     const classData = response.data;
                     const classInfo = classData.find((cls) => cls.Class === studentClass);

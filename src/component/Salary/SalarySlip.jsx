@@ -106,7 +106,7 @@ const PayrollSlip = () => {
 
     useEffect(() => {
       axios
-        .get("https://api.edspride.in/schoolsetup/all")
+        .get("http://localhost:8007/schoolsetup/all")
         .then((response) => {
           // console.log(response.data);
           if (response.data.length > 0) {
@@ -123,12 +123,12 @@ const PayrollSlip = () => {
     useEffect(() => {
         const fetchPayrollData = async () => {
             try {
-                const payrollResponse = await axios.get(`https://api.edspride.in/payroll-data/get/${location.state.EmployeeId}`);
+                const payrollResponse = await axios.get(`http://localhost:8007/payroll-data/get/${location.state.EmployeeId}`);
                 var filData = payrollResponse.data.Payments.filter(val => val.SlipId === location.state.SlipId)
                 // console.log(filData)
                 setPayrollSlip(filData)
                 setPayrollData(payrollResponse.data);
-                const staffResponse = await axios.get(`https://api.edspride.in/staff/get/${location.state.EmployeeId}`);
+                const staffResponse = await axios.get(`http://localhost:8007/staff/get/${location.state.EmployeeId}`);
                 setStaffData(staffResponse.data);
             } catch (error) {
                 console.error("Error fetching payroll or staff data:", error);

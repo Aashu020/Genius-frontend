@@ -45,7 +45,7 @@ const Setup = () => {
 
   const fetchData = () => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         if (response.data.length > 0) {
           setPresent(true);

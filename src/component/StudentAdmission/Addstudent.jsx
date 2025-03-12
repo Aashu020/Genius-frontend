@@ -131,7 +131,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchEnquiries = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/enquiry/all');
+        const response = await fetch('http://localhost:8007/enquiry/all');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -182,7 +182,7 @@ const AddStudentdata = () => {
       MobileNo: option.MobileNo || "",             // From enquiry
       Address: option.Address || "",                // From enquiry
       City: option.City || "",  
-      Medium:option.City || "",                    // From enquiry
+      Medium:option.Medium || "",                    // From enquiry
       Area: option.Area || "",                      // From enquiry
       Pincode: option.Pincode || "",
       AdmissionInClass: option.AdmissionInClass || "",
@@ -200,7 +200,7 @@ const AddStudentdata = () => {
 
     try {
       const response = await axios.get(
-        `https://api.edspride.in/class/get/${selectedClass}`
+        `http://localhost:8007/class/get/${selectedClass}`
       );
       console.log('Sections Response:', response.data);
       setSections(response.data.Section || []);
@@ -275,7 +275,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchFeeCategories = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/discount/all');
+        const response = await fetch('http://localhost:8007/discount/all');
         const data = await response.json();
         setFeeCategories(data);
       } catch (error) {
@@ -288,7 +288,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchRoutes = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/route/all");
+        const response = await axios.get("http://localhost:8007/route/all");
         setRoutes(response.data);
         setLoading(false);
       } catch (err) {
@@ -302,7 +302,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get('https://api.edspride.in/class/all');
+        const response = await axios.get('http://localhost:8007/class/all');
         setClasses(response.data);
         console.log(response.data);
       } catch (error) {
@@ -315,7 +315,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchHouses = async () => {
       try {
-        const response = await axios.get('https://api.edspride.in/house/all');
+        const response = await axios.get('http://localhost:8007/house/all');
         setHouses(response.data);
         console.log(response.data);
       } catch (error) {
@@ -331,7 +331,7 @@ const AddStudentdata = () => {
         console.log(selectedClass)
         try {
           const response = await axios.get(
-            `https://api.edspride.in/class/get/${selectedClass}`
+            `http://localhost:8007/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -375,7 +375,7 @@ const AddStudentdata = () => {
     // Fetch sections based on the selected class
     if (selectedClass) {
       try {
-        const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+        const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
         setSections(response.data.Section || []);
       } catch (error) {
         console.error("Error fetching sections:", error);
@@ -399,7 +399,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasseS(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -413,7 +413,7 @@ const AddStudentdata = () => {
       if (selectedClassS) {
         try {
           const response = await axios.get(
-            `https://api.edspride.in/class/get/${selectedClassS}`
+            `http://localhost:8007/class/get/${selectedClassS}`
           );
           console.log('Sections Response:', response.data);
           setSectionS(response.data.Section || []);
@@ -433,7 +433,7 @@ const AddStudentdata = () => {
     const fetchStudents = async () => {
       if (selectedClassS && selectedSectionS) {
         try {
-          const response = await axios.get("https://api.edspride.in/student/all", {
+          const response = await axios.get("http://localhost:8007/student/all", {
             params: { classId: selectedClassS, section: selectedSectionS },
           });
           console.log('Students Response:', response.data);

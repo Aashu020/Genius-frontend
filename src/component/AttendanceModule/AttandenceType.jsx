@@ -38,7 +38,7 @@ const AttendenceType = () => {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/department/all");
+        const response = await axios.get("http://localhost:8007/department/all");
         setDepartments(response.data);
       } catch (error) {
         console.error("Error fetching departments:", error);
@@ -52,7 +52,7 @@ const AttendenceType = () => {
   useEffect(() => {
     const fetchStaff = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/staff/all");
+        const response = await axios.get("http://localhost:8007/staff/all");
         console.log("Fetched Staff Data:", response.data); // Debugging
         setAllStaff(response.data);
       } catch (error) {
@@ -138,7 +138,7 @@ const AttendenceType = () => {
 
     try {
       const response = await axios.post(
-        "https://api.edspride.in/staff-attendance/add",
+        "http://localhost:8007/staff-attendance/add",
         attendanceToSubmit
       );
       console.log("Attendance submitted:", response.data);

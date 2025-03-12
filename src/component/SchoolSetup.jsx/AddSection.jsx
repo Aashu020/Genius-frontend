@@ -35,7 +35,7 @@ const AddSection = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/class/all");
+      const response = await axios.get("http://localhost:8007/class/all");
       setClasses(response.data);
     } catch (error) {
       console.error("Error fetching classes:", error);

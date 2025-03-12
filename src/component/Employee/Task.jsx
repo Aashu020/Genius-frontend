@@ -21,7 +21,7 @@ const TaskTable = () => {
 
     if (studentId) {
       axios
-        .get(`https://api.edspride.in/student/get/${studentId}`)
+        .get(`http://localhost:8007/student/get/${studentId}`)
         .then((response) => {
           const className = response.data.ClassName;
           setStudentClass(className);
@@ -39,7 +39,7 @@ const TaskTable = () => {
   useEffect(() => {
     if (studentClass) {
       axios
-        .get("https://api.edspride.in/homework/all")
+        .get("http://localhost:8007/homework/all")
         .then((response) => {
           const filteredTasks = response.data.filter(
             (task) => task.Class === studentClass

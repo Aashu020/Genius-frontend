@@ -247,7 +247,7 @@ const FeeDemandFormat = ({ admitCardData, selectedMonth, feeData, feeSlab, selec
   return (
     <Container style={{ padding: '20px', width: '90%', height: 'auto', background: '#fff' }}>
       <Header style={{ textAlign: 'center', marginBottom: '20px' }}>
-        <SchoolLogo src={`https://api.edspride.in/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
+        <SchoolLogo src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
         <SchoolName>{school?.SchoolName}</SchoolName>
         <Address>{school?.EmailId} | {school?.PhoneNo}</Address>
         <Address>{school?.Website}</Address>
@@ -307,7 +307,7 @@ const FeeDemand = () => {
   useEffect(() => {
     const fetchFeeData = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/fee-data/all");
+        const response = await axios.get("http://localhost:8007/fee-data/all");
         setFeeData(response.data);
         console.log(response.data);
       } catch (error) {
@@ -319,7 +319,7 @@ const FeeDemand = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -334,7 +334,7 @@ const FeeDemand = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const academicResponse = await axios.get("https://api.edspride.in/academic-year-info/active");
+        const academicResponse = await axios.get("http://localhost:8007/academic-year-info/active");
         const academicData = academicResponse.data;
 
         const startYear = academicData.StartYear;
@@ -369,7 +369,7 @@ const FeeDemand = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -382,7 +382,7 @@ const FeeDemand = () => {
     const fetchSections = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           setSections(response.data.Section || []);
         } catch (error) {
           console.error("Error fetching sections:", error);
@@ -398,7 +398,7 @@ const FeeDemand = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("https://api.edspride.in/student/all");
+          const response = await axios.get("http://localhost:8007/student/all");
           const filteredStudents = response.data.filter(
             (student) =>
               student.AdmissionInClass === selectedClass && student.Section === selectedSection
@@ -418,7 +418,7 @@ const FeeDemand = () => {
     const fetchFeeSlab = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get("https://api.edspride.in/feeSlab/all");
+          const response = await axios.get("http://localhost:8007/feeSlab/all");
           const feeData = response.data.find(fee => fee.ClassId === selectedClass);
           setFeeSlab(feeData ? feeData.Fees : []);
           // console.log(feeData ? feeData.Fees : []);

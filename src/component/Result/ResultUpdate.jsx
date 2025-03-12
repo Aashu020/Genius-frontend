@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { FaTrashAlt } from 'react-icons/fa';
-import { MainDashboard,
+import {  MainDashboard,
   Title,
   Form,
   Heading,
   Section,
   Main,
-  Main1,
+  // Main1,
   FormContainer,
   InputContainer,
   Label,
@@ -16,14 +16,49 @@ import { MainDashboard,
   Container,
   Header,
   InfoSection,
-  Table,
-  Th,
-  Td,
+  // Table,
+  // Th,
+  // Td,
   Input1,
   Button,
   DetailsSection,
   DetailsTable,
-  SubmitButton1,} from './ResultUpdateStyle';
+  SubmitButton1,} from './ConsolidateStyle';
+  import styled from "styled-components";
+
+  const Main1 = styled.div`
+  display: grid;
+  margin-top: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+`;
+
+const Th = styled.th`
+  background-color: #f2f2f2;
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+`;
+
+const Td = styled.td`
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+`;
+
 
 
 const ResultUpdate = () => {

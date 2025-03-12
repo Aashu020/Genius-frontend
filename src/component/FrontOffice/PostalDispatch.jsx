@@ -1,169 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import PostalDispatchTable from "./PostalDispatchTable";
-
-const Container = styled.div`
-  display: flex;
-
-  background-color: #f4f4f4;
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  background-color: #f9f9f9;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-  font-weight: bold;
-
-  @media (max-width: 480px) {
-    font-size: 12px;
-    height: 30px;
-    width: 50%;
-    margin-bottom: 30px;
-    margin-top: 20px;
-  }
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-
-const ErrorMessage = styled.div`
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
-  }
-`;
+import {
+  Container,
+  MainDashboard,
+  Title,
+  Form,
+  Heading,
+  Main,
+  FormContainer,
+  InputContainer,
+  Label,
+  Input,
+  Select,
+  SubmitButton,
+  ErrorMessage,
+} from "./FrontOfficeStyle1";
 
 const PostalDispatch = () => {
   const [formData, setFormData] = useState({
@@ -183,7 +37,6 @@ const PostalDispatch = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "UnitNo") {
-      // Allow only numbers
       if (!/^\d*$/.test(value)) {
         setErrors((prev) => ({
           ...prev,
@@ -207,7 +60,6 @@ const PostalDispatch = () => {
     }
     setFormData({ ...formData, [name]: value });
 
-    // Remove error message when the field is filled
     if (value.trim() !== "") {
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
     }
@@ -277,8 +129,7 @@ const PostalDispatch = () => {
         Remark: "",
       });
       setErrors({});
-      window.location.reload(false)
-
+      window.location.reload(false);
     } catch (error) {
       alert("Error submitting form: " + error.response.data.message);
       console.error(error);
@@ -287,7 +138,6 @@ const PostalDispatch = () => {
 
   return (
     <>
-
       <MainDashboard>
         <FormContainer>
           <Title>Postal Dispatched</Title>
@@ -340,9 +190,7 @@ const PostalDispatch = () => {
                   onChange={handleChange}
                   placeholder="Enter Number of Units"
                 />
-                {errors.UnitNo && (
-                  <ErrorMessage>{errors.UnitNo}</ErrorMessage>
-                )}
+                {errors.UnitNo && <ErrorMessage>{errors.UnitNo}</ErrorMessage>}
               </InputContainer>
 
               <InputContainer>
@@ -354,9 +202,7 @@ const PostalDispatch = () => {
                   onChange={handleChange}
                   placeholder="Enter Reference no."
                 />
-                {errors.ReferenceNo && (
-                  <ErrorMessage>{errors.ReferenceNo}</ErrorMessage>
-                )}
+                {errors.ReferenceNo && <ErrorMessage>{errors.ReferenceNo}</ErrorMessage>}
               </InputContainer>
 
               <InputContainer>
@@ -368,9 +214,7 @@ const PostalDispatch = () => {
                   onChange={handleChange}
                   placeholder="Enter Address"
                 />
-                {errors.Address && (
-                  <ErrorMessage>{errors.Address}</ErrorMessage>
-                )}
+                {errors.Address && <ErrorMessage>{errors.Address}</ErrorMessage>}
               </InputContainer>
 
               <InputContainer>
@@ -382,9 +226,7 @@ const PostalDispatch = () => {
                   onChange={handleChange}
                   placeholder="Enter Name"
                 />
-                {errors.FromWhom && (
-                  <ErrorMessage>{errors.FromWhom}</ErrorMessage>
-                )}
+                {errors.FromWhom && <ErrorMessage>{errors.FromWhom}</ErrorMessage>}
               </InputContainer>
 
               <InputContainer>
@@ -412,10 +254,8 @@ const PostalDispatch = () => {
           <PostalDispatchTable />
         </FormContainer>
       </MainDashboard>
-
     </>
   );
 };
 
 export default PostalDispatch;
-

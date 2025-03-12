@@ -1,391 +1,40 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import axios from "axios";
 import Navbar from "../Navbar";
 import FrontOfficeSidebar from "./FrontOfficeSidebar";
 import EntryExitTable from "./EntryExitTable";
 import Sidebar from "../Sidebar";
-import axios from "axios";
-
-const Container = styled.div`
-  display: flex;
-  background-color: #f4f4f4;
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  background-color: #f9f9f9;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-  font-weight: bold;
-
-  @media (max-width: 480px) {
-    font-size: 12px;
-    height: 30px;
-    width: 50%;
-    margin-bottom: 30px;
-    margin-top: 20px;
-  }
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-`;
-
-const PlusButton = styled.button`
-  width: 35px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-left: 10px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
-  }
-`;
-
-
-
-// Styled components...
-const Container1 = styled.div`
-  width: 100%;
-  margin: 50px auto;
-  background-color: #f9f9f9;
-`;
-
-
-const Tabs = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-
-const Tab = styled.button`
-  background-color: ${(props) => (props.active ? "#688AF6" : "#222D78")};
-  color: white;
-  border: none;
-  border-radius: 8px;
-  width: -webkit-fill-available;
-  padding: 10px 30px;
-  font-size: 16px;
-  cursor: pointer;
-  margin: 0 5px;
-
-
-  &:hover {
-    background-color: #6c8cf1;
-  }
-  @media (max-width: 480px) {
-    font-size: 12px;
-    padding: 8px 10px;
-  }
-`;
-
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-
-const TableHead = styled.thead`
-  background-color: #f4f4f4;
-`;
-
-
-const TableRow = styled.tr`
-  background-color: #fff;
-  &:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-`;
-
-
-const TableHeader = styled.th`
-  padding: 15px;
-  text-align: left;
-  font-size: 14px;
-  color: #666;
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 5px;
-  }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
-  }
-`;
-
-
-const TableData = styled.td`
-  padding: 15px;
-  text-align: left;
-  font-size: 14px;
-  color: #333;
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 5px;
-  }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
-  }
-`;
-
-
-const StatusButton = styled.button`
-  padding: 5px 15px;
-  border-radius: 20px;
-  background-color: ${(props) =>
-    props.status === "CHECKED IN"
-      ? "#e0e7ff"
-      : props.status === "WAITING"
-        ? "#f8d7da"
-        : "#e2e3e5"};
-  color: ${(props) =>
-    props.status === "CHECKED IN"
-      ? "#1e40af"
-      : props.status === "WAITING"
-        ? "#a94442"
-        : "#737373"};
-  border: none;
-  font-weight: bold;
-  font-size: 12px;
-  @media (max-width: 480px) {
-    font-size: 9px;
-    padding: 5px;
-  }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
-  }
-`;
-
-
-const ActionButton = styled.button`
-  padding: 8px 20px;
-  border-radius: 20px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  font-size: 14px;
-  cursor: pointer;
-
-
-  &:hover {
-    background-color: #45a049;
-  }
-  @media (max-width: 480px) {
-    font-size: 9px;
-    padding: 5px;
-    width: 46px;
-  }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
-  }
-`;
-
-
-const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  padding: 10px 20px;
-  border-top: 1px solid #e0e0e0;
-  background-color: #fff;
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 5px;
-  }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
-  }
-`;
-
-
-const PaginationInfo = styled.div`
-  display: flex;
-  align-items: center;
-  color: #888;
-`;
-
-
-const PaginationButton = styled.button`
-  background-color: #fff;
-  color: ${(props) => (props.disabled ? "#ccc" : "#000")};
-  border: none;
-  padding: 5px 15px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  font-size: 14px;
-
-
-  &:hover {
-    background-color: ${(props) => (props.disabled ? "#fff" : "#f0f0f0")};
-  }
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 5px;
-  }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
-  }
-`;
-
-
-const RowsPerPageDropdown = styled.select`
-  margin: 0 10px;
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  font-size: 14px;
-  cursor: pointer;
-  @media (max-width: 480px) {
-    font-size: 10px;
-  }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
-  }
-`;
-
+import {
+  Container,
+  MainDashboard,
+  Title,
+  Form,
+  Heading,
+  Main,
+  FormContainer,
+  InputContainer,
+  Label,
+  Input,
+  Select,
+  PlusButton,
+  SubmitButton,
+  ErrorMessage,
+  Container1,
+  Tabs,
+  Tab,
+  Table,
+  TableHead,
+  TableRow,
+  TableHeader,
+  TableData,
+  StatusButton,
+  ActionButton,
+  PaginationContainer,
+  PaginationInfo,
+  PaginationButton,
+  RowsPerPageDropdown,
+} from "./FrontOfficeStyle1";
 
 const VisitorEntry = () => {
   const [formData, setFormData] = useState({
@@ -445,13 +94,9 @@ const VisitorEntry = () => {
     if (!formData.TotalVisitorNo) newErrors.TotalVisitorNo = "Total number of visitors is required.";
     if (!formData.Purpose) newErrors.Purpose = "Purpose is required.";
     if (!formData.MobileNo) newErrors.MobileNo = "Mobile number is required.";
-    // if (!formData.OTP) newErrors.OTP = "OTP is required.";
     if (!formData.verifIedVisitorId) newErrors.verifIedVisitorId = "Verified visitor ID is required.";
     if (!formData.Category) newErrors.Category = "Category is required.";
 
-
-
-    // Validate Name and MobileNo again during submit
     if (!/^[a-zA-Z\s]*$/.test(formData.Name) && formData.Name) {
       newErrors.Name = "Name can only contain letters.";
     }
@@ -477,7 +122,6 @@ const VisitorEntry = () => {
       console.log(response.data);
       alert("Visitor Added Successfully");
 
-      // Reset form data after successful submission
       setFormData({
         Name: "",
         TotalVisitorNo: "",
@@ -492,7 +136,6 @@ const VisitorEntry = () => {
       alert("Error submitting the form");
     }
   };
-  // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   const [activeTab, setActiveTab] = useState("entry");
   const [visitorData, setData] = useState([]);
@@ -504,15 +147,14 @@ const VisitorEntry = () => {
       .get("https://api.edspride.in/visitor/all")
       .then((response) => {
         setData(response.data.reverse());
-
       })
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
 
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
 
   const totalPages = Math.ceil(visitorData.length / itemsPerPage);
@@ -532,44 +174,21 @@ const VisitorEntry = () => {
   const handleMarkOut = async (id) => {
     try {
       const response = await axios.put(`https://api.edspride.in/visitor/${id}/outtime`);
-      // Update the local state with the new data
-      // setData((prevData) =>
-      //   prevData.map((item) =>
-      //     item._id === id
-      //       ? { ...item, outTime: response.data.visitor.OutTime, status: "COMPLETED" }
-      //       : item
-      //   )
-      // );
-      fetchData()
+      fetchData();
       alert("Out Successfully");
     } catch (error) {
       console.error("Error updating out time:", error);
     }
   };
-  // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
   const handleRowsPerPageChange = (event) => {
     setItemsPerPage(Number(event.target.value));
     setCurrentPage(1);
   };
 
-  const formatDateToIndian = (dateString) => {
-    const options = {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false,
-      timeZone: 'Asia/Kolkata'
-    };
-    return new Date(dateString).toLocaleString('en-IN', options).replace(',', '');
-  };
-
-
   const [showInput, setShowInput] = useState(false);
   const [newPurpose, setNewPurpose] = useState("");
-  const [selectedPurpose, setSelectedPurpose] = useState(""); // For the dropdown
+  const [selectedPurpose, setSelectedPurpose] = useState("");
   const [purposes, setPurposes] = useState([]);
   useEffect(() => {
     const fetchPurposes = async () => {
@@ -592,8 +211,8 @@ const VisitorEntry = () => {
 
     try {
       await axios.post("https://api.edspride.in/purpose/add", { PurposeTitle: newPurpose });
-      setPurposes([...purposes, { PurposeTitle: newPurpose }]); // Update local state
-      setNewPurpose(""); // Clear the input field
+      setPurposes([...purposes, { PurposeTitle: newPurpose }]);
+      setNewPurpose("");
       alert("Purpose added successfully!");
     } catch (error) {
       console.error("Error adding purpose:", error);
@@ -603,7 +222,6 @@ const VisitorEntry = () => {
 
   return (
     <>
-
       <MainDashboard>
         <FormContainer>
           <Title>Take Entry</Title>
@@ -626,7 +244,7 @@ const VisitorEntry = () => {
 
               <InputContainer>
                 <Label>Category</Label>
-                <Select name="Category" value={formData.Category} onChange={handleChange} >
+                <Select name="Category" value={formData.Category} onChange={handleChange}>
                   <option value="">Select Category</option>
                   <option value="Associate">Associate</option>
                   <option value="External">External</option>
@@ -654,7 +272,7 @@ const VisitorEntry = () => {
                   value={selectedPurpose}
                   onChange={(e) => {
                     setSelectedPurpose(e.target.value);
-                    setFormData({ ...formData, Purpose: e.target.value }); // Update formData
+                    setFormData({ ...formData, Purpose: e.target.value });
                   }}
                 >
                   <option value="" disabled>Select Purpose</option>
@@ -722,7 +340,6 @@ const VisitorEntry = () => {
               <SubmitButton type="submit">Submit</SubmitButton>
             </div>
           </Form>
-          {/* <EntryExitTable /> */}
 
           <Container1>
             <Tabs>
@@ -750,7 +367,7 @@ const VisitorEntry = () => {
                 </TableHead>
                 <tbody>
                   {visitorData.map((item) => {
-                    if (item.OutTime ==="-") {
+                    if (item.OutTime === "-") {
                       return (
                         <TableRow key={item._id}>
                           <TableData>{item.Name}</TableData>
@@ -761,12 +378,16 @@ const VisitorEntry = () => {
                           <TableData>{item.InTime}</TableData>
                           <TableData>{item.OutTime}</TableData>
                           <TableData>
-                            {item.OutTime === "-" ? <ActionButton onClick={() => handleMarkOut(item._id)}>
-                              MARK OUT ✅
-                            </ActionButton> : "Out"}
+                            {item.OutTime === "-" ? (
+                              <ActionButton onClick={() => handleMarkOut(item._id)}>
+                                MARK OUT ✅
+                              </ActionButton>
+                            ) : (
+                              "Out"
+                            )}
                           </TableData>
                         </TableRow>
-                      )
+                      );
                     }
                   })}
                 </tbody>
@@ -788,8 +409,8 @@ const VisitorEntry = () => {
                   </TableRow>
                 </TableHead>
                 <tbody>
-                {visitorData.map((item) => {
-                    if (item.OutTime !=="-") {
+                  {visitorData.map((item) => {
+                    if (item.OutTime !== "-") {
                       return (
                         <TableRow key={item._id}>
                           <TableData>{item.Name}</TableData>
@@ -800,18 +421,21 @@ const VisitorEntry = () => {
                           <TableData>{item.InTime}</TableData>
                           <TableData>{item.OutTime}</TableData>
                           <TableData>
-                            {item.OutTime === "-" ? <ActionButton onClick={() => handleMarkOut(item._id)}>
-                              MARK OUT ✅
-                            </ActionButton> : "Out"}
+                            {item.OutTime === "-" ? (
+                              <ActionButton onClick={() => handleMarkOut(item._id)}>
+                                MARK OUT ✅
+                              </ActionButton>
+                            ) : (
+                              "Out"
+                            )}
                           </TableData>
                         </TableRow>
-                      )
+                      );
                     }
                   })}
                 </tbody>
               </Table>
             )}
-
 
             <PaginationContainer>
               <PaginationInfo>
@@ -836,7 +460,6 @@ const VisitorEntry = () => {
           </Container1>
         </FormContainer>
       </MainDashboard>
-
     </>
   );
 };

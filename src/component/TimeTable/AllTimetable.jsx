@@ -1,33 +1,12 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { Edit, Trash2, Eye } from "lucide-react";
+import {Eye } from "lucide-react";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
-
+import { MainDashboard,Title,Th,Td } from "../StudentAdmission/StudentAdmission";
 // Your existing styled components (no changes needed)
-
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
-
-const TableContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
+import { TableContainer,PeriodCell,Header,SubjectCell,RowHeader,TableItem,Table1,Td1,ViewButton,ModalOverlay,ModalContent,YesButton,NoButton,TableHeader,TableItem1,TimetableContainer} from "../Subject/SubjectStyle";
 
 const Table = styled.table`
   width: 70%;
@@ -35,281 +14,6 @@ const Table = styled.table`
   margin-top: 30px;
 `;
 
-const Th = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-`;
-
-const Td1 = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  gap: 1rem;
-`;
-
-const EditButton = styled.div`
-  background-color: #209a16bf;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const DeleteButton = styled.div`
-  background-color: red;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ViewButton = styled.div`
-  background-color: #2c3e50;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-`;
-
-const ModalContent = styled.div`
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-`;
-
-const YesButton = styled.button`
-  margin: 5px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: green;
-  color: white;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const NoButton = styled.button`
-  margin: 5px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  background-color: red;
-  color: white;
-  cursor: pointer;
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const TableItem = styled.div`
-  background-color: #e0e0e0;
-  padding: 10px;
-  text-align: center;
-  border-radius: 5px;
-  font-size: 12px;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    font-size: 8px;
-    padding: 5px;
-  }
-`;
-
-const TableItem1 = styled.div`
-  background-color: #64b5f6;
-  padding: 10px;
-  text-align: center;
-  border-radius: 5px;
-  font-size: 10px;
-  font-weight: bold;
-  color: white;
-  @media (max-width: 480px) {
-    font-size: 8px;
-    padding: 5px;
-  }
-`;
-
-const TableWrapper = styled.div`
-  width: 100%;
-  margin: auto;
-  margin-top: 20px;
-  @media (max-width: 480px) {
-    width: 100%;
-    margin: 0;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  h2 {
-    font-size: 20px;
-    margin-right: 20px;
-  }
-`;
-
-const HeaderWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-
-  @media (max-width: 480px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-
-const DropdownWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-
-  select {
-    padding: 4px;
-    font-size: 16px;
-    border-radius: 10px;
-  }
-
-  @media (max-width: 480px) {
-    margin-top: 10px;
-    select {
-      font-size: 10px;
-    }
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-`;
-
-const Table1 = styled.div`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  background-color: #fff;
-  grid-gap: 2px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(7, 1fr);
-    font-size: 6px;
-  }
-`;
-
-const TableHeader = styled.div`
-  background-color: #64b5f6;
-  text-align: center;
-  padding: 10px;
-  font-weight: bold;
-  border-radius: 5px;
-  color: white;
-font-size: 12px;
-  @media (max-width: 480px) {
-    padding: 5px;
-  }
-`;
-
-// Styled components
-const TimetableContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(${props => props.numColumns}, 1fr);
-  gap: 1px;
-  border: 1px solid #ccc;
-  background-color: #e0e0e0;
-  width: 80%;
-  margin: 2rem 0;
-`;
-
-const Header = styled.div`
-  grid-column: span ${props => props.numColumns};
-  background-color: #6da8e5;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  padding: 10px;
-  font-size: 1.2em;
-`;
-
-const RowHeader = styled.div`
-  background-color: #d1d1d1;
-  color: black;
-  font-weight: bold;
-  text-align: center;
-  padding: 8px;
-`;
-
-const SubjectCell = styled.div`
-  text-align: center;
-  padding: 8px;
-  color: black;
-  font-weight: bold;
-`;
-
-const PeriodCell = styled.div`
-  text-align: center;
-  padding: 8px;
-  font-weight: ${props => (props.bold ? 'bold' : 'normal')};
-`;
 
 
 // Main Component
@@ -327,7 +31,7 @@ const AllTimetable = () => {
   useEffect(() => {
     const fetchTimetable = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/timetable/all');
+        const response = await fetch('http://localhost:8007/timetable/all');
         const data = await response.json();
         setTimetable(data);
       } catch (error) {
@@ -340,7 +44,7 @@ const AllTimetable = () => {
   useEffect(() => {
     const fetchPeriods = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/period/all");
+        const response = await axios.get("http://localhost:8007/period/all");
         setPeriods(response.data);
       } catch (err) {
         console.error("Error fetching periods:", err);
@@ -351,7 +55,7 @@ const AllTimetable = () => {
 
   const handleView = async (id) => {
     try {
-      const response = await fetch(`https://api.edspride.in/timetable/get/${id}`);
+      const response = await fetch(`http://localhost:8007/timetable/get/${id}`);
       const data = await response.json();
       if (response.ok) {
         setTimetableDetails(data);

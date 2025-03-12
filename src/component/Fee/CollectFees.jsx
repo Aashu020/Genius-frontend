@@ -21,7 +21,7 @@ const CollectFees = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -36,7 +36,7 @@ const CollectFees = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `https://api.edspride.in/class/get/${selectedClass}`
+            `http://localhost:8007/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -56,7 +56,7 @@ const CollectFees = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("https://api.edspride.in/student/all", {
+          const response = await axios.get("http://localhost:8007/student/all", {
             params: { classId: selectedClass, section: selectedSection },
           });
           // console.log('Students Response:', response.data);
@@ -99,7 +99,7 @@ const CollectFees = () => {
         StudentId: student
       }
       try {
-        await axios.post("https://api.edspride.in/fee-data/create", payload);
+        await axios.post("http://localhost:8007/fee-data/create", payload);
         toast.success("Fee slab added successfully.");
         const role = localStorage.getItem("Role");
         if (role == "Superadmin" || role == "Admin") {

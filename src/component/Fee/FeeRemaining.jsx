@@ -11,8 +11,8 @@ import { Container1, H2, FilterWrapper, Table1, TableHeader, TableRow1, TableDat
 
 
 // Define your API endpoints (replace with actual URLs)
-const studentApiUrl = 'https://api.edspride.in/student/all';
-const feeApiUrl = 'https://api.edspride.in/fee-data/all';
+const studentApiUrl = 'http://localhost:8007/student/all';
+const feeApiUrl = 'http://localhost:8007/fee-data/all';
 
 // Utility function to handle null/undefined values
 const getSafeValue = (value, fallback = 'No Data') => {

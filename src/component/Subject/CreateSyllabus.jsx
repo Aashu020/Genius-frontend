@@ -1,140 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-
-const Container = styled.div`
-  display: flex;
-  background-color: #f4f4f4;
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-`;
-
-const Main = styled.div`
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(2, 1fr);
-`;
-
-const Main1 = styled.div`
-  display: grid;
-  gap: 20px;
-  grid-template-columns: 1fr;
-  margin-top: 50px;
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  z-index: 1;
-`;
-
-const Button = styled.button`
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  padding: 12px 20px;
-  margin: 10px;
-  color: white;
-  font-size: 20px;
-  border: none;
-  border-radius: 50%;
-  margin-left: 20px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  margin-bottom: 10px;
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-`;
-
-const ErrorMessage = styled.div`
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-`;
+import {Title,SubmitButton,Form,FormContainer,Input,InputContainer,Select,Container,MainDashboard,Heading } from "../StudentAdmission/StudentAdmission";
+import { Main,Main1,Label,Button,ErrorMessage } from "./SubjectStyle";
 
 
 
@@ -147,7 +15,7 @@ const Paper = ({ selectedClass, selectedSubject, chapters }) => {
     const fetchData = async () => {
       if (selectedClass && selectedSubject) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           setData(response.data); // Set the fetched data
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -249,7 +117,7 @@ const CreateSyllabus = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -262,7 +130,7 @@ const CreateSyllabus = () => {
     const fetchSubjects = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           const selectedClassData = response.data;
           setSubjects(selectedClassData.Subjects || []);
         } catch (error) {
@@ -279,7 +147,7 @@ const CreateSyllabus = () => {
     const fetchExistingSyllabus = async () => {
       if (selectedClass && selectedSubject) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           const selectedClassData = response.data;
           const subject = selectedClassData.Subjects.find(sub => sub.Subject === selectedSubject);
           
@@ -354,7 +222,7 @@ const CreateSyllabus = () => {
       }));
 
       try {
-        await axios.put(`https://api.edspride.in/class/update/${selectedClass}`, {
+        await axios.put(`http://localhost:8007/class/update/${selectedClass}`, {
           Subjects: subjects.map((subject) =>
             subject.Subject === selectedSubject ? { ...subject, Syllabus: updatedSyllabus } : subject
           ),

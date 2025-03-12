@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import {
   AiOutlinePlus,
   AiOutlineDashboard,
@@ -7,117 +6,22 @@ import {
 } from "react-icons/ai"; // Using icons for the sidebar items
 import { Link } from "react-router-dom";
 import { AiFillAppstore } from "react-icons/ai";
+import {
+  SidebarContainer,
+  SidebarContainer1,
+  DropdownIcon,
+  SidebarMenuTitle,
+  MenuItem,
+  MenuLabel,
+  MenuIcon,
+  PlusIcon,
+  SubMenuItem,
+  Left,
+} from "../Admin/AdminStyle";
 
-const SidebarContainer = styled.div`
-  width: 250px;
-  border-right: 1px solid #e0e0e0;
-  @media (max-width: 768px) {
-    display: ${(props) =>
-      props.isVisible ? "block" : "none"}; /* Conditionally show/hide sidebar */
-    position: ${(props) => (props.isVisible ? "absolute" : "none")};
-    z-index: 10;
-  }
-`;
-
-const SidebarContainer1 = styled.div`
-  background-color: #fff;
-  border-right: 1px solid #e0e0e0;
-  padding: 10px;
-
-  a {
-    color: #fff;
-    text-decoration: none;
-  }
-`;
-
-const DropdownIcon = styled.span`
-  margin-left: 5px;
-  cursor: pointer; /* Make it clickable */
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  @media (min-width: 769px) {
-    display: none;
-  }
-  @media (max-width: 480px) {
-    font-size: 12px;
-  }
-`;
-
-const SidebarMenuTitle = styled.h3`
-  font-size: 20px;
-  margin-bottom: 20px;
-  text-align: left;
-  padding-left: 10px;
-  font-weight: 600;
-  color: #2a2a2a;
-`;
-
-const MenuItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${(props) => (props.active ? "black" : "white")};
-  background-color: ${(props) => (props.active ? "#fff" : "#222D78")};
-  box-shadow: -1.53px 1.53px 3.07px 0px #5088ff4d inset;
-
-  border-radius: 8px;
-  margin: 5px 0;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #e6f0ff;
-    color: black;
-  }
-`;
-
-const MenuLabel = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const MenuIcon = styled.div`
-  font-size: 20px;
-  margin-right: 10px;
-`;
-
-const PlusIcon = styled.div`
-  font-size: 16px;
-`;
-
-const SubMenuItem = styled.div`
-  margin: 5px 0px;
-  color: white;
-
-  background-color: ${(props) => (props.active ? "#fff" : "#222D78")};
-  box-shadow: -1.53px 1.53px 3.07px 0px #5088ff4d inset;
-  padding: 6px;
-  font-size: 16px;
-  font-weight: 500;
-  margin-left: 20px;
-  border-radius: 8px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  &:hover {
-    background-color: #e6f0ff;
-    color: black;
-  }
-`;
-
-const Left = styled.div`
-  margin-left: 8px;
-`;
 const AdminSidebar = () => {
-  // const [expandedItem, setExpandedItem] = useState(null); // State to track which menu item is expanded
   const [expandedItems, setExpandedItems] = useState({ main: null, sub: null });
-
-  const [sidebarVisible, setSidebarVisible] = useState(false); // State to toggle sidebar visibility on mobile
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const toggleExpand = (type, index) => {
     setExpandedItems((prev) => ({
@@ -126,14 +30,12 @@ const AdminSidebar = () => {
     }));
   };
 
-  // Toggle sidebar visibility for mobile view
   const toggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
   };
 
   return (
     <>
-      {/* Sidebar Container */}
       <SidebarContainer isVisible={sidebarVisible}>
         <SidebarContainer1>
           <SidebarMenuTitle>Menu</SidebarMenuTitle>
@@ -760,7 +662,6 @@ const AdminSidebar = () => {
                             <AiFillAppstore />
                           </MenuIcon>
                           Subjectwise Result
-
                         </MenuLabel>
                       </SubMenuItem>
                     </Left>
@@ -773,7 +674,6 @@ const AdminSidebar = () => {
                             <AiFillAppstore />
                           </MenuIcon>
                           Generate Report Card
-
                         </MenuLabel>
                       </SubMenuItem>
                     </Left>
@@ -783,7 +683,7 @@ const AdminSidebar = () => {
             </>
           )}
 
-<PlusIcon onClick={() => toggleExpand("main", 7)}>
+          <PlusIcon onClick={() => toggleExpand("main", 7)}>
             <MenuItem>
               <MenuLabel>
                 <MenuIcon>
@@ -806,7 +706,7 @@ const AdminSidebar = () => {
                     <MenuIcon>
                       <AiFillAppstore />
                     </MenuIcon>
-                    Add Allowence Head
+                    Add Allowance Head
                   </MenuLabel>
                 </SubMenuItem>
               </Link>
@@ -834,12 +734,9 @@ const AdminSidebar = () => {
               </Link>
             </>
           )}
-
-
         </SidebarContainer1>
       </SidebarContainer>
 
-      {/* Sidebar Toggle for Mobile */}
       <DropdownIcon onClick={toggleSidebar}>
         {sidebarVisible ? "☰" : "☰"}
       </DropdownIcon>

@@ -4,20 +4,13 @@ import logo from "../../assets/Images/EDSP3.jpg";
 import { BsArrowReturnRight } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import {AdmissionLetterContainer,Photo,PhotoContainer,Valuevs,Labelviewstud,Logo,Title1,Left,LeftColumn,RightColumn,Section1,Section2} from "./StudentAdmission"
 
 // ------------------------------------------------
 const Container = styled.div`
 height: calc(100vh - 100px);
 overflow-y: auto;
 margin: 0 auto;
-
-`;
-
-const AdmissionLetterContainer = styled.div`
-  width: 1000px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  font-family: Arial, sans-serif;
 `;
 
 const Header = styled.div`
@@ -25,89 +18,6 @@ const Header = styled.div`
   margin-bottom: 20px;
 `;
 
-const Logo = styled.img`
-  height: 60px;
-`;
-
-const Title = styled.h2`
-  color: #4a4a4a;
-`;
-
-const Section2 = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-`;
-const Section1 = styled.div`
-  /* display: flex;
-  justify-content: space-between; */
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 20px;
-  gap: 1rem;
-`;
-
-const Left = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: 100%;
-`;
-
-const LeftColumn = styled.div`
-  width: 100%;
-`;
-
-const RightColumn = styled.div`
-  width: 48%;
-`;
-
-const Label = styled.p`
-  margin: 0;
-  font-size: 14px;
-  color: #555;
-  font-weight: bold;
-
-  border-bottom: 0.5px solid black;
-  width: 60%;
-`;
-
-const Value = styled.p`
-  margin: 0;
-  font-size: 14px;
-  color: black;
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
-
-const PhotoContainer = styled.div`
-  text-align: center;
-  margin-bottom: 20px;
-`;
-
-const Photo = styled.img`
-  width: 115px;
-  background-color: gray;
-`;
-
-const Photo1 = styled.img`
-  width: 60px;
-  height: 50px;
-  background-color: gray;
-  /* border-radius: 50%; */
-`;
-
-const QRCodesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-`;
-
-const QRCode = styled.img`
-  width: 80px;
-  height: 80px;
-  margin: 5px 0;
-`;
 // ----------------------------------------------------
 
 const ViewStudent = () => {
@@ -119,7 +29,7 @@ const ViewStudent = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -138,7 +48,7 @@ const ViewStudent = () => {
       const fetchStudent = async () => {
         try {
           const response = await fetch(
-            `https://api.edspride.in/student/get/${location.state.Id}`
+            `http://localhost:8007/student/get/${location.state.Id}`
           );
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -175,243 +85,249 @@ const ViewStudent = () => {
     <Container>
       <AdmissionLetterContainer>
         <Header>
-          <Logo style={{height:"80px"}} src={`https://api.edspride.in/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
-          <Title>{school?.SchoolName}</Title>
+          <Logo style={{height:"80px"}} src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
+          <Title1>{school?.SchoolName}</Title1>
           <p>{school?.EmailId} | {school?.PhoneNo} </p>
           <p>{school?.Website}</p>
           <h2 style={{ color: "#222d78", fontWeight: "bold", marginTop: "10px" }}>Student Details</h2>
         </Header>
 
         <PhotoContainer>
-          <Photo src={`https://api.edspride.in/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
+          <Photo src={`http://localhost:8007/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
         </PhotoContainer>
         <Section1>
           <LeftColumn>
-            <Label>Student Registration no:</Label>
+            <Labelviewstud>Student Registration no:</Labelviewstud>
 
-            <Value>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;
               {student?.StudentId}
-            </Value>
-            <Label>Student Name:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Student Name:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.StudentName}
-            </Value>
-            <Label>Date Of Birth:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Date Of Birth:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.DOB}
-            </Value>
+            </Valuevs>
 
-            <Label>Gender:</Label>
-            <Value>
+            <Labelviewstud>Gender:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp; {student?.Gender}
-            </Value>
-            <Label>Religion:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Religion:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Religion}
-            </Value>
-            <Label>Blood Group:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Blood Group:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.BloodGroup}
-            </Value>
-            <Label>Category:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Category:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Category}
-            </Value>
-            <Label>Height:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Height:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Height}
-            </Value>
+            </Valuevs>
 
-            <Label>Weight:</Label>
-            <Value>
+            <Labelviewstud>Weight:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Weight}
-            </Value>
-            <Label>Aadhar Number:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Aadhar Number:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.AadharNumber}
-            </Value>
-            <Label>Address:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Address:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp; {student?.Address}
-            </Value>
+            </Valuevs>
           </LeftColumn>
           <LeftColumn>
-            <Label>Contact No:</Label>
-            <Value>
+            <Labelviewstud>Contact No:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.MobileNo}
-            </Value>
-            <Label>Email:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Email:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Email}
-            </Value>
-            <Label>City:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Medium:</Labelviewstud>
+            <Valuevs>
+              {" "}
+              <BsArrowReturnRight style={{ color: "black" }} />
+              &nbsp;{student?.Medium}
+            </Valuevs>
+            <Labelviewstud>City:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp; {student?.City}
-            </Value>
-            <Label>Area:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Area:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Area}
-            </Value>
-            <Label>Pincode:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Pincode:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp; {student?.Pincode}
-            </Value>
-            <Label>Admission Date:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Admission Date:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp; {student?.AdmissionDate}
-            </Value>
-            <Label>Stream:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Stream:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Stream}
-            </Value>
+            </Valuevs>
 
-            <Label>Admission In Class:</Label>
-            <Value>
+            <Labelviewstud>Admission In Class:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.ClassName}
-            </Value>
+            </Valuevs>
 
-            <Label>House:</Label>
-            <Value>
+            <Labelviewstud>House:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.House}
-            </Value>
-            <Label>Fee Category:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Fee Category:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.FeeCategory}
-            </Value>
+            </Valuevs>
 
-            <Label>RollNo:</Label>
-            <Value>
+            <Labelviewstud>RollNo:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.RollNo}
-            </Value>
+            </Valuevs>
 
-            <Label>Last School Attended:</Label>
-            <Value>
+            <Labelviewstud>Last School Attended:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.LastSchoolAttended}
-            </Value>
+            </Valuevs>
 
-            <Label>Identification Mark:</Label>
-            <Value>
+            <Labelviewstud>Identification Mark:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.IdentificationMark}
-            </Value>
+            </Valuevs>
           </LeftColumn>
           <LeftColumn>
-            <Label>Source Of Admission:</Label>
-            <Value>
+            <Labelviewstud>Source Of Admission:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.SourceOfAdmission}
-            </Value>
-            <Label>Transport Needed:</Label>
-            <Value>
+            </Valuevs>
+            <Labelviewstud>Transport Needed:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.TransportNeeded || 'N/A'}
-            </Value>
+            </Valuevs>
 
-            <Label>Route:</Label>
-            <Value>
+            <Labelviewstud>Route:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Route || 'N/A'}
-            </Value>
+            </Valuevs>
 
-            <Label>Fee Discount:</Label>
-            <Value>
+            <Labelviewstud>Fee Discount:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.FeeDiscount}
-            </Value>
+            </Valuevs>
 
-            <Label>Bank Name:</Label>
-            <Value>
+            <Labelviewstud>Bank Name:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.BankName}
-            </Value>
+            </Valuevs>
 
-            <Label>Bank Account Number:</Label>
-            <Value>
+            <Labelviewstud>Bank Account Number:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.BankAccountNumber}
-            </Value>
+            </Valuevs>
 
-            <Label>IFSC:</Label>
-            <Value>
+            <Labelviewstud>IFSC:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.IFSC}
-            </Value>
+            </Valuevs>
 
-            <Label>Disability:</Label>
-            <Value>
+            <Labelviewstud>Disability:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Disability || 'N/A'}
-            </Value>
+            </Valuevs>
 
-            <Label>Disability Name:</Label>
-            <Value>
+            <Labelviewstud>Disability Name:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.DisabilityName || 'N/A'}
-            </Value>
+            </Valuevs>
 
-            <Label>Orphan:</Label>
-            <Value>
+            <Labelviewstud>Orphan:</Labelviewstud>
+            <Valuevs>
               {" "}
               <BsArrowReturnRight style={{ color: "black" }} />
               &nbsp;{student?.Orphan || 'N/A'}
-            </Value>
+            </Valuevs>
 
 
           </LeftColumn>
@@ -420,44 +336,44 @@ const ViewStudent = () => {
         <Section2>
           <Left style={{ flexDirection: 'row' }}>
             <LeftColumn style={{ flex: 1 }}>
-              <Label>Father Name:</Label>
-              <Value>
+              <Labelviewstud>Father Name:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.FatherDetail.Name}
-              </Value>
-              <Label>Qualification:</Label>
-              <Value>
+              </Valuevs>
+              <Labelviewstud>Qualification:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.FatherDetail.Qualification}
-              </Value>
-              <Label>Occupation:</Label>
-              <Value>
+              </Valuevs>
+              <Labelviewstud>Occupation:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.FatherDetail.Occupation}
-              </Value>
-              <Label>Annual Income:</Label>
-              <Value>
+              </Valuevs>
+              <Labelviewstud>Annual Income:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.FatherDetail.AnnualIncome}
-              </Value>
+              </Valuevs>
             </LeftColumn>
 
             <LeftColumn style={{ flex: 1 }}>
-              <Label>Father Aadhar Number:</Label>
-              <Value>
+              <Labelviewstud>Father Aadhar Number:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.FatherDetail.AadharNumber}
-              </Value>
-              <Label>Father Mobile No:</Label>
-              <Value>
+              </Valuevs>
+              <Labelviewstud>Father Mobile No:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.FatherDetail.MobileNo}
-              </Value>
-              <Label>Father Email Id:</Label>
-              <Value>
+              </Valuevs>
+              <Labelviewstud>Father Email Id:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.FatherDetail.EmailId}
-              </Value>
+              </Valuevs>
             </LeftColumn>
 
 
@@ -465,44 +381,44 @@ const ViewStudent = () => {
 
           <Left style={{ flexDirection: 'row' }}>
             <LeftColumn style={{ flex: 1 }}>
-              <Label>Mother Name:</Label>
-              <Value>
+              <Labelviewstud>Mother Name:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.MotherDetails.Name}
-              </Value>
-              <Label>Qualification:</Label>
-              <Value>
+              </Valuevs>
+              <Labelviewstud>Qualification:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.MotherDetails.Qualification}
-              </Value>
-              <Label>Occupation:</Label>
-              <Value>
+              </Valuevs>
+              <Labelviewstud>Occupation:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.MotherDetails.Occupation}
-              </Value>
-              <Label>Annual Income:</Label>
-              <Value>
+              </Valuevs>
+              <Labelviewstud>Annual Income:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.MotherDetails.AnnualIncome}
-              </Value>
+              </Valuevs>
             </LeftColumn>
 
             <LeftColumn style={{ flex: 1 }}>
-              <Label>Mother Aadhar Number:</Label>
-              <Value>
+              <Labelviewstud>Mother Aadhar Number:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.MotherDetails.AadharNumber}
-              </Value>
-              <Label>Mother Mobile No:</Label>
-              <Value>
+              </Valuevs>
+              <Labelviewstud>Mother Mobile No:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.MotherDetails.MobileNo}
-              </Value>
-              <Label>Mother Email Id:</Label>
-              <Value>
+              </Valuevs>
+              <Labelviewstud>Mother Email Id:</Labelviewstud>
+              <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
                 &nbsp;{student?.MotherDetails.EmailId}
-              </Value>
+              </Valuevs>
             </LeftColumn>
           </Left>
         </Section2>

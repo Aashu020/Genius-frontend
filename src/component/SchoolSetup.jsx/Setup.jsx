@@ -1,165 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { useParams } from 'react-router-dom';
-// Styled Components
-const Container = styled.div`
-  display: flex;
-  background-color: #f4f4f4;
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  background-color: #f9f9f9;
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-  @media (max-width: 480px) {
-    font-size: 12px;
-    height: 30px;
-    width: 50%;
-    margin-bottom: 30px;
-    margin-top: 20px;
-  }
-`;
-
-const Section = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Main = styled.div`
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
-
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  height: 88vh;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
-  }
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
-    padding: 10px 12px;
-  }
-`;
+import {
+  Container,
+  MainDashboard,
+  Title,
+  Form,
+  Heading,
+  Section,
+  Main,
+  FormContainer,
+  InputContainer,
+  Label,
+  Input,
+  SubmitButton,
+  Select,
+} from "./SchoolSetup2Style";
 
 const Setup = () => {
   const navigate = useNavigate();
-  // const { id } = useParams();
   const [present, setPresent] = useState(false);
   const [id, setId] = useState("");
   const [errors, setErrors] = useState({});
@@ -184,21 +45,21 @@ const Setup = () => {
 
   const fetchData = () => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         if (response.data.length > 0) {
           setPresent(true);
           setFormData(response.data[0]);
-          setId(response.data[0]._id)
+          setId(response.data[0]._id);
         }
       })
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
 
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
 
   const handleChange = (e) => {
@@ -226,14 +87,13 @@ const Setup = () => {
       [name]: value,
     });
 
-    // Clear the error message for this field
     setErrors({
       ...errors,
       [name]: "",
     });
 
     if (files) {
-      setFormData({ ...formData, [name]: files[0] }); // For file inputs
+      setFormData({ ...formData, [name]: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -275,7 +135,7 @@ const Setup = () => {
 
     try {
       const url = present
-        ? `https://api.edspride.in/schoolsetup/update/${id}` // Use the captured id
+        ? `https://api.edspride.in/schoolsetup/update/${id}`
         : "https://api.edspride.in/schoolsetup/add";
       const response = await axios.post(url, formToSubmit, {
         headers: {
@@ -284,7 +144,6 @@ const Setup = () => {
       });
       toast.success(present ? "School setup updated successfully!" : "School setup created successfully!");
       fetchData();
-      // Clear the form
       setFormData({
         SchoolName: "",
         Address: "",
@@ -303,7 +162,6 @@ const Setup = () => {
         UDISECode: "",
       });
 
-      // Optionally, reset file input elements
       document.querySelector('input[name="SchoolLogo"]').value = "";
       document.querySelector('input[name="SchoolStamp"]').value = "";
       document.querySelector('input[name="PrincipleSign"]').value = "";

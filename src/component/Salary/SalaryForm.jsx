@@ -5,179 +5,10 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Container = styled.div`
-  display: flex;
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  padding: 20px;
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 30px;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 96%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  font-weight: bold;
-
-  @media (max-width: 480px) {
-    font-size: 12px;
-    height: 30px;
-    width: 50%;
-    margin-bottom: 30px;
-    margin-top: 20px;
-  }
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Section = styled.div`
-  width: 98%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 10px;
-  height: 70px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 40px;
-  font-size: 14px;
-  padding: 10px;
-  align-items: center;
-`;
-
-const EmployeeName = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  img {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    background-color: aliceblue;
-  }
-`;
-
-const EmployeeID = styled.div``;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-  @media (max-width: 480px) {
-    margin-bottom: 12px;
-  }
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-
-const Select = styled.select`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
-  }
-`;
+import {
+  Container, MainDashboard, Title, Form, FormContainer, InputContainer, Label,
+  Input, Select, SubmitButton, Main, Heading, Section, EmployeeName, EmployeeID
+} from "./SalayStyle";
 
 const SalaryForm = () => {
   const location = useLocation();
@@ -208,19 +39,19 @@ const SalaryForm = () => {
 
 
   const fetchData = async () => {
-    const response = await axios.get(`https://api.edspride.in/staff/get/${location.state.StaffId}`);
+    const response = await axios.get(`http://localhost:8007/staff/get/${location.state.StaffId}`);
     setEmployee(response.data);
   };
 
   const fetchAttendanceData = async () => {
-    const response = await axios.get(`https://api.edspride.in/staff-attendance/all`);
+    const response = await axios.get(`http://localhost:8007/staff-attendance/all`);
     const roleAttendance = response.data.filter(data => data.Role === employee?.Department);
     setAttendanceData(roleAttendance);
   };
 
   const payrollPastData = async () => {
     try {
-      const response = await axios.get(`https://api.edspride.in/payroll-data/get/${location.state.StaffId}`);
+      const response = await axios.get(`http://localhost:8007/payroll-data/get/${location.state.StaffId}`);
       setPastData(response.data);
       // console.log(response.data);
       const monthsFromData = [...new Set(response.data.Payments.map(payment => payment.Month))];
@@ -232,7 +63,7 @@ const SalaryForm = () => {
 
 
   const fetchPayrollHeaders = async () => {
-    const response = await axios.get("https://api.edspride.in/payroll-header/all");
+    const response = await axios.get("http://localhost:8007/payroll-header/all");
     const allowances = response.data.filter(item => item.Type === "Allowance");
     const deductions = response.data.filter(item => item.Type === "Deduction");
     setAllowanceTitles(allowances);
@@ -240,7 +71,7 @@ const SalaryForm = () => {
   };
 
   const fetchAcademicYearInfo = async () => {
-    const response = await axios.get("https://api.edspride.in/academic-year-info/active");
+    const response = await axios.get("http://localhost:8007/academic-year-info/active");
     generateMonths(response.data);
   };
 
@@ -418,7 +249,7 @@ const SalaryForm = () => {
     console.log(formData)
     try {
       await axios.post(
-        "https://api.edspride.in/payroll-data/add",
+        "http://localhost:8007/payroll-data/add",
         formData
       );
       alert("Payment Added successfully!");
@@ -456,7 +287,7 @@ const SalaryForm = () => {
           </EmployeeID>
         </Section>
         <Form onSubmit={handleSubmit}>
-          <Main>
+          <Main columns="repeat(2, 1fr)">
             <InputContainer>
               <Label>Absent</Label>
               <Input type="text" placeholder="Enter Days" value={absentDays} onChange={(e) => setAbsent(e.target.value)} readOnly />
@@ -482,7 +313,7 @@ const SalaryForm = () => {
               <Select onChange={(e) => setSelectedMonth(e.target.value)}>
                 <option value="">Select Month</option>
                 {months
-                  .filter(month => !uniqueMonths.includes(month)) // Exclude months in past data
+                  .filter(month => !uniqueMonths.includes(month))
                   .map((month) => (
                     <option key={month} value={month}>{month}</option>
                   ))}
@@ -498,7 +329,7 @@ const SalaryForm = () => {
             </InputContainer>
           </Main>
 
-          <Main>
+          <Main columns="repeat(2, 1fr)">
             <Heading>Allowance</Heading>
             <Heading>Deduction</Heading>
             <div>
@@ -528,7 +359,7 @@ const SalaryForm = () => {
               ))}
             </div>
           </Main>
-          <Main>
+          <Main columns="repeat(2, 1fr)">
             <InputContainer>
               <Label>Date</Label>
               <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} required />

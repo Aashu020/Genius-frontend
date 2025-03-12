@@ -155,7 +155,7 @@ const TimeTable = () => {
         const fetchClasses = async () => {
             try {
                 var studentId = localStorage.getItem("Id")
-                const response = await axios.get(`https://api.edspride.in/student/get/${studentId}`);
+                const response = await axios.get(`http://localhost:8007/student/get/${studentId}`);
                 console.log('Classes Response:', response.data);
                 setStudent(response.data);
             } catch (error) {
@@ -169,7 +169,7 @@ const TimeTable = () => {
         // Fetch existing periods
         const fetchPeriods = async () => {
             try {
-                const response = await axios.get("https://api.edspride.in/period/all");
+                const response = await axios.get("http://localhost:8007/period/all");
                 setPeriods(response.data);
             } catch (err) {
                 console.error("Error fetching periods:", err);
@@ -177,35 +177,14 @@ const TimeTable = () => {
         };
         fetchPeriods();
     }, []);
-
-    // Fetch sections based on selected class
-    // useEffect(() => {
-    //     const fetchSections = async () => {
-    //         if (selectedClass) {
-    //             try {
-    //                 const response = await axios.get(
-    //                     `https://api.edspride.in/class/get/${selectedClass}`
-    //                 );
-    //                 console.log('Sections Response:', response.data);
-    //                 setSections(response.data.Section || []);
-    //             } catch (error) {
-    //                 console.error("Error fetching sections:", error);
-    //             }
-    //         } else {
-    //             setSections([]);
-    //         }
-    //     };
-    //     fetchSections();
-    // }, [selectedClass]);
-
-    // Fetch timetable when class or section is selected
+    
     useEffect(() => {
         const fetchTimetable = async () => {
             if (student) {
                 try {
                     const classId = selectedClass + selectedSection; // Combine classId and section
                     const response = await axios.get(
-                        `https://api.edspride.in/timetable/get/${student.AdmissionInClass}/${student.Section}`
+                        `http://localhost:8007/timetable/get/${student.AdmissionInClass}/${student.Section}`
                     );
                     console.log('Timetable Response:', response.data);
                     setTimetable(response.data);
@@ -221,32 +200,6 @@ const TimeTable = () => {
         <TableWrapper>
             <HeaderWrapper>
                 <h2>Time Table</h2>
-                {/* <DropdownWrapper>
-                    <InputContainer>
-                        <Select value={selectedClass} onChange={(e) => setSelectedClass(e.target.value)}>
-                            <option value="">Select Class</option>
-                            {classes.map((cls) => (
-                                <option key={cls.ClassId} value={cls.ClassId}>
-                                    {cls.Class}
-                                </option>
-                            ))}
-                        </Select>
-                    </InputContainer>
-                    <InputContainer>
-                        <Select
-                            value={selectedSection}
-                            onChange={(e) => setSelectedSection(e.target.value)}
-                            disabled={!selectedClass}
-                        >
-                            <option value="">Select Section</option>
-                            {sections.map((section, index) => (
-                                <option key={index} value={section}>
-                                    {section}
-                                </option>
-                            ))}
-                        </Select>
-                    </InputContainer>
-                </DropdownWrapper> */}
             </HeaderWrapper>
 
             {timetable && (

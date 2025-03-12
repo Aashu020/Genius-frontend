@@ -73,7 +73,7 @@ const DynamicCharts = () => {
     // Fetch the fee data from the API
     const fetchFeeData = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/fee-data/all");
+        const response = await axios.get("http://localhost:8007/fee-data/all");
         // setStudents(response.data); // Assuming the response is an array of student fee data
 
         // Calculate totalFee and remainingFee by iterating over the response data

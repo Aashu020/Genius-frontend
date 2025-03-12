@@ -27,7 +27,7 @@ const Calender = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('https://api.edspride.in/academic-year-plan/all');
+        const response = await axios.get('http://localhost:8007/academic-year-plan/all');
         const formattedEvents = response.data.map(event => ({
           title: event.Title,
           start: new Date(event.StartDate),

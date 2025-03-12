@@ -16,7 +16,7 @@ const AdminLayout = () => {
     const navigate = useNavigate();
     useEffect(() => {
         axios
-            .get("https://api.edspride.in/schoolsetup/all")
+            .get("http://localhost:8007/schoolsetup/all")
             .then((response) => {
                 // console.log(response.data);
                 if(response.data.length === 0){

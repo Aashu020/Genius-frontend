@@ -4,137 +4,11 @@ import styled from "styled-components";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import { Edit, Trash2 } from "lucide-react";
-
-const Container = styled.div`
-  display: flex;
-  background-color: #f4f4f4;
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-`;
-
-const ErrorMessage = styled.span`
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-`;
-const SubmitButton = styled.button`
-  padding: 12px 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
-`;
-
-const Th = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-`;
-
-const ActionButtons = styled.div`
-  display: flex;
-  gap: 10px;
-`;
-
-const EditButton = styled.div`
-  background-color: #209a16;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-`;
-
-const DeleteButton = styled.div`
-  background-color: red;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-`;
+import { 
+  Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
+  InputContainer, Label, Input, SubmitButton, Table, Th, Td, 
+  ActionButtons, EditButton, DeleteButton, ErrorMessage 
+} from './ExpenseStyles';
 
 const AddExpenseHead = () => {
   const [expenseHeadName, setExpenseHeadName] = useState("");
@@ -147,7 +21,7 @@ const AddExpenseHead = () => {
     const fetchExpenses = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/expense-header/all"
+          "http://localhost:8007/expense-header/all"
         );
         setExpenses(response.data);
       } catch (error) {
@@ -181,7 +55,7 @@ const AddExpenseHead = () => {
     try {
       if (editingExpenseId) {
         await axios.put(
-          `https://api.edspride.in/expense-header/update/${editingExpenseId}`,
+          `http://localhost:8007/expense-header/update/${editingExpenseId}`,
           data
         );
         setExpenses(
@@ -192,7 +66,7 @@ const AddExpenseHead = () => {
         alert("Expense head updated successfully!"); // Alert for update
       } else {
         const response = await axios.post(
-          "https://api.edspride.in/expense-header/add",
+          "http://localhost:8007/expense-header/add",
           data
         );
         setExpenses([...expenses, response.data]);
@@ -225,7 +99,7 @@ const AddExpenseHead = () => {
 
     try {
       await axios.delete(
-        `https://api.edspride.in/expense-header/delete/${id}`
+        `http://localhost:8007/expense-header/delete/${id}`
       );
       setExpenses(expenses.filter((expense) => expense._id !== id));
     } catch (error) {

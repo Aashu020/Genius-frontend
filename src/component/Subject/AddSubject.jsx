@@ -1,172 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "styled-components";
+// import styled from "styled-components";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import { Edit, Trash2 } from "lucide-react";
-
-const Container = styled.div`
-  display: flex;
-  background-color: #f4f4f4;
-`;
-
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-`;
-
-const Section = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-`;
-
-const TableContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Table = styled.table`
-  width: 60%;
-  border-collapse: collapse;
-  margin-top: 30px;
-`;
-
-const Th = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-weight: 400;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-`;
-
-const Td1 = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  display: flex;
-  gap: 1rem;
-`;
-
-const EditButton = styled.div`
-  background-color: #209a16bf;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  width: 20%;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-`;
-const ErrorMessage = styled.div`
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-`;
-
-const DeleteButton = styled.div`
-  background-color: red;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: white;
-  width: 10%;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-`;
+import {Heading,Th,Td,Input,SubmitButton,Label,InputContainer,FormContainer,Section,Container,MainDashboard,Title,Form } from "../StudentAdmission/StudentAdmission";
+import { Main,Table,DeleteButton,ErrorMessage,EditButton,TableContainer,Td1} from "./SubjectStyle";
 
 const AddSubject = () => {
   const [subject, setSubject] = useState(""); // State for the new subject
@@ -179,7 +18,7 @@ const AddSubject = () => {
     const fetchSubjects = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/add-subject/all"
+          "http://localhost:8007/add-subject/all"
         );
         setSubjects(response.data);
       } catch (error) {
@@ -209,7 +48,7 @@ const AddSubject = () => {
     if (!validate()) return;
     try {
       const response = await axios.post(
-        "https://api.edspride.in/add-subject/add",
+        "http://localhost:8007/add-subject/add",
         {
           Subject: subject,
         }
@@ -232,7 +71,7 @@ const AddSubject = () => {
     if (!validate()) return;
     try {
       const response = await axios.put(
-        `https://api.edspride.in/add-subject/update/${editingSubject._id}`,
+        `http://localhost:8007/add-subject/update/${editingSubject._id}`,
         {
           Subject: subject,
         }
@@ -253,7 +92,7 @@ const AddSubject = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://api.edspride.in/add-subject/delete/${id}`
+        `http://localhost:8007/add-subject/delete/${id}`
       );
       setSubjects(subjects.filter((sub) => sub._id !== id)); // Remove deleted subject from state
     } catch (error) {

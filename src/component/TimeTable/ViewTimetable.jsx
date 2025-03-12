@@ -1,38 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
+import {TimetableWrapper,Table100,Th,Td,Heading1} from "../Subject/SubjectStyle"
 
-// Styled components
-const TimetableWrapper = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-`;
-
-const Th = styled.th`
-  background-color: #0073e6;
-  color: white;
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center;
-  font-weight: bold;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center;
-`;
-
-const Heading = styled.h2`
-  text-align: center;
-  margin-top: 20px;
-`;
 
 // Timetable component
 const Timetable = () => {
@@ -68,8 +37,8 @@ const Timetable = () => {
 
   return (
     <TimetableWrapper>
-      <Heading>Class Timetable for {timetableData.Class} - Section {timetableData.Section}</Heading>
-      <Table>
+      <Heading1>Class Timetable for {timetableData.Class} - Section {timetableData.Section}</Heading1>
+      <Table100>
         <thead>
           <tr>
             <Th>Period</Th>
@@ -98,7 +67,7 @@ const Timetable = () => {
             </tr>
           ))}
         </tbody>
-      </Table>
+      </Table100>
     </TimetableWrapper>
   );
 };

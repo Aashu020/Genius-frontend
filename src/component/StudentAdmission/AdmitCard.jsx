@@ -1,299 +1,43 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
+import {
+  MainDashboard,
+  SubmitButton,
+  Select,
+  Title,
+  Form,
+  Heading,
+  Main,
+  FormContainer,
+  InputContainer,
+  Label,
+  TableContainer,Table,TableHeader,TableCell,
+  TableRow,SmallButton,AdmitCardContainer,DownloadButton,Logo,
+  Title1,Header,InfoSection,
+  InfoColumn,InfoRow,Value,PhotoSection,PhotoContainer,Photo,
+  Footer,FooterText
+} from "./StudentAdmission"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
 // Styled Components (unchanged)
-const MainDashboard = styled.div`
-  flex: 1;
-  padding: 20px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
 
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-`;
+// const SubmitButton = styled.button`
+//   width: 320px;
+//   padding: 12px;
+//   background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
+//   border: none;
+//   border-radius: 30px;
+//   color: white;
+//   font-size: 16px;
+//   cursor: pointer;
+//   font-weight: bold;
+//   transition: background 0.3s;
 
-const Form = styled.form`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Heading = styled.div`
-  width: 30%;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  margin-bottom: 40px;
-`;
-
-const Section = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const FormContainer = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-`;
-
-const TableContainer = styled.div`
-  margin-top: 40px;
-  overflow-x: auto;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  background-color: white;
-  font-size: 16px;
-  text-align: left;
-
-  th,
-  td {
-    padding: 12px;
-    border: 1px solid #ddd;
-  }
-
-  th {
-    background-color: #f4f6fc;
-  }
-`;
-
-const TableHeader = styled.th`
-  padding: 10px;
-  background-color: #f2f2f2;
-  border: 1px solid #ddd;
-`;
-
-const TableCell = styled.td`
-  padding: 10px;
-  border: 1px solid #ddd;
-`;
-
-const TableRow = styled.tr`
-  cursor: pointer;
-  &:hover {
-    background-color: #f1f1f1;
-  }
-`;
-
-const SmallButton = styled.button`
-  background: #ef5350;
-  border: none;
-  padding: 5px 10px;
-  color: white;
-  border-radius: 5px;
-  font-size: 12px;
-  cursor: pointer;
-  margin-left: 5px;
-
-  &:hover {
-    background: #d32f2f;
-  }
-`;
-const AdmitCardContainer = styled.div`
-  width: 800px;
-  border: 2px solid #00bfff;
-  padding: 20px;
-  margin: auto;
-  background-color: #ffffff;
-  font-family: Arial, sans-serif;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-`;
-
-const DownloadButton = styled.button`
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
-
-  &:hover {
-    background-color: #45a049;
-  }
-`;
-
-const Logo = styled.img`
-  height: 60px;
-`;
-
-const Title1 = styled.h2`
-  color: #4a4a4a;
-`;
-
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-`;
-
-const SchoolLogo = styled.img`
-  /* width: 120px; */
-  height: 120px;
-  margin-right: 15px;
-`;
-
-const SchoolInfo = styled.div`
-  flex: 1;
-  text-align: center;
-  font-size: 22px;
-  color: #333;
-  font-weight: bold;
-  line-height: 1.2;
-`;
-
-const ContactInfo = styled.div`
-  font-size: 14px;
-  color: #ff4500;
-  margin-top: 5px;
-`;
-
-const InfoSection = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #ddd;
-`;
-
-const InfoColumn = styled.div`
-  width: 50%;
-`;
-
-const InfoRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0;
-  font-size: 14px;
-`;
-
-const Value = styled.div`
-  width: 60%;
-  text-align: left;
-`;
-
-const PhotoSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const PhotoContainer = styled.div`
-  text-align: center;
-  margin-bottom: 20px;
-`;
-
-const Photo = styled.img`
-  width: 115px;
-  background-color: gray;
-`;
-
-const PlaceholderImage = styled.div`
-  width: 80px;
-  height: 80px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #888;
-  font-size: 12px;
-  margin-top: 10px;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  padding-top: 20px;
-`;
-
-const FooterText = styled.div`
-  font-size: 12px;
-  color: #555;
-  margin-top: 100px;
-`;
-
-const TdAction = styled.td`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+//   &:hover {
+//     background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
+//   }
+// `;
 
 // Styled Components (You can use your previous styled components)
 
@@ -908,3 +652,12 @@ const AdmitCard = () => {
 };
 
 export default AdmitCard;
+
+
+
+// const Title = styled.h2`
+//   color: #0d47a1;
+//   text-align: center;
+//   margin-bottom: 30px;
+//   font-weight: bold;
+// `;

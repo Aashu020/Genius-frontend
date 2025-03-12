@@ -1,188 +1,28 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify"; // Importing Toastify
-import 'react-toastify/dist/ReactToastify.css'; // Importing toast styles
-
-// Styled Components (no changes)
-
-const MainDashboard = styled.div`
-  flex: 1;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-  padding: 20px;;
-    align-items: center;
-`;
-
-const Title = styled.h2`
-  color: #0d47a1;
-  text-align: center;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  width: 80%;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-
-const Main = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 20px;
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const Label = styled.span`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-`;
-
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-`;
-
-const Select = styled.select`
-  width: 100%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-`;
-
-const Wrapper = styled.div`
-  width: 80%;
-  margin: 20px auto;
-  padding: 10px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const StyledTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-`;
-
-const TableHeader = styled.thead`
-  background-color: #fff;
-`;
-
-const HeaderCell = styled.th`
-  padding: 12px;
-  text-align: left;
-  font-size: 14px;
-  color: #666;
-  font-weight: bold;
-  border-bottom: 1px solid #e0e0e0;
-`;
-
-const TableBody = styled.tbody`
-  color: black;
-`;
-
-const BodyCell = styled.td`
-  padding: 12px;
-  text-align: left;
-  font-size: 14px;
-  color: #333;
-  border-bottom: 1px solid #e0e0e0;
-  vertical-align: middle;
-`;
-
-const StatusContainer = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const StatusButtonP = styled.button`
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 55%;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-right: 5px;
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const StatusButtonA = styled.button`
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 55%;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-right: 5px;
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const StatusButtonL = styled.button`
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  border-radius: 55%;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin-right: 5px;
-
-  &:hover {
-    opacity: 0.8;
-  }
-`;
-
-const SubmitButton = styled.button`
-  width: 320px;
-  padding: 12px;
-  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
-  border: none;
-  border-radius: 30px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-  margin-top: 20px;
-
-  &:hover {
-    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
-  }
-`;
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {
+  MainDashboard,
+  Title,
+  Form,
+  Main,
+  InputContainer,
+  Label,
+  Input,
+  Select,
+  Wrapper,
+  StyledTable,
+  TableHeader,
+  HeaderCell,
+  TableBody,
+  BodyCell,
+  StatusContainer,
+  StatusButtonP,
+  StatusButtonA,
+  StatusButtonL,
+  SubmitButton,
+} from "../AttendanceModule/AttendanceTStyle";
 
 const AttendenceType = () => {
   const [allStaff, setAllStaff] = useState([]); // All staff data
@@ -267,7 +107,6 @@ const AttendenceType = () => {
     }));
   };
 
-
   useEffect(() => {
     const initialAttendance = {};
     filteredStaff.forEach((employee) => {
@@ -275,8 +114,6 @@ const AttendenceType = () => {
     });
     setAttendanceData(initialAttendance); // Update attendanceData directly
   }, [filteredStaff]);
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -312,13 +149,10 @@ const AttendenceType = () => {
       setStatusSelection({});
       toast.success("Attendance submitted successfully!"); // Show success toast
     } catch (error) {
-      // console.log(error.response.data.message)
       console.error("Error submitting attendance:", error);
       toast.error(error.response.data.message || "Error submitting attendance. Please try again."); // Show error toast
     }
   };
-
-
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -398,7 +232,6 @@ const AttendenceType = () => {
                       >
                         L
                       </StatusButtonL>
-
                     </StatusContainer>
                   </BodyCell>
                 </tr>
@@ -409,10 +242,9 @@ const AttendenceType = () => {
       )}
 
       {filteredStaff.length > 0 && (
-        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+        <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
           <SubmitButton onClick={handleSubmit}>Submit Attendance</SubmitButton>
         </div>
-
       )}
     </MainDashboard>
   );

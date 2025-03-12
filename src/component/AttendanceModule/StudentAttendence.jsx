@@ -195,7 +195,7 @@ const StudentAttendance = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -209,7 +209,7 @@ const StudentAttendance = () => {
     const fetchSections = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           setSections(response.data.Section || []);
         } catch (error) {
           console.error("Error fetching sections:", error);
@@ -226,7 +226,7 @@ const StudentAttendance = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("https://api.edspride.in/student/all");
+          const response = await axios.get("http://localhost:8007/student/all");
           const filteredStudents = response.data.filter(student =>
             student.AdmissionInClass === selectedClass && student.Section === selectedSection
           );
@@ -301,7 +301,7 @@ const StudentAttendance = () => {
     console.log(attendanceToSubmit)
 
     try {
-      const response = await axios.post('https://api.edspride.in/student-attendance/add', attendanceToSubmit);
+      const response = await axios.post('http://localhost:8007/student-attendance/add', attendanceToSubmit);
       toast.success("Attendance submitted successfully!");
       setSelectedDate("");
       setSelectedClass("");

@@ -232,7 +232,7 @@ const StudentTable = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/enquiry/all");
+        const response = await axios.get("http://localhost:8007/enquiry/all");
         setStudents(response.data);
         setFilteredData(response.data);
       } catch (error) {
@@ -258,7 +258,7 @@ const StudentTable = () => {
 
   const handleUpdateStudent = async (updatedStudent) => {
     try {
-      await axios.put(`https://api.edspride.in/enquiry/update/${updatedStudent.RegistrationNo}`, updatedStudent);
+      await axios.put(`http://localhost:8007/enquiry/update/${updatedStudent.RegistrationNo}`, updatedStudent);
       setStudents(students.map(student => (student.RegistrationNo === updatedStudent.RegistrationNo ? updatedStudent : student)));
       setFilteredData(filteredData.map(student => (student.RegistrationNo === updatedStudent.RegistrationNo ? updatedStudent : student)));
       handleCloseModal();
@@ -275,7 +275,7 @@ const StudentTable = () => {
     }
 
     try {
-      await axios.delete(`https://api.edspride.in/enquiry/delete/${registrationNo}`);
+      await axios.delete(`http://localhost:8007/enquiry/delete/${registrationNo}`);
       setStudents(students.filter(student => student.RegistrationNo !== registrationNo));
       setFilteredData(filteredData.filter(student => student.RegistrationNo !== registrationNo));
       handleCloseModal();

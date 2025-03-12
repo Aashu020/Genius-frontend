@@ -103,7 +103,7 @@ const DateSheet = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/exam/all");
+        const response = await axios.get("http://localhost:8007/exam/all");
         console.log("Fetched exams:", response.data); // Debugging log
         setExams(response.data);
       } catch (error) {
@@ -121,7 +121,7 @@ const DateSheet = () => {
         try {
           console.log(`Fetching data for exam: ${selectedExam}`); // Debugging log
           const response = await axios.get(
-            `https://api.edspride.in/datesheet/getByExam/${selectedExam}`
+            `http://localhost:8007/datesheet/getByExam/${selectedExam}`
           );
           console.log("Fetched date sheet data:", response.data); // Debugging log
 

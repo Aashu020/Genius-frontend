@@ -220,12 +220,12 @@ const Payment = () => {
     const fetchData = async () => {
       try {
         // Fetch student data
-        const studentResponse = await axios.get(`https://api.edspride.in/student/get/${location.state.student}`);
+        const studentResponse = await axios.get(`http://localhost:8007/student/get/${location.state.student}`);
         console.log(studentResponse.data.AdmissionInClass);
         setStudent(studentResponse.data);
 
         // Fetch fee data
-        const feeResponse = await axios.get("https://api.edspride.in/feeSlab/all");
+        const feeResponse = await axios.get("http://localhost:8007/feeSlab/all");
         console.log(feeResponse.data)
         const filData = feeResponse?.data.find(data => {
           // console.log(data.ClassId.trim(), studentResponse.data.AdmissionInClass)
@@ -236,7 +236,7 @@ const Payment = () => {
 
 
         // Fetch academic year info
-        const academicResponse = await axios.get("https://api.edspride.in/academic-year-info/active");
+        const academicResponse = await axios.get("http://localhost:8007/academic-year-info/active");
         const academicData = academicResponse.data;
         setAcademic(academicData);
 
@@ -264,7 +264,7 @@ const Payment = () => {
         setMonths(generatedMonths);
 
         // Fetch existing fee data
-        const existingFeeResponse = await axios.get(`https://api.edspride.in/fee-data/get/${studentResponse.data.StudentId}`);
+        const existingFeeResponse = await axios.get(`http://localhost:8007/fee-data/get/${studentResponse.data.StudentId}`);
         const existingData = existingFeeResponse.data;
         // console.log(existingData)
         if (existingData.Payments.length > 0) {
@@ -526,7 +526,7 @@ const Payment = () => {
 
       // Uncomment and ensure this works
       try {
-        await axios.post("https://api.edspride.in/fee-data/add", paymentData);
+        await axios.post("http://localhost:8007/fee-data/add", paymentData);
         toast.success("Payment successful!");
         const role = localStorage.getItem("Role")
         if (role.trim().toLowerCase() === "superadmin" || role.trim().toLowerCase() === "admin") {

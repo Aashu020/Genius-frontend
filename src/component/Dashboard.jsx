@@ -242,7 +242,7 @@ const Dashboard = () => {
       try {
         // Call the API only if 'update' is not set to "Yes"
         if (update !== "Yes") {
-          await axios.post("https://api.edspride.in/student/create-fee-data-for-all-students");
+          await axios.post("http://localhost:8007/student/create-fee-data-for-all-students");
           setUpdate("Yes");  // Set update to "Yes" to prevent further calls
         }
       } catch (error) {
@@ -258,7 +258,7 @@ const Dashboard = () => {
     // Fetch the fee data from the API
     const fetchFeeData = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/fee-data/all");
+        const response = await axios.get("http://localhost:8007/fee-data/all");
         // setStudents(response.data); // Assuming the response is an array of student fee data
 
         // Calculate totalFee and remainingFee by iterating over the response data
@@ -295,7 +295,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchTotalStudents = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/student/all');
+        const response = await fetch('http://localhost:8007/student/all');
         const data = await response.json();
 
         // Assuming the API returns an array of students
@@ -312,7 +312,7 @@ const Dashboard = () => {
     };
     const fetchTotalStaff = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/staff/all');
+        const response = await fetch('http://localhost:8007/staff/all');
         const data = await response.json();
 
         // Assuming the API returns an array of staff members

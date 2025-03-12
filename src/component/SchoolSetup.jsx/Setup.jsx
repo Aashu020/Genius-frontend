@@ -184,7 +184,7 @@ const Setup = () => {
 
   const fetchData = () => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         if (response.data.length > 0) {
           setPresent(true);
@@ -275,8 +275,8 @@ const Setup = () => {
 
     try {
       const url = present
-        ? `https://api.edspride.in/schoolsetup/update/${id}` // Use the captured id
-        : "https://api.edspride.in/schoolsetup/add";
+        ? `http://localhost:8007/schoolsetup/update/${id}` // Use the captured id
+        : "http://localhost:8007/schoolsetup/add";
       const response = await axios.post(url, formToSubmit, {
         headers: {
           "Content-Type": "multipart/form-data",

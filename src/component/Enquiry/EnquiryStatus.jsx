@@ -256,7 +256,7 @@ const EnquiryStatus = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/enquiry/all")
+      .get("http://localhost:8007/enquiry/all")
       .then((response) => {
         setData(response.data);
       })
@@ -317,7 +317,7 @@ const EnquiryStatus = () => {
     // console.log(dataToSend)
     axios
       .put(
-        `https://api.edspride.in/enquiry/update/${registration.RegistrationNo}`,
+        `http://localhost:8007/enquiry/update/${registration.RegistrationNo}`,
         dataToSend
       )
       .then((response) => {
@@ -339,7 +339,7 @@ const EnquiryStatus = () => {
     // console.log(dataToSend)
     axios
       .put(
-        `https://api.edspride.in/enquiry/update/${registration.RegistrationNo}`,
+        `http://localhost:8007/enquiry/update/${registration.RegistrationNo}`,
         dataToSend
       )
       .then((response) => {

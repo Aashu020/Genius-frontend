@@ -205,7 +205,7 @@ const AddRoute = () => {
 
   const fetchRoutes = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/route/all");
+      const response = await axios.get("http://localhost:8007/route/all");
       setRoutes(response.data);
     } catch (error) {
       console.error("Error fetching routes:", error);
@@ -238,7 +238,7 @@ const AddRoute = () => {
     try {
       if (editId) {
         // Update existing Route
-        const response = await axios.put(`https://api.edspride.in/route/update/${editId}`, {
+        const response = await axios.put(`http://localhost:8007/route/update/${editId}`, {
           RouteName: routeName,
           RouteAmount: routeAmount,
         });
@@ -248,7 +248,7 @@ const AddRoute = () => {
         setEditId(null);
       } else {
         // Create new Route
-        const response = await axios.post("https://api.edspride.in/route/add", {
+        const response = await axios.post("http://localhost:8007/route/add", {
           RouteName: routeName,
           RouteAmount: routeAmount,
         });
@@ -278,7 +278,7 @@ const AddRoute = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/route/delete/${deleteId}`);
+      await axios.delete(`http://localhost:8007/route/delete/${deleteId}`);
       setRoutes(routes.filter(route => route._id !== deleteId));
       toast.success("Route deleted successfully!");
     } catch (error) {

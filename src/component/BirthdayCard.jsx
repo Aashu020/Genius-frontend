@@ -3,7 +3,7 @@ import axios from "axios";
 import bg from "../assets/Images/birthdaybg.jpeg";
 import html2canvas from "html2canvas"; // Import html2canvas
 
-const BASE_URL = "https://api.edspride.in/"; // Base URL for logo and assets
+const BASE_URL = "http://localhost:8007/"; // Base URL for logo and assets
 
 const BirthdayCard = () => {
     const [school, setSchool] = useState(null); // State to store school data
@@ -16,7 +16,7 @@ const BirthdayCard = () => {
 
     useEffect(() => {
         axios
-            .get("https://api.edspride.in/schoolsetup/all")
+            .get("http://localhost:8007/schoolsetup/all")
             .then((response) => {
                 if (response.data.length > 0) {
                     setSchool(response.data[0]); // Assuming only one school is returned

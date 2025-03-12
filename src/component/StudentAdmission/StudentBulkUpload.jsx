@@ -221,7 +221,7 @@ const mapToMongooseModel = (row) => {
     const handleSubmit = async () => {
         try {
             // Send the data to the server
-            const response = await fetch('https://api.edspride.in/bulk/save-student', {
+            const response = await fetch('http://localhost:8007/bulk/save-student', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

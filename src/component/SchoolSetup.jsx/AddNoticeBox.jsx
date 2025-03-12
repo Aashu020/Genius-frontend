@@ -248,7 +248,7 @@ const AddNoticeBox = () => {
 
     const fetchNotices = async () => {
         try {
-            const response = await axios.get("https://api.edspride.in/noticebox/all");
+            const response = await axios.get("http://localhost:8007/noticebox/all");
             setNotices(response.data);
         } catch (error) {
             console.error("Error fetching notices:", error);
@@ -290,7 +290,7 @@ const AddNoticeBox = () => {
             if (editId) {
                 // Update existing notice
                 const response = await axios.put(
-                    `https://api.edspride.in/noticebox/update/${editId}`,
+                    `http://localhost:8007/noticebox/update/${editId}`,
                     {
                         Title: title,
                         Date: date,
@@ -308,7 +308,7 @@ const AddNoticeBox = () => {
             } else {
                 // Create new notice
                 const response = await axios.post(
-                    "https://api.edspride.in/noticebox/add",
+                    "http://localhost:8007/noticebox/add",
                     {
                         Title: title,
                         Date: date,
@@ -355,7 +355,7 @@ const AddNoticeBox = () => {
 
     const confirmDelete = async () => {
         try {
-            await axios.delete(`https://api.edspride.in/noticebox/delete/${deleteId}`);
+            await axios.delete(`http://localhost:8007/noticebox/delete/${deleteId}`);
             setNotices(notices.filter((notice) => notice._id !== deleteId));
             toast.success("Notice deleted successfully!");
             setShowModal(false);

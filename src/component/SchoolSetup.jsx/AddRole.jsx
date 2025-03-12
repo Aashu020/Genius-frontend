@@ -226,7 +226,7 @@ const AddRole = () => {
 
   const fetchRoles = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/role/all");
+      const response = await axios.get("http://localhost:8007/role/all");
       setRoles(response.data);
     } catch (error) {
       console.error("Error fetching roles:", error);
@@ -251,14 +251,14 @@ const AddRole = () => {
 
     try {
       if (editId) {
-        await axios.put(`https://api.edspride.in/role/update/${editId}`, {
+        await axios.put(`http://localhost:8007/role/update/${editId}`, {
           RoleName: roleName,
           Description: description,
         });
         toast.success("Role updated successfully!");
         setEditId(null);
       } else {
-        const response = await axios.post("https://api.edspride.in/role/add", {
+        const response = await axios.post("http://localhost:8007/role/add", {
           RoleName: roleName,
           Description: description,
         });
@@ -288,7 +288,7 @@ const AddRole = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/role/delete/${deleteId}`);
+      await axios.delete(`http://localhost:8007/role/delete/${deleteId}`);
       toast.success("Role deleted successfully!");
       fetchRoles();
     } catch (error) {

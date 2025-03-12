@@ -226,7 +226,7 @@ const Consolidated = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -240,7 +240,7 @@ const Consolidated = () => {
     const fetchSections = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           setSections(response.data.Section || []);
         } catch (error) {
           console.error("Error fetching sections:", error);
@@ -298,7 +298,7 @@ const Consolidated = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/exam/all");
+        const response = await axios.get("http://localhost:8007/exam/all");
         setExams(response.data);
       } catch (error) {
         console.error("Error fetching exams:", error);
@@ -312,7 +312,7 @@ const Consolidated = () => {
     const fetchSubjects = async () => {
       if (selectedClass && selectedSection && formData.Exam) {
         try {
-          const response = await axios.get("https://api.edspride.in/result/all", {
+          const response = await axios.get("http://localhost:8007/result/all", {
             params: {
               ClassId: selectedClass,
               Section: selectedSection,

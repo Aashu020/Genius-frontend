@@ -210,7 +210,7 @@ const Deduction = () => {
   // Fetch existing deductions from API
   const fetchDeductions = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/payroll-header/all");
+      const response = await axios.get("http://localhost:8007/payroll-header/all");
       setDeductions(response.data);
     } catch (err) {
       console.error("Error fetching deductions:", err);
@@ -228,7 +228,7 @@ const Deduction = () => {
     } else {
       setError("");
       try {
-        const response = await axios.post("https://api.edspride.in/payroll-header/add", {
+        const response = await axios.post("http://localhost:8007/payroll-header/add", {
           Title: deductionName,
           Type: "Deduction",
         });
@@ -254,7 +254,7 @@ const Deduction = () => {
     } else {
       setError("");
       try {
-        const response = await axios.put(`https://api.edspride.in/payroll-header/update/${currentDeduction._id}`, {
+        const response = await axios.put(`http://localhost:8007/payroll-header/update/${currentDeduction._id}`, {
           Title: deductionName,
         });
         const updatedDeductions = deductions.map((deduction) =>
@@ -278,7 +278,7 @@ const Deduction = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/payroll-header/delete/${currentDeduction._id}`);
+      await axios.delete(`http://localhost:8007/payroll-header/delete/${currentDeduction._id}`);
       setDeductions(deductions.filter((deduction) => deduction._id !== currentDeduction._id));
       setShowModal(false);
       toast.success("Deduction Head deleted successfully!");

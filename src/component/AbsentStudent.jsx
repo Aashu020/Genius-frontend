@@ -82,7 +82,7 @@ const AbsentStudentList = () => {
         console.log("Fetching attendance data...");
 
         // Fetching attendance data
-        const attendanceResponse = await fetch("https://api.edspride.in/student-attendance/all");
+        const attendanceResponse = await fetch("http://localhost:8007/student-attendance/all");
         if (!attendanceResponse.ok) {
           throw new Error("Failed to fetch attendance data");
         }
@@ -104,7 +104,7 @@ const AbsentStudentList = () => {
               class: entry.Class, // Fetch class and section from the main attendance entry
               section: entry.Section,
               image: student?.Document?.StudentPhoto
-                ? `https://api.edspride.in/uploads/${student.Document.StudentPhoto}`
+                ? `http://localhost:8007/uploads/${student.Document.StudentPhoto}`
                 : "https://via.placeholder.com/40", // Default image if no student photo
             }))
           );

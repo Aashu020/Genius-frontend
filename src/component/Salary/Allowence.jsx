@@ -209,7 +209,7 @@ const Allowence = () => {
   // Fetch allowance heads from the API
   const fetchAllowanceHeads = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/payroll-header/all");
+      const response = await axios.get("http://localhost:8007/payroll-header/all");
       // Filter allowance heads to include only those with Type "Allowance"
       const filteredData = response.data.filter(item => item.Type === "Allowance");
       setAllowenceHeads(filteredData);
@@ -247,13 +247,13 @@ const Allowence = () => {
     if (Object.keys(errors).length === 0) {
       try {
         if (isEditing) {
-          await axios.put(`https://api.edspride.in/payroll-header/update/${itemToDelete}`, {
+          await axios.put(`http://localhost:8007/payroll-header/update/${itemToDelete}`, {
             Title: formData.allowenceHeadName,
             Type: "Allowance",
           });
           toast.success("Allowance Head updated successfully!");
         } else {
-          await axios.post("https://api.edspride.in/payroll-header/add", {
+          await axios.post("http://localhost:8007/payroll-header/add", {
             Title: formData.allowenceHeadName,
             Type: "Allowance",
           });
@@ -282,7 +282,7 @@ const Allowence = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/payroll-header/delete/${itemToDelete}`);
+      await axios.delete(`http://localhost:8007/payroll-header/delete/${itemToDelete}`);
       toast.success("Allowance Head deleted successfully!");
       fetchAllowanceHeads(); // Refresh the list after deletion
       setShowModal(false); // Close modal

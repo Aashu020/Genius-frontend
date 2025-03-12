@@ -179,7 +179,7 @@ const AddSection = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/class/all");
+      const response = await axios.get("http://localhost:8007/class/all");
       setClasses(response.data);
     } catch (error) {
       console.error("Error fetching classes:", error);
@@ -229,7 +229,7 @@ const AddSection = () => {
     const newSectionData = { Section: updatedSections };
 
     try {
-      await axios.put(`https://api.edspride.in/class/update/${selectedClass}`, newSectionData);
+      await axios.put(`http://localhost:8007/class/update/${selectedClass}`, newSectionData);
 
       // Reset state
       setSelectedClass("");

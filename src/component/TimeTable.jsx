@@ -154,7 +154,7 @@ const TimeTable = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         console.log('Classes Response:', response.data);
         setClasses(response.data);
       } catch (error) {
@@ -168,7 +168,7 @@ const TimeTable = () => {
     // Fetch existing periods
     const fetchPeriods = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/period/all");
+        const response = await axios.get("http://localhost:8007/period/all");
         setPeriods(response.data);
       } catch (err) {
         console.error("Error fetching periods:", err);
@@ -183,7 +183,7 @@ const TimeTable = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `https://api.edspride.in/class/get/${selectedClass}`
+            `http://localhost:8007/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -204,7 +204,7 @@ const TimeTable = () => {
         try {
           const classId = selectedClass + selectedSection; // Combine classId and section
           const response = await axios.get(
-            `https://api.edspride.in/timetable/get/${selectedClass}/${selectedSection}`
+            `http://localhost:8007/timetable/get/${selectedClass}/${selectedSection}`
           );
           console.log('Timetable Response:', response.data);
           setTimetable(response.data);

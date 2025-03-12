@@ -268,7 +268,7 @@ const AddExam = () => {
 
     try {
       const response = await axios.post(
-        "https://api.edspride.in/exam/add",
+        "http://localhost:8007/exam/add",
         examDetails
       );
       console.log(response.data);
@@ -283,7 +283,7 @@ const AddExam = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/exam/all")
+      .get("http://localhost:8007/exam/all")
       .then((response) => {
         setExamData(response.data);
         console.log(response.data);
@@ -296,7 +296,7 @@ const AddExam = () => {
   const Publish = (state) => {
     var dataToSend = { ...state, Status: "Published" };
     axios
-      .put(`https://api.edspride.in/exam/update/${state.ExamId}`, dataToSend)
+      .put(`http://localhost:8007/exam/update/${state.ExamId}`, dataToSend)
       .then((response) => {
         console.log(response.data);
         setExamData((prevData) =>
@@ -314,7 +314,7 @@ const AddExam = () => {
 
   const handleDelete = async (examId) => {
     try {
-      await axios.delete(`https://api.edspride.in/exam/delete/${examId}`);
+      await axios.delete(`http://localhost:8007/exam/delete/${examId}`);
       setExamData((prevData) =>
         prevData.filter((exam) => exam.ExamId !== examId)
       );

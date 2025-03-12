@@ -137,9 +137,9 @@ const Select = styled.select`
 
 const Option = styled.option``;
 
-const CLASSES_API_URL = 'https://api.edspride.in/class/all';
-const HOMEWORK_API_URL = 'https://api.edspride.in/homework/all';
-const ATTENDANCE_API_URL = 'https://api.edspride.in/staff-attendance/all';
+const CLASSES_API_URL = 'http://localhost:8007/class/all';
+const HOMEWORK_API_URL = 'http://localhost:8007/homework/all';
+const ATTENDANCE_API_URL = 'http://localhost:8007/staff-attendance/all';
 
 const App = () => {
   const [classesData, setClassesData] = useState([]);

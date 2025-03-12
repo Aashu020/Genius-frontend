@@ -240,7 +240,7 @@ const AddDepartment = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/department/all");
+      const response = await axios.get("http://localhost:8007/department/all");
       setDepartments(response.data);
     } catch (error) {
       console.error("Error fetching departments:", error);
@@ -274,7 +274,7 @@ const AddDepartment = () => {
       if (editId) {
         // Update existing department
         const response = await axios.put(
-          `https://api.edspride.in/department/update/${editId}`,
+          `http://localhost:8007/department/update/${editId}`,
           {
             DepartmentName: departmentName,
             Description: description,
@@ -289,7 +289,7 @@ const AddDepartment = () => {
       } else {
         // Create new department
         const response = await axios.post(
-          "https://api.edspride.in/department/add",
+          "http://localhost:8007/department/add",
           {
             DepartmentName: departmentName,
             Description: description,
@@ -321,7 +321,7 @@ const AddDepartment = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/department/delete/${deleteId}`);
+      await axios.delete(`http://localhost:8007/department/delete/${deleteId}`);
       setDepartments(departments.filter((dep) => dep._id !== deleteId));
       toast.success("Department deleted successfully!");
       setShowModal(false);

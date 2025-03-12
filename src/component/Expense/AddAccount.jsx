@@ -201,7 +201,7 @@ const AddAccount = () => {
     const fetchAccounts = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/bank/all"
+          "http://localhost:8007/bank/all"
         ); // Adjust this endpoint
         setAccounts(response.data);
       } catch (error) {
@@ -291,7 +291,7 @@ const AddAccount = () => {
     try {
       if (editMode) {
         const response = await axios.put(
-          `https://api.edspride.in/bank/update/${currentAccountId}`,
+          `http://localhost:8007/bank/update/${currentAccountId}`,
           accountData
         );
         const updatedAccounts = accounts.map((account) =>
@@ -300,7 +300,7 @@ const AddAccount = () => {
         setAccounts(updatedAccounts);
       } else {
         const response = await axios.post(
-          "https://api.edspride.in/bank/add",
+          "http://localhost:8007/bank/add",
           accountData
         );
         setAccounts([...accounts, response.data]);
@@ -323,7 +323,7 @@ const AddAccount = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://api.edspride.in/bank/delete/${id}`
+        `http://localhost:8007/bank/delete/${id}`
       );
       setAccounts(accounts.filter((account) => account._id !== id));
     } catch (error) {

@@ -121,7 +121,7 @@ const SubjectProgress = () => {
 
     if (studentId) {
       axios
-        .get(`https://api.edspride.in/student-attendance/all`)
+        .get(`http://localhost:8007/student-attendance/all`)
         .then((response) => {
           // Initialize counters for Present, Absent, Leave
           let presentCount = 0;

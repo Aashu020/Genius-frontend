@@ -15,7 +15,7 @@ const Paper = ({ selectedClass, selectedSubject, chapters }) => {
     const fetchData = async () => {
       if (selectedClass && selectedSubject) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           setData(response.data); // Set the fetched data
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -117,7 +117,7 @@ const CreateSyllabus = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/class/all");
+        const response = await axios.get("http://localhost:8007/class/all");
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -130,7 +130,7 @@ const CreateSyllabus = () => {
     const fetchSubjects = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           const selectedClassData = response.data;
           setSubjects(selectedClassData.Subjects || []);
         } catch (error) {
@@ -147,7 +147,7 @@ const CreateSyllabus = () => {
     const fetchExistingSyllabus = async () => {
       if (selectedClass && selectedSubject) {
         try {
-          const response = await axios.get(`https://api.edspride.in/class/get/${selectedClass}`);
+          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
           const selectedClassData = response.data;
           const subject = selectedClassData.Subjects.find(sub => sub.Subject === selectedSubject);
           
@@ -222,7 +222,7 @@ const CreateSyllabus = () => {
       }));
 
       try {
-        await axios.put(`https://api.edspride.in/class/update/${selectedClass}`, {
+        await axios.put(`http://localhost:8007/class/update/${selectedClass}`, {
           Subjects: subjects.map((subject) =>
             subject.Subject === selectedSubject ? { ...subject, Syllabus: updatedSyllabus } : subject
           ),

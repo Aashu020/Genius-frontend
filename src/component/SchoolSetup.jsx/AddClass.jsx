@@ -235,7 +235,7 @@ const AddClass = () => {
     const fetchSubjects = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/add-subject/all"
+          "http://localhost:8007/add-subject/all"
         );
         setSubjects(response.data);
       } catch (error) {
@@ -258,7 +258,7 @@ const AddClass = () => {
   const fetchClasses = async () => {
     try {
       const response = await axios.get(
-        "https://api.edspride.in/class/all"
+        "http://localhost:8007/class/all"
       );
       setClasses(response.data);
     } catch (error) {
@@ -299,12 +299,12 @@ const AddClass = () => {
     try {
       if (editingClassId) {
         await axios.put(
-          `https://api.edspride.in/class/update/${editingClassId}`,
+          `http://localhost:8007/class/update/${editingClassId}`,
           classData
         );
       } else {
         await axios.post(
-          "https://api.edspride.in/class/add",
+          "http://localhost:8007/class/add",
           classData
         );
       }
@@ -328,7 +328,7 @@ const AddClass = () => {
   const handleDelete = async (classId) => {
     try {
       await axios.delete(
-        `https://api.edspride.in/class/delete/${classId}`
+        `http://localhost:8007/class/delete/${classId}`
       );
       fetchClasses();
     } catch (error) {

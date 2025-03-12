@@ -258,7 +258,7 @@ const AddAcademicEvent = () => {
 
     const fetchEvents = async () => {
         try {
-            const response = await axios.get("https://api.edspride.in/academicevents/all");
+            const response = await axios.get("http://localhost:8007/academicevents/all");
             setEvents(response.data);
         } catch (error) {
             console.error("Error fetching events:", error);
@@ -304,7 +304,7 @@ const AddAcademicEvent = () => {
             if (editId) {
                 // Update existing event
                 const response = await axios.put(
-                    `https://api.edspride.in/academicevents/update/${editId}`,
+                    `http://localhost:8007/academicevents/update/${editId}`,
                     {
                         Title: title,
                         StartDate: startDate,
@@ -324,7 +324,7 @@ const AddAcademicEvent = () => {
             } else {
                 // Create new event
                 const response = await axios.post(
-                    "https://api.edspride.in/academicevents/add",
+                    "http://localhost:8007/academicevents/add",
                     {
                         Title: title,
                         StartDate: startDate,
@@ -381,7 +381,7 @@ const AddAcademicEvent = () => {
 
     const confirmDelete = async () => {
         try {
-            await axios.delete(`https://api.edspride.in/academicevents/delete/${deleteId}`);
+            await axios.delete(`http://localhost:8007/academicevents/delete/${deleteId}`);
             setEvents(events.filter((event) => event._id !== deleteId));
             toast.success("Event deleted successfully!");
             setShowModal(false);

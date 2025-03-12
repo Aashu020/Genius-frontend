@@ -208,7 +208,7 @@ const AddExpense = () => {
     const fetchExpenseHeads = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/expense-header/all"
+          "http://localhost:8007/expense-header/all"
         );
         setExpenseHeads(response.data);
       } catch (error) {
@@ -224,7 +224,7 @@ const AddExpense = () => {
     const fetchVendors = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/vendor/all"
+          "http://localhost:8007/vendor/all"
         );
         setVendors(response.data);
       } catch (error) {
@@ -240,7 +240,7 @@ const AddExpense = () => {
     const fetchExpenses = async () => {
       try {
         const response = await axios.get(
-          "https://api.edspride.in/revenue/all"
+          "http://localhost:8007/revenue/all"
         );
         setExpenses(response.data);
       } catch (error) {
@@ -274,7 +274,7 @@ const AddExpense = () => {
       if (isEditing) {
         // Update the expense
         await axios.put(
-          `https://api.edspride.in/revenue/update/${currentExpenseId}`,
+          `http://localhost:8007/revenue/update/${currentExpenseId}`,
           expenseData
         );
         setExpenses(
@@ -289,7 +289,7 @@ const AddExpense = () => {
       } else {
         // Add a new expense
         const response = await axios.post(
-          "https://api.edspride.in/revenue/add",
+          "http://localhost:8007/revenue/add",
           expenseData
         );
         setExpenses([...expenses, response.data]);
@@ -325,7 +325,7 @@ const AddExpense = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `https://api.edspride.in/revenue/delete/${id}`
+        `http://localhost:8007/revenue/delete/${id}`
       );
       setExpenses(expenses.filter((expense) => expense._id !== id));
     } catch (error) {

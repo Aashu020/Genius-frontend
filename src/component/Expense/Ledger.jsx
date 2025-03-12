@@ -116,7 +116,7 @@ const Ledger = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/schoolsetup/all")
+      .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -130,7 +130,7 @@ const Ledger = () => {
 
   const fetchData = async (start, end) => {
     try {
-      const response = await axios.get('https://api.edspride.in/revenue/all');
+      const response = await axios.get('http://localhost:8007/revenue/all');
       const filteredData = response.data.filter(item => {
         const date = new Date(item.Date);
         return date >= new Date(start) && date <= new Date(end);
@@ -167,7 +167,7 @@ const Ledger = () => {
       
       // Extract and add the school logo image
       const logoImg = new Image();
-      logoImg.src = `https://api.edspride.in/uploads/${school?.SchoolLogo}`;
+      logoImg.src = `http://localhost:8007/uploads/${school?.SchoolLogo}`;
       logoImg.onload = () => {
         const logoWidth = 10; // Adjust as necessary
         const logoHeight = 10; // Adjust as necessary
@@ -217,7 +217,7 @@ const Ledger = () => {
 
         <div ref={printRef}>
           <SchoolHeader>
-            <img style={{height:"80px"}} src={`https://api.edspride.in/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="" />
+            <img style={{height:"80px"}} src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="" />
             <h2>{school?.SchoolName}</h2>
             <p>{school?.EmailId} | {school?.PhoneNo} </p>
             <p>{school?.Website}</p>

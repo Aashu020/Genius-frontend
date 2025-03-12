@@ -214,7 +214,7 @@ const AcademicPlan = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('https://api.edspride.in/academic-year-plan/all');
+      const response = await axios.get('http://localhost:8007/academic-year-plan/all');
       setEvents(response.data);
     } catch (error) {
       console.error('Error fetching events:', error);
@@ -234,11 +234,11 @@ const AcademicPlan = () => {
     try {
       if (editingEventId) {
         // Update existing event
-        const response = await axios.put(`https://api.edspride.in/academic-year-plan/update/${editingEventId}`, formData);
+        const response = await axios.put(`http://localhost:8007/academic-year-plan/update/${editingEventId}`, formData);
         toast.success("Academic Year Plan updated successfully!");
       } else {
         // Add new event
-        const response = await axios.post('https://api.edspride.in/academic-year-plan/add', formData);
+        const response = await axios.post('http://localhost:8007/academic-year-plan/add', formData);
         toast.success("Academic Year Plan saved successfully!");
       }
       // Reset form
@@ -274,7 +274,7 @@ const AcademicPlan = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
-        await axios.delete(`https://api.edspride.in/academic-year-plan/delete/${id}`);
+        await axios.delete(`http://localhost:8007/academic-year-plan/delete/${id}`);
         toast.success("Event deleted successfully!");
         // Refresh the events list
         const updatedEvents = events.filter(event => event._id !== id);

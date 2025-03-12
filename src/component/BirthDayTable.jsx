@@ -18,7 +18,7 @@ const BirthdayWishesTable = () => {
 
     useEffect(() => {
         axios
-            .get("https://api.edspride.in/schoolsetup/all")
+            .get("http://localhost:8007/schoolsetup/all")
             .then((response) => {
                 if (response.data.length > 0) {
                     setSchool(response.data[0]); // Assuming only one school is returned
@@ -34,7 +34,7 @@ const BirthdayWishesTable = () => {
             try {
                 var id = localStorage.getItem("Id");
 
-                const response = await fetch(`https://api.edspride.in/birthday/wishes/${id}`);
+                const response = await fetch(`http://localhost:8007/birthday/wishes/${id}`);
                 const data = await response.json();
                 if (response.ok) {
                     setWishes(data.data);
@@ -85,7 +85,7 @@ const BirthdayWishesTable = () => {
             // Load the school logo with cross-origin
             const logo = new Image();
             logo.crossOrigin = 'anonymous';  // Enable cross-origin request
-            logo.src = `https://api.edspride.in/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`;
+            logo.src = `http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`;
 
             logo.onload = () => {
                 const logoWidth = 150;

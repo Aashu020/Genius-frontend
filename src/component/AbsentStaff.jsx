@@ -95,7 +95,7 @@ const AbsentStaffList = () => {
   useEffect(() => {
     const fetchAbsentStaff = async () =>  {
       try {
-        const response = await fetch('https://api.edspride.in/staff-attendance/all');
+        const response = await fetch('http://localhost:8007/staff-attendance/all');
         const data = await response.json();
         const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
 
@@ -109,7 +109,7 @@ const AbsentStaffList = () => {
 
         // Fetch additional staff details using EmployeeId
         const staffDetails = await Promise.all(absentStaffList.map(async (staff) => {
-          const employeeResponse = await fetch(`https://api.edspride.in/staff/get/${staff.EmployeeId}`);
+          const employeeResponse = await fetch(`http://localhost:8007/staff/get/${staff.EmployeeId}`);
           const employeeData = await employeeResponse.json();
           return {
             id: employeeData._id,
@@ -144,7 +144,7 @@ const AbsentStaffList = () => {
         <TableBody>
           {absentStaff.map((staff, index) => (
             <tr key={index}>
-              <BodyCell><Photo src={`https://api.edspride.in/uploads/${staff?.Documents?.Photo}`} alt="Staff" /></BodyCell>
+              <BodyCell><Photo src={`http://localhost:8007/uploads/${staff?.Documents?.Photo}`} alt="Staff" /></BodyCell>
               <BodyCell>{staff.name}</BodyCell>
               <BodyCell>{staff.roleClass}</BodyCell>
              

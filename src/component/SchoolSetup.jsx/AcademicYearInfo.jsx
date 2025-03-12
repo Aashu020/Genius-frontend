@@ -233,7 +233,7 @@ const AcademicYearInfo = () => {
   const fetchAcademicYears = async () => {
     try {
       const response = await axios.get(
-        "https://api.edspride.in/academic-year-info/all"
+        "http://localhost:8007/academic-year-info/all"
       );
       setAcademicYears(response.data);
     } catch (error) {
@@ -271,13 +271,13 @@ const AcademicYearInfo = () => {
     try {
       if (editingId) {
         await axios.put(
-          `https://api.edspride.in/academic-year-info/update/${editingId}`,
+          `http://localhost:8007/academic-year-info/update/${editingId}`,
           formData
         );
         toast.success("Academic year updated successfully!");
       } else {
         await axios.post(
-          "https://api.edspride.in/academic-year-info/add",
+          "http://localhost:8007/academic-year-info/add",
           formData
         );
         toast.success("Academic year created successfully!");
@@ -308,7 +308,7 @@ const AcademicYearInfo = () => {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `https://api.edspride.in/academic-year-info/delete/${deletingId}`
+        `http://localhost:8007/academic-year-info/delete/${deletingId}`
       );
       setAcademicYears(academicYears.filter((year) => year._id !== deletingId));
       toast.success("Academic year deleted successfully!");
@@ -324,7 +324,7 @@ const AcademicYearInfo = () => {
   const confirmActive = async () => {
     try {
       await axios.put(
-        `https://api.edspride.in/academic-year-info/active/${activeId}`
+        `http://localhost:8007/academic-year-info/active/${activeId}`
       );
       toast.success("Academic year activated successfully!");
       setShowEditModal(false);

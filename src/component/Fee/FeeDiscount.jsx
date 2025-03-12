@@ -240,10 +240,10 @@ const FeeDiscount = () => {
 
     try {
       if (isEditing) {
-        await axios.put(`https://api.edspride.in/discount/update/${fineList[editIndex]._id}`, payload);
+        await axios.put(`http://localhost:8007/discount/update/${fineList[editIndex]._id}`, payload);
         toast.success("Discount updated successfully!");
       } else {
-        await axios.post("https://api.edspride.in/discount/add", payload);
+        await axios.post("http://localhost:8007/discount/add", payload);
         toast.success("Discount added successfully!");
       }
 
@@ -257,7 +257,7 @@ const FeeDiscount = () => {
 
   const fetchDiscounts = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/discount/all");
+      const response = await axios.get("http://localhost:8007/discount/all");
       setFineList(response.data);
     } catch (error) {
       console.error("Error fetching discounts:", error);
@@ -273,7 +273,7 @@ const FeeDiscount = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/discount/delete/${fineList[deleteIndex]._id}`);
+      await axios.delete(`http://localhost:8007/discount/delete/${fineList[deleteIndex]._id}`);
       toast.success("Discount deleted successfully!");
       fetchDiscounts();
       setShowModal(false);

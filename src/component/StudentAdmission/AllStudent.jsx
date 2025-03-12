@@ -32,7 +32,7 @@ const AllStudent = () => {
   useEffect(() => {
     const fetchStudent = async () => {
       try {
-        const response = await fetch("https://api.edspride.in/student/all");
+        const response = await fetch("http://localhost:8007/student/all");
         const data = await response.json();
         setStudent(data.reverse());
         console.log(data)
@@ -241,7 +241,7 @@ const AllStudent = () => {
   
         // Send the formatted data to the API
         try {
-          const response = await axios.post("https://api.edspride.in/student/bulk-upload", formattedData, {
+          const response = await axios.post("http://localhost:8007/student/bulk-upload", formattedData, {
             headers: { 'Content-Type': 'application/json' },
           });
   
@@ -312,12 +312,13 @@ const AllStudent = () => {
             <tbody>
               {filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((studentMember) => (
                 <tr key={studentMember._id}>
-                  <Td><Photo1 src={`https://api.edspride.in/uploads/${studentMember?.Document?.StudentPhoto}`} alt="Student" /></Td>
+                  <Td><Photo1 src={`http://localhost:8007/uploads/${studentMember?.Document?.StudentPhoto}`} alt="Student" /></Td>
                   <Td>{studentMember.StudentId}</Td>
                   <Td>{studentMember.StudentName}</Td>
                   <Td>{studentMember.MobileNo}</Td>
-                  <Td>{studentMember.FatherDetail.Name}</Td>
-                  <Td>{studentMember.MotherDetails.Name}</Td>
+                  {console.log(studentMember)}
+                  <Td>{studentMember.FatherDetail?.Name}</Td>
+                  <Td>{studentMember.MotherDetails?.Name}</Td>
                   <Td>{studentMember.ClassName}</Td>
                   <Td>{studentMember.Section}</Td>
                   <Td>

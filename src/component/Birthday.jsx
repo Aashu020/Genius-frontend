@@ -204,7 +204,7 @@ const DynamicSlider = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/academicevents/all");
+        const response = await axios.get("http://localhost:8007/academicevents/all");
         // Filter events with status 'Publish' and only upcoming events based on StartDate
         const today = new Date();
         const filteredEvents = response.data
@@ -225,7 +225,7 @@ const DynamicSlider = () => {
   useEffect(() => {
     const fetchNotices = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/noticebox/all");
+        const response = await axios.get("http://localhost:8007/noticebox/all");
         // Filter notices with status 'Publish'
         const filteredNotices = response.data.filter((notice) => notice.Status === "Publish");
         setNotices(filteredNotices);
@@ -248,8 +248,8 @@ const DynamicSlider = () => {
     const fetchBirthdays = async () => {
       try {
         // Fetch students' birthdays
-        const studentsResponse = await axios.get("https://api.edspride.in/student/all");
-        const staffResponse = await axios.get("https://api.edspride.in/staff/all");
+        const studentsResponse = await axios.get("http://localhost:8007/student/all");
+        const staffResponse = await axios.get("http://localhost:8007/staff/all");
 
         // Log the responses to check if data is being fetched
         // console.log("Students:", studentsResponse.data);
@@ -314,7 +314,7 @@ const DynamicSlider = () => {
 
     try {
       // Make a POST request to the backend API to send the birthday wish
-      const response = await axios.post('https://api.edspride.in/birthday/send-birthday-wish', wishData);
+      const response = await axios.post('http://localhost:8007/birthday/send-birthday-wish', wishData);
 
       // Handle the success response
       console.log(response.data.message); // Show success message
@@ -345,7 +345,7 @@ const DynamicSlider = () => {
         {birthdayData.length > 0 ? (
           <ProfileContainer>
             <ProfileImage
-              src={birthdayData[currentBirthdayIndex]?.Documents?.Photo && `https://api.edspride.in/uploads/${birthdayData[currentBirthdayIndex]?.Documents?.Photo}` || birthdayData[currentBirthdayIndex]?.Document?.StudentPhoto && `https://api.edspride.in/uploads/${birthdayData[currentBirthdayIndex]?.Document?.StudentPhoto}` || "https://via.placeholder.com/60"}
+              src={birthdayData[currentBirthdayIndex]?.Documents?.Photo && `http://localhost:8007/uploads/${birthdayData[currentBirthdayIndex]?.Documents?.Photo}` || birthdayData[currentBirthdayIndex]?.Document?.StudentPhoto && `http://localhost:8007/uploads/${birthdayData[currentBirthdayIndex]?.Document?.StudentPhoto}` || "https://via.placeholder.com/60"}
               alt="Profile"
             />
             <ProfileInfo>

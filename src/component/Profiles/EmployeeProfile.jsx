@@ -80,7 +80,7 @@ const EmployeeProfile = () => {
     if (staffId) {
       const fetchStaff = async () => {
         try {
-          const response = await fetch(`https://api.edspride.in/staff/get/${staffId}`);
+          const response = await fetch(`http://localhost:8007/staff/get/${staffId}`);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -119,7 +119,7 @@ const EmployeeProfile = () => {
         </Header>
 
         <PhotoContainer>
-          <Photo src={`https://api.edspride.in/uploads/${staff?.Documents?.Photo}`} alt="Staff" />
+          <Photo src={`http://localhost:8007/uploads/${staff?.Documents?.Photo}`} alt="Staff" />
         </PhotoContainer>
 
         <Section1>

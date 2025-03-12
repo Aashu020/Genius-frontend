@@ -288,7 +288,7 @@ const DateSheet = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get('https://api.edspride.in/exam/all');
+        const response = await axios.get('http://localhost:8007/exam/all');
         setExams(response.data);
       } catch (error) {
         console.error("Error fetching exams:", error);
@@ -298,7 +298,7 @@ const DateSheet = () => {
 
     const fetchClasses = async () => {
       try {
-        const response = await axios.get('https://api.edspride.in/class/all');
+        const response = await axios.get('http://localhost:8007/class/all');
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -308,7 +308,7 @@ const DateSheet = () => {
 
     const fetchDateSheet = async () => {
       try {
-        const response = await axios.get('https://api.edspride.in/datesheet/all');
+        const response = await axios.get('http://localhost:8007/datesheet/all');
         setDatesheetData(response.data);
       } catch (error) {
         console.error("Error fetching date sheet data:", error);
@@ -340,7 +340,7 @@ const DateSheet = () => {
 
     if (editingId) {
       try {
-        const response = await axios.put(`https://api.edspride.in/datesheet/update/${editingId}`, formData);
+        const response = await axios.put(`http://localhost:8007/datesheet/update/${editingId}`, formData);
         toast.success("Date sheet updated successfully!");
         setEditingId(null);
         setFormData({
@@ -357,7 +357,7 @@ const DateSheet = () => {
       }
     } else {
       try {
-        const response = await axios.post('https://api.edspride.in/datesheet/add', formData);
+        const response = await axios.post('http://localhost:8007/datesheet/add', formData);
         toast.success("Date sheet saved successfully!");
         setFormData({
           Exam: "",
@@ -377,7 +377,7 @@ const DateSheet = () => {
   const handleDelete = async () => {
     if (currentIdToDelete) {
       try {
-        await axios.delete(`https://api.edspride.in/datesheet/delete/${currentIdToDelete}`);
+        await axios.delete(`http://localhost:8007/datesheet/delete/${currentIdToDelete}`);
         setDatesheetData(datesheetData.filter(datesheet => datesheet._id !== currentIdToDelete));
         toast.success("Date sheet deleted successfully!");
         setShowConfirm(false);

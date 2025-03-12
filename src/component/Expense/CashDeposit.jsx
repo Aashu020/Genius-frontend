@@ -226,7 +226,7 @@ const CashDeposit = () => {
   const fetchAccounts = async () => {
     try {
       const response = await axios.get(
-        "https://api.edspride.in/cash-detail/all"
+        "http://localhost:8007/cash-detail/all"
       );
       setAccounts(response.data); // Assuming response.data is an array of accounts
     } catch (error) {
@@ -237,7 +237,7 @@ const CashDeposit = () => {
   const fetchBank = async () => {
     try {
       const response = await axios.get(
-        "https://api.edspride.in/bank/all"
+        "http://localhost:8007/bank/all"
       );
       console.log(response.data);
       setBankList(response.data);
@@ -299,7 +299,7 @@ const CashDeposit = () => {
       if (editMode) {
         // Update existing entry
         const response = await axios.put(
-          `https://api.edspride.in/cash-detail/update/${currentId}`,
+          `http://localhost:8007/cash-detail/update/${currentId}`,
           formData
         );
         setAccounts((prev) =>
@@ -311,7 +311,7 @@ const CashDeposit = () => {
       } else {
         // Create new entry
         const response = await axios.post(
-          "https://api.edspride.in/cash-detail/add",
+          "http://localhost:8007/cash-detail/add",
           formData
         );
         setAccounts((prev) => [...prev, response.data]); // Add new entry to accounts
@@ -348,7 +348,7 @@ const CashDeposit = () => {
     if (confirmDelete) {
       try {
         await axios.delete(
-          `https://api.edspride.in/cash-detail/delete/${id}`
+          `http://localhost:8007/cash-detail/delete/${id}`
         );
         setAccounts((prev) => prev.filter((account) => account._id !== id)); // Remove deleted entry from accounts
         alert("Entry deleted successfully!"); // Alert for successful deletion

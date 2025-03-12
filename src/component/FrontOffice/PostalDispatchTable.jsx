@@ -130,7 +130,7 @@ const PostalDispatchTable = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('https://api.edspride.in/postal/all');
+        const response = await fetch('http://localhost:8007/postal/all');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

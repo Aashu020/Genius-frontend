@@ -157,7 +157,7 @@ const TaskTable = () => {
     if (studentId) {
       // Fetch student data by ID
       axios
-        .get(`https://api.edspride.in/student/get/${studentId}`)
+        .get(`http://localhost:8007/student/get/${studentId}`)
         .then((response) => {
           const className = response.data.ClassName; // Extract the ClassName from the student data
           setStudentClass(className); // Set the student class to state
@@ -176,7 +176,7 @@ const TaskTable = () => {
     if (studentClass) {
       // Fetch all homework
       axios
-        .get("https://api.edspride.in/homework/all")
+        .get("http://localhost:8007/homework/all")
         .then((response) => {
           // Filter homework by class
           const filteredTasks = response.data.filter(

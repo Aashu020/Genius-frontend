@@ -6,194 +6,29 @@ import { IoMdPrint } from "react-icons/io";
 import * as XLSX from "xlsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-;
-const MainDashboard = styled.div`
-  flex: 1;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  background-color: #f9f9f9;
-`;
-
-const TableContainer = styled.div`
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  margin: 20px;
-  justify-content: space-between;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  width: 20%;
-`;
-
-const OpenButton = styled(Button)`
-  background-color: #688af6;
-`;
-const Input = styled.input`
-  width: 88%;
-  padding: 15px 20px;
-  border: 2px solid #7d3cff;
-  border-radius: 30px;
-  font-size: 16px;
-  color: #7a7a7a;
-  background-color: #f4f6fc;
-  font-weight: bold;
-  outline: none;
-  @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
-  }
-`;
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-`;
-
-const Th = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-  font-weight: 400;
-`;
-
-const Td = styled.td`
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-`;
-
-const Td1 = styled.td`
-  padding: 5px;
-  border-bottom: 1px solid #ddd;
-  margin: 0.5rem;
-`;
-const EditButton = styled.div`
-  background-color: #209a16bf;
-  padding: 5px 10px;
-  font-size: 14px;
-  border-radius: 5px;
-  color: white;
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  margin: 0.5rem;
-`;
-
-const DeleteButton = styled.div`
-  background-color: red;
-  padding: 5px 10px;
-  font-size: 14px;
-  border-radius: 5px;
-  color: white;
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  margin: 0.5rem;
-`;
-
-const StatusButton = styled.button`
-  background-color: #ebedeb;
-  color: black;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 10px;
-`;
-
-const ActionButton = styled.button`
-  background-color: ${(props) => props.color};
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  margin-right: 5px;
-`;
-
-const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  padding: 10px 20px;
-  border-top: 1px solid #e0e0e0;
-  background-color: #fff;
-`;
-
-const PaginationInfo = styled.div`
-  display: flex;
-  align-items: center;
-  color: #888;
-`;
-
-const PaginationButton = styled.button`
-  background-color: #fff;
-  color: ${(props) => (props.disabled ? "#ccc" : "#000")};
-  border: none;
-  padding: 5px 15px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  font-size: 14px;
-
-  &:hover {
-    background-color: ${(props) => (props.disabled ? "#fff" : "#f0f0f0")};
-  }
-`;
-
-const RowsPerPageDropdown = styled.select`
-  margin: 0 10px;
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  font-size: 14px;
-  cursor: pointer;
-`;
-
-const SearchContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
-  justify-content: space-between;
-  margin: 10px 0;
-`;
-const ButtonSection = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: end;
-  gap: 0.5px;
-  button {
-    border: none;
-    background: transparent;
-    font-size: 25px;
-    padding: 5px;
-  }
-`;
-const SearchInput = styled.input`
-  margin: 10px;
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 200px; /* Adjust width as needed */
-`;
-
-const Photo = styled.img`
-  width: 115px;
-  height: 110px;
-  background-color: gray;
-  border-radius: 50%;
-`;
+import {
+  MainDashboard,
+  TableContainer,
+  ButtonGroup,
+  OpenButton,
+  Input,
+  Table,
+  Th,
+  Td,
+  Td1,
+  EditButton,
+  DeleteButton,
+  StatusButton,
+  ActionButton,
+  PaginationContainer,
+  PaginationInfo,
+  PaginationButton,
+  RowsPerPageDropdown,
+  SearchContainer,
+  ButtonSection,
+  SearchInput,
+  Photo,
+} from "./StaffStyle";
 
 const AllStaff = () => {
   const [staff, setStaff] = useState([]);

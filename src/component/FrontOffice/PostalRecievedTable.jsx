@@ -1,124 +1,16 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-
-// Styled Components (unchanged)
-const Wrapper = styled.div`
-  width: 90%;
-  margin: 20px auto;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: "Arial", sans-serif;
-  @media (max-width: 468px) {
-    width: 100%;
-    padding: 0;
-  }
-`;
-
-const StyledTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  @media (max-width: 468px) {
-    width: 95%;
-    margin: 0px auto;
-  }
-`;
-
-const TableHeader = styled.thead`
-  color: black;
-  font-weight: bolder;
-`;
-
-const HeaderCell = styled.th`
-  padding: 12px;
-  text-align: left;
-  font-size: 14px;
-  color: #666;
-  font-weight: bold;
-  border-bottom: 1px solid #e0e0e0;
-  @media (max-width: 468px) {
-    padding: 5px;
-    font-size: 10px;
-  }
-`;
-
-const TableBody = styled.tbody`
-  color: black;
-`;
-
-const BodyCell = styled.td`
-  padding: 12px;
-  text-align: left;
-  font-size: 14px;
-  color: #333;
-  border-bottom: 1px solid #e0e0e0;
-  @media (max-width: 468px) {
-    padding: 5px;
-    font-size: 10px;
-  }
-`;
-
-const PaginationContainer = styled.div`
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  padding: 10px 20px;
-  border-top: 1px solid #e0e0e0;
-  background-color: #fff;
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 5px;
-  }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
-  }
-`;
-
-const PaginationInfo = styled.div`
-  display: flex;
-  align-items: center;
-  color: #888;
-`;
-
-const PaginationButton = styled.button`
-  background-color: #fff;
-  color: ${(props) => (props.disabled ? "#ccc" : "#000")};
-  border: none;
-  padding: 5px 15px;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  font-size: 14px;
-
-  &:hover {
-    background-color: ${(props) => (props.disabled ? "#fff" : "#f0f0f0")};
-  }
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 5px;
-  }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
-  }
-`;
-
-const RowsPerPageDropdown = styled.select`
-  margin: 0 10px;
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  font-size: 14px;
-  cursor: pointer;
-  @media (max-width: 480px) {
-    font-size: 10px;
-  }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
-  }
-`;
+import {
+  Wrapper,
+  StyledTable,
+  StyledTableHeader,
+  HeaderCell,
+  TableBody,
+  BodyCell,
+  PaginationContainer,
+  PaginationInfo,
+  PaginationButton,
+  RowsPerPageDropdown,
+} from "./FrontOfficeStyle1";
 
 const PostalRecievedTable = () => {
   const [tasks, setTasks] = useState([]);
@@ -135,8 +27,8 @@ const PostalRecievedTable = () => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        var filData = data.filter(data => data.Category === "Recieved")
-        var saveData = (filData.reverse());
+        var filData = data.filter(data => data.Category === "Recieved");
+        var saveData = filData.reverse();
         setTasks(saveData);
       } catch (error) {
         setError(error);
@@ -170,7 +62,7 @@ const PostalRecievedTable = () => {
   return (
     <Wrapper>
       <StyledTable>
-        <TableHeader>
+        <StyledTableHeader>
           <tr>
             <HeaderCell>Receiver</HeaderCell>
             <HeaderCell>Category</HeaderCell>
@@ -182,7 +74,7 @@ const PostalRecievedTable = () => {
             <HeaderCell>Sender</HeaderCell>
             <HeaderCell>Remark</HeaderCell>
           </tr>
-        </TableHeader>
+        </StyledTableHeader>
         <TableBody>
           {currentData.map(task => (
             <tr key={task._id}>

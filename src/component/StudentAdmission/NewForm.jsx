@@ -18,6 +18,8 @@ import {
     StatusButtonL,
     FormContainer
 } from '../../Style/Index';
+import RequireSymbol from '../RequireSymbol';
+import { Step,StepIndicatorContainer,Section,StyledInput,InputContainer1,StepContent,Heading } from './StudentAdmission';
 
 const NewForm = () => {
     const [formData, setFormData] = useState({

@@ -20,26 +20,40 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f3f3f3;
-  padding: 20px; /* Merged from StudentBulkUpload.jsx */
-  max-width: 1200px; /* Merged from StudentBulkUpload.jsx */
-  margin: 0 auto; /* Merged from StudentBulkUpload.jsx */
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+export const Container2 = styled.div`
+  display: flex;
+  background-color: #f4f4f4;
+  width: calc(100vw - 250px);
+`;
+
+export const MainDashboard = styled.div`
+  flex: 1;
+  padding: 50px;
+  height: calc(100vh - 100px);
+  background-color: #f9f9f9;
 `;
 
 export const TableContainer = styled.div`
-  display: flex; /* From styles file */
-  flex-direction: column; /* From styles file */
-  justify-content: center; /* From styles file */
-  align-items: center; /* From styles file */
-  max-height: 500px; /* From StudentBulkUpload.jsx */
-  overflow-y: auto; /* From StudentBulkUpload.jsx */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 500px;
+  overflow-y: auto;
 `;
 
 export const Table = styled.table`
-  width: 60%; /* From styles file */
+  width: 100%;
   border-collapse: collapse;
-  margin-top: 30px; /* From styles file and StudentBulkUpload.jsx */
-  /* Merged properties from StudentBulkUpload.jsx */
-  width: 100%; /* Override from StudentBulkUpload.jsx takes precedence */
+  margin-top: 30px;
+  @media (max-width:480px){
+  margin-top:80px
+  }
 `;
 
 export const Table100 = styled.table`
@@ -50,8 +64,8 @@ export const Table100 = styled.table`
 
 export const Td = styled.td`
   padding: 10px;
-  border: 1px solid #ddd; /* From StudentBulkUpload.jsx */
-  text-align: center; /* From StudentBulkUpload.jsx */
+  border: 1px solid #ddd;
+  text-align: center;
 `;
 
 export const Td1 = styled.td`
@@ -63,9 +77,9 @@ export const Td1 = styled.td`
 
 export const Th = styled.th`
   padding: 10px;
-  text-align: left; /* From StudentBulkUpload.jsx */
-  background-color: #f4f4f4; /* From StudentBulkUpload.jsx */
-  border: 1px solid #ddd; /* From StudentBulkUpload.jsx */
+  text-align: left;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
 `;
 
 export const EditButton = styled.div`
@@ -83,6 +97,7 @@ export const ErrorMessage = styled.div`
   color: red;
   font-size: 14px;
   margin-top: 5px;
+  text-align: center; /* Merged from SyllabusStudent.jsx */
 `;
 
 export const DeleteButton = styled.div`
@@ -221,6 +236,15 @@ export const Button = styled.button`
   border: none;
   border-radius: 50%;
   margin-left: 20px;
+  @media (max-width:480px){
+  height:1.5rem;
+  width:fit-content;
+  padding:0.5rem;
+  font-size:13px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  }
 `;
 
 export const Frame = styled.iframe`
@@ -230,8 +254,13 @@ export const Frame = styled.iframe`
 `;
 
 export const TimetableWrapper = styled.div`
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
+  // margin: 0 auto;
+  @media (max-width:480px){
+    width:90%;
+    padding:1rem;
+
+  }
 `;
 
 export const Heading1 = styled.h2`
@@ -387,6 +416,12 @@ export const Table1 = styled.div`
   @media (max-width: 480px) {
     grid-template-columns: repeat(7, 1fr);
     font-size: 6px;
+    margin-top:10rem;
+  }
+     @media (min-width: 481px) {
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 6px;
+    margin-top:20rem;
   }
 `;
 
@@ -412,6 +447,10 @@ export const TimetableContainer = styled.div`
   background-color: #e0e0e0;
   width: 80%;
   margin: 2rem 0;
+  @media (max-width:480px){
+    margin:1rem 0 ;
+    width:100%;
+  }
 `;
 
 export const Header = styled.div`
@@ -429,7 +468,7 @@ export const RowHeader = styled.div`
   color: black;
   font-weight: bold;
   text-align: center;
-  padding: 8px;
+  padding: 9px;
 `;
 
 export const SubjectCell = styled.div`
@@ -477,8 +516,11 @@ export const ConfirmButton = styled.button`
 `;
 
 export const Title = styled.h2`
-  text-align: center; /* Merged from both, using h2 from styles file */
-  margin-top: 20px; /* Merged from both, using h2 from styles file */
+  text-align: center;
+  color: #1f1f1f; /* From SyllabusStudent.jsx */
+  font-size: 24px; /* From SyllabusStudent.jsx */
+  font-weight: 600; /* From SyllabusStudent.jsx */
+  margin-bottom: 20px; /* From SyllabusStudent.jsx */
 `;
 
 export const Input = styled.input`
@@ -488,6 +530,10 @@ export const Input = styled.input`
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  @media (max-width:480px){
+    width:fit-content;
+    padding: 0.4rem 0;
+  }
 `;
 
 export const Select = styled.select`
@@ -497,6 +543,12 @@ export const Select = styled.select`
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  @media (max-width:480px){
+    width:fit-content;
+  }
+  @media (min-width:481px){
+    width:fit-content;
+  }
 `;
 
 export const Buttonbg = styled.button`
@@ -527,6 +579,9 @@ export const TimeTableHeader = styled.div`
   text-align: center;
   padding: 10px;
   border: 1px solid #ddd;
+  @media (max-width:480px){
+    width:100%;
+  }
 `;
 
 export const TimeTableCell = styled.div`
@@ -535,8 +590,98 @@ export const TimeTableCell = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
+  @media (max-width:480px){
+    width:90%;
+    padding:10px;
+  }
 `;
 
 export const SubjectInput = styled(Input)`
   margin: 5px 0;
+`;
+
+// New components from SyllabusStudent.jsx
+export const ClassDetails = styled.div`
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  height:70vh;
+  overflow-y:auto;
+  scrollbar-width: none;
+   @media (max-width: 480px) {
+    width: 100%;
+    margin-left:-2rem;
+     height:60vh;
+  } 
+     @media (min-width: 767px) {
+    width: 100%;
+    margin-left:-2rem;
+     height:65vh;
+  } 
+     @media (min-width: 1024px) {
+    width: 100%;
+    margin-left:-2rem;
+     height:75vh;
+  } 
+`;
+
+export const Section = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+  color: #3e3e3e;
+`;
+
+export const SubjectList = styled.div`
+  margin-top: 40px;
+`;
+
+export const SubjectItem = styled.div`
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+`;
+
+export const SubjectTitle = styled.h4`
+  color: #5a3eff;
+  font-size: 22px;
+  margin-bottom: 15px;
+  font-weight: 600;
+`;
+
+export const SyllabusList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+`;
+
+export const SyllabusItem = styled.li`
+  margin-bottom: 15px;
+`;
+
+export const SyllabusTitle = styled.p`
+  font-weight: bold;
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 10px;
+`;
+
+export const TopicList = styled.ul`
+  list-style-type: none;
+  padding-left: 20px;
+`;
+
+export const TopicItem = styled.li`
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 5px;
+`;
+
+export const LoadingMessage = styled.div`
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+  margin-top: 20px;
 `;

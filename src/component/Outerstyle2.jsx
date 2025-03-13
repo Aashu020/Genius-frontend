@@ -216,20 +216,22 @@ export const HeaderContainer = styled.div`
   align-items: center;
   background-color: #64b5f6;
   padding: 10px 20px;
-  height: 60px;
+  height: 80px;
   box-sizing: border-box;
 `;
 
 export const Logo = styled.div`
-  height: 50px;
-  width: 130px;
+  height: 70px;
+  width: 70px;
   img {
     height: 100%;
     width: 100%;
+    border-radius:50%;
     object-fit: cover;
-    border-radius: 10px;
   }
 `;
+
+
 
 export const SearchContainer = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Logoimgage from "../assets/Images/EDSP3.jpg";
+import Logoimgage from "../assets/Images/geniuslogo.jpg";
 import WhatsAppIcon from "./Whatsapp";
 import NotificationModal from "./Notification";
 import { useNavigate } from "react-router-dom";
@@ -144,7 +144,7 @@ const Navbar = () => {
         {/* <NotificationModal /> */}
         <InstituteName>
           <img
-            style={{ height: "45px"}}
+            style={{ height: "50px", borderRadius:"50%"}}
             src={`http://localhost:8007/uploads/${formData?.SchoolLogo.replace(/^uploads\//, '')}`}
             alt="School-Logo"
           />

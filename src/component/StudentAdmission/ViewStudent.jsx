@@ -339,22 +339,22 @@ const ViewStudent = () => {
               <Labelviewstud>Father Name:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.FatherDetail.Name}
+                &nbsp;{student?.FatherDetail?.Name}
               </Valuevs>
               <Labelviewstud>Qualification:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.FatherDetail.Qualification}
+                &nbsp;{student?.FatherDetail?.Qualification}
               </Valuevs>
               <Labelviewstud>Occupation:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.FatherDetail.Occupation}
+                &nbsp;{student?.FatherDetail?.Occupation}
               </Valuevs>
               <Labelviewstud>Annual Income:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.FatherDetail.AnnualIncome}
+                &nbsp;{student?.FatherDetail?.AnnualIncome}
               </Valuevs>
             </LeftColumn>
 
@@ -362,17 +362,17 @@ const ViewStudent = () => {
               <Labelviewstud>Father Aadhar Number:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.FatherDetail.AadharNumber}
+                &nbsp;{student?.FatherDetail?.AadharNumber}
               </Valuevs>
               <Labelviewstud>Father Mobile No:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.FatherDetail.MobileNo}
+                &nbsp;{student?.FatherDetail?.MobileNo}
               </Valuevs>
               <Labelviewstud>Father Email Id:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.FatherDetail.EmailId}
+                &nbsp;{student?.FatherDetail?.EmailId}
               </Valuevs>
             </LeftColumn>
 
@@ -384,22 +384,22 @@ const ViewStudent = () => {
               <Labelviewstud>Mother Name:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.MotherDetails.Name}
+                &nbsp;{student?.MotherDetails?.Name}
               </Valuevs>
               <Labelviewstud>Qualification:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.MotherDetails.Qualification}
+                &nbsp;{student?.MotherDetails?.Qualification}
               </Valuevs>
               <Labelviewstud>Occupation:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.MotherDetails.Occupation}
+                &nbsp;{student?.MotherDetails?.Occupation}
               </Valuevs>
               <Labelviewstud>Annual Income:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.MotherDetails.AnnualIncome}
+                &nbsp;{student?.MotherDetails?.AnnualIncome}
               </Valuevs>
             </LeftColumn>
 
@@ -407,17 +407,17 @@ const ViewStudent = () => {
               <Labelviewstud>Mother Aadhar Number:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.MotherDetails.AadharNumber}
+                &nbsp;{student?.MotherDetails?.AadharNumber}
               </Valuevs>
               <Labelviewstud>Mother Mobile No:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.MotherDetails.MobileNo}
+                &nbsp;{student?.MotherDetails?.MobileNo}
               </Valuevs>
               <Labelviewstud>Mother Email Id:</Labelviewstud>
               <Valuevs>
                 <BsArrowReturnRight style={{ color: "black" }} />
-                &nbsp;{student?.MotherDetails.EmailId}
+                &nbsp;{student?.MotherDetails?.EmailId}
               </Valuevs>
             </LeftColumn>
           </Left>

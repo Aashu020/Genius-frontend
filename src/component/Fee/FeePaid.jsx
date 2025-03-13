@@ -3,128 +3,22 @@ import axios from 'axios';
 import Select from 'react-dropdown-select';
 import DatePicker from 'react-datepicker'; // Correct import for DatePicker
 import "react-datepicker/dist/react-datepicker.css";
-import styled from 'styled-components'; // Import styled-components
+// import styled from 'styled-components'; // Import styled-components
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { Eye } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
+import { 
+    Container1, Heading, FilterWrapper, Table, TableHeader, TableRow, TableData, TotalPaidFee, DateRangeWrapper, 
+    DatePickerWrapper, DateInput, DropdownWrapper, DropdownContainer, ButtonWrapper, Button 
+  } from "./FeeStyles";
+  
 
 // Define your API endpoints (replace with actual URLs)
 const studentApiUrl = 'http://localhost:8007/student/all'; // Replace with actual student API
 const feeApiUrl = 'http://localhost:8007/fee-data/all'; // Replace with actual fee API
 
-// Styled-components for your CSS
-const Container = styled.div`
-  flex: 1;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  padding: 20px;
-`;
-
-const Heading = styled.h2`
-  font-size: 24px;
-  color: #333;
-  text-align: center;
-`;
-
-const FilterWrapper = styled.div`
-  margin-bottom: 20px;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-`;
-
-const TableHeader = styled.th`
-  padding: 10px;
-  text-align: left;
-  background-color: #f2f2f2;
-  color: #333;
-`;
-
-const TableRow = styled.tr`
-  &:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  &:hover {
-    background-color: #f1f1f1;
-  }
-`;
-
-const TableData = styled.td`
-  padding: 10px;
-  border: 1px solid #ddd;
-  color: #555;
-`;
-
-const TotalPaidFee = styled.div`
-text-align: center;
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 18px;
-`;
-
-const DateRangeWrapper = styled.div`
-  margin-top: 10px;
-`;
-
-const DatePickerWrapper = styled.div`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-`;
-
-const DateInput = styled(DatePicker)`
-  width: 150px;
-  padding: 8px;
-  font-size: 14px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-`;
-
-const DropdownWrapper = styled.div`
-  margin-bottom: 20px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-`;
-
-const DropdownContainer = styled.div`
-  flex: 1;
-  min-width: 200px;
-`;
-
-const ButtonWrapper = styled.div`
-  text-align: center;
-  margin: 20px 0;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  margin-right: 10px;
-  background-color: ${props => (props.primary ? "#4CAF50" : "#2196F3")};
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  border-radius: 5px;
-  
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-`;
 
 // Main Component
 const FeePaid = () => {
@@ -511,7 +405,7 @@ const FeePaid = () => {
     const totals = calculateTotalFees(filteredData);
 
     return (
-        <Container>
+        <Container1>
             <Heading>Paid Fee Details</Heading>
 
             {/* Total Paid Fee */}
@@ -703,7 +597,7 @@ const FeePaid = () => {
                 </Table>
             </div>
 
-        </Container>
+        </Container1>
     );
 };
 

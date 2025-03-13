@@ -8,7 +8,7 @@ import { Eye, Edit, Trash2 } from "lucide-react";
 import { 
   Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
   InputContainer, Label, Input, Select, SubmitButton, Table, Th, Td, 
-  Td1, EditButton, DeleteButton, ErrorMessage 
+  Td1, EditButton, DeleteButton, ErrorMessage ,  TableWrapper
 } from './ExpenseStyles';
 
 const CashDeposit = () => {
@@ -284,7 +284,7 @@ const CashDeposit = () => {
               </SubmitButton>
             </div>
           </Form>
-
+  <TableWrapper>
           <Table>
             <thead>
               <tr>
@@ -321,6 +321,7 @@ const CashDeposit = () => {
               ))}
             </tbody>
           </Table>
+          </ TableWrapper>
         </FormContainer>
       </MainDashboard>
 

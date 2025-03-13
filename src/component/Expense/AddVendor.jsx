@@ -6,7 +6,7 @@ import { Edit, Trash2 } from "lucide-react";
 import { 
   Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
   InputContainer, Label, Label2, Input, SubmitButton, Table, Th, Td, Td1, 
-  EditButton, DeleteButton, ErrorMessage 
+  EditButton, DeleteButton, ErrorMessage , TableWrapper
 } from './ExpenseStyles';
 
 const AddVendor = () => {
@@ -267,6 +267,7 @@ const AddVendor = () => {
               </SubmitButton>
             </div>
           </Form>
+          < TableWrapper>
           <Table>
             <thead>
               <tr>
@@ -302,6 +303,7 @@ const AddVendor = () => {
               ))}
             </tbody>
           </Table>
+          </ TableWrapper>
         </FormContainer>
       </MainDashboard>
 

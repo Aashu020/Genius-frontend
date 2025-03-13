@@ -7,115 +7,12 @@ import styled from 'styled-components';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
+import { Container1, H2, FilterWrapper, Table1, TableHeader, TableRow1, TableData1, TotalPaidFee, DateInput, DropdownWrapper, DateRangeWrapper, DropdownContainer, ButtonWrapper, Button } from "./FeeStyles";
+
 
 // Define your API endpoints (replace with actual URLs)
 const studentApiUrl = 'http://localhost:8007/student/all';
 const feeApiUrl = 'http://localhost:8007/fee-data/all';
-
-// Styled-components for your CSS
-const Container = styled.div`
-  flex: 1;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
-  padding: 20px;
-`;
-
-const Heading = styled.h2`
-  font-size: 24px;
-  color: #333;
-  text-align: center;
-`;
-
-const FilterWrapper = styled.div`
-  margin-bottom: 20px;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-`;
-
-const TableHeader = styled.th`
-  padding: 10px;
-  text-align: left;
-  background-color: #f2f2f2;
-  color: #333;
-`;
-
-const TableRow = styled.tr`
-  &:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  &:hover {
-    background-color: #f1f1f1;
-  }
-`;
-
-const TableData = styled.td`
-  padding: 10px;
-  border: 1px solid #ddd;
-  color: #555;
-`;
-
-const TotalPaidFee = styled.div`
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: bold;
-  font-size: 18px;
-`;
-
-const DateInput = styled(DatePicker)`
-  width: 150px;
-  padding: 8px;
-  font-size: 14px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-`;
-
-const DropdownWrapper = styled.div`
-  margin-bottom: 20px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-`;
-
-const DateRangeWrapper = styled.div`
-  margin-top: 10px;
-`;
-
-const DropdownContainer = styled.div`
-  flex: 1;
-  min-width: 200px;
-`;
-
-const ButtonWrapper = styled.div`
-  text-align: center;
-  margin: 20px 0;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  margin-right: 10px;
-  background-color: ${props => (props.primary ? "#4CAF50" : "#2196F3")};
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  border-radius: 5px;
-  
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-`;
 
 // Utility function to handle null/undefined values
 const getSafeValue = (value, fallback = 'No Data') => {
@@ -381,8 +278,8 @@ const FeeRemaining = () => {
 
 
     return (
-        <Container>
-            <Heading>Fee Remaining Details</Heading>
+        <Container1>
+            <H2>Fee Remaining Details</H2>
 
             <FilterWrapper>
                 <DropdownWrapper>
@@ -485,7 +382,7 @@ const FeeRemaining = () => {
             <TotalPaidFee>Total Remaining Fee: ₹{totalRemainingFee.toFixed(2)}</TotalPaidFee>
 
             <div style={{ height: "60vh", overflowY: "auto" }}>
-                <Table>
+                <Table1>
                     <thead>
                         <tr>
                             <TableHeader>Student Name</TableHeader>
@@ -503,44 +400,44 @@ const FeeRemaining = () => {
                     <tbody>
                         {filteredData.length > 0 ? (
                             filteredData.map(student => (
-                                <TableRow key={student._id}>
-                                    <TableData>{getSafeValue(student.StudentName)}</TableData>
-                                    <TableData>{getSafeValue(student.Gender)}</TableData>
-                                    <TableData>{getSafeValue(student.ClassName)}</TableData>
-                                    <TableData>{getSafeValue(student.Section)}</TableData>
-                                    <TableData>{getSafeValue(student.House)}</TableData>
+                                <TableRow1 key={student._id}>
+                                    <TableData1>{getSafeValue(student.StudentName)}</TableData1>
+                                    <TableData1>{getSafeValue(student.Gender)}</TableData1>
+                                    <TableData1>{getSafeValue(student.ClassName)}</TableData1>
+                                    <TableData1>{getSafeValue(student.Section)}</TableData1>
+                                    <TableData1>{getSafeValue(student.House)}</TableData1>
                                     {/* <TableData>{getSafeValue(student.FatherName)}</TableData> */}
-                                    <TableData>{getSafeValue(student.feeDetails?.TotalFee)}</TableData>
-                                    <TableData>
+                                    <TableData1>{getSafeValue(student.feeDetails?.TotalFee)}</TableData1>
+                                    <TableData1>
                                         {getSafeValue(student.feeDetails?.Payments?.reduce((sum, payment) => sum + payment.PaidAmount, 0), 0)}
-                                    </TableData>
-                                    <TableData>{getSafeValue(student.feeDetails?.RemainingFee)}</TableData>
+                                    </TableData1>
+                                    <TableData1>{getSafeValue(student.feeDetails?.RemainingFee)}</TableData1>
                                     {/* <TableData>
                                         {getSafeValue(
                                             student.feeDetails?.Payments?.map(payment => new Date(payment.Date).toLocaleDateString()).join(', '),
                                             'No Data'
                                         )}
                                     </TableData> */}
-                                </TableRow>
+                                </TableRow1>
                             ))
                         ) : (
-                            <TableRow>
-                                <TableData colSpan="10">No data available for the selected filters.</TableData>
-                            </TableRow>
+                            <TableRow1>
+                                <TableData1 colSpan="10">No data available for the selected filters.</TableData1>
+                            </TableRow1>
                         )}
 
                         {/* Add the totals row at the bottom of the table */}
-                        <TableRow>
-                            <TableData colSpan="5" style={{ textAlign: 'right' }}>Total</TableData>
-                            <TableData>{totals.totalFee.toFixed(2)}</TableData>
-                            <TableData>{totals.paidAmount.toFixed(2)}</TableData>
-                            <TableData>{totals.remainingFee.toFixed(2)}</TableData>
+                        <TableRow1>
+                            <TableData1 colSpan="5" style={{ textAlign: 'right' }}>Total</TableData1>
+                            <TableData1>{totals.totalFee.toFixed(2)}</TableData1>
+                            <TableData1>{totals.paidAmount.toFixed(2)}</TableData1>
+                            <TableData1>{totals.remainingFee.toFixed(2)}</TableData1>
                             {/* <TableData></TableData> */}
-                        </TableRow>
+                        </TableRow1>
                     </tbody>
-                </Table>
+                </Table1>
             </div>
-        </Container>
+        </Container1>
     );
 };
 

@@ -1,10 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-// import {
-//   Wrapper, Table2, TableHeader, HeaderCell, TableBody, BodyCell,
-//   PaginationContainer, PaginationInfo, PaginationButton, RowsPerPageDropdown
-// } from './FrontOfficeStyles1';
 
 // Styled Components with updated constant names
 const Wrapper = styled.div`
@@ -14,14 +10,11 @@ const Wrapper = styled.div`
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
 
   font-family: "Arial", sans-serif;
   @media (max-width: 468px) {
     width: 100%;
     padding: 0;
-    
   }
 `;
 
@@ -99,9 +92,6 @@ const PaginationButton = styled.button`
   padding: 5px 15px;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   font-size: 14px;
-  display: flex;
-  flex-direction: column;
-
   
   &:hover {
     background-color: ${(props) => (props.disabled ? "#fff" : "#f0f0f0")};
@@ -139,7 +129,7 @@ const LeavingStaffTable = () => {
   const [staffData, setStaffDta] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8007/staff-leaving/all")
+      .get("https://api.edspride.in/staff-leaving/all")
       .then((response) => {
         setStaffDta(response.data);
       })

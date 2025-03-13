@@ -490,10 +490,10 @@ const AddStudentdata = () => {
             <Section>
               <Heading>Personal Information</Heading>
               <InputContainer1>
-                <Label>Search Enquiry</Label>
+                <Label>Search</Label>
                 <StyledInput
                   type="text"
-                  placeholder="Search..."
+                  placeholder="Search Enquiry..."
                   value={searchQuery}
                   onChange={handleSearchChange}
                   onBlur={handleBlur}

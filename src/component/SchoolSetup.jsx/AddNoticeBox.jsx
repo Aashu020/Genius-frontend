@@ -210,13 +210,14 @@ const AddNoticeBox = () => {
                 onChange={(e) => setStatus(e.target.value)}
                 style={{
                   width: "93%",
-                  padding: "15px 20px",
+                  padding: "10px 16px",
                   border: "2px solid #7d3cff",
                   borderRadius: "30px",
-                  fontSize: "16px",
+                  fontSize: "12px",
                   color: "#7a7a7a",
                   backgroundColor: "#f4f6fc",
                   fontWeight: "bold",
+                  height: "6vh",
                   outline: "none",
                 }}
               >

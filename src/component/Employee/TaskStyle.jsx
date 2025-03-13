@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+// Common breakpoints
+const breakpoints = {
+  mobile: '468px',
+  tablet: '768px',
+  desktop: '1024px',
+  largeDesktop: '1200px'
+};
+
 export const Wrapper = styled.div`
   width: 90%;
   margin: 20px auto;
@@ -8,18 +16,38 @@ export const Wrapper = styled.div`
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: "Arial", sans-serif;
-  @media (max-width: 468px) {
+
+  @media (max-width: ${breakpoints.mobile}) {
     width: 100%;
     padding: 0;
+    margin: 10px auto;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    width: 95%;
+    padding: 8px;
+  }
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    width: 92%;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    width: 85%;
+    padding: 15px;
   }
 `;
 
 export const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
-  @media (max-width: 468px) {
+
+  @media (max-width: ${breakpoints.mobile}) {
     width: 95%;
     margin: 0px auto;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    width: 98%;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    width: 100%;
   }
 `;
 
@@ -35,9 +63,22 @@ export const HeaderCell = styled.th`
   color: #666;
   font-weight: bold;
   border-bottom: 1px solid #e0e0e0;
-  @media (max-width: 468px) {
+
+  @media (max-width: ${breakpoints.mobile}) {
     padding: 5px;
     font-size: 10px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    padding: 8px;
+    font-size: 12px;
+  }
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    padding: 10px;
+    font-size: 13px;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    padding: 14px;
+    font-size: 16px;
   }
 `;
 
@@ -50,9 +91,22 @@ export const BodyCell = styled.td`
   font-size: 14px;
   color: #333;
   border-bottom: 1px solid #e0e0e0;
-  @media (max-width: 468px) {
+
+  @media (max-width: ${breakpoints.mobile}) {
     padding: 5px;
     font-size: 10px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    padding: 8px;
+    font-size: 12px;
+  }
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    padding: 10px;
+    font-size: 13px;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    padding: 14px;
+    font-size: 16px;
   }
 `;
 
@@ -62,9 +116,22 @@ export const StatusBadge = styled.span`
   border-radius: 15px;
   color: #666;
   font-size: 12px;
-  @media (max-width: 468px) {
-    padding: 5px;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 3px 6px;
     font-size: 8px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    padding: 5px 9px;
+    font-size: 11px;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    padding: 6px 12px;
+    font-size: 13px;
   }
 `;
 
@@ -77,6 +144,22 @@ export const EditButton = styled.div`
   width: 40%;
   display: flex;
   justify-content: center;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 4px 8px;
+    font-size: 10px;
+    width: 50%;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    padding: 5px 9px;
+    font-size: 12px;
+    width: 45%;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    padding: 6px 12px;
+    font-size: 16px;
+    width: 35%;
+  }
 `;
 
 export const DeleteButton = styled.div`
@@ -87,6 +170,22 @@ export const DeleteButton = styled.div`
   width: 12%;
   display: flex;
   justify-content: center;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 4px 8px;
+    width: 20%;
+    font-size: 10px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    padding: 5px 9px;
+    width: 15%;
+    font-size: 12px;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    padding: 6px 12px;
+    width: 10%;
+    font-size: 16px;
+  }
 `;
 
 export const ModalOverlay = styled.div`
@@ -100,6 +199,10 @@ export const ModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 10px;
+  }
 `;
 
 export const ModalContent = styled.div`
@@ -109,8 +212,21 @@ export const ModalContent = styled.div`
   width: 80%;
   max-width: 600px;
   position: relative;
-  @media (max-width: 468px) {
+
+  @media (max-width: ${breakpoints.mobile}) {
     width: 90%;
+    padding: 15px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    width: 85%;
+    padding: 18px;
+  }
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    width: 75%;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    padding: 25px;
+    max-width: 700px;
   }
 `;
 
@@ -122,6 +238,20 @@ export const CloseButton = styled.button`
   border: none;
   font-size: 18px;
   cursor: pointer;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 14px;
+    top: 5px;
+    right: 5px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    font-size: 16px;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    font-size: 20px;
+    top: 15px;
+    right: 15px;
+  }
 `;
 
 export const PaginationWrapper = styled.div`
@@ -130,9 +260,21 @@ export const PaginationWrapper = styled.div`
   margin: 20px 0;
   font-size: 14px;
   color: #666;
-  @media (max-width: 468px) {
+
+  @media (max-width: ${breakpoints.mobile}) {
     font-size: 12px;
     padding: 5px 10px;
     margin: 10px 0;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    font-size: 13px;
+    margin: 15px 0;
+  }
+  @media (min-width: ${breakpoints.tablet}) and (max-width: ${breakpoints.desktop}) {
+    padding: 0 5px;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    font-size: 16px;
+    margin: 25px 0;
   }
 `;

@@ -1,9 +1,13 @@
 import styled from "styled-components";
 export const HomeworkListContainer = styled.div`
-  flex: 1;
   height: calc(100vh - 100px);
   overflow-y: auto;
-  padding: 20px;
+  padding: 20px; 
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  width: 100%;
 `;
 
 export const HomeworkListTitle = styled.h3`
@@ -12,7 +16,10 @@ export const HomeworkListTitle = styled.h3`
   text-align: center;
   font-weight: 600;
 `;
-
+export const TableWrapper1=styled.div`
+   width: 100%;
+   overflow-x: auto; /* ✅ Ensure table scrolls */
+`
 export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -37,6 +44,10 @@ export const Td1 = styled.td`
   border-bottom: 1px solid #ddd;
   display: flex;
   gap: 1rem;
+  @media (max-width:480px){
+    flex-direction: column;
+
+  }
 `;
 
 export const EditButton = styled.div`
@@ -48,7 +59,9 @@ export const EditButton = styled.div`
   display: flex;
   justify-content: center;
   cursor: pointer;
-  
+  @media (max-width:480px){
+    padding: 9px 20px;
+  }
 `;
 
 
@@ -61,6 +74,9 @@ export const DeleteButton = styled.div`
   display: flex;
   justify-content: center;
   cursor: pointer;
+  @media (max-width:480px){
+    padding: 9px 20px;
+  }
 `;
 
 export const ViewButton = styled.div`
@@ -275,6 +291,12 @@ export const TableContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width:480px){
+    /* overflow-x: auto; */
+    
+    /* min-width:100%; */
+    margin-left: 3rem;
+  }
 `;
 
 export const ModalOverlay = styled.div`

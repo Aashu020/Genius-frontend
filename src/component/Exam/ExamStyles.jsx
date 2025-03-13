@@ -388,30 +388,51 @@ export const Button = styled.button`
     font-size: 0.7rem;
   }
 `;
-
 export const DeleteButton = styled.button`
-  background-color: red;
+  background-color: #ff0000; /* Explicit red for clarity */
   border: none;
-  padding: 5px 10px;
+  padding: 8px 12px; /* Increased base padding for better touch target */
   border-radius: 5px;
   color: white;
-  width: 20%;
+  font-size: 14px; /* Base font size for readability */
+  font-weight: 500; /* Medium weight for balance */
+  width: auto; /* Default to content width instead of fixed percentage */
+  min-width: 60px; /* Minimum width for consistency */
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer; /* Indicate interactivity */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
 
+  &:hover {
+    background-color: #cc0000; /* Darker red on hover */
+    transform: translateY(-2px); /* Subtle lift effect */
+  }
+
+  &:disabled {
+    background-color: #ff6666; /* Lighter red when disabled */
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Tablet and below */
   @media (max-width: 768px) {
-    width: 70%;
-    padding: 4px 8px;
+    padding: 6px 10px; /* Slightly smaller padding */
+    font-size: 13px; /* Adjusted font size */
+    min-width: 50px; /* Slightly smaller minimum width */
   }
 
+  /* Small mobile */
   @media (max-width: 480px) {
-    width: 60%;
-    padding: 3px 6px;
+    padding: 5px 8px; /* Compact padding */
+    font-size: 12px; /* Smaller font for fit */
+    min-width: 45px; /* Adjusted for small screens */
+    width: auto; /* Let content dictate width, avoid fixed 70% */
   }
-  
-  @media (max-width: 480px) {
-    width: 50%;
-    padding: 3px 6px;
+
+  /* Extra-small mobile */
+  @media (max-width: 320px) {
+    
+    padding: 2px;
   }
 `;

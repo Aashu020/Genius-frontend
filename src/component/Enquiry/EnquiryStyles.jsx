@@ -498,7 +498,7 @@ export const CardContainer = styled.div`
   width: calc(100vw - 300px);
   max-width: 900px;
   @media (max-width: 1024px) {
-    width: calc(100vw - 200px);
+    width: 92%;
   }
   @media (max-width: 768px) {
     width: 90%;

@@ -366,11 +366,13 @@ export const Wrapper = styled.div`
   margin: 20px auto;
   padding: 10px;
   background-color: #fff;
+  overflow-x: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: "Arial", sans-serif;
   @media (max-width: 468px) {
     width: 100%;
+    overflow-x: auto;
     padding: 0;
   }
 `;

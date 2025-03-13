@@ -195,15 +195,15 @@ const RowsPerPageDropdown = styled.select`
   font-size: 14px;
   cursor: pointer;
 `;
-
 const Electricity = () => {
   const [meterNo, setMeterNo] = useState("");
   const [editId, setEditId] = useState(null);
-  const [reading7AM, setReading7AM] = useState(0);
-  const [reading3PM, setReading3PM] = useState(0);
-  const [reading7PM, setReading7PM] = useState(0);
+  const [reading7AM, setReading7AM] = useState("");
+  const [reading3PM, setReading3PM] = useState("");
+  const [reading7PM, setReading7PM] = useState("");
   const [data, setData] = useState([]);
-  const [totalReading, setTotalReading] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -220,57 +220,75 @@ const Electricity = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
     try {
+      const meterReadings = {
+        MeterNo: meterNo,
+        Reading: {
+          ReadingAt7AM: Number(reading7AM) || 0,
+          ReadingAt3PM: Number(reading3PM) || 0,
+          ReadingAt7PM: Number(reading7PM) || 0,
+          Total: (Number(reading7AM) || 0) + (Number(reading3PM) || 0) + (Number(reading7PM) || 0),
+        },
+      };
+
       if (editId) {
-        const meterReadings = {
-          MeterNo: meterNo,
-          Reading: {
-            ReadingAt7AM: Number(reading7AM),
-            ReadingAt3PM: Number(reading3PM),
-            ReadingAt7PM: Number(reading7PM),
-            Total: Number(reading7AM) + Number(reading3PM) + Number(reading7PM),
-          },
-        };
         await axios.put(`http://localhost:8007/electricity/update/${editId}`, meterReadings);
-        // Reset input fields
-        setMeterNo("");
-        setReading7AM("");
-        setReading3PM("");
-        setReading7PM("");
-        setEditId(null);
+        setMessage("Reading updated successfully!");
       } else {
-        const meterReadings = {
-          Date: new Date().toISOString(),
-          MeterNo: meterNo,
-          Reading: {
-            ReadingAt7AM: Number(reading7AM),
-            ReadingAt3PM: Number(reading3PM),
-            ReadingAt7PM: Number(reading7PM),
-            Total: Number(reading7AM) + Number(reading3PM) + Number(reading7PM),
-          },
-        };
+        meterReadings.Date = new Date().toISOString();
         await axios.post("http://localhost:8007/electricity/add", meterReadings);
-        // Reset input fields
-        setMeterNo("");
-        setReading7AM("");
-        setReading3PM("");
-        setReading7PM("");
-        setEditId(null);
+        setMessage("Reading added successfully!");
       }
-      // Re-fetch data
+
+      // Reset form
+      setMeterNo("");
+      setReading7AM("");
+      setReading3PM("");
+      setReading7PM("");
+      setEditId(null);
+
+      // Refresh data
       const response = await axios.get("http://localhost:8007/electricity/all");
-      setData(response.data);
+      setData(response.data.reverse());
     } catch (error) {
-      console.error("Error adding meter reading:", error.response ? error.response.data : error.message);
+      setMessage(error.response?.data?.message || "Error processing reading");
+    } finally {
+      setLoading(false);
     }
   };
 
   const editData = (data) => {
     setEditId(data._id);
     setMeterNo(data.MeterNo);
-    setReading7AM(data.Reading?.ReadingAt7AM || 0);
-    setReading3PM(data.Reading?.ReadingAt3PM || 0);
-    setReading7PM(data.Reading?.ReadingAt7PM || 0);
+    setReading7AM(data.Reading?.ReadingAt7AM || "");
+    setReading3PM(data.Reading?.ReadingAt3PM || "");
+    setReading7PM(data.Reading?.ReadingAt7PM || "");
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this reading?')) {
+      return;
+    }
+
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const response = await axios.delete(`http://localhost:8007/electricity/delete/${id}`);
+      if (response.status === 204) {
+        setMessage("Reading deleted successfully!");
+        // Refresh data
+        const updatedResponse = await axios.get("http://localhost:8007/electricity/all");
+        setData(updatedResponse.data.reverse());
+      }
+    } catch (error) {
+      setMessage(error.response?.data?.message || "Error deleting reading");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -296,6 +314,7 @@ const Electricity = () => {
     <MainDashboard>
       <FormContainer>
         <Title>Add Meter Readings</Title>
+        {message && <p style={{ color: message.includes("Error") ? "red" : "green", textAlign: "center" }}>{message}</p>}
         <Form onSubmit={handleSubmit}>
           <Heading>Details</Heading>
           <Main>
@@ -306,6 +325,7 @@ const Electricity = () => {
                 placeholder="Enter Meter Number"
                 value={meterNo}
                 onChange={(e) => setMeterNo(e.target.value)}
+                disabled={loading}
               />
             </InputContainer>
           </Main>
@@ -318,6 +338,7 @@ const Electricity = () => {
                 placeholder="Enter Reading"
                 value={reading7AM}
                 onChange={(e) => setReading7AM(e.target.value)}
+                disabled={loading}
               />
             </InputContainer>
             <InputContainer>
@@ -327,6 +348,7 @@ const Electricity = () => {
                 placeholder="Enter Reading"
                 value={reading3PM}
                 onChange={(e) => setReading3PM(e.target.value)}
+                disabled={loading}
               />
             </InputContainer>
             <InputContainer>
@@ -336,32 +358,34 @@ const Electricity = () => {
                 placeholder="Enter Reading"
                 value={reading7PM}
                 onChange={(e) => setReading7PM(e.target.value)}
+                disabled={loading}
               />
             </InputContainer>
           </Main>
           <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
-            <SubmitButton type="button" onClick={() => {}}>
-              Total Reading: {Number(reading7AM) + Number(reading3PM) + Number(reading7PM)}
+            <SubmitButton type="button" disabled={loading}>
+              Total Reading: {(Number(reading7AM) || 0) + (Number(reading3PM) || 0) + (Number(reading7PM) || 0)}
             </SubmitButton>
-            <SubmitButton type="submit">Submit</SubmitButton>
+            <SubmitButton type="submit" disabled={loading}>
+              {loading ? "Processing..." : editId ? "Update" : "Submit"}
+            </SubmitButton>
           </div>
         </Form>
 
-<TableWrapper1>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Sr. No</Th>
-              <Th>Meter No</Th>
-              <Th>Reading</Th>
-              <Th>Total Reading</Th>
-              <Th>Time</Th>
-              <Th>Action</Th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentData.map((reading, index) => {
-              return (
+        <TableWrapper1>
+          <Table>
+            <thead>
+              <tr>
+                <Th>Sr. No</Th>
+                <Th>Meter No</Th>
+                <Th>Reading</Th>
+                <Th>Total Reading</Th>
+                <Th>Time</Th>
+                <Th>Action</Th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentData.map((reading, index) => (
                 <tr key={reading._id}>
                   <Td>{(currentPage - 1) * itemsPerPage + index + 1}</Td>
                   <Td>{reading.MeterNo}</Td>
@@ -370,22 +394,21 @@ const Electricity = () => {
                     Reading at 3PM: {reading.Reading?.ReadingAt3PM || 0},
                     Reading at 7PM: {reading.Reading?.ReadingAt7PM || 0}
                   </Td>
-                  <Td>{reading.Reading?.ReadingAt7PM - reading.Reading?.ReadingAt7AM}</Td>
+                  <Td>{reading.Reading?.Total || ((reading.Reading?.ReadingAt7PM || 0) - (reading.Reading?.ReadingAt7AM || 0))}</Td>
                   <Td>{new Date(reading.Date).toLocaleString()}</Td>
                   <Td1>
-                    <EditButton onClick={() => editData(reading)}>
+                    <EditButton onClick={() => editData(reading)} disabled={loading}>
                       Edit
                       <Edit size={18} />
                     </EditButton>
-                    <DeleteButton>
+                    <DeleteButton onClick={() => handleDelete(reading._id)} disabled={loading}>
                       <Trash2 size={18} />
                     </DeleteButton>
                   </Td1>
                 </tr>
-              );
-            })}
-          </tbody>
-        </Table>
+              ))}
+            </tbody>
+          </Table>
         </TableWrapper1>
         <PaginationContainer>
           <PaginationInfo>
@@ -397,12 +420,11 @@ const Electricity = () => {
             </RowsPerPageDropdown>
             {currentPage} of {totalPages}
           </PaginationInfo>
-
           <div>
-            <PaginationButton onClick={handlePrevPage} disabled={currentPage === 1}>
+            <PaginationButton onClick={handlePrevPage} disabled={currentPage === 1 || loading}>
               Previous
             </PaginationButton>
-            <PaginationButton onClick={handleNextPage} disabled={currentPage === totalPages}>
+            <PaginationButton onClick={handleNextPage} disabled={currentPage === totalPages || loading}>
               Next
             </PaginationButton>
           </div>

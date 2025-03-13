@@ -1,19 +1,53 @@
 import styled from "styled-components";
 
+// Breakpoints for consistent responsiveness
+const breakpoints = {
+  mobile: '480px',
+  tablet: '768px',
+  desktop: '1024px',
+  largeDesktop: '1200px',
+};
+
 // Common Styled Components Across Files
 export const Container = styled.div`
-  display: flex; /* From AddSection, Setup */
-  background-color: #f4f4f4; /* From AddSection, Setup */
-  /* SubjectWise uses different styles: padding: 20px; background-color: #f5f5f5; min-height: 100vh; margin-top: 60px; */
+  display: flex;
+  background-color: #f4f4f4;
+  width: 100%;
+  min-height: 100vh;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 15px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 10px;
+    flex-direction: column;
+    width: 100%;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 5px;
+    width: 95%;
+  }
 `;
 
 export const MainDashboard = styled.div`
   flex: 1;
   padding: 20px;
-  height: calc(100vh - 100px); /* From AddSection, DateSheet */
-  overflow-y: auto; /* From AddSection, DateSheet */
+  height: calc(100vh - 100px);
+  overflow-y: auto;
   background-color: #f9f9f9;
-  /* Setup omits height/overflow but keeps background */
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 15px;
+    height: calc(100vh - 80px);
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 10px;
+    height: auto;
+    min-height: 100vh;
+  }
 `;
 
 export const Title = styled.h2`
@@ -21,17 +55,47 @@ export const Title = styled.h2`
   text-align: center;
   margin-bottom: 30px;
   font-weight: bold;
+  font-size: 28px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
 `;
 
 export const Form = styled.form`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    max-width: 900px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    max-width: 700px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    max-width: 100%;
+    padding: 0 5px;
+  }
 `;
 
 export const Section = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -39,9 +103,20 @@ export const FormContainer = styled.div`
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 88vh; /* From Setup */
-  @media (max-width: 480px) {
+  height: 88vh;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 15px;
+    height: calc(88vh - 20px);
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 12px;
+    height: auto;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
     padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -49,7 +124,14 @@ export const InputContainer = styled.div`
   position: relative;
   width: 100%;
   margin-bottom: 20px;
-  @media (max-width: 480px) {
+
+  @media (max-width: ${breakpoints.desktop}) {
+    margin-bottom: 18px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-bottom: 15px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
     margin-bottom: 12px;
   }
 `;
@@ -63,6 +145,22 @@ export const Label = styled.span`
   padding: 2px 10px;
   border-radius: 20px;
   font-size: 12px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    left: 15px;
+    font-size: 11px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    left: 12px;
+    padding: 2px 8px;
+    font-size: 10px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    left: 10px;
+    padding: 1px 6px;
+    font-size: 9px;
+    top: -8px;
+  }
 `;
 
 export const Label2 = styled.span`
@@ -74,10 +172,26 @@ export const Label2 = styled.span`
   padding: 2px 10px;
   border-radius: 20px;
   font-size: 12px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    left: 15px;
+    font-size: 11px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    left: 12px;
+    padding: 2px 8px;
+    font-size: 10px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    left: 10px;
+    padding: 1px 6px;
+    font-size: 9px;
+    top: -8px;
+  }
 `;
 
 export const Input = styled.input`
-  width: 88%; /* Adjusted from SubjectWise, Setup */
+  width: 88%;
   padding: 15px 20px;
   border: 2px solid #7d3cff;
   border-radius: 30px;
@@ -86,14 +200,24 @@ export const Input = styled.input`
   background-color: #f4f6fc;
   font-weight: bold;
   outline: none;
-  @media (max-width: 1024px) {
-    width: 80%; /* From DateSheet 1 */
-  }
-  @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
+  margin-bottom: 10px;
+
+  @media (max-width: ${breakpoints.desktop}) {
     padding: 12px 18px;
+    font-size: 14px;
+    width: 90%;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 10px 15px;
+    font-size: 13px;
+    width: 80%;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 80%;
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+    height: auto;
   }
 `;
 
@@ -104,6 +228,23 @@ export const Input2 = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   text-align: center;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 85%;
+    padding: 7px;
+    font-size: 0.95rem;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 90%;
+    padding: 6px;
+    font-size: 0.9rem;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 100%;
+    padding: 5px;
+    font-size: 0.85rem;
+    border-radius: 3px;
+  }
 `;
 
 export const Select = styled.select`
@@ -115,11 +256,23 @@ export const Select = styled.select`
   color: #7a7a7a;
   background-color: #f4f6fc;
   font-weight: bold;
-  @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 12px 18px;
+    font-size: 14px;
+    width: 98%;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 10px 15px;
+    font-size: 13px;
+    width: 96%;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 90%;
+    padding: 8px 12px;
     font-size: 12px;
-    padding: 10px 12px;
+    border-radius: 20px;
+    height: auto;
   }
 `;
 
@@ -135,44 +288,106 @@ export const SubmitButton = styled.button`
   font-weight: bold;
   transition: background 0.3s;
   margin-top: 20px;
+
   &:hover {
     background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
   }
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 12px;
-    padding: 5px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 280px;
+    padding: 10px;
+    font-size: 15px;
+    margin-top: 15px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 240px;
+    padding: 8px;
+    font-size: 14px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 90%;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 20px;
+    margin-top: 12px;
   }
 `;
 
 export const TableContainer = styled.div`
-  display: flex; /* From AddSection */
-  flex-direction: column; /* From AddSection */
-  justify-content: center; /* From AddSection */
-  align-items: center; /* From AddSection */
-  overflow-x: auto; /* From SubjectWise */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  width: 100%;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 0 5px;
+  }
 `;
 
 export const Table = styled.table`
-  width: 100%; /* Adjusted from SubjectWise, DateSheet 2 */
+  width: 100%;
   border-collapse: collapse;
-  margin-top: 30px; /* From AddSection */
-  background-color: #fff; /* From SubjectWise */
-  text-align: center; /* From SubjectWise, DateSheet 2 */
+  margin-top: 30px;
+  background-color: #fff;
+  text-align: center;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    margin-top: 25px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-top: 20px;
+    width: 90%;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-top: 15px;
+    width: 90%;
+  }
 `;
 
 export const Th = styled.th`
   padding: 12px;
-  text-align: left; /* From AddSection */
-  border-bottom: 1px solid #ccc; /* From SubjectWise */
-  background-color: #f0f0f0; /* From SubjectWise */
-  text-align: center; /* From SubjectWise */
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  background-color: #f0f0f0;
+  font-size: 14px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 10px;
+    font-size: 13px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 8px;
+    font-size: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 6px;
+    font-size: 10px;
+  }
 `;
 
 export const Td = styled.td`
   padding: 12px;
-  border-bottom: 1px solid #ccc; /* From SubjectWise */
-  text-align: center; /* From SubjectWise */
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  font-size: 14px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 10px;
+    font-size: 13px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 8px;
+    font-size: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 6px;
+    font-size: 10px;
+  }
 `;
 
 export const EditButton = styled.div`
@@ -184,7 +399,24 @@ export const EditButton = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  width: 40%; /* From AddSection, overridden in DateSheet 1 as 18% */
+  width: 40%;
+  font-size: 14px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 4px 8px;
+    font-size: 13px;
+    width: 35%;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 3px 6px;
+    font-size: 12px;
+    width: 30%;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 3px 5px;
+    font-size: 10px;
+    width: 50%;
+  }
 `;
 
 export const DeleteButton = styled.div`
@@ -194,14 +426,42 @@ export const DeleteButton = styled.div`
   color: white;
   display: flex;
   justify-content: center;
-  width: 10%; /* From SubjectWise, differs from AddSection (20%) and DateSheet 1 (18%) */
+  width: 10%;
   cursor: pointer;
+  font-size: 14px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 4px 8px;
+    font-size: 13px;
+    width: 15%;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 3px 6px;
+    font-size: 12px;
+    width: 20%;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 3px 5px;
+    font-size: 10px;
+    width: 25%;
+  }
 `;
 
 export const ErrorMessage = styled.div`
   color: red;
   font-size: 14px;
   margin-top: 5px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 13px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 11px;
+    margin-top: 3px;
+  }
 `;
 
 export const Heading = styled.div`
@@ -214,24 +474,43 @@ export const Heading = styled.div`
   align-items: center;
   height: 40px;
   margin-bottom: 40px;
-  @media (max-width: 480px) {
-    font-size: 12px;
-    height: 30px;
-    width: 50%;
+  font-size: 16px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 35%;
+    font-size: 14px;
     margin-bottom: 30px;
-    margin-top: 20px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 40%;
+    height: 35px;
+    font-size: 13px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 50%;
+    height: 30px;
+    font-size: 12px;
+    margin-bottom: 20px;
+    margin-top: 15px;
   }
 `;
 
 export const Main = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* From DateSheet 1, SubjectWise, Setup */
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(2, 1fr); /* From DateSheet 1, Setup */
+
+  @media (max-width: ${breakpoints.desktop}) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
-  @media (max-width: 480px) {
-    grid-template-columns: 1fr; /* From DateSheet 1, Setup, AddSection */
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 `;
 
@@ -243,6 +522,19 @@ export const HomeworkTable = styled.table`
   width: 100%;
   border-collapse: collapse;
   margin-top: 40px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    margin-top: 35px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-top: 30px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin-top: 20px;
+  }
 `;
 
 export const Td1 = styled.td`
@@ -250,6 +542,22 @@ export const Td1 = styled.td`
   border-bottom: 1px solid #ddd;
   display: flex;
   gap: 1rem;
+  font-size: 14px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 8px;
+    font-size: 13px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 6px;
+    gap: 0.8rem;
+    font-size: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 5px;
+    gap: 0.5rem;
+    font-size: 10px;
+  }
 `;
 
 export const ConfirmationModal = styled.div`
@@ -263,6 +571,10 @@ export const ConfirmationModal = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 999;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 10px;
+  }
 `;
 
 export const ModalContent = styled.div`
@@ -270,6 +582,23 @@ export const ModalContent = styled.div`
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  width: 80%;
+  max-width: 500px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 15px;
+    width: 85%;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 12px;
+    width: 90%;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 10px;
+    width: 95%;
+    max-width: 100%;
+    border-radius: 8px;
+  }
 `;
 
 export const ConfirmButton = styled.button`
@@ -278,6 +607,8 @@ export const ConfirmButton = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 14px;
+
   &.yes {
     background-color: #4caf50;
     color: white;
@@ -285,6 +616,20 @@ export const ConfirmButton = styled.button`
   &.no {
     background-color: #f44336;
     color: white;
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 5px 8px;
+    font-size: 11px;
+    border-radius: 4px;
   }
 `;
 
@@ -296,6 +641,10 @@ export const Overlay = styled.div`
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 5px;
+  }
 `;
 
 export const ConfirmDialog = styled.div`
@@ -307,6 +656,22 @@ export const ConfirmDialog = styled.div`
   background: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  width: 80%;
+  max-width: 400px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 15px;
+    width: 85%;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 12px;
+    width: 90%;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 10px;
+    width: 95%;
+    max-width: 100%;
+  }
 `;
 
 // DateSheet (Second Version) Specific Styles
@@ -316,6 +681,21 @@ export const Wrapper = styled.div`
   margin-top: 50px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 15px;
+    margin-top: 40px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 12px;
+    margin-top: 30px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 export const Header = styled.h1`
@@ -323,6 +703,19 @@ export const Header = styled.h1`
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
 `;
 
 export const SubHeader = styled.h2`
@@ -330,6 +723,19 @@ export const SubHeader = styled.h2`
   color: red;
   font-size: 20px;
   margin-bottom: 20px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const TableHeader = styled.th`
@@ -337,6 +743,20 @@ export const TableHeader = styled.th`
   font-weight: bold;
   padding: 8px;
   border: 1px solid #000;
+  font-size: 14px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 7px;
+    font-size: 13px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 6px;
+    font-size: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 5px;
+    font-size: 10px;
+  }
 `;
 
 export const TableRow = styled.tr`
@@ -346,18 +766,58 @@ export const TableRow = styled.tr`
 export const TableData = styled.td`
   padding: 8px;
   border: 1px solid #000;
+  font-size: 14px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 7px;
+    font-size: 13px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 6px;
+    font-size: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 5px;
+    font-size: 10px;
+  }
 `;
 
 export const FooterNote = styled.div`
   font-size: 12px;
   margin-top: 20px;
   text-align: left;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 11px;
+    margin-top: 15px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 10px;
+    margin-top: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 9px;
+    margin-top: 10px;
+  }
 `;
 
 export const PrincipalSign = styled.div`
   margin-top: 30px;
   font-size: 14px;
   text-align: right;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 13px;
+    margin-top: 25px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 11px;
+    margin-top: 15px;
+  }
 `;
 
 export const Dropdown = styled.select`
@@ -367,6 +827,25 @@ export const Dropdown = styled.select`
   border-radius: 5px;
   font-size: 16px;
   width: 200px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 8px;
+    font-size: 14px;
+    width: 180px;
+    margin: 15px auto;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 7px;
+    font-size: 13px;
+    width: 160px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 6px;
+    font-size: 12px;
+    width: 140px;
+    border-radius: 4px;
+    margin: 10px auto;
+  }
 `;
 
 // SubjectWise Specific Styles
@@ -375,12 +854,38 @@ export const Title2 = styled.h2`
   font-weight: bold;
   color: #2c2c6c;
   margin-bottom: 20px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const HeaderItem = styled.div`
   margin-right: 20px;
+
   & span {
     font-weight: bold;
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    margin-right: 15px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    margin-right: 5px;
+    font-size: 12px;
   }
 `;
 
@@ -395,7 +900,25 @@ export const Button = styled.button`
   font-weight: bold;
   transition: background 0.3s;
   margin-top: 20px;
+
   &:hover {
     background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 10px;
+    font-size: 15px;
+    margin-top: 15px;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 8px;
+    font-size: 14px;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 20px;
+    width: 100%;
+    margin-top: 12px;
   }
 `;

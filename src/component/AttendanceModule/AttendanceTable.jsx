@@ -5,10 +5,20 @@ import jsPDF from "jspdf";
 import { CSVLink } from "react-csv";
 import "jspdf-autotable";
 
-// Styled components
+// Breakpoints for responsiveness
+const breakpoints = {
+  mobile: '468px',
+  tablet: '768px',
+  desktop: '1024px',
+  largeDesktop: '1200px',
+};
+
+// Styled components with responsive design
 const Container = styled.div`
   display: flex;
   background-color: #f4f4f4;
+  width: 100%;
+  min-height: 100vh;
 `;
 
 const MainDashboard = styled.div`
@@ -17,22 +27,65 @@ const MainDashboard = styled.div`
   height: calc(100vh - 100px);
   overflow-y: auto;
   background-color: #f9f9f9;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 10px;
+    height: calc(100vh - 80px);
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    padding: 15px;
+    height: calc(100vh - 90px);
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    padding: 25px;
+  }
 `;
 
 const TableContainer = styled.div`
   padding: 10px;
   background-color: #f5f5f5;
   border-radius: 8px;
+  width: 100%;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 5px;
+    border-radius: 4px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    padding: 8px;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    padding: 15px;
+  }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 15px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
 `;
 
 const TableButton = styled.button`
@@ -41,8 +94,28 @@ const TableButton = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 14px;
+  background-color: #fff;
+  transition: background-color 0.2s;
+
   &:hover {
     background-color: #e0e0e0;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-right: 0;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    padding: 5px 8px;
+    font-size: 13px;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    padding: 6px 12px;
+    font-size: 15px;
   }
 `;
 
@@ -51,6 +124,24 @@ const SearchInput = styled.input`
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-right: 10px;
+  font-size: 14px;
+  width: 200px;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+    font-size: 12px;
+    padding: 4px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    width: 150px;
+    font-size: 13px;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    width: 250px;
+    font-size: 15px;
+  }
 `;
 
 const DatePicker = styled.input`
@@ -58,8 +149,27 @@ const DatePicker = styled.input`
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-left: 10px;
+  font-size: 14px;
+  width: 150px;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 10px;
+    font-size: 12px;
+    padding: 4px;
+  }
+  @media (min-width: ${breakpoints.mobile}) and (max-width: ${breakpoints.tablet}) {
+    width: 120px;
+    font-size: 13px;
+  }
+  @media (min-width: ${breakpoints.largeDesktop}) {
+    width: 180px;
+    font-size: 15px;
+  }
 `;
 
+// Headers and columns remain unchanged
 const headersStudent = [
   { label: "Date", key: "date" },
   { label: "Day", key: "day" },
@@ -106,36 +216,26 @@ const AttendanceTable = () => {
   const [loadingStaff, setLoadingStaff] = useState(false);
   const [currentTable, setCurrentTable] = useState("none");
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]); // Default to today
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
 
-
-  // Fetch student data based on the selected date
   const fetchStudentData = async (date) => {
     setLoadingStudent(true);
     try {
       const response = await fetch(`http://localhost:8007/student-attendance/all?date=${date}`);
       const result = await response.json();
-  
-      // Logging the result to check the data structure
-      console.log('Student Data:', result);
-  
       const filteredData = result
-        .filter(item => item.Date === date)  // Filtering by selected date
-        .flatMap(item => 
-          item.Attendance.map(att => ({
+        .filter((item) => item.Date === date)
+        .flatMap((item) =>
+          item.Attendance.map((att) => ({
             date: item.Date,
             day: new Date(item.Date).toLocaleDateString('en-US', { weekday: 'long' }),
             rollNo: att.RollNo,
             status: att.Status,
             class: item.Class,
             section: item.Section,
-            name: att.StudentName, // This should contain the student's name
+            name: att.StudentName,
           }))
         );
-  
-      // Logging the mapped data to check if names are properly extracted
-      console.log('Mapped Student Data:', filteredData);
-  
       setStudentData(filteredData);
     } catch (error) {
       console.error("Error fetching student data:", error);
@@ -143,35 +243,24 @@ const AttendanceTable = () => {
       setLoadingStudent(false);
     }
   };
-  
 
-  // Fetch staff data based on the selected date
   const fetchStaffData = async (date) => {
-    console.log(date)
     setLoadingStaff(true);
     try {
       const response = await fetch(`http://localhost:8007/staff-attendance/all?date=${date}`);
       const result = await response.json();
-  
-      // Logging the result to check the data structure
-      console.log('Staff Data:', result);
-  
       const filteredData = result
-        .filter(item => item.Date === date)  // Filtering by selected date
-        .flatMap(item => 
-          item.Attendance.map(att => ({
+        .filter((item) => item.Date === date)
+        .flatMap((item) =>
+          item.Attendance.map((att) => ({
             date: item.Date,
             day: new Date(item.Date).toLocaleDateString('en-US', { weekday: 'long' }),
-            employeeId: att.EmployeeId, // This should contain the employee ID
+            employeeId: att.EmployeeId,
             status: att.Status,
-            role: item.Role, // The role of the employee
-            name: att.EmployeeName, // This should contain the staff name
+            role: item.Role,
+            name: att.EmployeeName,
           }))
         );
-  
-      // Logging the mapped data to check if names are properly extracted
-      console.log('Mapped Staff Data:', filteredData);
-  
       setStaffData(filteredData);
     } catch (error) {
       console.error("Error fetching staff data:", error);
@@ -179,7 +268,6 @@ const AttendanceTable = () => {
       setLoadingStaff(false);
     }
   };
-  
 
   useEffect(() => {
     fetchStudentData(selectedDate);
@@ -190,104 +278,156 @@ const AttendanceTable = () => {
     const doc = new jsPDF();
     const title = type === "student" ? "Student Attendance Report" : "Staff Attendance Report";
     doc.text(title, 20, 10);
-    const body = type === "student"
-      ? studentData.map(row => [row.date, row.day, row.rollNo, row.name, row.status, row.class, row.section])
-      : staffData.map(row => [row.date, row.day, row.name, row.employeeId, row.status, row.role]);
+    const body =
+      type === "student"
+        ? studentData.map((row) => [row.date, row.day, row.rollNo, row.name, row.status, row.class, row.section])
+        : staffData.map((row) => [row.date, row.day, row.name, row.employeeId, row.status, row.role]);
 
     doc.autoTable({
-      head: type === "student" ? [["DATE", "DAY", "ROLL NO", "STUDENT NAME", "STATUS", "CLASS", "SECTION"]] : [["DATE", "DAY", "NAME", "EMPLOYEE ID", "STATUS", "ROLE"]],
+      head: type === "student"
+        ? [["DATE", "DAY", "ROLL NO", "STUDENT NAME", "STATUS", "CLASS", "SECTION"]]
+        : [["DATE", "DAY", "NAME", "EMPLOYEE ID", "STATUS", "ROLE"]],
       body,
     });
     doc.save(`${title.toLowerCase().replace(" ", "_")}.pdf`);
   };
 
-  // Search Function
   const filteredStudentData = studentData.filter((item) =>
-    Object.values(item).some(value =>
+    Object.values(item).some((value) =>
       String(value).toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
 
   const filteredStaffData = staffData.filter((item) =>
-    Object.values(item).some(value =>
+    Object.values(item).some((value) =>
       String(value).toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
 
-  useEffect(()=>{
-
-  })
-
   return (
-    <MainDashboard>
-      <ButtonContainer>
-        <ButtonGroup>
-          <TableButton onClick={() => { setCurrentTable("student"); fetchStudentData(selectedDate); }}>
-            Student Attendance
-          </TableButton>
-          <TableButton onClick={() => { setCurrentTable("staff"); fetchStaffData(selectedDate); }}>
-            Staff Attendance
-          </TableButton>
-          {currentTable === "student" && (
-            <>
-              <CSVLink data={studentData} headers={headersStudent} filename={"student_attendance_report.csv"}>
-                <TableButton>Export Student CSV</TableButton>
-              </CSVLink>
-              <TableButton onClick={() => exportPDF("student")}>Export Student PDF</TableButton>
-            </>
-          )}
-          {currentTable === "staff" && (
-            <>
-              <CSVLink data={staffData} headers={headersStaff} filename={"staff_attendance_report.csv"}>
-                <TableButton>Export Staff CSV</TableButton>
-              </CSVLink>
-              <TableButton onClick={() => exportPDF("staff")}>Export Staff PDF</TableButton>
-            </>
-          )}
-          <TableButton onClick={() => window.print()}>Print</TableButton>
-        </ButtonGroup>
-        <SearchInput
-          type="text"
-          placeholder="Search"
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <DatePicker
-          type="date"
-          value={selectedDate}
-          onChange={(e) => setSelectedDate(e.target.value)}
-        />
-      </ButtonContainer>
-      {currentTable === "student" && (
-        <TableContainer>
-          {loadingStudent ? (
-            <div>Loading Student Data...</div>
-          ) : (
-            <DataTable
-              columns={columnsStudent}
-              data={filteredStudentData}
-              pagination
-              highlightOnHover
-              title="Student Attendance"
-            />
-          )}
-        </TableContainer>
-      )}
-      {currentTable === "staff" && (
-        <TableContainer>
-          {loadingStaff ? (
-            <div>Loading Staff Data...</div>
-          ) : (
-            <DataTable
-              columns={columnsStaff}
-              data={filteredStaffData}
-              pagination
-              highlightOnHover
-              title="Staff Attendance"
-            />
-          )}
-        </TableContainer>
-      )}
-    </MainDashboard>
+    <Container>
+      <MainDashboard>
+        <ButtonContainer>
+          <ButtonGroup>
+            <TableButton onClick={() => { setCurrentTable("student"); fetchStudentData(selectedDate); }}>
+              Student Attendance
+            </TableButton>
+            <TableButton onClick={() => { setCurrentTable("staff"); fetchStaffData(selectedDate); }}>
+              Staff Attendance
+            </TableButton>
+            {currentTable === "student" && (
+              <>
+                <CSVLink data={studentData} headers={headersStudent} filename={"student_attendance_report.csv"}>
+                  <TableButton>Export Student CSV</TableButton>
+                </CSVLink>
+                <TableButton onClick={() => exportPDF("student")}>Export Student PDF</TableButton>
+              </>
+            )}
+            {currentTable === "staff" && (
+              <>
+                <CSVLink data={staffData} headers={headersStaff} filename={"staff_attendance_report.csv"}>
+                  <TableButton>Export Staff CSV</TableButton>
+                </CSVLink>
+                <TableButton onClick={() => exportPDF("staff")}>Export Staff PDF</TableButton>
+              </>
+            )}
+            <TableButton onClick={() => window.print()}>Print</TableButton>
+          </ButtonGroup>
+          <SearchInput
+            type="text"
+            placeholder="Search"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <DatePicker
+            type="date"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
+        </ButtonContainer>
+        {currentTable === "student" && (
+          <TableContainer>
+            {loadingStudent ? (
+              <div>Loading Student Data...</div>
+            ) : (
+              <DataTable
+                columns={columnsStudent}
+                data={filteredStudentData}
+                pagination
+                highlightOnHover
+                title="Student Attendance"
+                responsive // Enable built-in responsiveness of react-data-table-component
+                customStyles={{
+                  table: {
+                    style: {
+                      minWidth: '100%',
+                    },
+                  },
+                  headCells: {
+                    style: {
+                      fontSize: '14px',
+                      '@media (max-width: 468px)': {
+                        fontSize: '10px',
+                        padding: '5px',
+                      },
+                    },
+                  },
+                  cells: {
+                    style: {
+                      fontSize: '12px',
+                      '@media (max-width: 468px)': {
+                        fontSize: '9px',
+                        padding: '5px',
+                      },
+                    },
+                  },
+                }}
+              />
+            )}
+          </TableContainer>
+        )}
+        {currentTable === "staff" && (
+          <TableContainer>
+            {loadingStaff ? (
+              <div>Loading Staff Data...</div>
+            ) : (
+              <DataTable
+                columns={columnsStaff}
+                data={filteredStaffData}
+                pagination
+                highlightOnHover
+                title="Staff Attendance"
+                responsive // Enable built-in responsiveness
+                customStyles={{
+                  table: {
+                    style: {
+                      minWidth: '100%',
+                    },
+                  },
+                  headCells: {
+                    style: {
+                      fontSize: '14px',
+                      '@media (max-width: 468px)': {
+                        fontSize: '10px',
+                        padding: '5px',
+                      },
+                    },
+                  },
+                  cells: {
+                    style: {
+                      fontSize: '12px',
+                      '@media (max-width: 468px)': {
+                        fontSize: '9px',
+                        padding: '5px',
+                      },
+                    },
+                  },
+                }}
+              />
+            )}
+          </TableContainer>
+        )}
+      </MainDashboard>
+    </Container>
   );
 };
 

@@ -4,7 +4,7 @@ import styled from 'styled-components'; // Importing styled-components
 
 // Styled components for layout and styling
 import {
-    Container2, MainDashboard, Title, ClassDetails, Section, SubjectList,
+    Container, Container2, MainDashboard, Title, ClassDetails, Section, SubjectList,
     SubjectItem, SubjectTitle, SyllabusList, SyllabusItem, SyllabusTitle,
     TopicList, TopicItem, LoadingMessage, ErrorMessage
   } from '../Subject/SubjectStyle';

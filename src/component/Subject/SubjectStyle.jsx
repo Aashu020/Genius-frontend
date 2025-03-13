@@ -255,6 +255,8 @@ export const Frame = styled.iframe`
 
 export const TimetableWrapper = styled.div`
   width: 100%;
+  overflow-y:auto;
+  height:90vh;
   // margin: 0 auto;
   @media (max-width:480px){
     width:90%;

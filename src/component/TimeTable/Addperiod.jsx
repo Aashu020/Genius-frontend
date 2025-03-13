@@ -3,7 +3,7 @@ import axios from "axios";
 import { Edit, Trash2 } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { MainDashboard,SubmitButton,Title,Th,FormContainer,Td,Input,Label,Form,Heading,Section,Main,InputContainer} from "../StudentAdmission/StudentAdmission";
+import { MainDashboard,SubmitButton,Title,Th,FormContainer,Td,Input,Label,Form,Heading,Section,Main,InputContainer, TableWrapper} from "../StudentAdmission/StudentAdmission";
 import { Td1,ConfirmationModal,EditButton,Table100,DeleteButton,ModalContent,ConfirmButton } from "../Subject/SubjectStyle";
 
 
@@ -173,32 +173,34 @@ const Addperiod = () => {
             </div>
           </Form>
 
-          <Table100>
-            <thead>
-              <tr>
-                <Th>Title</Th>
-                <Th>Time</Th>
-                <Th>Action</Th>
-              </tr>
-            </thead>
-            <tbody>
-              {expense.map((item) => (
-                <tr key={item._id}>
-                  <Td>{item.Title}</Td>
-                  <Td>{item.StartTime} - {item.EndTime}</Td>
-                  <Td1>
-                    <EditButton onClick={() => handleEdit(item)}>
-                      Edit
-                      <Edit size={18} />
-                    </EditButton>
-                    <DeleteButton onClick={() => handleDeleteConfirmation(item._id)}>
-                      <Trash2 size={18} />
-                    </DeleteButton>
-                  </Td1>
+          <TableWrapper>
+            <Table100>
+              <thead>
+                <tr>
+                  <Th>Title</Th>
+                  <Th>Time</Th>
+                  <Th>Action</Th>
                 </tr>
-              ))}
-            </tbody>
-          </Table100>
+              </thead>
+              <tbody>
+                {expense.map((item) => (
+                  <tr key={item._id}>
+                    <Td>{item.Title}</Td>
+                    <Td>{item.StartTime}-{item.EndTime}</Td>
+                    <Td1>
+                      <EditButton onClick={() => handleEdit(item)}>
+                        Edit
+                        <Edit size={18} />
+                      </EditButton>
+                      <DeleteButton onClick={() => handleDeleteConfirmation(item._id)}>
+                        <Trash2 size={18} />
+                      </DeleteButton>
+                    </Td1>
+                  </tr>
+                ))}
+              </tbody>
+            </Table100>
+          </TableWrapper>
         </FormContainer>
         {showModal && (
           <ConfirmationModal>

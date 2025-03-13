@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { Edit, Trash2 } from "lucide-react";
+import { TableWrapper } from "../Outerstyle2";
 
 const Container = styled.div`
   display: flex;
@@ -31,7 +32,7 @@ const Form = styled.form`
 `;
 
 const Heading = styled.div`
-  width: 30%;
+  width: 47%;
   background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
   color: white;
   border-radius: 25px;
@@ -114,6 +115,10 @@ const Table = styled.table`
   border-collapse: collapse;
   margin-top: 30px;
 `;
+const TableWrapper1 = styled.div`
+width: 100%;
+overflow-x: auto;
+`
 
 const Th = styled.th`
   background-color: #f2f2f2;
@@ -342,6 +347,7 @@ const Electricity = () => {
           </div>
         </Form>
 
+<TableWrapper1>
         <Table>
           <thead>
             <tr>
@@ -380,6 +386,7 @@ const Electricity = () => {
             })}
           </tbody>
         </Table>
+        </TableWrapper1>
         <PaginationContainer>
           <PaginationInfo>
             Rows per page:

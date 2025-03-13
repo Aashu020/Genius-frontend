@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Edit, Trash2 } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { TableWrapper } from "../Outerstyle2";
 
 const Container = styled.div`
   display: flex;
@@ -175,6 +176,11 @@ const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   margin-top: 30px;
+`;
+
+const TableWrapper1 = styled.div`
+width: 100%;
+overflow-x: auto;
 `;
 
 const Th = styled.th`
@@ -456,6 +462,8 @@ const Complaint = () => {
           </SubmitButton>
         </Form>
 
+
+<TableWrapper1>
         <Table>
           <thead>
             <tr>
@@ -503,6 +511,7 @@ const Complaint = () => {
             ))}
           </tbody>
         </Table>
+        </TableWrapper1>
         <PaginationContainer>
           <PaginationInfo>
             Rows per page:

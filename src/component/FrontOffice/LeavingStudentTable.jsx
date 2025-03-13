@@ -6,6 +6,7 @@ const Container = styled.div`
   width: 100%;
   margin: 50px auto;
   background-color: #f9f9f9;
+  overflow-x: auto;
 `;
 
 const Tabs = styled.div`
@@ -35,7 +36,8 @@ const Tab = styled.button`
 
 const Table = styled.table`
   width: 100%;
-  border-collapse: collapse;
+  /* border-collapse: collapse; */
+ 
 `;
 
 const TableHead = styled.thead`

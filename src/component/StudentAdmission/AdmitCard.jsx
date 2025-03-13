@@ -211,11 +211,11 @@ const AdmitCardFormat = ({ student, exam }) => {
             </InfoRow>
             <InfoRow>
               <div>Father's Name</div>
-              <Value>{student.FatherDetail.Name}</Value>
+              <Value>{student.FatherDetail?.Name}</Value>
             </InfoRow>
             <InfoRow>
               <div>Mother's Name</div>
-              <Value>{student.MotherDetails.Name}</Value>
+              <Value>{student.MotherDetails?.Name}</Value>
             </InfoRow>
           </InfoColumn>
 

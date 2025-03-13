@@ -16,6 +16,7 @@ const MainDashboard = styled.div`
   height: calc(100vh - 100px);
   overflow-y: auto;
   background-color: #f9f9f9;
+  width: 90%;
   padding: 20px;
   @media (max-width: 480px) {
     padding: 10px;
@@ -405,7 +406,10 @@ const TableContainer1 = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   @media (max-width: 480px) {
-    width:100%;
+    width:90%;
+  }
+  @media (max-width: 320px) {
+    width:85%;
   }
 `;
 

@@ -13,23 +13,23 @@ Chart.register(ArcElement, Tooltip, Legend);
 
 // Styled Components
 const Container = styled.div`
-  /* display: flex;
-  justify-content: space-between; */
   width: 30vw;
   margin: 20px auto;
   @media (max-width:768px){
     flex-direction:column;
     gap:2rem;
+    width: 80%;
     align-items: center;
+  }
+  @media (max-width: 480px) {
+    width: 110%;
+    margin-bottom: 10px;
   }
 `;
 
 const Card = styled.div`
-  background-color: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* width: 50%; */
   text-align: center;
   @media (max-width:480px){
    width: 80%;

@@ -7,7 +7,7 @@ import { Edit, Trash2 } from "lucide-react";
 import { 
   Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
   InputContainer, Label, Input, SubmitButton, Table, Th, Td, Td1, 
-  EditButton, DeleteButton, ErrorMessage 
+  EditButton, DeleteButton, ErrorMessage, TableWrapper
 } from './ExpenseStyles';
 
 
@@ -161,6 +161,7 @@ const AddIncomehead = () => {
             </div>
           </Form>
 
+          <TableWrapper>
           <Table>
             <thead>
               <tr>
@@ -191,6 +192,7 @@ const AddIncomehead = () => {
                 ))}
             </tbody>
           </Table>
+          </TableWrapper>
         </FormContainer>
       </MainDashboard>
 

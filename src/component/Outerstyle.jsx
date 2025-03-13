@@ -231,7 +231,6 @@ export const ConfirmButton = styled.button`
 
 // BirthdayWishesTable Styles
 export const TableContainer = styled.div`
-  margin: 20px;
   padding: 20px;
   width: 100%;
   border-radius: 8px;

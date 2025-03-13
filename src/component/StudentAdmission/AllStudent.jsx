@@ -6,7 +6,7 @@ import { SiMicrosoftexcel } from "react-icons/si";
 import { IoMdPrint } from "react-icons/io";
 import * as XLSX from "xlsx";
 import axios from "axios";
-import{ Input,Th,Td,SearchContainer,SearchInput,ButtonSection,ActionButton,RowsPerPageDropdown,PaginationButton,PaginationInfo,PaginationContainer,Photo1,OpenButton,Table1, MainDashboard, TableContainer1,ButtonGroup,Button} from "./StudentAdmission"
+import{ Input,Th,Td,SearchContainer,TableWrapper,SearchInput,ButtonSection,ActionButton,RowsPerPageDropdown,PaginationButton,PaginationInfo,PaginationContainer,Photo1,OpenButton,Table1, MainDashboard, TableContainer1,ButtonGroup,Button} from "./StudentAdmission"
 
 const AllStudent = () => {
   const navigate = useNavigate();
@@ -295,6 +295,7 @@ const AllStudent = () => {
         </ButtonSection>
 
         <div id="student-table">
+          <TableWrapper>
           <Table1>
             <thead>
               <tr>
@@ -333,6 +334,7 @@ const AllStudent = () => {
               ))}
             </tbody>
           </Table1>
+          </TableWrapper>
         </div>
 
         <PaginationContainer>

@@ -12,6 +12,9 @@ const Table = styled.table`
   width: 70%;
   border-collapse: collapse;
   margin-top: 30px;
+  @media (max-width:480px){
+    width:100%;
+  }
 `;
 
 
@@ -183,7 +186,7 @@ const AllTimetable = () => {
         <Table>
           <thead>
             <tr>
-              <Th>Sr. No.</Th>
+              <Th>Sr.No.</Th>
               <Th>Class</Th>
               <Th>Section</Th>
               <Th>Actions</Th>
@@ -217,11 +220,11 @@ const AllTimetable = () => {
               <div key={periodIndex} style={{ display: 'contents' }}>
                 {!lecture.Period.includes('Period') && lecture.Period.trim() !== "" ? (
                   <TableItem1 style={{ gridColumn: 'span 7' }}>
-                    {lecture.Period.trim()}<p>{(periods.find(val => val.Title.trim() === lecture.Period.trim())).StartTime} - {(periods.find(val => val.Title.trim() === lecture.Period.trim())).EndTime}</p>
+                    {lecture.Period.trim()}<p>{(periods.find(val => val.Title.trim() === lecture.Period.trim())).StartTime}-{(periods.find(val => val.Title.trim() === lecture.Period.trim())).EndTime}</p>
                   </TableItem1>
                 ) : (
                   <>
-                    <TableHeader>{lecture.Period}<p>{(periods.find(val => val.Title.trim() === lecture.Period.trim())).StartTime} - {(periods.find(val => val.Title.trim() === lecture.Period.trim())).EndTime}</p></TableHeader>
+                    <TableHeader>{lecture.Period}<p>{(periods.find(val => val.Title.trim() === lecture.Period.trim())).StartTime}-{(periods.find(val => val.Title.trim() === lecture.Period.trim())).EndTime}</p></TableHeader>
                     {timetableDetails.Days.map((dayData, dayIndex) => {
                       const currentLecture = dayData.Lectures[periodIndex] || {};
                       return (
@@ -246,14 +249,14 @@ const AllTimetable = () => {
             {subjects.map((subject, index) => (
               <SubjectCell key={index}>{subject}</SubjectCell>
             ))}
-            <RowHeader>TOTAL</RowHeader>
+            <RowHeader style={{backgroundColor:"#e0e0e0"}}>TOTAL</RowHeader>
 
             {/* Periods Row */}
             <RowHeader>NO OF PERIODS</RowHeader>
             {subjects.map((subject, index) => (
               <PeriodCell key={index}>{subjectLectureCount[subject] || 0}</PeriodCell>
             ))}
-            <PeriodCell bold>{totalPeriods}</PeriodCell>
+            <PeriodCell bold style={{backgroundColor:"#e0e0e0"}}>{totalPeriods}</PeriodCell>
           </TimetableContainer>
 
 

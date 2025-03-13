@@ -152,12 +152,13 @@ const Allowence = () => {
                   <BodyCell>
                     <ActionButton edit onClick={() => handleEdit(item)}>
                       <EditIcon />
-                      Edit
+                      <span>Edit</span>
                     </ActionButton>
                     <ActionButton onClick={() => handleDelete(item._id)}>
                       <DeleteIcon />
-                      Delete
+                      <span>Delete</span>
                     </ActionButton>
+
                   </BodyCell>
                 </BodyRow>
               ))}
@@ -175,7 +176,7 @@ const Allowence = () => {
           </ConfirmationModal>
         )}
       </MainDashboard>
-      
+
     </>
   );
 };

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Title,Input,Buttonbg,Select,TimeTable,TimeTableHeader,TimeTableCell} from '../Subject/SubjectStyle';
+import { Title,Input,Buttonbg,Select,TimeTable,TimeTableHeader,TimeTableCell, TimetableWrapper} from '../Subject/SubjectStyle';
+import { TableWrapper } from '../StudentAdmission/StudentAdmission';
+
 const Container = styled.div`
   flex: 1;
   height: calc(100vh - 100px);
@@ -8,6 +10,15 @@ const Container = styled.div`
   padding: 20px;
 `;
 
+// <style>
+//         {`
+//           @media (max-width: 480px) {
+//             .responsive-form {
+//               padding: 0;
+//             }
+//           }
+//         `}
+//       </style>
 const TimeTableForm = () => {
     const [classID, setClassID] = useState('');
     const [className, setClassName] = useState('');
@@ -216,17 +227,19 @@ const TimeTableForm = () => {
     };
 
     return (
-        <Container>
+        <TimetableWrapper >
             <Title>Create Time Table</Title>
-            <form onSubmit={handleSubmit}>
-                <Select value={classID} onChange={handleClassChange}>
+            <form onSubmit={handleSubmit} style={{ padding: "0 3rem" }} className="responsive-form">
+                <Select style={{width:"100%"}}
+                value={classID} onChange={handleClassChange}>
                     <option value="">Select Class</option>
                     {classes.map(c => (
                         <option key={c.ClassId} value={c.ClassId}>{c.Class}</option>
                     ))}
                 </Select>
 
-                <Select value={section} onChange={handleSectionChange}>
+                <Select style={{width:"100%"}}
+                value={section} onChange={handleSectionChange}>
                     <option value="">Select Section</option>
                     {sections.map(s => (
                         <option key={s} value={s}>{s}</option>
@@ -237,26 +250,28 @@ const TimeTableForm = () => {
             </form>
 
             <Title>Current Timetable</Title>
-            <TimeTable>
+            <TableWrapper >
+            <TimeTable >
                 <TimeTableHeader key="empty-header" />
                 {timetableDays.map(day => (
                     <TimeTableHeader key={`day-${day}`}>{day}</TimeTableHeader>
                 ))}
                 {periods.map((period, index) => (
                     <React.Fragment key={`period-${index}`}>
-                        <TimeTableHeader>
+                        <TimeTableHeader style={{pading:"0 5rem"}}>
                             <Input
                                 type="text"
                                 value={period.Title.trim()}
                                 placeholder="Period Name"
                                 readOnly
+                                style={{textAlign:"center", width:"fit-content"}}
                             />
                         </TimeTableHeader>
                         {timetableDays.map(day => (
                             <TimeTableCell key={`${day}-${index}`}>
                                 {period.Title.trim().includes('Period') ? (
                                     <>
-                                        <Select
+                                        <Select style={{marginLeft:"0.5rem"}}
                                             value={teacherDetails[day]?.[period.Title]?.subject || ''}
                                             onChange={(e) => handleSubjectChange(period.Title, day, e)}
                                         >
@@ -268,7 +283,7 @@ const TimeTableForm = () => {
                                             ))}
                                         </Select>
 
-                                        <Select
+                                        <Select style={{marginLeft:"0.5rem"}}
                                             value={teacherDetails[day]?.[period.Title]?.teacherId || ''}
                                             onChange={(e) => handleTeacherIdChange(period.Title, day, e.target.value)}
                                         >
@@ -301,7 +316,9 @@ const TimeTableForm = () => {
                     </React.Fragment>
                 ))}
             </TimeTable>
-        </Container>
+            </TableWrapper>
+
+        </TimetableWrapper>
     );
 };
 

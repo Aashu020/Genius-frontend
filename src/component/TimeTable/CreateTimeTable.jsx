@@ -3,7 +3,7 @@ import axios from "axios";
 import jsPDF from "jspdf";;
 import * as XLSX from "xlsx";
 import { FaFilePdf, FaFileExcel, FaPrint } from "react-icons/fa";
-import { MainDashboard,SubmitButton,Select,Section,Label,InputContainer,Title,Heading,Main,FormContainer} from "../StudentAdmission/StudentAdmission";
+import {Form, MainDashboard,SubmitButton,Select,Section,Label,InputContainer,Title,Heading,Main,FormContainer} from "../StudentAdmission/StudentAdmission";
 import { CheckboxContainer,Th,Td,Heading1,Checkbox,ClearButton,TimetableWrapper,Table} from "../Subject/SubjectStyle";
 
 
@@ -284,7 +284,8 @@ const CreateTimeTable = () => {
 
   return (
     <>
-      <MainDashboard>
+  <TimetableWrapper>
+  {/* <MainDashboard> */}
         <FormContainer>
           <Title>Create Time Table</Title>
           <Form onSubmit={handleSubmit}>
@@ -441,7 +442,7 @@ const CreateTimeTable = () => {
         {formData.Class && formData.Section && (
           <Timetable classId={formData.Class} section={formData.Section} />
         )}
-      </MainDashboard>
+      </  TimetableWrapper>
     </>
   );
 };

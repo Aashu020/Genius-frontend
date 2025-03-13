@@ -8,6 +8,9 @@ export const HomeworkListContainer = styled.div`
   /* justify-content: center; */
   align-items: center;
   width: 100%;
+  @media (max-width:1023px){
+  font-size: 12px;
+}
 `;
 
 export const HomeworkListTitle = styled.h3`
@@ -140,6 +143,9 @@ export const MainDashboard = styled.div`
   height: calc(100vh - 100px);
   overflow-y: auto;
   background-color: #f9f9f9;
+  @media (max-width:1023px){
+  font-size: 12px;
+}
 `;
 
 export const Title = styled.h2`
@@ -201,6 +207,9 @@ export const InputContainer = styled.div`
   @media (max-width: 480px) {
     margin-bottom: 12px;
   }
+  @media (max-width:1023px){
+  font-size: 12px;
+}
 `;
 
 export const Label = styled.span`
@@ -231,6 +240,9 @@ export const Input = styled.input`
     font-size: 12px;
     padding: 12px 18px;
   }
+  @media (max-width:1023px){
+  font-size: 12px;
+}
 `;
 
 export const Select = styled.select`
@@ -284,6 +296,9 @@ padding: 20px;
 height: calc(100vh - 100px);
 overflow-y: auto;
 background-color: #f9f9f9;
+@media (max-width:1023px){
+  font-size: 12px;
+}
 `;
 
 export const TableContainer = styled.div`
@@ -293,7 +308,7 @@ export const TableContainer = styled.div`
   align-items: center;
   @media (max-width:480px){
     /* overflow-x: auto; */
-    
+    font-size: 12px;
     /* min-width:100%; */
     margin-left: 3rem;
   }

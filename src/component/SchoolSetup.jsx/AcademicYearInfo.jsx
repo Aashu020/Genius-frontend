@@ -162,7 +162,7 @@ const AcademicYearInfo = () => {
         <Title>Academic Year Information</Title>
         <Form onSubmit={handleSubmit}>
           <Section>
-            <Label>Details</Label>
+            {/* <Label>Details</Label> */}
           </Section>
           <AcademicYearMain>
             <InputContainer>

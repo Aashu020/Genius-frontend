@@ -27,8 +27,11 @@ export const Title = styled.h2`
 
 export const Form = styled.form`
   width: 100%;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Heading = styled.div`
@@ -105,9 +108,9 @@ export const Input = styled.input`
   outline: none;
   @media (max-width: 480px) {
     height: 10px;
-    width: 80%;
+    width: 90%;
     font-size: 12px;
-    padding: 12px 18px;
+    padding: 14px 18px;
   }
 `;
 
@@ -122,7 +125,7 @@ export const Select = styled.select`
   font-weight: bold;
   @media (max-width: 480px) {
     height: 38px;
-    width: 94%;
+    width: 100%;
     font-size: 12px;
     padding: 10px 12px;
   }
@@ -163,7 +166,7 @@ export const SubmitButton = styled.button`
   @media (max-width: 768px) {
     width: 100%;
     font-size: 12px;
-    padding: 5px;
+    padding: 14px 16px;
   }
 `;
 
@@ -178,6 +181,12 @@ export const Container1 = styled.div`
   width: 100%;
   margin: 50px auto;
   background-color: #f9f9f9;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+  padding: 10px; /* Add some padding for better spacing */
+  @media (max-width: 768px) {
+    padding: 5px; /* Reduce padding on smaller screens */
+  }
 `;
 
 export const Tabs = styled.div`
@@ -206,7 +215,11 @@ export const Tab = styled.button`
 
 export const Table = styled.table`
   width: 100%;
+  min-width: 1000px; /* Set a larger minimum width to make the table "big" */
   border-collapse: collapse;
+  @media (max-width: 768px) {
+    min-width: 1200px; /* Increase min-width for mobile to force scrolling */
+  }
 `;
 
 export const TableHead = styled.thead`
@@ -225,13 +238,14 @@ export const TableHeader = styled.th`
   text-align: left;
   font-size: 14px;
   color: #666;
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 5px;
+  white-space: nowrap; /* Prevent text wrapping in headers */
+  @media (max-width: 768px) {
+    padding: 10px; /* Slightly reduce padding for mobile */
+    font-size: 12px; /* Adjust font size for readability */
   }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
+  @media (max-width: 480px) {
+    padding: 8px;
+    font-size: 10px;
   }
 `;
 
@@ -240,13 +254,14 @@ export const TableData = styled.td`
   text-align: left;
   font-size: 14px;
   color: #333;
-  @media (max-width: 480px) {
-    font-size: 10px;
-    padding: 5px;
+  white-space: nowrap; /* Prevent text wrapping in data cells */
+  @media (max-width: 768px) {
+    padding: 10px; /* Slightly reduce padding for mobile */
+    font-size: 12px; /* Adjust font size for readability */
   }
-  @media (max-width: 376px) {
-    font-size: 8px;
-    padding: 2px;
+  @media (max-width: 480px) {
+    padding: 10px;
+    font-size: 10px;
   }
 `;
 

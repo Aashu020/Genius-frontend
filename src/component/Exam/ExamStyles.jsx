@@ -345,7 +345,7 @@ export const Status = styled.button`
   padding: 8px 20px;
   border-radius: 5px;
   color: white;
-  width: 50%;
+  width: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -358,7 +358,7 @@ export const Status = styled.button`
   }
 
   @media (max-width: 480px) {
-    width: 70%;
+    width: 60px;
     padding: 5px 10px;
     font-size: 0.7rem;
   }
@@ -370,7 +370,7 @@ export const Button = styled.button`
   padding: 8px 10px;
   border-radius: 5px;
   color: white;
-  width: 50%;
+  width: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -383,8 +383,8 @@ export const Button = styled.button`
   }
 
   @media (max-width: 480px) {
-    width: 70%;
-    padding: 5px 6px;
+    width: 40px;
+    padding: 5px 16px;
     font-size: 0.7rem;
   }
 `;
@@ -395,7 +395,7 @@ export const DeleteButton = styled.button`
   padding: 5px 10px;
   border-radius: 5px;
   color: white;
-  width: 20%;
+  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -411,7 +411,7 @@ export const DeleteButton = styled.button`
   }
   
   @media (max-width: 480px) {
-    width: 50%;
-    padding: 3px 6px;
+    width: 25px;
+    padding: 0px 6px;
   }
 `;

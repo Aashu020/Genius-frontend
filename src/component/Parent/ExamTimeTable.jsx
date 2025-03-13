@@ -4,20 +4,24 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   background-color: #f4f4f4;
-  width: calc(100vw - 250px);
+  /* width: calc(100vw - 250px); */
+  overflow-x: auto;
+width: 100%;
 `;
 
 const MainDashboard = styled.div`
   flex: 1;
   padding: 50px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
+  /* height: calc(100vh - 100px); */
+  /* overflow-x: auto; */
   background-color: #f9f9f9;
+
 `;
 
 const TableContainer = styled.div`
   margin-top: 40px;
   overflow-x: auto;
+ 
 `;
 
 const Table = styled.table`

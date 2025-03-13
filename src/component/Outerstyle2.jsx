@@ -60,10 +60,13 @@ export const Select = styled.select`
   color: #7a7a7a;
   background-color: #f4f6fc;
   font-weight: bold;
+  @media (max-width: 1025px) {
+    /* padding: 5px 7px; */
+  }
   @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
+    /* height: 38px; */
+    width: 100%;
+    font-size: 14px;
     padding: 10px 12px;
   }
 `;
@@ -72,6 +75,9 @@ export const InputContainer = styled.div`
   position: relative;
   width: 100%;
   margin-bottom: 20px;
+  @media (max-width: 1025px) {
+    margin-bottom: 12px;
+  }
   @media (max-width: 480px) {
     margin-bottom: 12px;
   }
@@ -110,11 +116,12 @@ export const Main = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  @media (max-width: 768px) {
+  @media (max-width: 1025px) {
     grid-template-columns: repeat(2, 1fr);
   }
   @media (max-width: 480px) {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -129,15 +136,15 @@ export const FormInput = styled.input`
   font-weight: bold;
   outline: none;
   @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
+    /* height: 38px; */
+    width: 93%;
+    font-size: 14px;
+    padding: 10px 12px;
   }
 `;
 
 export const SubmitButton = styled.button`
-  width: 320px;
+  /* width: 320px; */
   padding: 12px;
   background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
   border: none;
@@ -151,10 +158,16 @@ export const SubmitButton = styled.button`
   &:hover {
     background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
   }
-  @media (max-width: 768px) {
+  @media (max-width: 1025px) {
+    height: 55px;
+    margin: 0;
+    padding:7px;
+  }
+  @media (max-width: 480px) {
+    height: 45px;
     width: 100%;
-    font-size: 12px;
-    padding: 5px;
+    font-size: 16px;
+    padding: 10px;
   }
 `;
 
@@ -212,27 +225,66 @@ export const HeaderContainer = styled.div`
   align-items: center;
   background-color: #64b5f6;
   padding: 10px 20px;
-  height: 80px;
+  height: 60px;
   box-sizing: border-box;
+  @media (max-width:480px){
+    gap:0.3rem
+  }
 `;
 
 export const Logo = styled.div`
+  height: 50px;
+  width: 130px;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius:100%;
+    object-fit: cover;
+  }
+  @media (max-width:320px){
+    height:40px;
+    width:45px;
+    margin-left:-0.5rem;
+  }
+  @media (min-width:321px) and (max-width:480px){
+    height:45px;
+    width:50px;
+    margin-left:-0.5rem;
+  }
+     @media (min-width:481px) and (max-width:768px){
+    height:60px;
+    width:60px;
+    margin-left:-0.5rem;
+  }
+`;
+
+export const Logo1 = styled.div`
   height: 70px;
   width: 70px;
   img {
     height: 100%;
     width: 100%;
-    border-radius:50%;
+    border-radius:100%;
     object-fit: cover;
   }
+  @media (max-width:480px){
+    height:45px;
+    width:45px;
+    margin-left:-0.5rem;
+  }
+     @media (min-width:480px) and (max-width:768px){
+    height:60px;
+    width:60px;
+    margin-right:1rem;
+  }
 `;
-
-
 
 export const SearchContainer = styled.div`
   display: flex;
   gap: 15px;
   position: relative;
+
+  
 `;
 
 export const SearchBox = styled.div`
@@ -242,6 +294,10 @@ export const SearchBox = styled.div`
   border-radius: 30px;
   padding: 5px 15px;
   width: 100%;
+  @media (max-width:480px){
+    width:80%;
+    height:1.5rem;
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -276,6 +332,12 @@ export const InstituteName = styled.div`
   font-size: 16px;
   font-weight: bold;
   color: #fff;
+  @media (max-width:480px){
+  height:50px;
+  img{
+    height:10px;
+    }
+  }
 `;
 
 export const DropdownList = styled.ul`
@@ -402,6 +464,7 @@ export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0px 40px;
   margin-bottom: 20px;
   @media (max-width: 480px) {
     flex-direction: column;

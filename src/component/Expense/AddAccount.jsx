@@ -6,7 +6,7 @@ import Sidebar from "../Sidebar";
 import { Edit, Trash2 } from "lucide-react";
 import { 
   Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
-  InputContainer, Label, Input, SubmitButton, Table, Th, Td, Td1, 
+  InputContainer, Label, Input, SubmitButton, TableWrapper, Table, Th, Td, Td1, 
   EditButton, DeleteButton, ErrorMessage 
 } from './ExpenseStyles';
 
@@ -23,43 +23,37 @@ const AddAccount = () => {
   const [accounts, setAccounts] = useState([]);
   const [editMode, setEditMode] = useState(false);
   const [currentAccountId, setCurrentAccountId] = useState(null);
-
   const [errors, setErrors] = useState({});
+
   const validateForm = () => {
     let formErrors = {};
-    if (!accountData.HolderName)
-      formErrors.HolderName = "Account Holder Name is required";
+    if (!accountData.HolderName) formErrors.HolderName = "Account Holder Name is required";
     if (!accountData.BankName) formErrors.BankName = "Bank Name is required";
     if (!accountData.IFSCCode) {
       formErrors.IFSCCode = "IFSC Code is required";
     } else {
-      // Validate IFSC code format: 4 uppercase letters, '0', and 6 alphanumeric characters
       const ifscRegex = /^[A-Z]{4}0[A-Z0-9]{6}$/;
       if (accountData.IFSCCode.length !== 11 || !ifscRegex.test(accountData.IFSCCode)) {
         formErrors.IFSCCode = "IFSC Code must be 11 characters: 4 letters, 0, and 6 alphanumeric characters.";
       }
     }
-    if (!accountData.BranchName)
-      formErrors.BranchName = "Branch Name is required";
-
+    if (!accountData.BranchName) formErrors.BranchName = "Branch Name is required";
     if (!accountData.AccountNo) {
       formErrors.AccountNo = "Account No is required";
     } else {
-      // Validate Account Number length
       const accountNoLength = accountData.AccountNo.length;
       if (accountNoLength < 9 || accountNoLength > 18) {
         formErrors.AccountNo = "Account No must be between 9 to 18 digits.";
       }
-    } if (!accountData.Remark) formErrors.Remark = "Remark is required";
+    }
+    if (!accountData.Remark) formErrors.Remark = "Remark is required";
     return formErrors;
   };
 
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8007/bank/all"
-        ); // Adjust this endpoint
+        const response = await axios.get("http://localhost:8007/bank/all");
         setAccounts(response.data);
       } catch (error) {
         console.error("Error fetching accounts:", error);
@@ -70,7 +64,6 @@ const AddAccount = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     let updatedErrors = { ...errors };
 
     if (name === "AccountNo") {
@@ -81,7 +74,6 @@ const AddAccount = () => {
         }));
         return;
       } else {
-        setErrors((prev) => ({ ...prev, AccountNo: "" }));
         delete updatedErrors.AccountNo;
       }
     }
@@ -92,37 +84,19 @@ const AddAccount = () => {
       }));
       return;
     } else {
-      setErrors((prev) => ({ ...prev, HolderName: "" }));
       delete updatedErrors.HolderName;
     }
     if (name === "IFSCCode") {
-      const gstRegex = /^[A-Z]{4}0[a-zA-Z0-9]{6}$/;
-      if (value.length > 11) {
-        updatedErrors.IFSCCode = "IFSC Code must be 11 characters long.";
-      } else if (!gstRegex.test(value)) {
-        updatedErrors.IFSCCode = "IFSC Code is invalid.";
+      const ifscRegex = /^[A-Z]{4}0[A-Z0-9]{6}$/;
+      if (value.length > 11 || !ifscRegex.test(value)) {
+        updatedErrors.IFSCCode = "IFSC Code must be 11 characters: 4 letters, 0, and 6 alphanumeric.";
       } else {
         delete updatedErrors.IFSCCode;
       }
     }
 
-    if (name === "AccountNo") {
-      if (!/^\d*$/.test(value)) {
-        updatedErrors.AccountNo = "Account No can only contain numbers.";
-      } else {
-        // Check length
-        const accountNoLength = value.length;
-        if (accountNoLength < 9 || accountNoLength > 18) {
-          updatedErrors.AccountNo = "Account No must be between 9 to 18 digits.";
-        } else {
-          delete updatedErrors.AccountNo;
-        }
-      }
-    }
-
     setAccountData({ ...accountData, [name]: value });
     setErrors(updatedErrors);
-
   };
 
   const handleEdit = (account) => {
@@ -179,9 +153,7 @@ const AddAccount = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `http://localhost:8007/bank/delete/${id}`
-      );
+      await axios.delete(`http://localhost:8007/bank/delete/${id}`);
       setAccounts(accounts.filter((account) => account._id !== id));
     } catch (error) {
       console.error("Error deleting account:", error);
@@ -189,147 +161,122 @@ const AddAccount = () => {
   };
 
   return (
-    <>
-
-      <MainDashboard>
-        <FormContainer>
-          <Title>Add Account</Title>
-          <Form onSubmit={handleSubmit}>
-            <Heading>Details</Heading>
-            <Main>
-              <InputContainer>
-                <Label>Account Holder Name</Label>
-                <Input
-                  type="text"
-                  name="HolderName"
-                  placeholder="Enter Name"
-                  value={accountData.HolderName}
-                  onChange={handleChange}
-                />
-                {errors.HolderName && (
-                  <ErrorMessage>{errors.HolderName}</ErrorMessage>
-                )}
-              </InputContainer>
-              <InputContainer>
-                <Label>Bank Name</Label>
-                <Input
-                  type="text"
-                  name="BankName"
-                  placeholder="Enter Bank Name"
-                  value={accountData.BankName}
-                  onChange={handleChange}
-                />
-                {errors.BankName && (
-                  <ErrorMessage>{errors.BankName}</ErrorMessage>
-                )}
-              </InputContainer>
-              <InputContainer>
-                <Label>IFSC Code</Label>
-                <Input
-                  type="text"
-                  name="IFSCCode"
-                  placeholder="Enter IFSC Code"
-                  value={accountData.IFSCCode}
-                  onChange={handleChange}
-                  maxLength={11}
-                />
-                {errors.IFSCCode && (
-                  <ErrorMessage>{errors.IFSCCode}</ErrorMessage>
-                )}
-              </InputContainer>
-              <InputContainer>
-                <Label>Branch Name</Label>
-                <Input
-                  type="text"
-                  name="BranchName"
-                  placeholder="Enter Branch Name"
-                  value={accountData.BranchName}
-                  onChange={handleChange}
-                />
-                {errors.BranchName && (
-                  <ErrorMessage>{errors.BranchName}</ErrorMessage>
-                )}
-              </InputContainer>
-              <InputContainer>
-                <Label>Account No</Label>
-                <Input
-                  type="text"
-                  name="AccountNo"
-                  placeholder="Enter Account No"
-                  value={accountData.AccountNo}
-                  onChange={handleChange}
-                  maxLength={18}
-
-                />
-                {errors.AccountNo && (
-                  <ErrorMessage>{errors.AccountNo}</ErrorMessage>
-                )}
-              </InputContainer>
-              <InputContainer>
-                <Label>Remark</Label>
-                <Input
-                  type="text"
-                  name="Remark"
-                  placeholder="Enter Remark"
-                  value={accountData.Remark}
-                  onChange={handleChange}
-                />
-                {errors.Remark && (
-                  <ErrorMessage>{errors.Remark}</ErrorMessage>
-                )}
-              </InputContainer>
-            </Main>
-            <div
-              style={{
-                display: "flex",
-                gap: "10px",
-                justifyContent: "center",
-              }}
-            >
-              <SubmitButton type="submit">
-                {editMode ? "Update" : "Save"}
-              </SubmitButton>
-            </div>
-          </Form>
-
-          <Table>
-            <thead>
-              <tr>
-                <Th>Sr. No</Th>
-                <Th>Account Holder Name</Th>
-                <Th>Account No</Th>
-                <Th>Bank Name</Th>
-                <Th>IFSC Code</Th>
-                <Th>Remark</Th>
-                <Th>Action</Th>
-              </tr>
-            </thead>
-            <tbody>
-              {accounts.map((account, index) => (
-                <tr key={account._id}>
-                  <Td>{index + 1}</Td>
-                  <Td>{account.HolderName}</Td>
-                  <Td>{account.AccountNo}</Td>
-                  <Td>{account.BankName}</Td>
-                  <Td>{account.IFSCCode}</Td>
-                  <Td>{account.Remark}</Td>
-                  <Td1>
-                    <EditButton onClick={() => handleEdit(account)}>
-                      Edit
-                      <Edit size={18} />
-                    </EditButton>
-                    <DeleteButton onClick={() => handleDelete(account._id)}>
-                      <Trash2 size={18} />
-                    </DeleteButton>
-                  </Td1>
+    <MainDashboard>
+      <FormContainer>
+        <Title>Add Account</Title>
+        <Form onSubmit={handleSubmit}>
+          <Heading>Details</Heading>
+          <Main>
+            <InputContainer>
+              <Label>Account Holder Name</Label>
+              <Input
+                type="text"
+                name="HolderName"
+                placeholder="Enter Name"
+                value={accountData.HolderName}
+                onChange={handleChange}
+              />
+              {errors.HolderName && <ErrorMessage>{errors.HolderName}</ErrorMessage>}
+            </InputContainer>
+            <InputContainer>
+              <Label>Bank Name</Label>
+              <Input
+                type="text"
+                name="BankName"
+                placeholder="Enter Bank Name"
+                value={accountData.BankName}
+                onChange={handleChange}
+              />
+              {errors.BankName && <ErrorMessage>{errors.BankName}</ErrorMessage>}
+            </InputContainer>
+            <InputContainer>
+              <Label>IFSC Code</Label>
+              <Input
+                type="text"
+                name="IFSCCode"
+                placeholder="Enter IFSC Code"
+                value={accountData.IFSCCode}
+                onChange={handleChange}
+                maxLength={11}
+              />
+              {errors.IFSCCode && <ErrorMessage>{errors.IFSCCode}</ErrorMessage>}
+            </InputContainer>
+            <InputContainer>
+              <Label>Branch Name</Label>
+              <Input
+                type="text"
+                name="BranchName"
+                placeholder="Enter Branch Name"
+                value={accountData.BranchName}
+                onChange={handleChange}
+              />
+              {errors.BranchName && <ErrorMessage>{errors.BranchName}</ErrorMessage>}
+            </InputContainer>
+            <InputContainer>
+              <Label>Account No</Label>
+              <Input
+                type="text"
+                name="AccountNo"
+                placeholder="Enter Account No"
+                value={accountData.AccountNo}
+                onChange={handleChange}
+                maxLength={18}
+              />
+              {errors.AccountNo && <ErrorMessage>{errors.AccountNo}</ErrorMessage>}
+            </InputContainer>
+            <InputContainer>
+              <Label>Remark</Label>
+              <Input
+                type="text"
+                name="Remark"
+                placeholder="Enter Remark"
+                value={accountData.Remark}
+                onChange={handleChange}
+              />
+              {errors.Remark && <ErrorMessage>{errors.Remark}</ErrorMessage>}
+            </InputContainer>
+          </Main>
+          <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+            <SubmitButton type="submit">{editMode ? "Update" : "Save"}</SubmitButton>
+          </div>
+          <TableWrapper>
+            <Table>
+              <thead>
+                <tr>
+                  <Th>Sr. No</Th>
+                  <Th>Account Holder Name</Th>
+                  <Th>Account No</Th>
+                  <Th>Bank Name</Th>
+                  <Th>IFSC Code</Th>
+                  <Th>Remark</Th>
+                  <Th>Action</Th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-        </FormContainer>
-      </MainDashboard>
-
-    </>
+              </thead>
+              <tbody>
+                {accounts.map((account, index) => (
+                  <tr key={account._id}>
+                    <Td>{index + 1}</Td>
+                    <Td>{account.HolderName}</Td>
+                    <Td>{account.AccountNo}</Td>
+                    <Td>{account.BankName}</Td>
+                    <Td>{account.IFSCCode}</Td>
+                    <Td>{account.Remark}</Td>
+                    <Td1>
+                      <EditButton onClick={() => handleEdit(account)}>
+                        Edit <Edit size={18} />
+                      </EditButton>
+                      <DeleteButton onClick={() => handleDelete(account._id)}>
+                        <Trash2 size={18} />
+                      </DeleteButton>
+                    </Td1>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </TableWrapper>
+        </Form>
+      </FormContainer>
+    </MainDashboard>
   );
 };
 

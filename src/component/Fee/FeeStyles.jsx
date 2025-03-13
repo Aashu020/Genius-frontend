@@ -140,29 +140,90 @@ export const SubmitButton = styled.button`
     padding: 5px;
   }
 `;
+// export const Container = styled.div`
+  
+   
+//   }
+// `;
 export const Container = styled.div`
-  display: flex;
+ 
+ display: flex;
+ justify-content: center;
   background-color: #f4f4f4;
+  /* width: ${`({ isSidebarOpen }) => (isSidebarOpen ? "calc(100vw - 250px)" : "100vw")`};
+   */
+  width: 100%;
   @media (max-width: 768px) {
     flex-direction: column;
+  /* Large Screens (Desktops) */
+  @media (max-width: 1200px) {
+    padding: 15px;
+    justify-content:center
+  }
+  }
+
+
+  /* Tablets */
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  /* Mobile Devices */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 8px;
+  }
+
+  /* Small Phones */
+  @media (max-width: 480px) {
+    flex-direction: column;
+    padding: 5px;
+    
   }
 `;
 export const Section = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom:15px;
-`;
-export const TableContainer = styled.div`
-display: flex;
+  @media(max-width:768px){
 flex-direction: column;
-justify-content: center;
-align-items: center;
+  }
 `;
+// export const TableContainer = styled.div`
+// display: flex;
+// flex-direction: column;
+// justify-content: center;
+// align-items: center;
+// `;
+// export const Table = styled.table`
+//   width: 70%;
+//   border-collapse: collapse;
+//   margin-top: 30px;
+// `;
+export const TableContainer = styled.div`
+  width: 100%;
+  overflow-x: auto; /* ✅ Ensure scrolling works */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+`;
+
 export const Table = styled.table`
-  width: 70%;
+  width: 100%; /* ✅ 100% width le, taaki scroll properly aaye */
+  min-width: 600px; /* ✅ Avoid shrinking */
   border-collapse: collapse;
   margin-top: 30px;
+  /* white-space: nowrap; ✅ Prevent text wrapping */
+  @media (max-width:1023px){
+    margin-left: 14rem;
+  }
+  @media (max-width:320px){
+    margin-left: 34rem;
+  }
 `;
+
 export const Th = styled.th`
   background-color: #f2f2f2;
   padding: 10px;
@@ -468,11 +529,24 @@ padding: 20px;
 background-color: white;
 font-family: Arial, sans-serif;
 position: relative;
+ @media(max-width:480px){
+  width: 100%;
+ }
 `;
 export const ReceiptWrapper = styled.div`
 display: flex;
 gap: 3rem;
 margin: 10px 0; // Add vertical margin for spacing between receipt pairs
+@media(max-width:1023px){
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 100vw;
+}
+@media(max-width:480px){
+  width: 84%;
+}
 `;
 export const Row = styled.div`
 display: flex;

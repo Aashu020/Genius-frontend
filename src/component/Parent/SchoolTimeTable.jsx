@@ -12,6 +12,9 @@ const TableWrapper = styled.div`
     margin: 0;
     margin-top: 20px;
     margin-bottom: 20px;
+    display: flex;
+        flex-direction: column;
+        align-items: center;
   }
 
   h2 {
@@ -98,6 +101,8 @@ const Table = styled.div`
   @media (max-width: 480px) {
     grid-template-columns: repeat(7, 1fr);
     font-size: 6px;
+    max-width: 97%;
+    overflow-x: auto;
   }
 `;
 

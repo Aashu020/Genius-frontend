@@ -8,7 +8,7 @@ import axios from "axios";
 
 import {
   HeaderContainer, Logo, SearchContainer, SearchBox, SearchInput, SearchIcon, MenuIcon,
-  InstituteSection, InstituteName, DropdownList, DropdownItem
+  InstituteSection, InstituteName,Logo1 ,DropdownList, DropdownItem
 } from './Outerstyle2';
 
 const Navbar = () => {
@@ -142,14 +142,13 @@ const Navbar = () => {
       <InstituteSection>
         {/* <WhatsAppIcon /> */}
         {/* <NotificationModal /> */}
-        <InstituteName>
+        <Logo1 style={{marginLeft:"0"}}>
           <img
-            style={{ height: "45px"}}
             src={`http://localhost:8007/uploads/${formData?.SchoolLogo.replace(/^uploads\//, '')}`}
             alt="School-Logo"
           />
 
-        </InstituteName>
+        </Logo1>
       </InstituteSection>
     </HeaderContainer>
   );

@@ -51,6 +51,9 @@ export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   margin-top: 30px;
+  @media (max-width:480px){
+  margin-top:80px
+  }
 `;
 
 export const Table100 = styled.table`
@@ -233,6 +236,15 @@ export const Button = styled.button`
   border: none;
   border-radius: 50%;
   margin-left: 20px;
+  @media (max-width:480px){
+  height:1.5rem;
+  width:fit-content;
+  padding:0.5rem;
+  font-size:13px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  }
 `;
 
 export const Frame = styled.iframe`
@@ -242,8 +254,15 @@ export const Frame = styled.iframe`
 `;
 
 export const TimetableWrapper = styled.div`
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
+  overflow-y:auto;
+  height:90vh;
+  // margin: 0 auto;
+  @media (max-width:480px){
+    width:90%;
+    padding:1rem;
+
+  }
 `;
 
 export const Heading1 = styled.h2`
@@ -399,6 +418,12 @@ export const Table1 = styled.div`
   @media (max-width: 480px) {
     grid-template-columns: repeat(7, 1fr);
     font-size: 6px;
+    margin-top:10rem;
+  }
+     @media (min-width: 481px) {
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 6px;
+    margin-top:20rem;
   }
 `;
 
@@ -424,6 +449,10 @@ export const TimetableContainer = styled.div`
   background-color: #e0e0e0;
   width: 80%;
   margin: 2rem 0;
+  @media (max-width:480px){
+    margin:1rem 0 ;
+    width:100%;
+  }
 `;
 
 export const Header = styled.div`
@@ -441,7 +470,7 @@ export const RowHeader = styled.div`
   color: black;
   font-weight: bold;
   text-align: center;
-  padding: 8px;
+  padding: 9px;
 `;
 
 export const SubjectCell = styled.div`
@@ -503,6 +532,10 @@ export const Input = styled.input`
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  @media (max-width:480px){
+    width:fit-content;
+    padding: 0.4rem 0;
+  }
 `;
 
 export const Select = styled.select`
@@ -512,6 +545,12 @@ export const Select = styled.select`
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  @media (max-width:480px){
+    width:fit-content;
+  }
+  @media (min-width:481px){
+    width:fit-content;
+  }
 `;
 
 export const Buttonbg = styled.button`
@@ -542,6 +581,9 @@ export const TimeTableHeader = styled.div`
   text-align: center;
   padding: 10px;
   border: 1px solid #ddd;
+  @media (max-width:480px){
+    width:100%;
+  }
 `;
 
 export const TimeTableCell = styled.div`
@@ -550,6 +592,10 @@ export const TimeTableCell = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
+  @media (max-width:480px){
+    width:90%;
+    padding:10px;
+  }
 `;
 
 export const SubjectInput = styled(Input)`
@@ -563,6 +609,24 @@ export const ClassDetails = styled.div`
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
+  height:70vh;
+  overflow-y:auto;
+  scrollbar-width: none;
+   @media (max-width: 480px) {
+    width: 100%;
+    margin-left:-2rem;
+     height:60vh;
+  } 
+     @media (min-width: 767px) {
+    width: 100%;
+    margin-left:-2rem;
+     height:65vh;
+  } 
+     @media (min-width: 1024px) {
+    width: 100%;
+    margin-left:-2rem;
+     height:75vh;
+  } 
 `;
 
 export const Section = styled.p`

@@ -1,18 +1,28 @@
 import axios from "axios";
+import { Scroll } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 // Styled components
 const Container = styled.div`
-  width: 80%;
+  width: 100%;
   margin: 50px auto;
   background-color: #f9f9f9;
 `;
 
-const Table = styled.table`
-  width: 100%;
+export const Table = styled.table`
+  width: 100%; /* ✅ 100% width le, taaki scroll properly aaye */
+  min-width: 600px; /* ✅ Avoid shrinking */
   border-collapse: collapse;
+  /* margin-top: 30px; */
+  /* white-space: nowrap; ✅ Prevent text wrapping */
+  @media (max-width:1023px){
+    margin-left: 14rem;
+  }
+  @media (max-width:590px){
+    margin-left: 34rem;
+  }
 `;
 
 const TableHead = styled.thead`
@@ -91,6 +101,16 @@ const CloseButton = styled.button`
   }
 `;
 
+export const TableContainer = styled.div`
+  width: 100%;
+  overflow-x: auto; /* ✅ Ensure scrolling works */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+`;
+
+
 const FeeTable = () => {
     const navigate = useNavigate();
     const [feeData, setFeeData] = useState([]);
@@ -157,6 +177,7 @@ const FeeTable = () => {
                 <div>Loading...</div>
             ) : (
                 <>
+                <TableContainer>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -229,10 +250,12 @@ const FeeTable = () => {
                             </ModalContainer>
                         </ModalBackground>
                     )}
+                    </TableContainer>
                 </>
             )}
         </Container>
     );
 };
+
 
 export default FeeTable;

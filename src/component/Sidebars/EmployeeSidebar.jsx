@@ -36,7 +36,7 @@ const EmployeeSidebar = () => {
     ],
     "Librarian": ["Employee Progress", "Enquiry", "Front Office"],
     "SecurityGuard": ["Employee Progress", "Front Office"],
-    "Teacher": ["Employee Progress", "TimeTable", "Homework", "Exam", "Subject", "Birthday","Result"],
+    "Teacher": ["Employee Progress", "TimeTable", "Homework", "Exam", "Subject", "Birthday","Result","Profile"],
 
   };
 

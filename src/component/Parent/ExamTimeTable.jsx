@@ -4,20 +4,24 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   background-color: #f4f4f4;
-  width: calc(100vw - 250px);
+  /* width: calc(100vw - 250px); */
+  overflow-x: auto;
+width: 100%;
 `;
 
 const MainDashboard = styled.div`
   flex: 1;
   padding: 50px;
-  height: calc(100vh - 100px);
-  overflow-y: auto;
+  /* height: calc(100vh - 100px); */
+  /* overflow-x: auto; */
   background-color: #f9f9f9;
+
 `;
 
 const TableContainer = styled.div`
   margin-top: 40px;
   overflow-x: auto;
+ 
 `;
 
 const Table = styled.table`
@@ -122,35 +126,33 @@ const ExamTimeTable = () => {
 
     // Fetch Date Sheet Data based on student class and match class name
     useEffect(() => {
-        if (studentClass) {
-            const fetchDateSheet = async () => {
-                try {
-                    // Fetch the date sheet for all classes
-                    const response = await fetch("http://localhost:8007/datesheet/all");
-                    const data = await response.json();
-                    console.log("Fetched Date Sheet Data:", data); // Log the entire date sheet data
-
-                    // Filter the date sheet by the student's class
-                    const filteredDateSheet = data.filter(entry => entry.Class === studentClass);
-                    console.log("Filtered Date Sheet for Class:", filteredDateSheet); // Log the filtered date sheet
-
-                    // If there are entries matching the student's class, set them in the state
-                    if (filteredDateSheet.length > 0) {
-                        setDateSheet(filteredDateSheet);
-                    } else {
-                        console.log("No date sheet data available for this class.");
-                    }
-                } catch (error) {
-                    console.error("Error fetching date sheet data:", error);
-                } finally {
-                    setLoading(false);
-                }
-            };
-
-            fetchDateSheet();
-        }
+        if (!studentClass) return;
+    
+        const fetchDateSheet = async () => {
+            try {
+                const response = await fetch("http://localhost:8007/datesheet/all");
+                const data = await response.json();
+                console.log("Raw Data:", data);
+                console.log("Student Class:", `"${studentClass}"`); // Show exact value
+    
+                const filteredDateSheet = data.filter(entry => {
+                    const entryClass = String(entry.Class).trim().toLowerCase();
+                    const targetClass = String(studentClass).trim().toLowerCase();
+                    console.log(`Comparing: "${entryClass}" vs "${targetClass}"`);
+                    return entryClass === targetClass;
+                });
+    
+                console.log("Filtered Results:", filteredDateSheet);
+                setDateSheet(filteredDateSheet);
+            } catch (error) {
+                console.error("Error fetching date sheet data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+    
+        fetchDateSheet();
     }, [studentClass]);
-
     if (loading) {
         return <div>Loading...</div>;
     }

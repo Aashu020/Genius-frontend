@@ -26,6 +26,9 @@ const Title = styled.h2`
   color: #0d47a1;
   text-align: center;
   font-weight: bold;
+  @media (max-width:480px){
+  padding-bottom:1rem;
+  }
 `;
 
 const Form = styled.form`
@@ -49,7 +52,7 @@ const Heading = styled.div`
   @media (max-width: 480px) {
     font-size: 12px;
     height: 30px;
-    width: 50%;
+    width: 60%;
     margin-bottom: 30px;
     margin-top: 20px;
   }
@@ -64,6 +67,7 @@ const Main = styled.div`
   }
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
+    margin-left:15px;
   }
 `;
 
@@ -81,6 +85,11 @@ const FormContainer = styled.div`
 const Section = styled.div`
   display: flex;
   justify-content: space-between;
+  @media (max-width: 480px) {
+    justify-content:center;
+    gap:0.1rem;
+    margin-left:-0.2rem;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -101,6 +110,10 @@ const Label = styled.span`
   padding: 2px 10px;
   border-radius: 20px;
   font-size: 12px;
+  @media (max-width: 480px) {
+    margin-bottom: 12px;
+    height:1rem;
+  }
 `;
 
 const Label2 = styled.span`
@@ -124,11 +137,13 @@ const Input = styled.input`
   background-color: #f4f6fc;
   font-weight: bold;
   outline: none;
+  margin-bottom:1rem;
   @media (max-width: 480px) {
     height: 10px;
     width: 80%;
     font-size: 12px;
     padding: 12px 18px;
+    margin-bottom:1rem;
   }
 `;
 
@@ -141,9 +156,21 @@ const Select = styled.select`
   color: #7a7a7a;
   background-color: #f4f6fc;
   font-weight: bold;
-  @media (max-width: 480px) {
+  @media (max-width: 320px) {
     height: 38px;
-    width: 94%;
+    width: 95%;
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+     @media (min-width: 321px) and (max-width:479px) {
+    height: 38px;
+    width: 93%;
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+    @media (min-width: 381px) and (max-width: 480px) {
+    height: 38px;
+    width: 91%;
     font-size: 12px;
     padding: 10px 12px;
   }
@@ -165,11 +192,11 @@ const SubmitButton = styled.button`
   &:hover {
     background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
   }
-
-  @media (max-width: 768px) {
+@media (max-width: 480px) {
     width: 100%;  
     font-size: 12px;
     padding: 5px;
+    height:2rem;
   }
 `;
 
@@ -234,6 +261,7 @@ const InputContainer1 = styled.div`
   }
   @media (max-width: 480px) {
     margin-bottom: 12px;
+    height:1rem;
   }
 `;
 
@@ -246,6 +274,15 @@ const StyledInput = styled.input`
   color: #7a7a7a;
   background-color: #f4f6fc;
   font-weight: bold;
+  @media (max-width: 380px) {
+    margin-bottom: 12px;
+    height:0.5rem;
+    width:80%;
+  }@media (max-width: 480px) {
+    margin-bottom: 12px;
+    height:0.5rem;
+    width:81%;
+  }
 `;
 
 const SuggestionsList = styled.ul`
@@ -367,6 +404,9 @@ const TableContainer1 = styled.div`
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  @media (max-width: 480px) {
+    width:100%;
+  }
 `;
 
 const Table = styled.table`
@@ -375,7 +415,6 @@ const Table = styled.table`
   background-color: white;
   font-size: 16px;
   text-align: left;
-
   th,
   td {
     padding: 12px;
@@ -576,6 +615,13 @@ const Table1 = styled.table`
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
+  @media (max-width:480px) {
+    width:100%;
+  }
+`;
+const TableWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto; /* Enables horizontal scrolling */
 `;
 const Th = styled.th`
   background-color: #f2f2f2;
@@ -583,11 +629,12 @@ const Th = styled.th`
   text-align: left;
   border-bottom: 1px solid #ddd;
   font-weight: 400;
-`;
-
-const Td = styled.td`
+  `;
+  
+  const Td = styled.td`
   padding: 10px;
   border-bottom: 1px solid #ddd;
+
 `;
 
 const Photo1 = styled.img`
@@ -761,5 +808,6 @@ export{
   TableRow,SmallButton,AdmitCardContainer,DownloadButton,Logo,
   Title1,Header,SchoolLogo,SchoolInfo,ContactInfo,InfoSection,
   InfoColumn,InfoRow,Value,PhotoSection,PhotoContainer,Photo,
-  PlaceholderImage,Footer,FooterText,TdAction,TableContainer1,
+  PlaceholderImage,Footer,FooterText,TdAction,TableContainer1,TableWrapper,
+
 };

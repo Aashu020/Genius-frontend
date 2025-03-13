@@ -7,7 +7,7 @@ import { Eye, Edit, Trash2 } from "lucide-react";
 import { 
   Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
   InputContainer, Label, Input, Select, SubmitButton, Table, Th, Td, 
-  Td1, EditButton, DeleteButton, ErrorMessage 
+  Td1, EditButton, DeleteButton, ErrorMessage ,TableWrapper
 } from './ExpenseStyles';
 
 
@@ -286,6 +286,7 @@ const AddIncome = () => {
             </div>
           </Form>
 
+         <TableWrapper>
           <Table>
             <thead>
               <tr>
@@ -325,6 +326,7 @@ const AddIncome = () => {
                 ))}
             </tbody>
           </Table>
+          </TableWrapper>
         </FormContainer>
       </MainDashboard>
 

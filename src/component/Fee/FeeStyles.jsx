@@ -54,12 +54,13 @@ margin-bottom: 40px;
 export const Main = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 39px;
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
+    gap:20px
   }
 `;
 export const FormContainer = styled.div`
@@ -146,7 +147,6 @@ export const SubmitButton = styled.button`
 //   }
 // `;
 export const Container = styled.div`
- 
  display: flex;
  justify-content: center;
   background-color: #f4f4f4;
@@ -208,6 +208,7 @@ export const TableContainer = styled.div`
   justify-content: center;
   align-items: center;
   
+  
 `;
 
 export const Table = styled.table`
@@ -222,6 +223,10 @@ export const Table = styled.table`
   @media (max-width:320px){
     margin-left: 34rem;
   }
+  @media (max-width:480px){
+    margin-left: 17rem;
+  }
+  
 `;
 
 export const Th = styled.th`

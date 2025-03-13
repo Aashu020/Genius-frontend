@@ -1,12 +1,41 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import styled from "styled-components";
+import styled from "styled-components";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import { Edit, Trash2 } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ErrorMessage,Heading,MainDashboard,Title,Form,Main,FormContainer,InputContainer,Label ,Input,Select,Container,Section,TableContainer,Table,Th,Td,Td1,EditButton,DeleteButton,ConfirmationModal,ConfirmButton,SubmitButton} from "./FeeStyles";
+import { ErrorMessage,Heading,MainDashboard,Title,Form,Main,FormContainer,InputContainer,Label ,Input,Select,Container,Section,Th,Td,Td1,EditButton,DeleteButton,ConfirmationModal,ConfirmButton,SubmitButton} from "./FeeStyles";
+export const TableContainer = styled.div`
+  width: 100%;
+  overflow-x: auto; /* ✅ Ensure scrolling works */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  @media (max-width:375px){
+    justify-content: flex-start;
+  }
+`;
+
+export const Table = styled.table`
+  width: 100%; /* ✅ 100% width le, taaki scroll properly aaye */
+  min-width: 600px; /* ✅ Avoid shrinking */
+  border-collapse: collapse;
+  margin-top: 30px;
+  /* white-space: nowrap; ✅ Prevent text wrapping */
+  @media (max-width:1023px){
+    margin-left: 14rem;
+  }
+  @media (max-width:375px){
+    margin-left: 0;
+  }
+  @media (max-width:480px){
+    margin-left: 17rem;
+  }
+  
+`;
 
 const CreateFeeHeader = () => {
   const [headerName, setHeaderName] = useState("");

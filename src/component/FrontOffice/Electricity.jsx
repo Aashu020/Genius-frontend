@@ -137,6 +137,10 @@ const Td1 = styled.td`
   border-bottom: 1px solid #ddd;
   display: flex;
   gap: 1rem;
+  @media (max-width:1023px){
+    flex-direction: column;
+    border: none;
+  }
 `;
 
 const EditButton = styled.div`
@@ -283,6 +287,7 @@ const Electricity = () => {
         // Refresh data
         const updatedResponse = await axios.get("http://localhost:8007/electricity/all");
         setData(updatedResponse.data.reverse());
+        window.location.reload();
       }
     } catch (error) {
       setMessage(error.response?.data?.message || "Error deleting reading");

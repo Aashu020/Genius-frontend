@@ -107,6 +107,9 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   margin-top: 20px;
   width: 90%;
+  @media (max-width: 480px) {
+    gap:10px;
+  }
 `;
 
 // Wrapper for IdCard image (specific to IdCard.jsx)
@@ -280,9 +283,15 @@ export const Input = styled.input`
   background-color: #f4f6fc;
   font-weight: bold;
   outline: none;
-  @media (max-width: 480px) {
+  @media (max-width: 426px) {
     height: 10px;
-    width: 80%;
+    width: 90%;
+    font-size: 12px;
+    padding: 12px 18px;
+  }
+  @media (max-width:321px) {
+    height: 10px;
+    width: 86%;
     font-size: 12px;
     padding: 12px 18px;
   }
@@ -321,7 +330,7 @@ export const Select = styled.select`
   font-weight: bold;
   @media (max-width: 480px) {
     height: 38px;
-    width: 94%;
+    width: 100%;
     font-size: 12px;
     padding: 10px 12px;
   }
@@ -348,8 +357,13 @@ export const SubmitButton = styled.button`
   }
   @media (max-width: 768px) {
     width: 100%;
+    font-size: 18px;
+    padding: 8px;
+  }
+  @media (max-width: 480px) {
+    width: 100%;
     font-size: 12px;
-    padding: 5px;
+    padding: 8px;
   }
 `;
 
@@ -378,6 +392,11 @@ export const Step = styled.div`
   @media (max-width: 480px) {
     font-size: 10px;
     padding: 7px;
+    width: 40%;
+  }
+  @media (max-width: 321px) {
+    font-size: 9px;
+    padding: 5px;
     width: 40%;
   }
 `;
@@ -595,6 +614,10 @@ export const Button = styled.button`
 // Open button (specific style from AllStaff)
 export const OpenButton = styled(Button)`
   background-color: #688af6;
+  padding:5px;
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 // Edit button (from AllStaff)
@@ -713,4 +736,7 @@ export const SearchInput = styled.input`
   border: 1px solid #ddd;
   border-radius: 4px;
   width: 200px;
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `;

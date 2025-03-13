@@ -39,7 +39,6 @@ const MainDashboard = styled.div`
   flex: 1;
   padding: 20px;
   height: calc(100vh - 100px);
-  overflow-y: auto;
   background-color: #f9f9f9;
 `;
 
@@ -76,6 +75,10 @@ const ChartSection = styled.div`
   /* height: 0vh; */
   justify-content: space-between;
   margin-bottom: 20px;
+  @media (max-width: 480px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 
@@ -85,7 +88,7 @@ const CalendarContainer = styled.div`
   display: flex;
   background-color: #fff;
   border-radius: 12px;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
   justify-content: space-between;
@@ -98,18 +101,18 @@ const CalendarContainer = styled.div`
 
 const Box = styled.div`
   display: flex;
-  @media (max-width: 768px) {
+  @media (max-width: 1025px) {
     display: block;
   }
 `;
 const Left = styled.div`
-  width: 60%;
+  width: 100%;
   @media (max-width: 480px) {
     width: 100%;
   }
 `;
 const Right = styled.div`
-  width: 40%;
+  width: 100%;
   @media (max-width: 480px) {
     width: 100%;
   }

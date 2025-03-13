@@ -8,7 +8,7 @@ import { Edit, Trash2 } from "lucide-react";
 import { 
   Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
   InputContainer, Label, Label2, Input, Select, SubmitButton, Table, 
-  Th, Td, Td1, EditButton, DeleteButton, ErrorMessage 
+  Th, Td, Td1, EditButton, DeleteButton, ErrorMessage , TableWrapper
 } from './ExpenseStyles';
 
 const AddExpense = () => {
@@ -289,8 +289,7 @@ const AddExpense = () => {
                 {isEditing ? "Update" : "Save"}
               </SubmitButton>
             </div>
-          </Form>
-
+                 <TableWrapper>
           <Table>
             <thead>
               <tr>
@@ -330,6 +329,9 @@ const AddExpense = () => {
                 ))}
             </tbody>
           </Table>
+               </TableWrapper>
+          </Form>
+
         </FormContainer>
       </MainDashboard>
 

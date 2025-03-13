@@ -17,25 +17,41 @@ const AdmissionLetterContainer = styled.div`
   padding: 20px;
   border: 1px solid #ccc;
   font-family: Arial, sans-serif;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    width: 90%;
+    padding: 10px;
+  }
 `;
 
 const Header = styled.div`
   text-align: center;
   margin-bottom: 20px;
+
+  @media (max-width: 480px) {
+    margin-bottom: 15px;
+  }
 `;
 
 const Logo = styled.img`
   height: 60px;
+
+  @media (max-width: 480px) {
+    height: 40px;
+  }
 `;
 
 const Title = styled.h2`
   color: #4a4a4a;
-`;
-
-const Section2 = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Section1 = styled.div`
@@ -43,10 +59,23 @@ const Section1 = styled.div`
   grid-template-columns: repeat(3, 1fr);
   margin-bottom: 20px;
   gap: 1rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
 `;
 
 const LeftColumn = styled.div`
   width: 100%;
+
+  @media (max-width: 480px) {
+    margin-bottom: 15px;
+  }
 `;
 
 const Label = styled.p`
@@ -55,7 +84,13 @@ const Label = styled.p`
   color: #555;
   font-weight: bold;
   border-bottom: 0.5px solid black;
-  width: 60%;
+  width: 100%;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    font-size: 12px;
+  }
+  
 `;
 
 const Value = styled.p`
@@ -64,11 +99,20 @@ const Value = styled.p`
   color: black;
   font-weight: bold;
   margin-bottom: 10px;
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
 `;
 
 const PhotoContainer = styled.div`
   text-align: center;
   margin-bottom: 20px;
+
+  @media (max-width: 480px) {
+    margin-bottom: 15px;
+  }
 `;
 
 const Photo = styled.img`
@@ -76,6 +120,11 @@ const Photo = styled.img`
   height: 110px;
   background-color: gray;
   border-radius: 50%;
+
+  @media (max-width: 480px) {
+    width: 80px;
+    height: 75px;
+  }
 `;
 
 const QRCodesContainer = styled.div`
@@ -83,21 +132,28 @@ const QRCodesContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+
+  @media (max-width: 480px) {
+    margin-top: 15px;
+  }
 `;
 
 const QRCode = styled.img`
   width: 80px;
   height: 80px;
   margin: 5px 0;
-`;
 
+  @media (max-width: 480px) {
+    width: 60px;
+    height: 60px;
+  }
+`;
 const ViewStaff = () => {
   const location = useLocation();
   const [staff, setStaff] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [school, setSchool] = useState(null);
-
 
   useEffect(() => {
     if (location.state && location.state.Id) {
@@ -128,15 +184,14 @@ const ViewStaff = () => {
     axios
       .get("http://localhost:8007/schoolsetup/all")
       .then((response) => {
-        // console.log(response.data);
         if (response.data.length > 0) {
-          setSchool(response.data[0])
+          setSchool(response.data[0]);
         }
       })
       .catch((error) => {
         console.error(error);
-      })
-  }, [])
+      });
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -149,34 +204,26 @@ const ViewStaff = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8007/student/update/${location.state.Id}`, staff);
+      const response = await axios.put(`http://localhost:8007/staff/update/${location.state.Id}`, staff); // Fixed endpoint from 'student' to 'staff'
       if (response.status === 200) {
-        alert('Staff data updated successfully!');
+        alert("Staff data updated successfully!");
       }
     } catch (error) {
-      console.error('Error updating staff data:', error);
-      setError('Failed to update staff data.');
+      console.error("Error updating staff data:", error);
+      setError("Failed to update staff data.");
     }
   };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  if (loading) {
-    return <p>Loading staff details...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
   return (
     <Container>
       <AdmissionLetterContainer>
         <Header>
-          <Logo style={{height:"80px"}} src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
+          <Logo style={{ height: "80px" }} src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, "")}`} alt="School Logo" />
           <Title>{school?.SchoolName}</Title>
-          <p>{school?.EmailId} | {school?.PhoneNo} </p>
+          <p>{school?.EmailId} | {school?.PhoneNo}</p>
           <p>{school?.Website}</p>
           <h2 style={{ color: "#222d78", fontWeight: "bold", marginTop: "10px" }}>Staff Details</h2>
         </Header>
@@ -188,60 +235,53 @@ const ViewStaff = () => {
         <Section1>
           <LeftColumn>
             <Label>Employee ID:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.EmployeeId}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.EmployeeId}</Value>
             <Label>Name:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.Name}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.Name}</Value>
             <Label>Date of Birth:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.DOB}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.DOB}</Value>
             <Label>Gender:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.Gender}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.Gender}</Value>
             <Label>Role:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.Role}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.Role}</Value>
             <Label>Department:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.Department}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.Department}</Value>
             <Label>Email:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.Email}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.Email}</Value>
             <Label>Mobile No:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.MobileNo}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.MobileNo}</Value>
             <Label>Address:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.Address}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.Address}</Value>
           </LeftColumn>
 
           <LeftColumn>
             <Label>Qualification:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.Documents?.Qualification}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.Documents?.Qualification}</Value>
             <Label>Experience:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.Experience}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.Experience}</Value>
             <Label>Salary:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.Salary}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.Salary}</Value>
             <Label>Blood Group:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.BloodGroup}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.BloodGroup}</Value>
             <Label>Marital Status:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.MaritalStatus}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.MaritalStatus}</Value>
             <Label>Language Known:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.LanguageKnown.join(", ")}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.LanguageKnown.join(", ")}</Value>
           </LeftColumn>
 
           <LeftColumn>
             <Label>Emergency Contact Name:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.EmergencyContact?.Name}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.EmergencyContact?.Name}</Value>
             <Label>Emergency Contact Mobile:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.EmergencyContact?.MobileNo}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.EmergencyContact?.MobileNo}</Value>
             <Label>Last School:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.LastSchool}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.LastSchool}</Value>
             <Label>Referred By:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.ReferredName}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.ReferredName}</Value>
             <Label>Referred Contact:</Label>
-            <Value><BsArrowReturnRight style={{ color: "black" }} />&nbsp;{staff?.ReferredContact}</Value>
+            <Value><BsArrowReturnRight style={{ color: "black" }} /> {staff?.ReferredContact}</Value>
           </LeftColumn>
         </Section1>
-
-        {/* <QRCodesContainer>
-                    <Label>Scan QR Code to Access Portal</Label>
-                    <QRCode src="/path/to/qr1.png" alt="QR Code 1" />
-                    <QRCode src="/path/to/qr2.png" alt="QR Code 2" />
-                    <QRCode src="/path/to/qr3.png" alt="QR Code 3" />
-                </QRCodesContainer> */}
       </AdmissionLetterContainer>
     </Container>
   );

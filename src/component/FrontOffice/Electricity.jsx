@@ -2,13 +2,199 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { Edit, Trash2 } from "lucide-react";
-import {
-  Container2, MainDashboard, Title, Form, Heading, Main, FormContainer,
-  InputContainer, Label, Input, SubmitButton, Table, Th, Td, Td1,
-  EditButton, DeleteButton, PaginationContainer, PaginationInfo,
-  PaginationButton, RowsPerPageDropdown
-} from './FrontOfficeStyles1';
+import { TableWrapper } from "../Outerstyle2";
 
+const Container = styled.div`
+  display: flex;
+  height: calc(100vh - 35px);
+  background-color: #f4f4f4;
+`;
+
+const MainDashboard = styled.div`
+  flex: 1;
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+`;
+
+const Title = styled.h2`
+  color: #0d47a1;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+`;
+
+const Form = styled.form`
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const Heading = styled.div`
+  width: 47%;
+  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
+  color: white;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  margin-bottom: 40px;
+`;
+
+const Main = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FormContainer = styled.div`
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const InputContainer = styled.div`
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+const Label = styled.span`
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
+  color: white;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+`;
+
+const Input = styled.input`
+  width: 88%;
+  padding: 15px 20px;
+  border: 2px solid #7d3cff;
+  border-radius: 30px;
+  font-size: 16px;
+  color: #7a7a7a;
+  background-color: #f4f6fc;
+  font-weight: bold;
+  outline: none;
+`;
+
+const SubmitButton = styled.button`
+  width: 320px;
+  padding: 12px;
+  background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+  margin-top: 20px;
+
+  &:hover {
+    background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
+  }
+`;
+
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+`;
+const TableWrapper1 = styled.div`
+width: 100%;
+overflow-x: auto;
+`
+
+const Th = styled.th`
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+`;
+
+const Td = styled.td`
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+`;
+
+const Td1 = styled.td`
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  gap: 1rem;
+`;
+
+const EditButton = styled.div`
+  cursor: pointer;
+  background-color: #209a16bf;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  justify-content: center;
+`;
+
+const DeleteButton = styled.div`
+  background-color: red;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  justify-content: center;
+`;
+
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: end; 
+  align-items: center;
+  padding: 10px 20px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #fff;
+`;
+
+const PaginationInfo = styled.div`
+  display: flex;
+  align-items: center;
+  color: #888;
+`;
+
+const PaginationButton = styled.button`
+  background-color: #fff;
+  color: ${(props) => (props.disabled ? "#ccc" : "#000")};
+  border: none;
+  padding: 5px 15px;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  font-size: 14px;
+  
+  &:hover {
+    background-color: ${(props) => (props.disabled ? "#fff" : "#f0f0f0")};
+  }
+`;
+
+const RowsPerPageDropdown = styled.select`
+  margin: 0 10px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  cursor: pointer;
+`;
 
 const Electricity = () => {
   const [meterNo, setMeterNo] = useState("");
@@ -161,6 +347,7 @@ const Electricity = () => {
           </div>
         </Form>
 
+<TableWrapper1>
         <Table>
           <thead>
             <tr>
@@ -199,6 +386,7 @@ const Electricity = () => {
             })}
           </tbody>
         </Table>
+        </TableWrapper1>
         <PaginationContainer>
           <PaginationInfo>
             Rows per page:

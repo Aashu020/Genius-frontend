@@ -159,7 +159,7 @@ const StaffDetail = () => {
           </StepIndicatorContainer>
 
           <Form>
-            <Heading1>Father's Details/Husband Details</Heading1>
+            <Heading>Father's Details/Husband Details</Heading>
 
             <Main>
               <InputContainer>

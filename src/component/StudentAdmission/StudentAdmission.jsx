@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-
-
 const Container = styled.div`
   display: flex;
   background-color: #f4f4f4;

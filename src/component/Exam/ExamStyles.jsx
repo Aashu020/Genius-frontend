@@ -345,7 +345,7 @@ export const Status = styled.button`
   padding: 8px 20px;
   border-radius: 5px;
   color: white;
-  width: 50%;
+  width: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -358,7 +358,7 @@ export const Status = styled.button`
   }
 
   @media (max-width: 480px) {
-    width: 70%;
+    width: 60px;
     padding: 5px 10px;
     font-size: 0.7rem;
   }
@@ -370,7 +370,7 @@ export const Button = styled.button`
   padding: 8px 10px;
   border-radius: 5px;
   color: white;
-  width: 50%;
+  width: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -383,8 +383,8 @@ export const Button = styled.button`
   }
 
   @media (max-width: 480px) {
-    width: 70%;
-    padding: 5px 6px;
+    width: 40px;
+    padding: 5px 16px;
     font-size: 0.7rem;
   }
 `;
@@ -394,10 +394,7 @@ export const DeleteButton = styled.button`
   padding: 8px 12px; /* Increased base padding for better touch target */
   border-radius: 5px;
   color: white;
-  font-size: 14px; /* Base font size for readability */
-  font-weight: 500; /* Medium weight for balance */
-  width: auto; /* Default to content width instead of fixed percentage */
-  min-width: 60px; /* Minimum width for consistency */
+  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -429,10 +426,9 @@ export const DeleteButton = styled.button`
     min-width: 45px; /* Adjusted for small screens */
     width: auto; /* Let content dictate width, avoid fixed 70% */
   }
-
-  /* Extra-small mobile */
-  @media (max-width: 320px) {
-    
-    padding: 2px;
+  
+  @media (max-width: 480px) {
+    width: 25px;
+    padding: 0px 6px;
   }
 `;

@@ -218,6 +218,9 @@ export const HeaderContainer = styled.div`
   padding: 10px 20px;
   height: 80px;
   box-sizing: border-box;
+  @media (max-width:480px){
+    gap:0.3rem
+  }
 `;
 
 export const Logo = styled.div`
@@ -226,8 +229,44 @@ export const Logo = styled.div`
   img {
     height: 100%;
     width: 100%;
-    border-radius:50%;
+    border-radius:100%;
     object-fit: cover;
+  }
+  @media (max-width:320px){
+    height:40px;
+    width:45px;
+    margin-left:-0.5rem;
+  }
+  @media (min-width:321px) and (max-width:480px){
+    height:45px;
+    width:50px;
+    margin-left:-0.5rem;
+  }
+     @media (min-width:481px) and (max-width:768px){
+    height:60px;
+    width:60px;
+    margin-left:-0.5rem;
+  }
+`;
+
+export const Logo1 = styled.div`
+  height: 70px;
+  width: 70px;
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius:100%;
+    object-fit: cover;
+  }
+  @media (max-width:480px){
+    height:45px;
+    width:45px;
+    margin-left:-0.5rem;
+  }
+     @media (min-width:480px) and (max-width:768px){
+    height:60px;
+    width:60px;
+    margin-right:1rem;
   }
 `;
 
@@ -237,6 +276,8 @@ export const SearchContainer = styled.div`
   display: flex;
   gap: 15px;
   position: relative;
+
+  
 `;
 
 export const SearchBox = styled.div`
@@ -246,6 +287,10 @@ export const SearchBox = styled.div`
   border-radius: 30px;
   padding: 5px 15px;
   width: 100%;
+  @media (max-width:480px){
+    width:80%;
+    height:1.5rem;
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -280,6 +325,12 @@ export const InstituteName = styled.div`
   font-size: 16px;
   font-weight: bold;
   color: #fff;
+  @media (max-width:480px){
+  height:50px;
+  img{
+    height:10px;
+    }
+  }
 `;
 
 export const DropdownList = styled.ul`

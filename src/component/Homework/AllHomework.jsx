@@ -4,8 +4,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Edit, Trash2, Eye } from 'lucide-react'; // Import Eye icon
 import { 
-  HomeworkListContainer, HomeworkListTitle, Table, Th, Td, Td1, EditButton, DeleteButton, ViewButton, ConfirmationModal,  ModalContent, ConfirmButton, DetailModalContent 
+  HomeworkListContainer, TableWrapper1,HomeworkListTitle, Table, Th, Td, Td1, EditButton, DeleteButton, ViewButton, ConfirmationModal,  ModalContent, ConfirmButton, DetailModalContent 
 } from "./HomeworkStyle";
+import { TableWrapper } from '../Outerstyle2';
 
 const AllHomework = () => {
   const [homework, setHomework] = useState([]);
@@ -92,6 +93,7 @@ const AllHomework = () => {
   return (
     <HomeworkListContainer>
       <HomeworkListTitle>All Homework</HomeworkListTitle>
+      <TableWrapper1>
       <Table>
         <thead>
           <tr>
@@ -142,6 +144,8 @@ const AllHomework = () => {
           ))}
         </tbody>
       </Table>
+      </TableWrapper1>
+      
 
       {showConfirm && (
         <ConfirmationModal>

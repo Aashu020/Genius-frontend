@@ -3,6 +3,7 @@ import { Scroll } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { TableWrapper } from "../Outerstyle2";
 
 // Styled components
 const Container = styled.div`

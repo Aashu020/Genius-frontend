@@ -5,9 +5,10 @@ import { jsPDF } from "jspdf"; // Import jsPDF
 import axios from 'axios';
 import { 
     Container, ReceiptWrapper, Receipt, CopyLabel, Header, Title, SubTitle, SectionTitle, InfoSection, Row, 
-    LabelDiv, ValueDiv, Label, Value, Table, TableHeader, TableData, AmountRow, Footer, DetailsText, 
+    LabelDiv, ValueDiv, Label, Value, Table,TableContainer, TableHeader, TableData, AmountRow, Footer, DetailsText, 
     AuthSign, PrintButton 
   } from "./FeeStyles";
+
 
 const FeeReceipt = () => {
     const location = useLocation();
@@ -164,8 +165,8 @@ const FeeReceipt = () => {
                                     
                                 </InfoSection>
                             </Header>
-
-                            <Table>
+                           <TableContainer>
+                           <Table>
                                 <thead>
                                     <tr>
                                         <TableHeader style={{ textAlign: 'center' }}>S. No.</TableHeader>
@@ -221,6 +222,8 @@ const FeeReceipt = () => {
                                     </AmountRow>
                                 </tbody>
                             </Table>
+                           </TableContainer>
+                            
 
                             <Footer>
                                 <DetailsText>Details: {location.state.PaymentMode} / {payment.Remark}</DetailsText>
@@ -268,8 +271,8 @@ const FeeReceipt = () => {
                                     
                                 </InfoSection>
                             </Header>
-
-                            <Table>
+                          <TableContainer>
+                          <Table>
                                 <thead>
                                     <tr>
                                         <TableHeader style={{ textAlign: 'center' }}>S. No.</TableHeader>
@@ -325,6 +328,8 @@ const FeeReceipt = () => {
                                     </AmountRow>
                                 </tbody>
                             </Table>
+                          </TableContainer>
+                           
 
                             <Footer>
                                 <DetailsText>Details: {location.state.PaymentMode} / {payment.Remark}</DetailsText>

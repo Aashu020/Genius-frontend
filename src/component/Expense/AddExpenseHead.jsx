@@ -7,7 +7,7 @@ import { Edit, Trash2 } from "lucide-react";
 import { 
   Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
   InputContainer, Label, Input, SubmitButton, Table, Th, Td, 
-  ActionButtons, EditButton, DeleteButton, ErrorMessage 
+  ActionButtons, EditButton, DeleteButton, ErrorMessage ,TableWrapper
 } from './ExpenseStyles';
 
 const AddExpenseHead = () => {
@@ -163,6 +163,8 @@ const AddExpenseHead = () => {
             </div>
           </Form>
 
+          <TableWrapper>
+
           <Table>
             <thead>
               <tr>
@@ -198,6 +200,7 @@ const AddExpenseHead = () => {
                 ))}
             </tbody>
           </Table>
+          </TableWrapper>
         </FormContainer>
       </MainDashboard>
 

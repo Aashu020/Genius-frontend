@@ -60,6 +60,9 @@ export const Select = styled.select`
   color: #7a7a7a;
   background-color: #f4f6fc;
   font-weight: bold;
+  @media (max-width: 1025px) {
+    padding: 5px 7px;
+  }
   @media (max-width: 480px) {
     height: 38px;
     width: 94%;
@@ -72,6 +75,9 @@ export const InputContainer = styled.div`
   position: relative;
   width: 100%;
   margin-bottom: 20px;
+  @media (max-width: 1025px) {
+    margin-bottom: 12px;
+  }
   @media (max-width: 480px) {
     margin-bottom: 12px;
   }
@@ -110,11 +116,9 @@ export const Main = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
   @media (max-width: 480px) {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -400,6 +404,7 @@ export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0px 40px;
   margin-bottom: 20px;
   @media (max-width: 480px) {
     flex-direction: column;

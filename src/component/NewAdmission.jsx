@@ -40,9 +40,15 @@ const Card = styled.div`
   border-radius: 10px;
   width: 95px;
   text-align: center;
-  @media (max-width: 468px) {
+  @media (max-width: 1025px) {
     width: 80%;
-    height: 120px;
+    height: 200px;
+    padding: 4px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  @media (max-width: 480px) {
+    width: 80%;
+    height: 150px;
     padding: 4px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   }

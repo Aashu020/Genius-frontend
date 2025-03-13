@@ -78,7 +78,7 @@ export const Input = styled.input`
   font-weight: bold;
   outline: none;
   @media (max-width: 480px) {
-    width: 80%;
+    width: 90%;
     font-size: 12px;
     padding: 12px 18px;
   }
@@ -99,7 +99,7 @@ export const Select = styled.select`
   }
   @media (max-width: 480px) {
     height: 38px;
-    width: 90%;
+    width: 100%;
     font-size: 12px;
     padding: 10px 12px;
   }
@@ -120,10 +120,10 @@ export const SubmitButton = styled.button`
   &:hover {
     background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
   }
-  @media (max-width: 768px) {
-    width: 100%;
+  @media (max-width: 480px) {
+    width: 70%;
     font-size: 12px;
-    padding: 5px;
+    padding: 10px 30px;
   }
 `;
 
@@ -178,13 +178,29 @@ export const ActionButton = styled.button`
   border-radius: 4px;
   background-color: ${(props) => (props.edit ? "#4caf50" : "#f44336")};
   color: #fff;
+
   &:hover {
     opacity: 0.9;
   }
+
   svg {
     margin-right: 5px;
   }
+
+  @media (max-width: 480px) {
+    span {
+      display: none; /* Hide text on small screens */
+    }
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 5px;
+    
+    svg {
+      margin-right: 0; /* Remove margin to keep the icon centered */
+    }
+  }
 `;
+
 
 export const EditIcon = styled(FaEdit)`
   color: #fff;
@@ -240,14 +256,11 @@ export const Main = styled.div`
   display: grid;
   grid-template-columns: ${(props) => (props.columns ? props.columns : "repeat(3, 1fr)")};
   gap: 20px;
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    br {
-      display: none;
-    }
-  }
+  
   @media (max-width: 480px) {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 `;
 

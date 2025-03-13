@@ -66,9 +66,9 @@ const FeePaymentChart = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div>
-      <h2>Fee Payments in the Last 7 Days (Total Amount)</h2>
-      <ResponsiveContainer width="100%" height={650}>
+    <div style={{marginTop:'16px'}}>
+<h2 style={{ fontSize: '16px',textAlign:'center',margin:'20px 0px' }}>Fee Payments in the Last 7 Days (Total Amount)</h2>
+      <ResponsiveContainer width="100%" height={310}>
         <BarChart data={paymentData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />

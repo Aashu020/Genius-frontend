@@ -61,12 +61,12 @@ export const Select = styled.select`
   background-color: #f4f6fc;
   font-weight: bold;
   @media (max-width: 1025px) {
-    padding: 5px 7px;
+    /* padding: 5px 7px; */
   }
   @media (max-width: 480px) {
-    height: 38px;
-    width: 94%;
-    font-size: 12px;
+    /* height: 38px; */
+    width: 100%;
+    font-size: 14px;
     padding: 10px 12px;
   }
 `;
@@ -116,6 +116,9 @@ export const Main = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  @media (max-width: 1025px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
   @media (max-width: 480px) {
     display: flex;
     flex-direction: column;
@@ -133,15 +136,15 @@ export const FormInput = styled.input`
   font-weight: bold;
   outline: none;
   @media (max-width: 480px) {
-    height: 10px;
-    width: 80%;
-    font-size: 12px;
-    padding: 12px 18px;
+    /* height: 38px; */
+    width: 93%;
+    font-size: 14px;
+    padding: 10px 12px;
   }
 `;
 
 export const SubmitButton = styled.button`
-  width: 320px;
+  /* width: 320px; */
   padding: 12px;
   background: linear-gradient(270deg, #222d78 0%, #7130e4 100%);
   border: none;
@@ -155,10 +158,16 @@ export const SubmitButton = styled.button`
   &:hover {
     background: linear-gradient(270deg, #1c2563 0%, #662acc 100%);
   }
-  @media (max-width: 768px) {
+  @media (max-width: 1025px) {
+    height: 55px;
+    margin: 0;
+    padding:7px;
+  }
+  @media (max-width: 480px) {
+    height: 45px;
     width: 100%;
-    font-size: 12px;
-    padding: 5px;
+    font-size: 16px;
+    padding: 10px;
   }
 `;
 
@@ -216,22 +225,20 @@ export const HeaderContainer = styled.div`
   align-items: center;
   background-color: #64b5f6;
   padding: 10px 20px;
-  height: 80px;
+  height: 60px;
   box-sizing: border-box;
 `;
 
 export const Logo = styled.div`
-  height: 70px;
-  width: 70px;
+  height: 50px;
+  width: 130px;
   img {
     height: 100%;
     width: 100%;
-    border-radius:50%;
     object-fit: cover;
+    border-radius: 10px;
   }
 `;
-
-
 
 export const SearchContainer = styled.div`
   display: flex;

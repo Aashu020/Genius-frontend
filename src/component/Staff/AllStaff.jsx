@@ -420,6 +420,8 @@ const AllStaff = () => {
               <IoMdPrint />
             </button>
           </ButtonSection>
+        </TableContainer>
+        <TableContainer>
           <div id="staff-table">
 
             <Table>

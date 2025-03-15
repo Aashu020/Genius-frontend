@@ -127,8 +127,8 @@ const LoginForm = () => {
                   <option value="Librarian">Librarian</option>
                   <option value="SecurityGuard">SecurityGuard</option>
                   <option value="Admin">Admin</option>
-                  <option value="Admin">Student</option>
-                  <option value="Admin">Teacher</option>
+                  <option value="Student">Student</option>
+                  <option value="Teacher">Teacher</option>
                 </Select>
               </InputContainer>
               <SubmitButton type="submit">{editing ? 'Update Login' : 'Create Login'}</SubmitButton>

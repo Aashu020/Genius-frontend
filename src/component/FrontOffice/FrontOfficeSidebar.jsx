@@ -4,7 +4,6 @@ import { AiFillAppstore } from "react-icons/ai";
 import styled from 'styled-components';
 import { AiOutlinePlus, AiOutlineDashboard } from 'react-icons/ai'; // Using icons for the sidebar items
 import { Link } from 'react-router-dom';
-
 const SidebarContainer = styled.div`
   width: 250px;
   border-right: 1px solid #e0e0e0;

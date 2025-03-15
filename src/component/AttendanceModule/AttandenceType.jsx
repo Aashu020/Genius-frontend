@@ -23,6 +23,7 @@ import {
   StatusButtonL,
   SubmitButton,
 } from "../AttendanceModule/AttendanceTStyle";
+import baseURL from '../utils/Url'; //
 
 const AttendenceType = () => {
   const [allStaff, setAllStaff] = useState([]); // All staff data
@@ -38,7 +39,7 @@ const AttendenceType = () => {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/department/all");
+        const response = await axios.get(`${baseURL}/department/all`);
         setDepartments(response.data);
       } catch (error) {
         console.error("Error fetching departments:", error);
@@ -52,7 +53,7 @@ const AttendenceType = () => {
   useEffect(() => {
     const fetchStaff = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/staff/all");
+        const response = await axios.get(`${baseURL}/staff/all`);
         console.log("Fetched Staff Data:", response.data); // Debugging
         setAllStaff(response.data);
       } catch (error) {
@@ -138,7 +139,7 @@ const AttendenceType = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8007/staff-attendance/add",
+        `${baseURL}/staff-attendance/add`,
         attendanceToSubmit
       );
       console.log("Attendance submitted:", response.data);

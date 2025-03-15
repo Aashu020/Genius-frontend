@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import { Container, MainDashboard, Title, Form, Heading, Section, Main, FormContainer, InputContainer, Label, Input, SubmitButton, TableContainer, Table, Th, Td, Td1, EditButton, DeleteButton, ErrorMessage, ConfirmationModal, ModalContent, ConfirmButton } from "./FeeStyles";
-
+import  baseURL from '../utils/Url'; 
 const FineSetUp = () => {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
@@ -33,10 +33,10 @@ const FineSetUp = () => {
 
     try {
       if (editingFine) {
-        await axios.put(`http://localhost:8007/fine-setup/update/${editingFine._id}`, payload);
+        await axios.put(`${baseURL}/fine-setup/update/${editingFine._id}`, payload);
         toast.success("Fine updated successfully!");
       } else {
-        await axios.post("http://localhost:8007/fine-setup/add", payload);
+        await axios.post(`${baseURL}/fine-setup/add`, payload);
         toast.success("Fine added successfully!");
       }
       resetForm();
@@ -49,7 +49,7 @@ const FineSetUp = () => {
 
   const fetchFines = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/fine-setup/all");
+      const response = await axios.get(`${baseURL}/fine-setup/all`);
       setFines(response.data);
     } catch (error) {
       console.error("Error fetching fines:", error);
@@ -69,7 +69,7 @@ const FineSetUp = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8007/fine-setup/delete/${fineToDelete._id}`);
+      await axios.delete(`${baseURL}/fine-setup/delete/${fineToDelete._id}`);
       toast.success("Fine deleted successfully!");
       setShowModal(false);
       fetchFines();

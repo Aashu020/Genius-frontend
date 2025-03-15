@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -40,7 +41,7 @@ const AddRole = () => {
 
   const fetchRoles = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/role/all");
+      const response = await axios.get(`${baseURL}/role/all`);
       setRoles(response.data);
     } catch (error) {
       console.error("Error fetching roles:", error);
@@ -65,14 +66,14 @@ const AddRole = () => {
 
     try {
       if (editId) {
-        await axios.put(`http://localhost:8007/role/update/${editId}`, {
+        await axios.put(`${baseURL}/role/update/${editId}`, {
           RoleName: roleName,
           Description: description,
         });
         toast.success("Role updated successfully!");
         setEditId(null);
       } else {
-        const response = await axios.post("http://localhost:8007/role/add", {
+        const response = await axios.post(`${baseURL}/role/add`, {
           RoleName: roleName,
           Description: description,
         });
@@ -102,7 +103,7 @@ const AddRole = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8007/role/delete/${deleteId}`);
+      await axios.delete(`${baseURL}/role/delete/${deleteId}`);
       toast.success("Role deleted successfully!");
       fetchRoles();
     } catch (error) {

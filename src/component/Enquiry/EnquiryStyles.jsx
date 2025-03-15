@@ -570,7 +570,9 @@ export const MarkButton = styled.button`
 
 export const ModalWrapper = styled.div`
   position: fixed;
-  display: ${(prop) => (prop.show ? "block" : "none")};
+  display: ${(prop) => (prop.show ? "flex" : "none")};
+  align-items: center;
+  justify-content: center;
   top: 0;
   left: 0;
   width: 100%;

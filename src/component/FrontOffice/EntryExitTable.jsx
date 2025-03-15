@@ -6,7 +6,7 @@ import {
   TableData, StatusButton, ActionButton, PaginationContainer,
   PaginationInfo, PaginationButton, RowsPerPageDropdown
 } from './FrontOfficeStyles1';
-
+import  baseURL from '../utils/Url'; 
 const EntryExitTable = () => {
   const [activeTab, setActiveTab] = useState("entry");
   const [visitorData, setData] = useState([]);
@@ -15,7 +15,7 @@ const EntryExitTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/visitor/all")
+      .get(`${baseURL}/visitor/all`)
       .then((response) => {
         setData(response.data);
       })
@@ -40,7 +40,7 @@ const EntryExitTable = () => {
 
   const handleMarkOut = async (id) => {
     try {
-      const response = await axios.put(`http://localhost:8007/visitor/${id}/outtime`);
+      const response = await axios.put(`${baseURL}/visitor/${id}/outtime`);
       // Update the local state with the new data
       setData((prevData) =>
         prevData.map((item) =>
@@ -55,7 +55,7 @@ const EntryExitTable = () => {
   };
 
   return (
-    <Container1>
+    <Container3>
       <Tabs>
         <Tab active={activeTab === "entry"} onClick={() => setActiveTab("entry")}>
           Entry List
@@ -145,7 +145,7 @@ const EntryExitTable = () => {
           </PaginationButton>
         </div>
       </PaginationContainer>
-    </Container1>
+    </Container3>
   );
 };
 

@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -37,7 +38,7 @@ const AddRoute = () => {
 
   const fetchRoutes = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/route/all");
+      const response = await axios.get(`${baseURL}/route/all`);
       setRoutes(response.data);
     } catch (error) {
       console.error("Error fetching routes:", error);
@@ -68,7 +69,7 @@ const AddRoute = () => {
 
     try {
       if (editId) {
-        const response = await axios.put(`https://api.edspride.in/route/update/${editId}`, {
+        const response = await axios.put(`${baseURL}/route/update/${editId}`, {
           RouteName: routeName,
           RouteAmount: routeAmount,
         });
@@ -76,7 +77,7 @@ const AddRoute = () => {
         toast.success("Route updated successfully!");
         setEditId(null);
       } else {
-        const response = await axios.post("https://api.edspride.in/route/add", {
+        const response = await axios.post(`${baseURL}/route/add`, {
           RouteName: routeName,
           RouteAmount: routeAmount,
         });
@@ -105,7 +106,7 @@ const AddRoute = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/route/delete/${deleteId}`);
+      await axios.delete(`${baseURL}/route/delete/${deleteId}`);
       setRoutes(routes.filter((route) => route._id !== deleteId));
       toast.success("Route deleted successfully!");
     } catch (error) {

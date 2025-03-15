@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -40,7 +41,7 @@ const AddDepartment = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/department/all");
+      const response = await axios.get(`${baseURL}/department/all`);
       setDepartments(response.data);
     } catch (error) {
       console.error("Error fetching departments:", error);
@@ -71,7 +72,7 @@ const AddDepartment = () => {
 
     try {
       if (editId) {
-        const response = await axios.put(`https://api.edspride.in/department/update/${editId}`, {
+        const response = await axios.put(`${baseURL}/department/update/${editId}`, {
           DepartmentName: departmentName,
           Description: description,
         });
@@ -79,7 +80,7 @@ const AddDepartment = () => {
         toast.success("Department updated successfully!");
         setEditId(null);
       } else {
-        const response = await axios.post("https://api.edspride.in/department/add", {
+        const response = await axios.post(`${baseURL}/department/add`, {
           DepartmentName: departmentName,
           Description: description,
         });
@@ -108,7 +109,7 @@ const AddDepartment = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8007/department/delete/${deleteId}`);
+      await axios.delete(`${baseURL}/department/delete/${deleteId}`);
       setDepartments(departments.filter((dep) => dep._id !== deleteId));
       toast.success("Department deleted successfully!");
       setShowModal(false);

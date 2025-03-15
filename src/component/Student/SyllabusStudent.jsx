@@ -4,7 +4,7 @@ import { Container,MainDashboard, Title, ClassDetails, Section, SubjectList,
         SubjectItem, SubjectTitle, SyllabusList, SyllabusItem, SyllabusTitle,
         TopicList, TopicItem, LoadingMessage, ErrorMessage
   } from '../Subject/SubjectStyle';
-
+  import  baseURL from '../utils/Url'; 
 const SyllabusStudent = () => {
     const [studentId, setStudentId] = useState(null);
     const [studentClass, setStudentClass] = useState(null);
@@ -26,7 +26,7 @@ const SyllabusStudent = () => {
     useEffect(() => {
         if (studentId) {
             axios
-                .get(`http://localhost:8007/student/get/${studentId}`)
+                .get(`${baseURL}/student/get/${studentId}`)
                 .then((response) => {
                     const data = response.data;
                     if (data && data.ClassName) {
@@ -46,7 +46,7 @@ const SyllabusStudent = () => {
     useEffect(() => {
         if (studentClass) {
             axios
-                .get('http://localhost:8007/class/all')
+                .get(`${baseURL}/class/all`)
                 .then((response) => {
                     const classData = response.data;
                     const classInfo = classData.find((cls) => cls.Class === studentClass);

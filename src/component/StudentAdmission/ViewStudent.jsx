@@ -5,7 +5,7 @@ import { BsArrowReturnRight } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import {AdmissionLetterContainer,Photo,PhotoContainer,Valuevs,Labelviewstud,Logo,Title1,Left,LeftColumn,RightColumn,Section1,Section2} from "./StudentAdmission"
-
+import  baseURL from '../utils/Url'; 
 // ------------------------------------------------
 const Container = styled.div`
 height: calc(100vh - 100px);
@@ -29,7 +29,7 @@ const ViewStudent = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/schoolsetup/all")
+      .get(`${baseURL}/schoolsetup/all`)
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -48,7 +48,7 @@ const ViewStudent = () => {
       const fetchStudent = async () => {
         try {
           const response = await fetch(
-            `http://localhost:8007/student/get/${location.state.Id}`
+            `${baseURL}/student/get/${location.state.Id}`
           );
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -85,7 +85,7 @@ const ViewStudent = () => {
     <Container>
       <AdmissionLetterContainer>
         <Header>
-          <Logo style={{height:"80px"}} src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
+          <Logo style={{height:"80px"}} src={`${baseURL}/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
           <Title1>{school?.SchoolName}</Title1>
           <p>{school?.EmailId} | {school?.PhoneNo} </p>
           <p>{school?.Website}</p>
@@ -93,7 +93,7 @@ const ViewStudent = () => {
         </Header>
 
         <PhotoContainer>
-          <Photo src={`http://localhost:8007/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
+          <Photo src={`${baseURL}/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
         </PhotoContainer>
         <Section1>
           <LeftColumn>

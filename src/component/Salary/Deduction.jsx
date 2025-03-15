@@ -6,6 +6,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import  baseURL from '../utils/Url'; 
 import {
   Container, MainDashboard, Title, Form, InputContainer, Label, Input, SubmitButton,
   TableWrapper, Table, TableHeader, HeaderRow, HeaderCell, TableBody, BodyRow,
@@ -23,7 +24,7 @@ const Deduction = () => {
   // Fetch existing deductions from API
   const fetchDeductions = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/payroll-header/all");
+      const response = await axios.get(`${baseURL}/payroll-header/all`);
       setDeductions(response.data);
     } catch (err) {
       console.error("Error fetching deductions:", err);
@@ -41,7 +42,7 @@ const Deduction = () => {
     } else {
       setError("");
       try {
-        const response = await axios.post("http://localhost:8007/payroll-header/add", {
+        const response = await axios.post(`${baseURL}/payroll-header/add`, {
           Title: deductionName,
           Type: "Deduction",
         });
@@ -67,7 +68,7 @@ const Deduction = () => {
     } else {
       setError("");
       try {
-        const response = await axios.put(`http://localhost:8007/payroll-header/update/${currentDeduction._id}`, {
+        const response = await axios.put(`${baseURL}/payroll-header/update/${currentDeduction._id}`, {
           Title: deductionName,
         });
         const updatedDeductions = deductions.map((deduction) =>
@@ -91,7 +92,7 @@ const Deduction = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8007/payroll-header/delete/${currentDeduction._id}`);
+      await axios.delete(`${baseURL}/payroll-header/delete/${currentDeduction._id}`);
       setDeductions(deductions.filter((deduction) => deduction._id !== currentDeduction._id));
       setShowModal(false);
       toast.success("Deduction Head deleted successfully!");

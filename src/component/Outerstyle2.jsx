@@ -224,8 +224,8 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #64b5f6;
-  padding: 10px 20px;
-  height: 60px;
+  padding: 20px 20px;
+  height: 70px;
   box-sizing: border-box;
   @media (max-width:480px){
     gap:0.3rem
@@ -233,8 +233,8 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Logo = styled.div`
-  height: 50px;
-  width: 130px;
+  height: 60px;
+  width: 60px;
   img {
     height: 100%;
     width: 100%;
@@ -251,7 +251,7 @@ export const Logo = styled.div`
     width:50px;
     margin-left:-0.5rem;
   }
-     @media (min-width:481px) and (max-width:768px){
+  @media (min-width:481px) and (max-width:768px){
     height:60px;
     width:60px;
     margin-left:-0.5rem;
@@ -259,8 +259,8 @@ export const Logo = styled.div`
 `;
 
 export const Logo1 = styled.div`
-  height: 70px;
-  width: 70px;
+  height: 60px;
+  width: 60px;
   img {
     height: 100%;
     width: 100%;

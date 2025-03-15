@@ -7,7 +7,7 @@ import {
   Wrapper, StyledTable, TableHeader, HeaderCell, TableBody, BodyCell,
   StatusContainer, StatusButtonP, StatusButtonA, StatusButtonL, SubmitButton
 } from "../AttendanceModule/StudentStyle";
-
+import baseURL from '../utils/Url'; //
 const StudentAttendance = () => {
   const [tasks, setTasks] = useState([]); // List of students
   const [selectedClass, setSelectedClass] = useState("");
@@ -22,7 +22,7 @@ const StudentAttendance = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -36,7 +36,7 @@ const StudentAttendance = () => {
     const fetchSections = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
+          const response = await axios.get(`${baseURL}/class/get/${selectedClass}`);
           setSections(response.data.Section || []);
         } catch (error) {
           console.error("Error fetching sections:", error);
@@ -53,7 +53,7 @@ const StudentAttendance = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("http://localhost:8007/student/all");
+          const response = await axios.get(`${baseURL}/student/all`);
           const filteredStudents = response.data.filter(student =>
             student.AdmissionInClass === selectedClass && student.Section === selectedSection
           );
@@ -128,7 +128,7 @@ const StudentAttendance = () => {
     console.log(attendanceToSubmit)
 
     try {
-      const response = await axios.post('http://localhost:8007/student-attendance/add', attendanceToSubmit);
+      const response = await axios.post(`${baseURL}/student-attendance/add`, attendanceToSubmit);
       toast.success("Attendance submitted successfully!");
       setSelectedDate("");
       setSelectedClass("");

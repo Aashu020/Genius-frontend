@@ -5,6 +5,7 @@ import jsPDF from "jspdf";
 import { saveAs } from "file-saver";
 import * as XLSX from "xlsx";
 import styled from "styled-components";
+import  baseURL from '../utils/Url';
 import {
   Container, LeftSection, RightSection, Button, ProgressContainer,
   ProgressBar, SubjectName, Progress, ProgressInner, ChartContainer,
@@ -13,9 +14,9 @@ import {
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-const CLASSES_API_URL = "https://api.edspride.in/class/all";
-const HOMEWORK_API_URL = "https://api.edspride.in/homework/all";
-const ATTENDANCE_API_URL = "https://api.edspride.in/staff-attendance/all";
+const CLASSES_API_URL = `${baseURL}/class/all`;
+const HOMEWORK_API_URL = `${baseURL}/homework/all`;
+const ATTENDANCE_API_URL = `${baseURL}/staff-attendance/all`;
 
 const SubjectProgress = () => {
   const [classesData, setClassesData] = useState([]);

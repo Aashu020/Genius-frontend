@@ -12,12 +12,12 @@ import { useNavigate } from 'react-router-dom';
 import { 
     Container1, Heading, FilterWrapper, Table, TableHeader, TableRow, TableData, TotalPaidFee, DateRangeWrapper, 
     DatePickerWrapper, DateInput, DropdownWrapper, DropdownContainer, ButtonWrapper, Button 
-  } from "./FeeStyles";
-  
+} from "./FeeStyles";
+import  baseURL from '../utils/Url';   
 
 // Define your API endpoints (replace with actual URLs)
-const studentApiUrl = 'http://localhost:8007/student/all'; // Replace with actual student API
-const feeApiUrl = 'http://localhost:8007/fee-data/all'; // Replace with actual fee API
+const studentApiUrl = `${baseURL}/student/all`; // Replace with actual student API
+const feeApiUrl = `${baseURL}/fee-data/all`; // Replace with actual fee API
 
 
 // Main Component
@@ -42,7 +42,7 @@ const FeePaid = () => {
     useEffect(() => {
         const create = async () => {
             try {
-                axios.post("http://localhost:8007/student/create-fee-data-for-all-students");
+                axios.post(`${baseURL}/student/create-fee-data-for-all-students`);
                 setUpdate("Yes");
             } catch (error) {
                 console.error(error);

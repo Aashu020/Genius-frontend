@@ -6,6 +6,7 @@ import {
   StatusBadge, EditButton, DeleteButton, ModalOverlay, ModalContent,
   CloseButton, PaginationWrapper
 } from "../Employee/TaskStyle";
+import  baseURL from '../utils/Url'; 
 
 const TaskTable = () => {
   const [tasks, setTasks] = useState([]);
@@ -21,7 +22,7 @@ const TaskTable = () => {
 
     if (studentId) {
       axios
-        .get(`http://localhost:8007/student/get/${studentId}`)
+        .get(`${baseURL}/student/get/${studentId}`)
         .then((response) => {
           const className = response.data.ClassName;
           setStudentClass(className);
@@ -39,7 +40,7 @@ const TaskTable = () => {
   useEffect(() => {
     if (studentClass) {
       axios
-        .get("http://localhost:8007/homework/all")
+        .get(`${baseURL}/homework/all`)
         .then((response) => {
           const filteredTasks = response.data.filter(
             (task) => task.Class === studentClass

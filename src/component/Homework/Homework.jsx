@@ -7,14 +7,14 @@ import { Edit, Trash2 } from "lucide-react";
 import { 
   MainDashboard1,Title,Form,Heading,Section,Main,InputContainer,Label,Input ,Select,SubmitButton,HomeworkListContainer, HomeworkListTitle, Table, Th, Td, Td1, EditButton, DeleteButton, ViewButton, ConfirmationModal,  ModalContent, ConfirmButton, DetailModalContent 
 } from "./HomeworkStyle.jsx";
-
+import  baseURL from '../utils/Url'; 
 const HomeworkTypeDropdown = ({ formData, handleChange, errors }) => {
   const [homeworkTypes, setHomeworkTypes] = useState([]);
 
   useEffect(() => {
     const fetchHomeworkTypes = async () => {
       try {
-        const response = await axios.get('http://localhost:8007/homeworktype/all');
+        const response = await axios.get(`${baseURL}/homeworktype/all`);
         setHomeworkTypes(response.data);
       } catch (error) {
         console.error('Error fetching homework types:', error);
@@ -113,7 +113,7 @@ const Homework = () => {
     // Fetch homework types
     const fetchHomeworkTypes = async () => {
       try {
-        const response = await axios.get('http://localhost:8007/homeworktype/all');
+        const response = await axios.get(`${baseURL}/homeworktype/all`);
         setHomeworkTypes(response.data);
       } catch (error) {
         console.error('Error fetching homework types:', error);
@@ -123,7 +123,7 @@ const Homework = () => {
     // Fetch available classes
     const fetchClasses = async () => {
       try {
-        const response = await axios.get('http://localhost:8007/class/all');
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
         console.log(response.data);
       } catch (error) {
@@ -139,7 +139,7 @@ const Homework = () => {
     const fetchSections = async () => {
       if (formData.Class) {
         try {
-          const response = await axios.get(`http://localhost:8007/class/get/${classId}`);
+          const response = await axios.get(`${baseURL}/class/get/${classId}`);
           setSections(response.data.Section || []);
           setSubjects(response.data.Subjects)
         } catch (error) {
@@ -155,7 +155,7 @@ const Homework = () => {
   //   const fetchSubjects = async () => {
   //     if (formData.Class && formData.Section) {
   //       try {
-  //         const response = await axios.get(`http://localhost:8007/subjects/get/${formData.Class}-${formData.Section}`);
+  //         const response = await axios.get(``${baseURL}/subjects/get/${formData.Class}-${formData.Section}`);
   //         setSubjects(response.data);
   //       } catch (error) {
   //         console.error('Error fetching subjects:', error);
@@ -170,7 +170,7 @@ const Homework = () => {
   //   const fetchChapters = async () => {
   //     if (formData.Subject) {
   //       try {
-  //         const response = await axios.get(`http://localhost:8007/chapters/${formData.Subject}`);
+  //         const response = await axios.get(``${baseURL}/chapters/${formData.Subject}`);
   //         setChapters(response.data);
   //       } catch (error) {
   //         console.error('Error fetching chapters:', error);
@@ -184,7 +184,7 @@ const Homework = () => {
   const fetchHomework = async () => {
     if (formData.Class && formData.Section && formData.Subject) {
       try {
-        const response = await axios.get(`http://localhost:8007/homework/get/${formData.Class}-${formData.Section}`);
+        const response = await axios.get(`${baseURL}/homework/get/${formData.Class}-${formData.Section}`);
         const homeworkList = response.data;
         console.log(homeworkList)
 
@@ -251,7 +251,7 @@ const Homework = () => {
     homeworkData.append('Status', status);
 
     try {
-      await axios.post("http://localhost:8007/homework/add", homeworkData, {
+      await axios.post(`${baseURL}/homework/add`, homeworkData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }
@@ -285,7 +285,7 @@ const Homework = () => {
 
   const handleDeleteHomework = async (homeworkId) => {
     try {
-      await axios.delete(`http://localhost:8007/homework/delete/${homeworkId}`);
+      await axios.delete(`${baseURL}/homework/delete/${homeworkId}`);
       toast.success("Homework deleted successfully!");
       fetchHomework(); // Refresh homework list
     } catch (error) {

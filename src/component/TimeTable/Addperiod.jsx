@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MainDashboard,SubmitButton,Title,Th,FormContainer,Td,Input,Label,Form,Heading,Section,Main,InputContainer, TableWrapper} from "../StudentAdmission/StudentAdmission";
 import { Td1,ConfirmationModal,EditButton,Table100,DeleteButton,ModalContent,ConfirmButton } from "../Subject/SubjectStyle";
-
+import  baseURL from '../utils/Url'; 
 
 const Addperiod = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +24,7 @@ const Addperiod = () => {
     // Fetch existing periods
     const fetchPeriods = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/period/all");
+        const response = await axios.get(`${baseURL}/period/all`);
         setExpense(response.data);
       } catch (err) {
         console.error("Error fetching periods:", err);
@@ -65,11 +65,11 @@ const Addperiod = () => {
 
     try {
       if (isEditing) {
-        const response = await axios.put(`http://localhost:8007/period/update/${currentId}`, formData);
+        const response = await axios.put(`${baseURL}/period/update/${currentId}`, formData);
         setExpense(expense.map(item => item._id === currentId ? response.data : item));
         toast.success("Period updated successfully!");
       } else {
-        const response = await axios.post("http://localhost:8007/period/add", formData);
+        const response = await axios.post(`${baseURL}/period/add`, formData);
         setExpense([...expense, response.data]);
         toast.success("Period added successfully!");
       }
@@ -94,7 +94,7 @@ const Addperiod = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8007/period/delete/${currentId}`);
+      await axios.delete(`${baseURL}/period/delete/${currentId}`);
       setExpense(expense.filter(item => item._id !== currentId));
       toast.success("Period deleted successfully!");
     } catch (err) {

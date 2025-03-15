@@ -5,10 +5,10 @@ import WhatsAppIcon from "./Whatsapp";
 import NotificationModal from "./Notification";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import  baseURL from './utils/Url';
 import {
   HeaderContainer, Logo, SearchContainer, SearchBox, SearchInput, SearchIcon, MenuIcon,
-  InstituteSection, InstituteName,Logo1 ,DropdownList, DropdownItem
+  InstituteSection, InstituteName,Logo1, DropdownList, DropdownItem
 } from './Outerstyle2';
 
 const Navbar = () => {
@@ -92,7 +92,7 @@ const Navbar = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/schoolsetup/all")
+      .get(`${baseURL}/schoolsetup/all`)
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -102,7 +102,7 @@ const Navbar = () => {
         }
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       })
   }, [])
 
@@ -142,9 +142,10 @@ const Navbar = () => {
       <InstituteSection>
         {/* <WhatsAppIcon /> */}
         {/* <NotificationModal /> */}
-        <Logo1 style={{marginLeft:"0"}}>
+        <Logo1>
           <img
-            src={`http://localhost:8007/uploads/${formData?.SchoolLogo.replace(/^uploads\//, '')}`}
+            style={{ height: "50px", borderRadius:"50%"}}
+            src={`${baseURL}/uploads/${formData?.SchoolLogo.replace(/^uploads\//, '')}`}
             alt="School-Logo"
           />
 

@@ -5,7 +5,7 @@ import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import { Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-
+import  baseURL from '../utils/Url'; 
 import {
   Container,
   MainDashboard,
@@ -79,7 +79,7 @@ const AddExam = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8007/exam/add",
+        `${baseURL}/exam/add`,
         examDetails
       );
       console.log(response.data);
@@ -94,7 +94,7 @@ const AddExam = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/exam/all")
+      .get(`${baseURL}/exam/all`)
       .then((response) => {
         setExamData(response.data);
         console.log(response.data);
@@ -107,7 +107,7 @@ const AddExam = () => {
   const Publish = (state) => {
     var dataToSend = { ...state, Status: "Published" };
     axios
-      .put(`http://localhost:8007/exam/update/${state.ExamId}`, dataToSend)
+      .put(`${baseURL}/exam/update/${state.ExamId}`, dataToSend)
       .then((response) => {
         console.log(response.data);
         setExamData((prevData) =>
@@ -125,7 +125,7 @@ const AddExam = () => {
 
   const handleDelete = async (examId) => {
     try {
-      await axios.delete(`http://localhost:8007/exam/delete/${examId}`);
+      await axios.delete(`${baseURL}/exam/delete/${examId}`);
       setExamData((prevData) =>
         prevData.filter((exam) => exam.ExamId !== examId)
       );

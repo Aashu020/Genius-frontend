@@ -158,7 +158,7 @@ const LeavingStudentTable = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.edspride.in/student-leaving/all")
+      .get("${baseURL}/student-leaving/all")
       .then((response) => {
         setVisitorData(response.data);
         setEntryData(response.data.filter(item => item.Time && !item.TimeOfLeaving));

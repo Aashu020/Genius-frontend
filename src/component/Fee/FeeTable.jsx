@@ -3,7 +3,7 @@ import { Scroll } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import  baseURL from '../utils/Url'; 
 // Styled components
 const Container = styled.div`
   width: 100%;
@@ -120,7 +120,7 @@ const FeeTable = () => {
     useEffect(() => {
         setLoading(true);
         axios
-            .get("http://localhost:8007/fee-receipt/all")
+            .get(`${baseURL}/fee-receipt/all`)
             .then((response) => {
                 // console.log(response.data)
                 setFeeData(response.data.reverse());

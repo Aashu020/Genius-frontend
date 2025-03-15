@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -49,7 +50,7 @@ const AcademicYearInfo = () => {
 
   const fetchAcademicYears = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/academic-year-info/all");
+      const response = await axios.get(`${baseURL}/academic-year-info/all`);
       setAcademicYears(response.data);
     } catch (error) {
       console.error("Error fetching academic years:", error);
@@ -78,10 +79,10 @@ const AcademicYearInfo = () => {
 
     try {
       if (editingId) {
-        await axios.put(`https://api.edspride.in/academic-year-info/update/${editingId}`, formData);
+        await axios.put(`${baseURL}/academic-year-info/update/${editingId}`, formData);
         toast.success("Academic year updated successfully!");
       } else {
-        await axios.post("https://api.edspride.in/academic-year-info/add", formData);
+        await axios.post(`${baseURL}/academic-year-info/add`, formData);
         toast.success("Academic year created successfully!");
       }
       fetchAcademicYears();
@@ -109,7 +110,7 @@ const AcademicYearInfo = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/academic-year-info/delete/${deletingId}`);
+      await axios.delete(`${baseURL}/academic-year-info/delete/${deletingId}`);
       setAcademicYears(academicYears.filter((year) => year._id !== deletingId));
       toast.success("Academic year deleted successfully!");
       setShowModal(false);
@@ -123,7 +124,7 @@ const AcademicYearInfo = () => {
 
   const confirmActive = async () => {
     try {
-      await axios.put(`https://api.edspride.in/academic-year-info/active/${activeId}`);
+      await axios.put(`${baseURL}/academic-year-info/active/${activeId}`);
       toast.success("Academic year activated successfully!");
       setShowEditModal(false);
       setActiveId(null);

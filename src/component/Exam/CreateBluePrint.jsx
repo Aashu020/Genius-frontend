@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import ExamPage from "./ExamPage";  // Import ExamPage
 import { toast, ToastContainer } from "react-toastify";  // Import toast from react-toastify
 import "react-toastify/dist/ReactToastify.css";
-
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -38,7 +38,7 @@ const CreateBluePrint = () => {
       const fetchBlueprint = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:8007/exam/get/${examId}`
+            `${baseURL}/exam/get/${examId}`
           );
           setExamName(response.data.ExamName);
           setTotalMarksFromAPI(response.data.TotalMarks);
@@ -96,7 +96,7 @@ const CreateBluePrint = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:8007/exam/update/${examId}`,
+        `${baseURL}/exam/update/${examId}`,
         dataToSend
       );
       console.log("Exam blueprint updated successfully:", response.data);

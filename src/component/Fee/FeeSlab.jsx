@@ -5,7 +5,7 @@ import { Eye, Edit, Trash2 } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, MainDashboard, Title, Form, Main, FormContainer, InputContainer, Label, Input, Select, SubmitButton, ErrorMessage, TableContainer, Table, Th, Td, Td1, EditButton, DeleteButton, ConfirmationModal, ModalContent, ConfirmButton, DetailModalContent } from "./FeeStyles";
-
+import  baseURL from '../utils/Url'; 
 const FeeSlab = () => {
   const [classList, setClassList] = useState([]);
   const [feeSlabList, setFeeSlabList] = useState([]);
@@ -29,7 +29,7 @@ const FeeSlab = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/class/all");
+      const response = await axios.get(`${baseURL}/class/all`);
       setClassList(response.data);
     } catch (error) {
       console.error("Error fetching classes:", error);
@@ -39,7 +39,7 @@ const FeeSlab = () => {
 
   const fetchFeeHeaders = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/feeHeader/all");
+      const response = await axios.get(`${baseURL}/feeHeader/all`);
       const arr = response.data.map(feeHeader => ({
         Name: feeHeader.Name,
         FeeMode: feeHeader.FeeMode,
@@ -53,7 +53,7 @@ const FeeSlab = () => {
 
   const fetchFeeSlabs = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/feeslab/all");
+      const response = await axios.get(`${baseURL}/feeslab/all`);
       setFeeSlabList(response.data);
     } catch (error) {
       console.error("Error fetching fee slabs:", error);
@@ -108,10 +108,10 @@ const FeeSlab = () => {
 
     try {
       if (editingClassId) {
-        await axios.put(`http://localhost:8007/feeslab/update/${editingClassId}`, payload);
+        await axios.put(`${baseURL}/feeslab/update/${editingClassId}`, payload);
         toast.success("Fee slab updated successfully.");
       } else {
-        await axios.post("http://localhost:8007/feeslab/add", payload);
+        await axios.post(`${baseURL}/feeslab/add`, payload);
         toast.success("Fee slab added successfully.");
       }
       resetForm();
@@ -146,7 +146,7 @@ const FeeSlab = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8007/feeslab/delete/${id}`);
+      await axios.delete(`${baseURL}/feeslab/delete/${id}`);
       toast.success("Fee slab deleted successfully.");
       fetchFeeSlabs();
     } catch (error) {

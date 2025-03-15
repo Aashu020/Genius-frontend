@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import  baseURL from '../utils/Url'; 
 import {
     AiOutlinePlus,
     AiOutlineDashboard,
@@ -32,7 +33,7 @@ const
 
         useEffect(() => {
             axios
-                .get("http://localhost:8007/schoolsetup/all")
+                .get(`${baseURL}/schoolsetup/all`)
                 .then((response) => {
                     if (response.data.length === 0) {
                         navigate('/initial-setup')

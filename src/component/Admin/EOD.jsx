@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Document, Page, Text, Image, View, StyleSheet, PDFViewer } from '@react-pdf/renderer';
 import styled from 'styled-components';
-
+import  baseURL from '../utils/Url';
 // Styled component for the container
 const ReportContainer = styled.div`
   width: 100%;
@@ -82,7 +82,7 @@ const SchoolReport = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8007/schoolsetup/all')
+      .get(`${baseURL}/schoolsetup/all`)
       .then((response) => {
         if (response.data.length > 0) {
           setSchool(response.data[0]);
@@ -96,7 +96,7 @@ const SchoolReport = () => {
   useEffect(() => {
     const getClassWiseAttendance = async () => {
       try {
-        const response = await fetch('http://localhost:8007/student-attendance/all');
+        const response = await fetch(`${baseURL}/student-attendance/all`);
         const data = await response.json();
         const todayDate = new Date().toISOString().split('T')[0];
 
@@ -173,14 +173,14 @@ const SchoolReport = () => {
           revenueResponse,
           homeworkResponse,
         ] = await Promise.all([
-          axios.get('http://localhost:8007/student/all'),
-          axios.get('http://localhost:8007/staff/all'),
-          axios.get('http://localhost:8007/fee-data/all'),
-          axios.get('http://localhost:8007/student-attendance/all'),
-          axios.get('http://localhost:8007/staff-attendance/all'),
-          axios.get('http://localhost:8007/fee-receipt/all'),
-          axios.get('http://localhost:8007/revenue/all'),
-          axios.get('http://localhost:8007/homework/all'),
+          axios.get(`${baseURL}/student/all`),
+          axios.get(`${baseURL}/staff/all`),
+          axios.get(`${baseURL}/fee-data/all`),
+          axios.get(`${baseURL}/student-attendance/all`),
+          axios.get(`${baseURL}/staff-attendance/all`),
+          axios.get(`${baseURL}/fee-receipt/all`),
+          axios.get(`${baseURL}/revenue/all`),
+          axios.get(`${baseURL}/homework/all`),
         ]);
 
         const studentData = studentResponse.data;
@@ -268,7 +268,7 @@ const SchoolReport = () => {
         <View style={styles.header}>
           {school?.SchoolLogo && (
             <Image
-              src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`}
+              src={`${baseURL}/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`}
               style={styles.logo}
             />
           )}

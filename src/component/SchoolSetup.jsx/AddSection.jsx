@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   Container,
   MainDashboard,
@@ -35,7 +36,7 @@ const AddSection = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/class/all");
+      const response = await axios.get(`${baseURL}/class/all`);
       setClasses(response.data);
     } catch (error) {
       console.error("Error fetching classes:", error);
@@ -85,7 +86,7 @@ const AddSection = () => {
     const newSectionData = { Section: updatedSections };
 
     try {
-      await axios.put(`https://api.edspride.in/class/update/${selectedClass}`, newSectionData);
+      await axios.put(`${baseURL}/class/update/${selectedClass}`, newSectionData);
       setSelectedClass("");
       setSections([]);
       setNewSectionsArray([]);

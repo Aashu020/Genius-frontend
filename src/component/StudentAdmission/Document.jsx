@@ -6,6 +6,7 @@ import RequireSymbol from "../RequireSymbol";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { MainDashboard,Step,StepContent,SubmitButton,StepIndicatorContainer,FormContainer,Input,InputContainer,Label2, Title,Form,Heading,Main } from "./StudentAdmission";
+import  baseURL from '../utils/Url'; 
 
 const Document = () => {
   const [formData, setFormData] = useState({
@@ -116,7 +117,7 @@ const Document = () => {
   //     });
 
   //     try {
-  //       await axios.post("http://localhost:8007/student/add", formDataToSend, {
+  //       await axios.post(`${baseURL}/student/add`, formDataToSend, {
   //         headers: {
   //           'Content-Type': 'multipart/form-data',
   //         },
@@ -163,7 +164,7 @@ const Document = () => {
       });
 
       try {
-        await axios.post("http://localhost:8007/student/add", formDataToSend, {
+        await axios.post(`${baseURL}/student/add`, formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

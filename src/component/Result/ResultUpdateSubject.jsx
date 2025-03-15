@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import  baseURL from '../utils/Url'; 
 
 const SubjectWise = () => {
   const [exams, setExams] = useState([]);
@@ -23,7 +24,7 @@ const SubjectWise = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/exam/all");
+        const response = await axios.get(`${baseURL}/exam/all`);
         setExams(response.data);
       } catch (error) {
         console.error("Error fetching exams:", error);
@@ -48,7 +49,7 @@ const SubjectWise = () => {
     if (selectedExam) {
       const fetchClasses = async () => {
         try {
-          const response = await axios.get("http://localhost:8007/class/all");
+          const response = await axios.get(`${baseURL}/class/all`);
           setClasses(response.data || []);
         } catch (error) {
           console.error("Error fetching classes:", error);
@@ -63,7 +64,7 @@ const SubjectWise = () => {
     if (selectedClass) {
       const fetchSections = async () => {
         try {
-          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
+          const response = await axios.get(`${baseURL}/class/get/${selectedClass}`);
           setSections(response.data.Section || []);
         } catch (error) {
           console.error("Error fetching sections:", error);
@@ -78,7 +79,7 @@ const SubjectWise = () => {
     if (selectedClass && selectedSection) {
       const fetchSubjects = async () => {
         try {
-          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
+          const response = await axios.get(`${baseURL}/class/get/${selectedClass}`);
           setSubjects(response.data.Subjects || []);
         } catch (error) {
           console.error("Error fetching subjects:", error);
@@ -93,7 +94,7 @@ const SubjectWise = () => {
     if (selectedClass && selectedSection && selectedSubject) {
       const fetchStudents = async () => {
         try {
-          const response = await axios.get("http://localhost:8007/student/all");
+          const response = await axios.get(`${baseURL}/student/all`);
           var filData = response.data.filter(data => data.Section === selectedSection && data.AdmissionInClass === selectedClass);
           
           // Initialize subjectMarks for each student
@@ -115,7 +116,7 @@ const SubjectWise = () => {
 
           // Now, fetch subject-wise marks for the selected subject, class, and section
           const subjectMarksResponse = await axios.get(
-            `http://localhost:8007/result/getSubjectWiseMarks?subjectName=${selectedSubject}&classId=${selectedClass}&section=${selectedSection}`
+            `${baseURL}/result/getSubjectWiseMarks?subjectName=${selectedSubject}&classId=${selectedClass}&section=${selectedSection}`
           );
 
           // Update subjectMarks if data exists
@@ -199,7 +200,7 @@ const SubjectWise = () => {
     console.log("Data to be sent:", data);  // Log the data for debugging
 
     try {
-        const response = await axios.post("http://localhost:8007/result/saveSubjectMarks", data);
+        const response = await axios.post(`${baseURL}/result/saveSubjectMarks`, data);
         console.log("Success:", response.data);
         alert("Marks saved successfully!");
     } catch (error) {
@@ -321,7 +322,6 @@ const SubjectWise = () => {
                     onChange={(e) => handleSubjectMarksChange(index, e)}
                   />
                 </td>
-           
                 <td>
                   <input
                     type="text"

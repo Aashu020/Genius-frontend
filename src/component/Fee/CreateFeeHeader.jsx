@@ -7,7 +7,7 @@ import { Edit, Trash2 } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ErrorMessage,Heading,MainDashboard,Title,Form,Main,FormContainer,InputContainer,Label ,Input,Select,Container,Section,TableContainer,Table,Th,Td,Td1,EditButton,DeleteButton,ConfirmationModal,ConfirmButton,SubmitButton} from "./FeeStyles";
-
+import  baseURL from '../utils/Url'; 
 const CreateFeeHeader = () => {
   const [headerName, setHeaderName] = useState("");
   const [revenueOption, setRevenueOption] = useState("");
@@ -21,7 +21,7 @@ const CreateFeeHeader = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/feeHeader/all");
+        const response = await axios.get(`${baseURL}/feeHeader/all`);
         setSubjects(response.data);
       } catch (error) {
         console.error("Error fetching fee headers:", error);
@@ -52,11 +52,11 @@ const CreateFeeHeader = () => {
 
       try {
         if (selectedSubject) {
-          const response = await axios.put(`http://localhost:8007/feeHeader/update/${selectedSubject._id}`, feeHeaderData);
+          const response = await axios.put(`${baseURL}/feeHeader/update/${selectedSubject._id}`, feeHeaderData);
           setSubjects(subjects.map(sub => (sub._id === selectedSubject._id ? response.data : sub)));
           toast.success("Fee Header updated successfully!");
         } else {
-          const response = await axios.post("http://localhost:8007/feeHeader/add", feeHeaderData);
+          const response = await axios.post(`${baseURL}/feeHeader/add`, feeHeaderData);
           setSubjects(prevSubjects => [...prevSubjects, response.data]);
           toast.success("Fee Header added successfully!");
         }
@@ -92,7 +92,7 @@ const CreateFeeHeader = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8007/feeHeader/delete/${selectedSubject._id}`);
+      await axios.delete(`${baseURL}/feeHeader/delete/${selectedSubject._id}`);
       setSubjects(subjects.filter(sub => sub._id !== selectedSubject._id));
       toast.success("Fee Header deleted successfully!");
       setShowDeleteModal(false);

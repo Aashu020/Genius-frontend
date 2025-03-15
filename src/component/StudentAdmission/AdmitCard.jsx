@@ -20,6 +20,7 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { jsPDF } from "jspdf";
+import  baseURL from '../utils/Url'; 
 // Styled Components (unchanged)
 
 // const SubmitButton = styled.button`
@@ -49,7 +50,7 @@ const AdmitCardFormat = ({ student, exam }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/schoolsetup/all")
+      .get(`${baseURL}/schoolsetup/all`)
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -67,7 +68,7 @@ const AdmitCardFormat = ({ student, exam }) => {
       console.log(exam)
       try {
         const response = await fetch(
-          `http://localhost:8007/datesheet/all`
+          `${baseURL}/datesheet/all`
         );
         const data = await response.json();
 
@@ -182,7 +183,7 @@ const AdmitCardFormat = ({ student, exam }) => {
         <Header>
           <Logo
             style={{ height: "80px" }}
-            src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(
+            src={`${baseURL}/uploads/${school?.SchoolLogo.replace(
               /^uploads\//,
               ""
             )}`}
@@ -238,7 +239,7 @@ const AdmitCardFormat = ({ student, exam }) => {
             <PhotoSection>
               <PhotoContainer>
                 <Photo
-                  src={`http://localhost:8007/uploads/${student?.Document?.StudentPhoto}`}
+                  src={`${baseURL}/uploads/${student?.Document?.StudentPhoto}`}
                   alt="Student"
                 />
               </PhotoContainer>
@@ -313,7 +314,7 @@ const AdmitCard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/schoolsetup/all")
+      .get(`${baseURL}/schoolsetup/all`)
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -328,7 +329,7 @@ const AdmitCard = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -343,7 +344,7 @@ const AdmitCard = () => {
       console.log(selectedExam)
       try {
         const response = await fetch(
-          `http://localhost:8007/datesheet/all`
+          `${baseURL}/datesheet/all`
         );
         const data = await response.json();
 
@@ -376,7 +377,7 @@ const AdmitCard = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `http://localhost:8007/class/get/${selectedClass}`
+            `${baseURL}/class/get/${selectedClass}`
           );
           setSections(response.data.Section || []);
         } catch (error) {
@@ -392,7 +393,7 @@ const AdmitCard = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/exam/all");
+        const response = await axios.get(`${baseURL}/exam/all`);
         setExams(response.data);
       } catch (error) {
         console.error("Error fetching exams:", error);
@@ -405,7 +406,7 @@ const AdmitCard = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("http://localhost:8007/student/all");
+          const response = await axios.get(`${baseURL}/student/all`);
           const filteredStudents = response.data.filter(
             (student) =>
               student.AdmissionInClass === selectedClass &&

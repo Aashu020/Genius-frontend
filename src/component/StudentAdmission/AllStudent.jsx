@@ -7,6 +7,7 @@ import { IoMdPrint } from "react-icons/io";
 import * as XLSX from "xlsx";
 import axios from "axios";
 import{ Input,Th,Td,SearchContainer,TableWrapper,SearchInput,ButtonSection,ActionButton,RowsPerPageDropdown,PaginationButton,PaginationInfo,PaginationContainer,Photo1,OpenButton,Table1, MainDashboard, TableContainer1,ButtonGroup,Button} from "./StudentAdmission"
+import  baseURL from '../utils/Url'; 
 
 const AllStudent = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const AllStudent = () => {
   useEffect(() => {
     const fetchStudent = async () => {
       try {
-        const response = await fetch("http://localhost:8007/student/all");
+        const response = await fetch(`${baseURL}/student/all`);
         const data = await response.json();
         setStudent(data.reverse());
         console.log(data)
@@ -241,7 +242,7 @@ const AllStudent = () => {
   
         // Send the formatted data to the API
         try {
-          const response = await axios.post("http://localhost:8007/student/bulk-upload", formattedData, {
+          const response = await axios.post(`${baseURL}/student/bulk-upload`, formattedData, {
             headers: { 'Content-Type': 'application/json' },
           });
   
@@ -313,7 +314,7 @@ const AllStudent = () => {
             <tbody>
               {filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((studentMember) => (
                 <tr key={studentMember._id}>
-                  <Td><Photo1 src={`http://localhost:8007/uploads/${studentMember?.Document?.StudentPhoto}`} alt="Student" /></Td>
+                  <Td><Photo1 src={`${baseURL}/uploads/${studentMember?.Document?.StudentPhoto}`} alt="Student" /></Td>
                   <Td>{studentMember.StudentId}</Td>
                   <Td>{studentMember.StudentName}</Td>
                   <Td>{studentMember.MobileNo}</Td>

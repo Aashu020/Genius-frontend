@@ -6,7 +6,7 @@ import {
   SubmitButton, TableContainer, Table, TableHeader, TableRow, TableData, ButtonGroup,
   EditButton, DeleteButton, Heading
 } from './Outerstyle2';
-
+import  baseURL from './utils/Url'; 
 const LoginForm = () => {
     const [formData, setFormData] = useState({
         Id: '',
@@ -26,7 +26,7 @@ const LoginForm = () => {
     // Fetch logins function
     const fetchLogins = async () => {
         try {
-            const response = await axios.get('http://localhost:8007/user/all');
+            const response = await axios.get(`${baseURL}/user/all`);
             var filData =  response.data.filter(val => val.Role === 'Student' || val.Role === 'Teacher' || val.Role === 'FrontOffice' || val.Role === 'Accountant' || val.Role === 'Librarian' || val.Role === 'SecurityGuard' || val.Role === 'Admin' || val.Role === 'Superadmin');
             setLogins(filData);
             // console.log(filData);
@@ -51,11 +51,11 @@ const LoginForm = () => {
         try {
             if (editing) {
                 // Update login
-                await axios.put(`http://localhost:8007/user/update/${editing._id}`, formData);
+                await axios.put(`${baseURL}/user/update/${editing._id}`, formData);
                 toast.success('Login updated successfully');
             } else {
                 // Add new login
-                await axios.post('http://localhost:8007/user/add', formData);
+                await axios.post(`${baseURL}/user/add`, formData);
                 toast.success('Login created successfully');
             }
 
@@ -81,7 +81,7 @@ const LoginForm = () => {
     // Handle delete
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`http://localhost:8007/user/delete/${id}`);
+            await axios.delete(`${baseURL}/user/delete/${id}`);
             toast.success('Login deleted successfully');
             fetchLogins(); // Refresh the login list
         } catch (error) {

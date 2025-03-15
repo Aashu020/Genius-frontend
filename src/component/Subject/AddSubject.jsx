@@ -6,7 +6,7 @@ import Sidebar from "../Sidebar";
 import { Edit, Trash2 } from "lucide-react";
 import {Heading,Th,Td,Input,SubmitButton,Label,InputContainer,FormContainer,Section,Container,MainDashboard,Title,Form } from "../StudentAdmission/StudentAdmission";
 import { Main,Table,DeleteButton,ErrorMessage,EditButton,TableContainer,Td1} from "./SubjectStyle";
-
+import  baseURL from '../utils/Url'; 
 const AddSubject = () => {
   const [subject, setSubject] = useState(""); // State for the new subject
   const [subjects, setSubjects] = useState([]); // State for the list of subjects
@@ -18,7 +18,7 @@ const AddSubject = () => {
     const fetchSubjects = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8007/add-subject/all"
+          `${baseURL}/add-subject/all`
         );
         setSubjects(response.data);
       } catch (error) {
@@ -48,7 +48,7 @@ const AddSubject = () => {
     if (!validate()) return;
     try {
       const response = await axios.post(
-        "http://localhost:8007/add-subject/add",
+        `${baseURL}/add-subject/add`,
         {
           Subject: subject,
         }
@@ -71,7 +71,7 @@ const AddSubject = () => {
     if (!validate()) return;
     try {
       const response = await axios.put(
-        `http://localhost:8007/add-subject/update/${editingSubject._id}`,
+        `${baseURL}/add-subject/update/${editingSubject._id}`,
         {
           Subject: subject,
         }
@@ -92,7 +92,7 @@ const AddSubject = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:8007/add-subject/delete/${id}`
+        `${baseURL}/add-subject/delete/${id}`
       );
       setSubjects(subjects.filter((sub) => sub._id !== id)); // Remove deleted subject from state
     } catch (error) {

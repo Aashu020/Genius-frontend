@@ -3,7 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { Edit, Trash2 } from "lucide-react";
 import { TableWrapper } from "../Outerstyle2";
-
+import  baseURL from '../utils/Url'; 
 const Container = styled.div`
   display: flex;
   height: calc(100vh - 35px);
@@ -212,7 +212,7 @@ const Electricity = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/electricity/all");
+        const response = await axios.get(`${baseURL}/electricity/all`);
         setData(response.data.reverse());
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -239,11 +239,11 @@ const Electricity = () => {
       };
 
       if (editId) {
-        await axios.put(`http://localhost:8007/electricity/update/${editId}`, meterReadings);
+        await axios.put(`${baseURL}/electricity/update/${editId}`, meterReadings);
         setMessage("Reading updated successfully!");
       } else {
         meterReadings.Date = new Date().toISOString();
-        await axios.post("http://localhost:8007/electricity/add", meterReadings);
+        await axios.post(`${baseURL}/electricity/add`, meterReadings);
         setMessage("Reading added successfully!");
       }
 
@@ -255,7 +255,7 @@ const Electricity = () => {
       setEditId(null);
 
       // Refresh data
-      const response = await axios.get("http://localhost:8007/electricity/all");
+      const response = await axios.get(`${baseURL}/electricity/all`);
       setData(response.data.reverse());
     } catch (error) {
       setMessage(error.response?.data?.message || "Error processing reading");
@@ -281,11 +281,11 @@ const Electricity = () => {
     setMessage("");
 
     try {
-      const response = await axios.delete(`http://localhost:8007/electricity/delete/${id}`);
+      const response = await axios.delete(`${baseURL}/electricity/delete/${id}`);
       if (response.status === 204) {
         setMessage("Reading deleted successfully!");
         // Refresh data
-        const updatedResponse = await axios.get("http://localhost:8007/electricity/all");
+        const updatedResponse = await axios.get(`${baseURL}/electricity/all`);
         setData(updatedResponse.data.reverse());
         window.location.reload();
       }

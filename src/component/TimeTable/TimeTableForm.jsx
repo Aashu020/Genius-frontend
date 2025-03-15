@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Title,Input,Buttonbg,Select,TimeTable,TimeTableHeader,TimeTableCell, TimetableWrapper} from '../Subject/SubjectStyle';
 import { TableWrapper } from '../StudentAdmission/StudentAdmission';
-
+import  baseURL from '../utils/Url'; 
 const Container = styled.div`
   flex: 1;
   height: calc(100vh - 100px);
@@ -36,15 +36,15 @@ const TimeTableForm = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const classResponse = await fetch('http://localhost:8007/class/all');
+                const classResponse = await fetch(`${baseURL}/class/all`);
                 const classData = await classResponse.json();
                 setClasses(classData);
 
-                const periodResponse = await fetch('http://localhost:8007/period/all');
+                const periodResponse = await fetch(`${baseURL}/period/all`);
                 const periodData = await periodResponse.json();
                 setPeriods(periodData);
 
-                const teacherResponse = await fetch('http://localhost:8007/staff/all');
+                const teacherResponse = await fetch(`${baseURL}/staff/all`);
                 const teacherData = await teacherResponse.json();
                 setTeachers(teacherData); // Store all teacher data
             } catch (error) {
@@ -83,7 +83,7 @@ const TimeTableForm = () => {
         setSelectedSubject(''); // Reset selected subject
 
         try {
-            const subjectResponse = await fetch(`http://localhost:8007/class/get/${selectedClass.ClassId}`);
+            const subjectResponse = await fetch(`${baseURL}/class/get/${selectedClass.ClassId}`);
             const subjectData = await subjectResponse.json();
             setSubjects(subjectData.Subjects); // Set subjects for the selected class
         } catch (error) {
@@ -200,7 +200,7 @@ const TimeTableForm = () => {
     
         try {
             // Send the timetable data to the backend
-            const response = await fetch('http://localhost:8007/timetable/add', {
+            const response = await fetch(`${baseURL}/timetable/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

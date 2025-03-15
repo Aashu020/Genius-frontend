@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 // import styled from "styled-components";
 import { MainDashboard, FeeCollectionWrapper, Title, Section, InputContainer, Label, DropdownHeader, DropdownList, CheckboxLabel, CheckboxInput, InfoGrid, InfoItem, TableDetail, SubmitButton, Select } from "./FeeStyles";
-
+import  baseURL from '../utils/Url'; 
 const Payment = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -39,12 +39,12 @@ const Payment = () => {
     const fetchData = async () => {
       try {
         // Fetch student data
-        const studentResponse = await axios.get(`http://localhost:8007/student/get/${location.state.student}`);
+        const studentResponse = await axios.get(`${baseURL}/student/get/${location.state.student}`);
         console.log(studentResponse.data.AdmissionInClass);
         setStudent(studentResponse.data);
 
         // Fetch fee data
-        const feeResponse = await axios.get("http://localhost:8007/feeSlab/all");
+        const feeResponse = await axios.get(`${baseURL}/feeSlab/all`);
         console.log(feeResponse.data)
         const filData = feeResponse?.data.find(data => {
           // console.log(data.ClassId.trim(), studentResponse.data.AdmissionInClass)
@@ -55,7 +55,7 @@ const Payment = () => {
 
 
         // Fetch academic year info
-        const academicResponse = await axios.get("http://localhost:8007/academic-year-info/active");
+        const academicResponse = await axios.get(`${baseURL}/academic-year-info/active`);
         const academicData = academicResponse.data;
         setAcademic(academicData);
 
@@ -83,7 +83,7 @@ const Payment = () => {
         setMonths(generatedMonths);
 
         // Fetch existing fee data
-        const existingFeeResponse = await axios.get(`http://localhost:8007/fee-data/get/${studentResponse.data.StudentId}`);
+        const existingFeeResponse = await axios.get(`${baseURL}/fee-data/get/${studentResponse.data.StudentId}`);
         const existingData = existingFeeResponse.data;
         // console.log(existingData)
         if (existingData.Payments.length > 0) {
@@ -345,7 +345,7 @@ const Payment = () => {
 
       // Uncomment and ensure this works
       try {
-        await axios.post("http://localhost:8007/fee-data/add", paymentData);
+        await axios.post(`${baseURL}/fee-data/add`, paymentData);
         toast.success("Payment successful!");
         const role = localStorage.getItem("Role")
         if (role.trim().toLowerCase() === "superadmin" || role.trim().toLowerCase() === "admin") {

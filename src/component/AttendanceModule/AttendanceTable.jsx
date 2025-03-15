@@ -4,7 +4,7 @@ import DataTable from "react-data-table-component";
 import jsPDF from "jspdf";
 import { CSVLink } from "react-csv";
 import "jspdf-autotable";
-
+import baseURL from '../utils/Url'; //
 // Breakpoints for responsiveness
 const breakpoints = {
   mobile: '468px',
@@ -221,7 +221,7 @@ const AttendanceTable = () => {
   const fetchStudentData = async (date) => {
     setLoadingStudent(true);
     try {
-      const response = await fetch(`http://localhost:8007/student-attendance/all?date=${date}`);
+      const response = await fetch(`${baseURL}/student-attendance/all?date=${date}`);
       const result = await response.json();
       const filteredData = result
         .filter((item) => item.Date === date)
@@ -247,7 +247,7 @@ const AttendanceTable = () => {
   const fetchStaffData = async (date) => {
     setLoadingStaff(true);
     try {
-      const response = await fetch(`http://localhost:8007/staff-attendance/all?date=${date}`);
+      const response = await fetch(`${baseURL}/staff-attendance/all?date=${date}`);
       const result = await response.json();
       const filteredData = result
         .filter((item) => item.Date === date)

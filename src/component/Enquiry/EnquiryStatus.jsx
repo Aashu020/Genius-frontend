@@ -9,6 +9,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { utils, writeFile } from "xlsx";
 import { Eye, Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 
 
 import {
@@ -34,6 +35,8 @@ import {
   PaginationButton,
   RowsPerPageDropdown,
   ModalWrapper,
+  ModalContent,
+  CloseButton,
   ModalContentAlternate,
   CloseButtonAlternate,
 } from "./EnquiryStyles";
@@ -72,7 +75,7 @@ const EnquiryStatus = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/enquiry/all")
+      .get(`${baseURL}/enquiry/all`)
       .then((response) => {
         setData(response.data);
       })
@@ -133,7 +136,7 @@ const EnquiryStatus = () => {
     // console.log(dataToSend)
     axios
       .put(
-        `http://localhost:8007/enquiry/update/${registration.RegistrationNo}`,
+        `${baseURL}/enquiry/update/${registration.RegistrationNo}`,
         dataToSend
       )
       .then((response) => {
@@ -155,7 +158,7 @@ const EnquiryStatus = () => {
     // console.log(dataToSend)
     axios
       .put(
-        `http://localhost:8007/enquiry/update/${registration.RegistrationNo}`,
+        `${baseURL}/enquiry/update/${registration.RegistrationNo}`,
         dataToSend
       )
       .then((response) => {

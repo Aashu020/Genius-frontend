@@ -4,10 +4,10 @@ import Select from 'react-dropdown-select';
 import DatePicker from 'react-datepicker'; // Correct import for DatePicker
 import "react-datepicker/dist/react-datepicker.css";
 import styled from 'styled-components'; // Import styled-components
-
+import  baseURL from './utils/Url'; 
 // Define your API endpoints (replace with actual URLs)
-const studentApiUrl = 'http://localhost:8007/student/all'; // Replace with actual student API
-const feeApiUrl = 'http://localhost:8007/fee-data/all'; // Replace with actual fee API
+const studentApiUrl = `${baseURL}/student/all`; // Replace with actual student API
+const feeApiUrl = `${baseURL}/fee-data/all`; // Replace with actual fee API
 
 import {
     Container, Heading, FilterWrapper, Table, TableHeader, TableRow, TableData, TotalPaidFee,
@@ -35,7 +35,7 @@ const StudentFeeTable = () => {
     useEffect(() => {
         const create = async () => {
             try {
-                axios.post("http://localhost:8007/student/create-fee-data-for-all-students");
+                axios.post(`${baseURL}/student/create-fee-data-for-all-students`);
                 setUpdate("Yes");
             } catch (error) {
                 console.error(error);

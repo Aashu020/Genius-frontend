@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { useLocation } from 'react-router-dom';
-
+import  baseURL from '../utils/Url'; 
 const SlipContainer = styled.div`
   width: 100%;
   max-width: 900px;
@@ -106,7 +106,7 @@ const PayrollSlip = () => {
 
     useEffect(() => {
       axios
-        .get("http://localhost:8007/schoolsetup/all")
+        .get(`${baseURL}/schoolsetup/all`)
         .then((response) => {
           // console.log(response.data);
           if (response.data.length > 0) {
@@ -123,12 +123,12 @@ const PayrollSlip = () => {
     useEffect(() => {
         const fetchPayrollData = async () => {
             try {
-                const payrollResponse = await axios.get(`http://localhost:8007/payroll-data/get/${location.state.EmployeeId}`);
+                const payrollResponse = await axios.get(`${baseURL}/payroll-data/get/${location.state.EmployeeId}`);
                 var filData = payrollResponse.data.Payments.filter(val => val.SlipId === location.state.SlipId)
                 // console.log(filData)
                 setPayrollSlip(filData)
                 setPayrollData(payrollResponse.data);
-                const staffResponse = await axios.get(`http://localhost:8007/staff/get/${location.state.EmployeeId}`);
+                const staffResponse = await axios.get(`${baseURL}/staff/get/${location.state.EmployeeId}`);
                 setStaffData(staffResponse.data);
             } catch (error) {
                 console.error("Error fetching payroll or staff data:", error);

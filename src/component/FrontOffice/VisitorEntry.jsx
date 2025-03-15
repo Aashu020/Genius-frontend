@@ -5,6 +5,7 @@ import Navbar from "../Navbar";
 import FrontOfficeSidebar from "./FrontOfficeSidebar";
 import EntryExitTable from "./EntryExitTable";
 import Sidebar from "../Sidebar";
+import  baseURL from '../utils/Url'; 
 import {
   Container,
   MainDashboard,
@@ -116,7 +117,7 @@ const VisitorEntry = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8007/visitor/add",
+        `${baseURL}/visitor/add`,
         formData
       );
       console.log(response.data);
@@ -144,7 +145,7 @@ const VisitorEntry = () => {
 
   const fetchData = () => {
     axios
-      .get("http://localhost:8007/visitor/all")
+      .get(`${baseURL}/visitor/all`)
       .then((response) => {
         setData(response.data.reverse());
       })
@@ -173,7 +174,7 @@ const VisitorEntry = () => {
 
   const handleMarkOut = async (id) => {
     try {
-      const response = await axios.put(`https://api.edspride.in/visitor/${id}/outtime`);
+      const response = await axios.put(`${baseURL}/visitor/${id}/outtime`);
       fetchData();
       alert("Out Successfully");
     } catch (error) {
@@ -193,7 +194,7 @@ const VisitorEntry = () => {
   useEffect(() => {
     const fetchPurposes = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/purpose/all");
+        const response = await axios.get(`${baseURL}/purpose/all`);
         setPurposes(response.data);
       } catch (error) {
         console.error("Error fetching purposes:", error);
@@ -210,7 +211,7 @@ const VisitorEntry = () => {
     }
 
     try {
-      await axios.post("https://api.edspride.in/purpose/add", { PurposeTitle: newPurpose });
+      await axios.post(`${baseURL}/purpose/add`, { PurposeTitle: newPurpose });
       setPurposes([...purposes, { PurposeTitle: newPurpose }]);
       setNewPurpose("");
       alert("Purpose added successfully!");

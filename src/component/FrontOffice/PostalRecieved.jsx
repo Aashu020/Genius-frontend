@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import PostalRecievedTable from "./PostalRecievedTable";
+import  baseURL from '../utils/Url'; 
 import {
   Container,
   MainDashboard,
@@ -103,7 +104,7 @@ const PostalRecieved = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8007/postal/add",
+        `${baseURL}/postal/add`,
         formData
       );
       alert("Form Submitted Successfully!");

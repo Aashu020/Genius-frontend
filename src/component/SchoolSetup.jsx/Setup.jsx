@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import  baseURL from '../utils/Url'; 
 import {
   Container,
   MainDashboard,
@@ -45,7 +46,7 @@ const Setup = () => {
 
   const fetchData = () => {
     axios
-      .get("http://localhost:8007/schoolsetup/all")
+      .get(`${baseURL}/schoolsetup/all`)
       .then((response) => {
         if (response.data.length > 0) {
           setPresent(true);
@@ -135,8 +136,8 @@ const Setup = () => {
 
     try {
       const url = present
-        ? `https://api.edspride.in/schoolsetup/update/${id}`
-        : "https://api.edspride.in/schoolsetup/add";
+        ? `${baseURL}/schoolsetup/update/${id}`
+        : `${baseURL}/schoolsetup/add`;
       const response = await axios.post(url, formToSubmit, {
         headers: {
           "Content-Type": "multipart/form-data",

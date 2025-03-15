@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard, Title, Form, FormContainer, InputContainer, Label, Select,
   SubmitButton, Main, ErrorMessage
@@ -52,7 +52,7 @@ const GenerateSalary = () => {
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
-        const response = await fetch('http://localhost:8007/department/all');
+        const response = await fetch(`${baseURL}/department/all`);
         const data = await response.json();
         setDepartments(data);
       } catch (error) {
@@ -68,7 +68,7 @@ const GenerateSalary = () => {
     const fetchStaff = async () => {
       if (selectDepartment) {
         try {
-          const response = await fetch('http://localhost:8007/staff/all');
+          const response = await fetch(`${baseURL}/staff/all`);
           const data = await response.json();
           console.log(data)
           const filteredStaff = data.filter(staffMember => staffMember.Department.trim() === selectDepartment);

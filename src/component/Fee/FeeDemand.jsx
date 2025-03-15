@@ -8,7 +8,7 @@ import {
   Container,Heading,MainDashboard,Title,Form,Main,InputContainer,Label,TableContainer,Table,Header, SchoolLogo, SchoolName, Address, SubHeader, FeeDetails, DetailRow,
    DetailLabel, TableHeader, TableData, TotalRow, Signature, PrintButton, StyledSelect,  SubmitButton, TableRow, SmallButton 
 } from "./FeeStyles";
-
+import  baseURL from '../utils/Url'; 
 const FeeDemandFormat = ({ admitCardData, selectedMonth, feeData, feeSlab, selectedFees, school }) => {
   const { student } = admitCardData;
 
@@ -23,7 +23,7 @@ const FeeDemandFormat = ({ admitCardData, selectedMonth, feeData, feeSlab, selec
   return (
     <Container style={{ padding: '20px', width: '90%', height: 'auto', background: '#fff' }}>
       <Header style={{ textAlign: 'center', marginBottom: '20px' }}>
-        <SchoolLogo src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
+        <SchoolLogo src={`${baseURL}/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`} alt="School Logo" />
         <SchoolName>{school?.SchoolName}</SchoolName>
         <Address>{school?.EmailId} | {school?.PhoneNo}</Address>
         <Address>{school?.Website}</Address>
@@ -83,7 +83,7 @@ const FeeDemand = () => {
   useEffect(() => {
     const fetchFeeData = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/fee-data/all");
+        const response = await axios.get(`${baseURL}/fee-data/all`);
         setFeeData(response.data);
         console.log(response.data);
       } catch (error) {
@@ -95,7 +95,7 @@ const FeeDemand = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/schoolsetup/all")
+      .get(`${baseURL}/schoolsetup/all`)
       .then((response) => {
         // console.log(response.data);
         if (response.data.length > 0) {
@@ -110,7 +110,7 @@ const FeeDemand = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const academicResponse = await axios.get("http://localhost:8007/academic-year-info/active");
+        const academicResponse = await axios.get(`${baseURL}/academic-year-info/active`);
         const academicData = academicResponse.data;
 
         const startYear = academicData.StartYear;
@@ -145,7 +145,7 @@ const FeeDemand = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -158,7 +158,7 @@ const FeeDemand = () => {
     const fetchSections = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
+          const response = await axios.get(`${baseURL}/class/get/${selectedClass}`);
           setSections(response.data.Section || []);
         } catch (error) {
           console.error("Error fetching sections:", error);
@@ -174,7 +174,7 @@ const FeeDemand = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("http://localhost:8007/student/all");
+          const response = await axios.get(`${baseURL}/student/all`);
           const filteredStudents = response.data.filter(
             (student) =>
               student.AdmissionInClass === selectedClass && student.Section === selectedSection
@@ -194,7 +194,7 @@ const FeeDemand = () => {
     const fetchFeeSlab = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get("http://localhost:8007/feeSlab/all");
+          const response = await axios.get(`${baseURL}/feeSlab/all`);
           const feeData = response.data.find(fee => fee.ClassId === selectedClass);
           setFeeSlab(feeData ? feeData.Fees : []);
           // console.log(feeData ? feeData.Fees : []);

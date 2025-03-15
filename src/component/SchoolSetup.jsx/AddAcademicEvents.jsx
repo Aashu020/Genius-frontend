@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -53,7 +54,7 @@ const AddAcademicEvent = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/academicevents/all");
+      const response = await axios.get(`${baseURL}/academicevents/all`);
       setEvents(response.data);
     } catch (error) {
       console.error("Error fetching events:", error);
@@ -96,7 +97,7 @@ const AddAcademicEvent = () => {
 
     try {
       if (editId) {
-        const response = await axios.put(`https://api.edspride.in/academicevents/update/${editId}`, {
+        const response = await axios.put(`${baseURL}/academicevents/update/${editId}`, {
           Title: title,
           StartDate: startDate,
           EndDate: endDate,
@@ -109,7 +110,7 @@ const AddAcademicEvent = () => {
         toast.success("Event updated successfully!");
         setEditId(null);
       } else {
-        const response = await axios.post("https://api.edspride.in/academicevents/add", {
+        const response = await axios.post(`${baseURL}/academicevents/add`, {
           Title: title,
           StartDate: startDate,
           EndDate: endDate,
@@ -162,7 +163,7 @@ const AddAcademicEvent = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/academicevents/delete/${deleteId}`);
+      await axios.delete(`${baseURL}/academicevents/delete/${deleteId}`);
       setEvents(events.filter((event) => event._id !== deleteId));
       toast.success("Event deleted successfully!");
       setShowModal(false);

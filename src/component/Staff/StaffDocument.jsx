@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -132,7 +132,7 @@ const StaffDocument = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -147,7 +147,7 @@ const StaffDocument = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `http://localhost:8007/class/get/${selectedClass}`
+            `${baseURL}/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -166,7 +166,7 @@ const StaffDocument = () => {
     const fetchSubjects = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}/${selectedSection}`);
+          const response = await axios.get(`${baseURL}/class/get/${selectedClass}/${selectedSection}`);
           setSubjects(response.data);
         } catch (error) {
           console.error("Error fetching subjects:", error);
@@ -213,7 +213,7 @@ const StaffDocument = () => {
       });
 
       try {
-        await axios.post("http://localhost:8007/staff/add", formDataToSend, {
+        await axios.post(`${baseURL}/staff/add`, formDataToSend, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -222,7 +222,7 @@ const StaffDocument = () => {
         toast.success("Form Submitted Successfully!");
         localStorage.removeItem('staffData');
         const role = localStorage.getItem("Role");
-        navigate(`/${role}/allstaff`);
+        navigate(`/admin/allstaff`);
       } catch (error) {
         console.error("Error submitting form:", error);
         alert("Error submitting form. Please try again.");

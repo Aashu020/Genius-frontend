@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import  baseURL from './utils/Url'; 
 // Styled Components
 const Container = styled.div`
   width: 100%;
@@ -90,7 +90,7 @@ const NewAdmissions = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await fetch('http://localhost:8007/student/all');
+        const response = await fetch(`${baseURL}/student/all`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -161,7 +161,7 @@ const NewAdmissions = () => {
           students.map((student) => (
             <Card key={student._id}>
               <PhotoContainer>
-                <Photo src={`http://localhost:8007/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
+                <Photo src={`${baseURL}/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
               </PhotoContainer>
               <StudentID>Student ID: {student.StudentId}</StudentID>
               <StudentInfo>Name: {student.StudentName}</StudentInfo>

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import { Edit, Trash2 } from "lucide-react";
-
+import  baseURL from '../utils/Url'; 
 import { 
   Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
   InputContainer, Label, Label2, Input, Select, SubmitButton, Table, 
@@ -43,7 +43,7 @@ const AddExpense = () => {
     const fetchExpenseHeads = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8007/expense-header/all"
+          `${baseURL}/expense-header/all`
         );
         setExpenseHeads(response.data);
       } catch (error) {
@@ -59,7 +59,7 @@ const AddExpense = () => {
     const fetchVendors = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8007/vendor/all"
+          `${baseURL}/vendor/all`
         );
         setVendors(response.data);
       } catch (error) {
@@ -75,7 +75,7 @@ const AddExpense = () => {
     const fetchExpenses = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8007/revenue/all"
+          `${baseURL}/revenue/all`
         );
         setExpenses(response.data);
       } catch (error) {
@@ -109,7 +109,7 @@ const AddExpense = () => {
       if (isEditing) {
         // Update the expense
         await axios.put(
-          `http://localhost:8007/revenue/update/${currentExpenseId}`,
+          `${baseURL}/revenue/update/${currentExpenseId}`,
           expenseData
         );
         setExpenses(
@@ -124,7 +124,7 @@ const AddExpense = () => {
       } else {
         // Add a new expense
         const response = await axios.post(
-          "http://localhost:8007/revenue/add",
+          `${baseURL}/revenue/add`,
           expenseData
         );
         setExpenses([...expenses, response.data]);
@@ -160,7 +160,7 @@ const AddExpense = () => {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `http://localhost:8007/revenue/delete/${id}`
+        `${baseURL}/revenue/delete/${id}`
       );
       setExpenses(expenses.filter((expense) => expense._id !== id));
     } catch (error) {

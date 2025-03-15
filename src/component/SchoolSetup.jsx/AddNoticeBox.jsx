@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -43,7 +44,7 @@ const AddNoticeBox = () => {
 
   const fetchNotices = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/noticebox/all");
+      const response = await axios.get(`${baseURL}/noticebox/all`);
       setNotices(response.data);
     } catch (error) {
       console.error("Error fetching notices:", error);
@@ -78,7 +79,7 @@ const AddNoticeBox = () => {
 
     try {
       if (editId) {
-        const response = await axios.put(`https://api.edspride.in/noticebox/update/${editId}`, {
+        const response = await axios.put(`${baseURL}/noticebox/update/${editId}`, {
           Title: title,
           Date: date,
           Time: time,
@@ -89,7 +90,7 @@ const AddNoticeBox = () => {
         toast.success("Notice updated successfully!");
         setEditId(null);
       } else {
-        const response = await axios.post("https://api.edspride.in/noticebox/add", {
+        const response = await axios.post(`${baseURL}/noticebox/add`, {
           Title: title,
           Date: date,
           Time: time,
@@ -127,7 +128,7 @@ const AddNoticeBox = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/noticebox/delete/${deleteId}`);
+      await axios.delete(`${baseURL}/noticebox/delete/${deleteId}`);
       setNotices(notices.filter((notice) => notice._id !== deleteId));
       toast.success("Notice deleted successfully!");
       setShowModal(false);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {TimetableWrapper,Table100,Th,Td,Heading1} from "../Subject/SubjectStyle"
-
+import  baseURL from '../utils/Url'; 
 
 // Timetable component
 const Timetable = () => {
@@ -13,7 +13,7 @@ const Timetable = () => {
   useEffect(() => {
     const fetchTimetable = async () => {
       try {
-        const response = await axios.get(`http://localhost:8007/timetable/get/${classId}`); // Replace with your API endpoint
+        const response = await axios.get(`${baseURL}/timetable/get/${classId}`); // Replace with your API endpoint
         setTimetableData(response.data);
         setLoading(false);
       } catch (err) {

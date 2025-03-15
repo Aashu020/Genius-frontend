@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
+import  baseURL from '../utils/Url'; 
 const Container = styled.div`
   display: flex;
   background-color: #f4f4f4;
@@ -107,7 +107,7 @@ const ExamTimeTable = () => {
         if (studentId) {
             const fetchStudentDetails = async () => {
                 try {
-                    const response = await fetch(`http://localhost:8007/student/get/${studentId}`);
+                    const response = await fetch(`${baseURL}/student/get/${studentId}`);
                     const studentData = await response.json();
                     console.log("Student Data:", studentData); // Log the student data
                     if (studentData && studentData.ClassName) {
@@ -130,7 +130,7 @@ const ExamTimeTable = () => {
     
         const fetchDateSheet = async () => {
             try {
-                const response = await fetch("http://localhost:8007/datesheet/all");
+                const response = await fetch(`${baseURL}/datesheet/all`);
                 const data = await response.json();
                 console.log("Raw Data:", data);
                 console.log("Student Class:", `"${studentClass}"`); // Show exact value

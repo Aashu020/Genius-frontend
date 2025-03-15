@@ -8,7 +8,7 @@ import {
   InputContainer, Label, Label2, Input, SubmitButton, Table, Th, Td, Td1, 
   EditButton, DeleteButton, ErrorMessage , TableWrapper
 } from './ExpenseStyles';
-
+import  baseURL from '../utils/Url'; 
 const AddVendor = () => {
   const [vendorData, setVendorData] = useState({
     Name: "",
@@ -38,7 +38,7 @@ const AddVendor = () => {
     const fetchVendors = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8007/vendor/all"
+          `${baseURL}/vendor/all`
         );
         setVendors(response.data);
       } catch (error) {
@@ -109,7 +109,7 @@ const AddVendor = () => {
     try {
       if (isEditing) {
         await axios.put(
-          `http://localhost:8007/vendor/update/${currentVendorId}`,
+          `${baseURL}/vendor/update/${currentVendorId}`,
           vendorData
         );
         setVendors(
@@ -123,7 +123,7 @@ const AddVendor = () => {
         setIsEditing(false);
       } else {
         const response = await axios.post(
-          "http://localhost:8007/vendor/add",
+          `${baseURL}/vendor/add`,
           vendorData
         );
         setVendors([...vendors, response.data]);
@@ -163,7 +163,7 @@ const AddVendor = () => {
     if (confirmDelete) {
       try {
         await axios.delete(
-          `http://localhost:8007/vendor/delete/${id}`
+          `${baseURL}/vendor/delete/${id}`
         );
         setVendors(vendors.filter((vendor) => vendor._id !== id));
         alert("Vendor deleted successfully!"); // Alert for successful deletion

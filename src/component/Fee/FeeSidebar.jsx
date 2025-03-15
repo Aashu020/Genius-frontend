@@ -1,7 +1,6 @@
 
 import React, { useState } from "react";
 import { AiFillAppstore } from "react-icons/ai";
-
 import styled from 'styled-components';
 import { AiOutlinePlus, AiOutlineDashboard } from 'react-icons/ai'; // Using icons for the sidebar items
 import { Link } from 'react-router-dom';

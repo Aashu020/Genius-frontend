@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import {Container,StyledInput,SuggestionsList,SuggestionItem,MainDashboard,SubmitButton,StepContent,Section,InputContainer1,Step,StepIndicatorContainer,Select,Title,Form,Heading,Main,FormContainer,InputContainer,Label,Input,Label2} from './StudentAdmission'
+import  baseURL from '../utils/Url'; 
 const AddStudentdata = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -131,7 +132,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchEnquiries = async () => {
       try {
-        const response = await fetch('http://localhost:8007/enquiry/all');
+        const response = await fetch(`${baseURL}/enquiry/all`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -200,7 +201,7 @@ const AddStudentdata = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:8007/class/get/${selectedClass}`
+        `${baseURL}/class/get/${selectedClass}`
       );
       console.log('Sections Response:', response.data);
       setSections(response.data.Section || []);
@@ -275,7 +276,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchFeeCategories = async () => {
       try {
-        const response = await fetch('http://localhost:8007/discount/all');
+        const response = await fetch(`${baseURL}/discount/all`);
         const data = await response.json();
         setFeeCategories(data);
       } catch (error) {
@@ -288,7 +289,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchRoutes = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/route/all");
+        const response = await axios.get(`${baseURL}/route/all`);
         setRoutes(response.data);
         setLoading(false);
       } catch (err) {
@@ -302,7 +303,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get('http://localhost:8007/class/all');
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
         console.log(response.data);
       } catch (error) {
@@ -315,7 +316,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchHouses = async () => {
       try {
-        const response = await axios.get('http://localhost:8007/house/all');
+        const response = await axios.get(`${baseURL}/house/all`);
         setHouses(response.data);
         console.log(response.data);
       } catch (error) {
@@ -331,7 +332,7 @@ const AddStudentdata = () => {
         console.log(selectedClass)
         try {
           const response = await axios.get(
-            `http://localhost:8007/class/get/${selectedClass}`
+            `${baseURL}/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -375,7 +376,7 @@ const AddStudentdata = () => {
     // Fetch sections based on the selected class
     if (selectedClass) {
       try {
-        const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
+        const response = await axios.get(`${baseURL}/class/get/${selectedClass}`);
         setSections(response.data.Section || []);
       } catch (error) {
         console.error("Error fetching sections:", error);
@@ -399,7 +400,7 @@ const AddStudentdata = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasseS(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -413,7 +414,7 @@ const AddStudentdata = () => {
       if (selectedClassS) {
         try {
           const response = await axios.get(
-            `http://localhost:8007/class/get/${selectedClassS}`
+            `${baseURL}/class/get/${selectedClassS}`
           );
           console.log('Sections Response:', response.data);
           setSectionS(response.data.Section || []);
@@ -433,7 +434,7 @@ const AddStudentdata = () => {
     const fetchStudents = async () => {
       if (selectedClassS && selectedSectionS) {
         try {
-          const response = await axios.get("http://localhost:8007/student/all", {
+          const response = await axios.get(`${baseURL}/student/all`, {
             params: { classId: selectedClassS, section: selectedSectionS },
           });
           console.log('Students Response:', response.data);

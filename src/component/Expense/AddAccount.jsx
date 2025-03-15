@@ -9,7 +9,7 @@ import {
   InputContainer, Label, Input, SubmitButton, TableWrapper, Table, Th, Td, Td1, 
   EditButton, DeleteButton, ErrorMessage 
 } from './ExpenseStyles';
-
+import  baseURL from '../utils/Url'; 
 const AddAccount = () => {
   const [accountData, setAccountData] = useState({
     BankName: "",
@@ -53,7 +53,7 @@ const AddAccount = () => {
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/bank/all");
+        const response = await axios.get(`${baseURL}/bank/all`);
         setAccounts(response.data);
       } catch (error) {
         console.error("Error fetching accounts:", error);
@@ -122,7 +122,7 @@ const AddAccount = () => {
     try {
       if (editMode) {
         const response = await axios.put(
-          `http://localhost:8007/bank/update/${currentAccountId}`,
+          `${baseURL}/bank/update/${currentAccountId}`,
           accountData
         );
         const updatedAccounts = accounts.map((account) =>
@@ -131,7 +131,7 @@ const AddAccount = () => {
         setAccounts(updatedAccounts);
       } else {
         const response = await axios.post(
-          "http://localhost:8007/bank/add",
+          `${baseURL}/bank/add`,
           accountData
         );
         setAccounts([...accounts, response.data]);
@@ -153,7 +153,7 @@ const AddAccount = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8007/bank/delete/${id}`);
+      await axios.delete(`${baseURL}/bank/delete/${id}`);
       setAccounts(accounts.filter((account) => account._id !== id));
     } catch (error) {
       console.error("Error deleting account:", error);

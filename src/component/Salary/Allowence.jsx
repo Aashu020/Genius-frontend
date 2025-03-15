@@ -7,7 +7,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import  baseURL from '../utils/Url'; 
 import {
   Container, MainDashboard, Title, Form, InputContainer, Label, Input, SubmitButton,
   TableWrapper, Table, TableHeader, HeaderRow, HeaderCell, TableBody, BodyRow,
@@ -26,7 +26,7 @@ const Allowence = () => {
   // Fetch allowance heads from the API
   const fetchAllowanceHeads = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/payroll-header/all");
+      const response = await axios.get(`${baseURL}/payroll-header/all`);
       // Filter allowance heads to include only those with Type "Allowance"
       const filteredData = response.data.filter(item => item.Type === "Allowance");
       setAllowenceHeads(filteredData);
@@ -64,13 +64,13 @@ const Allowence = () => {
     if (Object.keys(errors).length === 0) {
       try {
         if (isEditing) {
-          await axios.put(`http://localhost:8007/payroll-header/update/${itemToDelete}`, {
+          await axios.put(`${baseURL}/payroll-header/update/${itemToDelete}`, {
             Title: formData.allowenceHeadName,
             Type: "Allowance",
           });
           toast.success("Allowance Head updated successfully!");
         } else {
-          await axios.post("http://localhost:8007/payroll-header/add", {
+          await axios.post(`${baseURL}/payroll-header/add`, {
             Title: formData.allowenceHeadName,
             Type: "Allowance",
           });
@@ -99,7 +99,7 @@ const Allowence = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8007/payroll-header/delete/${itemToDelete}`);
+      await axios.delete(`${baseURL}/payroll-header/delete/${itemToDelete}`);
       toast.success("Allowance Head deleted successfully!");
       fetchAllowanceHeads(); // Refresh the list after deletion
       setShowModal(false); // Close modal

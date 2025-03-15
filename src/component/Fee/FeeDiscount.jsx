@@ -10,7 +10,7 @@ import {
   ErrorMessage, Heading, MainDashboard, Title, Form, Main, FormContainer, InputContainer, Label, Input, Select, Container, 
   Section, TableContainer, Table, Th, Td, Td1, EditButton, DeleteButton, ConfirmationModal, ConfirmButton, ModalContent ,SubmitButton
 } from "./FeeStyles";
-
+import  baseURL from '../utils/Url'; 
 const FeeDiscount = () => {
   const [title, setTitle] = useState("");
   const [percentage, setPercentage] = useState("");
@@ -43,10 +43,10 @@ const FeeDiscount = () => {
 
     try {
       if (isEditing) {
-        await axios.put(`http://localhost:8007/discount/update/${fineList[editIndex]._id}`, payload);
+        await axios.put(`${baseURL}/discount/update/${fineList[editIndex]._id}`, payload);
         toast.success("Discount updated successfully!");
       } else {
-        await axios.post("http://localhost:8007/discount/add", payload);
+        await axios.post(`${baseURL}/discount/add`, payload);
         toast.success("Discount added successfully!");
       }
 
@@ -60,7 +60,7 @@ const FeeDiscount = () => {
 
   const fetchDiscounts = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/discount/all");
+      const response = await axios.get(`${baseURL}/discount/all`);
       setFineList(response.data);
     } catch (error) {
       console.error("Error fetching discounts:", error);
@@ -76,7 +76,7 @@ const FeeDiscount = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8007/discount/delete/${fineList[deleteIndex]._id}`);
+      await axios.delete(`${baseURL}/discount/delete/${fineList[deleteIndex]._id}`);
       toast.success("Discount deleted successfully!");
       fetchDiscounts();
       setShowModal(false);

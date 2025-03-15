@@ -10,7 +10,7 @@ import {
   InputContainer, Label, Input, Select, SubmitButton, Table, Th, Td, 
   Td1, EditButton, DeleteButton, ErrorMessage ,  TableWrapper
 } from './ExpenseStyles';
-
+import  baseURL from '../utils/Url'; 
 const CashDeposit = () => {
   const [formData, setFormData] = useState({
     Type: "",
@@ -33,7 +33,7 @@ const CashDeposit = () => {
   const fetchAccounts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8007/cash-detail/all"
+        `${baseURL}/cash-detail/all`
       );
       setAccounts(response.data); // Assuming response.data is an array of accounts
     } catch (error) {
@@ -44,7 +44,7 @@ const CashDeposit = () => {
   const fetchBank = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8007/bank/all"
+        `${baseURL}/bank/all`
       );
       console.log(response.data);
       setBankList(response.data);
@@ -106,7 +106,7 @@ const CashDeposit = () => {
       if (editMode) {
         // Update existing entry
         const response = await axios.put(
-          `http://localhost:8007/cash-detail/update/${currentId}`,
+          `${baseURL}/cash-detail/update/${currentId}`,
           formData
         );
         setAccounts((prev) =>
@@ -118,7 +118,7 @@ const CashDeposit = () => {
       } else {
         // Create new entry
         const response = await axios.post(
-          "http://localhost:8007/cash-detail/add",
+          `${baseURL}/cash-detail/add`,
           formData
         );
         setAccounts((prev) => [...prev, response.data]); // Add new entry to accounts
@@ -155,7 +155,7 @@ const CashDeposit = () => {
     if (confirmDelete) {
       try {
         await axios.delete(
-          `http://localhost:8007/cash-detail/delete/${id}`
+          `${baseURL}/cash-detail/delete/${id}`
         );
         setAccounts((prev) => prev.filter((account) => account._id !== id)); // Remove deleted entry from accounts
         alert("Entry deleted successfully!"); // Alert for successful deletion

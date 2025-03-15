@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   MainDashboard,Title,Form,InputContainer,Label,Input,SubmitButton,TableContainer,Table,Th,Td,EditButton,DeleteButton,ModalOverlay,ModalContent,YesButton,NoButton
 } from "./HomeworkStyle";
-
+import  baseURL from '../utils/Url'; 
 const HomeworkType = () => {
   const [homeworkTypes, setHomeworkTypes] = useState([]);
   const [formData, setFormData] = useState({ Type: "" });
@@ -17,7 +17,7 @@ const HomeworkType = () => {
 
   useEffect(() => {
     const fetchHomeworkTypes = async () => {
-      const response = await axios.get("http://localhost:8007/homeworktype/all");
+      const response = await axios.get(`${baseURL}/homeworktype/all`);
       setHomeworkTypes(response.data);
     };
     fetchHomeworkTypes();
@@ -31,15 +31,15 @@ const HomeworkType = () => {
     e.preventDefault();
     try {
       if (editingId) {
-        await axios.put(`http://localhost:8007/homeworktype/update/${editingId}`, { HomeworkTypeTitle: formData.Type });
+        await axios.put(`${baseURL}/homeworktype/update/${editingId}`, { HomeworkTypeTitle: formData.Type });
         toast.success("Homework Type updated successfully!");
       } else {
-        await axios.post("http://localhost:8007/homeworktype/add", { HomeworkTypeTitle: formData.Type });
+        await axios.post(`${baseURL}/homeworktype/add`, { HomeworkTypeTitle: formData.Type });
         toast.success("Homework Type added successfully!");
       }
       setFormData({ Type: "" });
       setEditingId(null);
-      const response = await axios.get("http://localhost:8007/homeworktype/all");
+      const response = await axios.get(`${baseURL}/homeworktype/all`);
       setHomeworkTypes(response.data);
     } catch (error) {
       console.error("Error:", error);
@@ -59,7 +59,7 @@ const HomeworkType = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8007/homeworktype/delete/${deletingId}`);
+      await axios.delete(`${baseURL}/homeworktype/delete/${deletingId}`);
       setHomeworkTypes(homeworkTypes.filter((type) => type._id !== deletingId));
       toast.success("Homework Type deleted successfully!");
       setIsDialogOpen(false);

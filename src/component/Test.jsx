@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
-const CLASSES_API_URL = 'http://localhost:8007/class/all';
-const HOMEWORK_API_URL = 'http://localhost:8007/homework/all';
+import  baseURL from './utils/Url'; 
+const CLASSES_API_URL = `${baseURL}/class/all`;
+const HOMEWORK_API_URL = `${baseURL}/homework/all`;
 
 const App = () => {
   const [classesData, setClassesData] = useState([]);

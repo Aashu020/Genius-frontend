@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../../assets/Images/EDSP3.jpg";
 import { BsArrowReturnRight } from "react-icons/bs";
-
+import  baseURL from '../utils/Url'; 
 // Styled components
 const Container = styled.div`
   height: calc(100vh - 100px);
@@ -80,7 +80,7 @@ const EmployeeProfile = () => {
     if (staffId) {
       const fetchStaff = async () => {
         try {
-          const response = await fetch(`http://localhost:8007/staff/get/${staffId}`);
+          const response = await fetch(`${baseURL}/staff/get/${staffId}`);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -119,7 +119,7 @@ const EmployeeProfile = () => {
         </Header>
 
         <PhotoContainer>
-          <Photo src={`http://localhost:8007/uploads/${staff?.Documents?.Photo}`} alt="Staff" />
+          <Photo src={`${baseURL}/uploads/${staff?.Documents?.Photo}`} alt="Staff" />
         </PhotoContainer>
 
         <Section1>

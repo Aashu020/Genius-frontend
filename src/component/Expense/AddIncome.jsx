@@ -9,7 +9,7 @@ import {
   InputContainer, Label, Input, Select, SubmitButton, Table, Th, Td, 
   Td1, EditButton, DeleteButton, ErrorMessage ,TableWrapper
 } from './ExpenseStyles';
-
+import  baseURL from '../utils/Url'; 
 
 
 const AddIncome = () => {
@@ -47,7 +47,7 @@ const AddIncome = () => {
     const fetchIncomeHeads = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8007/expense-header/all"
+          `${baseURL}/expense-header/all`
         );
         setIncomeHeads(response.data);
       } catch (error) {
@@ -63,7 +63,7 @@ const AddIncome = () => {
     const fetchVendors = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8007/vendor/all"
+          `${baseURL}/vendor/all`
         );
         setVendors(response.data);
       } catch (error) {
@@ -79,7 +79,7 @@ const AddIncome = () => {
     const fetchIncomeList = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8007/revenue/all"
+          `${baseURL}/revenue/all`
         );
         setIncomeList(response.data);
       } catch (error) {
@@ -112,7 +112,7 @@ const AddIncome = () => {
     try {
       if (isEditing) {
         // Update existing income
-        await axios.put(`http://localhost:8007/revenue/update/${currentIncomeId}`, newIncome);
+        await axios.put(`${baseURL}/revenue/update/${currentIncomeId}`, newIncome);
         setIncomeList(incomeList.map((income) => (income._id === currentIncomeId ? { ...income, ...newIncome } : income)));
         alert("Income updated successfully!"); // Alert for update
         setIsEditing(false);
@@ -120,7 +120,7 @@ const AddIncome = () => {
       } else {
         // Add new income
         const response = await axios.post(
-          "http://localhost:8007/revenue/add",
+          "`${baseURL}/revenue/add",
           newIncome
         );
         setIncomeList([...incomeList, response.data]);
@@ -157,7 +157,7 @@ const AddIncome = () => {
     const confirmDelete = window.confirm("Are you sure you want to delete this income?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:8007/revenue/delete/${id}`);
+        await axios.delete(`${baseURL}/revenue/delete/${id}`);
         setIncomeList(incomeList.filter((income) => income._id !== id));
       } catch (error) {
         console.error("Error deleting income:", error);

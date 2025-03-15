@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Navbar from '../component/Navbar';
 import AdminSidebar from '../component/Sidebars/AdminSidebar';
 import axios from 'axios';
-
+import  baseURL from '../component/utils/Url'; 
 const Container = styled.div`
   display: flex;
   background-color: #f4f4f4;
@@ -16,7 +16,7 @@ const AdminLayout = () => {
     const navigate = useNavigate();
     useEffect(() => {
         axios
-            .get("http://localhost:8007/schoolsetup/all")
+            .get(`${baseURL}/schoolsetup/all`)
             .then((response) => {
                 // console.log(response.data);
                 if(response.data.length === 0){

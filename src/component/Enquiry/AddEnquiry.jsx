@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; // Import axios
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import  baseURL from '../utils/Url'; 
 import {
   Title,
   Form,
@@ -59,7 +60,7 @@ const AddEnquiryForm = () => {
     // Fetch sections based on the selected class
     if (selectedClass) {
       try {
-        const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
+        const response = await axios.get(`${baseURL}/class/get/${selectedClass}`);
         setSections(response.data.Section || []);
       } catch (error) {
         console.error("Error fetching sections:", error);
@@ -122,7 +123,7 @@ const AddEnquiryForm = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await fetch('http://localhost:8007/class/all');
+        const response = await fetch(`${baseURL}/class/all`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -174,7 +175,7 @@ const AddEnquiryForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8007/enquiry/add",
+        `${baseURL}/enquiry/add`,
         formData
       );
       console.log(response.data);

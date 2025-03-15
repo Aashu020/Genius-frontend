@@ -12,7 +12,7 @@ import {
   ContentText,
   ButtonContainer,
 } from "./StaffStyle";
-
+import  baseURL from '../utils/Url'; 
 const OfferLetter = () => {
   const [employees, setEmployees] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,7 +20,7 @@ const OfferLetter = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await fetch("http://localhost:8007/staff/all");
+        const response = await fetch(`${baseURL}/staff/all`);
         const data = await response.json();
         setEmployees(data);
       } catch (error) {

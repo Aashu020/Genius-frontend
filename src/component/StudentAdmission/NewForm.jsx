@@ -16,11 +16,13 @@ import {
     StatusButtonP,
     StatusButtonA,
     StatusButtonL,
-    FormContainer
+    FormContainer,
+    // ToastContainer,
 } from '../../Style/Index';
 import RequireSymbol from '../RequireSymbol';
 import { Step,StepIndicatorContainer,Section,StyledInput,InputContainer1,StepContent,Heading } from './StudentAdmission';
-
+// import {Toas}
+import { ToastContainer } from 'react-toastify';
 const NewForm = () => {
     const [formData, setFormData] = useState({
         StudentName: '',

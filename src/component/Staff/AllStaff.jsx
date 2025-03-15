@@ -6,6 +6,7 @@ import { IoMdPrint } from "react-icons/io";
 import * as XLSX from "xlsx";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   TableContainer,
@@ -49,7 +50,7 @@ const AllStaff = () => {
     const fetchStaff = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8007/staff/all"
+          `${baseURL}/staff/all`
         );
         const data = await response.json();
         setStaff(data);
@@ -215,7 +216,7 @@ const AllStaff = () => {
     }
 
     try {
-      const response = await axios.delete(`http://localhost:8007/staff/delete/${staffId}`);
+      const response = await axios.delete(`${baseURL}/staff/delete/${staffId}`);
 
       if (response.status === 204) {
         alert('Staff member deleted successfully!');
@@ -340,7 +341,7 @@ const AllStaff = () => {
         console.log("Formatted Data to Send to API:", formattedData);
   
         try {
-          const response = await axios.post("http://localhost:8007/staff/bulk-upload", formattedData, {
+          const response = await axios.post(`${baseURL}/staff/bulk-upload`, formattedData, {
             headers: { 'Content-Type': 'application/json' },
           });
   
@@ -444,7 +445,7 @@ const AllStaff = () => {
               <tbody>
                 {currentData.map((staffMember) => (
                   <tr key={staffMember._id}>
-                    <Td><Photo src={`http://localhost:8007/uploads/${staffMember?.Documents?.Photo}`} alt="Staff" /></Td>
+                    <Td><Photo src={`${baseURL}/uploads/${staffMember?.Documents?.Photo}`} alt="Staff" /></Td>
                     <Td>{staffMember.EmployeeId}</Td>
                     <Td>{staffMember.Name}</Td>
                     <Td>{staffMember.Department}</Td>

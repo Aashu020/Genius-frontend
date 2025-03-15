@@ -4,7 +4,7 @@ import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import axios from 'axios';
-
+import  baseURL from './utils/Url';  
 const CalendarWrapper = styled.div`
   flex: 2;
   padding-right: 20px;
@@ -27,7 +27,7 @@ const Calender = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get('http://localhost:8007/academic-year-plan/all');
+        const response = await axios.get(`${baseURL}/academic-year-plan/all`);
         const formattedEvents = response.data.map(event => ({
           title: event.Title,
           start: new Date(event.StartDate),

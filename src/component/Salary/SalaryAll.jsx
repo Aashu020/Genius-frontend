@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import  baseURL from '../utils/Url'; 
 // Styled components
 const Container = styled.div`
   width: 90%;
@@ -100,7 +100,7 @@ const PayrollTable = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:8007/pay-slip/all")
+      .get(`${baseURL}/pay-slip/all`)
       .then((response) => {
         setPayrollData(response.data);
       })

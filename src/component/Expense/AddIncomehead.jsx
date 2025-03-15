@@ -9,7 +9,7 @@ import {
   InputContainer, Label, Input, SubmitButton, Table, Th, Td, Td1, 
   EditButton, DeleteButton, ErrorMessage, TableWrapper
 } from './ExpenseStyles';
-
+import  baseURL from '../utils/Url'; 
 
 const AddIncomehead = () => {
   const [incomeHeadName, setIncomeHeadName] = useState("");
@@ -32,7 +32,7 @@ const AddIncomehead = () => {
     const fetchIncomeHeads = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8007/expense-header/all"
+          `${baseURL}/expense-header/all`
         );
         setIncome(response.data);
       } catch (error) {
@@ -61,7 +61,7 @@ const AddIncomehead = () => {
       if (editId) {
         // Update existing income head
         const response = await axios.put(
-          `http://localhost:8007/expense-header/update/${editId}`,
+          `${baseURL}/expense-header/update/${editId}`,
           newIncomeHead
         );
         setIncome(
@@ -71,7 +71,7 @@ const AddIncomehead = () => {
       } else {
         // Create new income head
         const response = await axios.post(
-          "http://localhost:8007/expense-header/add",
+          `${baseURL}/expense-header/add`,
           newIncomeHead
         );
         setIncome([...income, response.data]);
@@ -97,7 +97,7 @@ const AddIncomehead = () => {
     if (confirmDelete) {
       try {
         await axios.delete(
-          `http://localhost:8007/expense-header/delete/${id}`
+          `${baseURL}/expense-header/delete/${id}`
         );
         setIncome(income.filter((head) => head._id !== id)); // Remove the deleted income head from state
       } catch (error) {

@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { MainDashboard,Label2,InputContainer1,StyledInput,Section,Step,StepContent,SubmitButton,StepIndicatorContainer,Label,Input,Select,Title,Form,Heading,InputContainer,Main,FormContainer } from "./StudentAdmission";
-
+import  baseURL from '../utils/Url'; 
 
 const SuggestionItem = styled.li`
   padding: 10px;
@@ -104,7 +104,7 @@ const EditStudent = () => {
         if (location.state && location.state.Id) {
             const fetchStudent = async () => {
                 try {
-                    const response = await fetch(`http://localhost:8007/student/get/${location.state.Id}`);
+                    const response = await fetch(`${baseURL}/student/get/${location.state.Id}`);
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
                     }
@@ -231,7 +231,7 @@ const EditStudent = () => {
         }
 
         try {
-            const response = await axios.put(`http://localhost:8007/student/update/${studentId}`, formDataToSubmit, {
+            const response = await axios.put(`${baseURL}/student/update/${studentId}`, formDataToSubmit, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -319,7 +319,7 @@ const EditStudent = () => {
     useEffect(() => {
         const fetchFeeCategories = async () => {
             try {
-                const response = await fetch('http://localhost:8007/discount/all');
+                const response = await fetch(`${baseURL}/discount/all`);
                 const data = await response.json();
                 setFeeCategories(data);
             } catch (error) {
@@ -332,7 +332,7 @@ const EditStudent = () => {
     useEffect(() => {
         const fetchRoutes = async () => {
             try {
-                const response = await axios.get("http://localhost:8007/route/all");
+                const response = await axios.get(`${baseURL}/route/all`);
                 setRoutes(response.data);
                 setLoading(false);
             } catch (err) {
@@ -346,7 +346,7 @@ const EditStudent = () => {
     useEffect(() => {
         const fetchClasses = async () => {
             try {
-                const response = await axios.get('http://localhost:8007/class/all');
+                const response = await axios.get(`${baseURL}/class/all`);
                 setClasses(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -359,7 +359,7 @@ const EditStudent = () => {
     useEffect(() => {
         const fetchHouses = async () => {
             try {
-                const response = await axios.get('http://localhost:8007/house/all');
+                const response = await axios.get(`${baseURL}/house/all`);
                 setHouses(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -374,7 +374,7 @@ const EditStudent = () => {
             if (selectedClass) {
                 try {
                     const response = await axios.get(
-                        `http://localhost:8007/class/get/${selectedClass}`
+                        `${baseURL}/class/get/${selectedClass}`
                     );
                     console.log('Sections Response:', response.data);
                     setSections(response.data.Section || []);
@@ -409,7 +409,7 @@ const EditStudent = () => {
         // Fetch sections based on the selected class
         if (selectedClass) {
             try {
-                const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
+                const response = await axios.get(`${baseURL}/class/get/${selectedClass}`);
                 setSections(response.data.Section || []);
             } catch (error) {
                 console.error("Error fetching sections:", error);
@@ -437,7 +437,7 @@ const EditStudent = () => {
     useEffect(() => {
         const fetchClasses = async () => {
             try {
-                const response = await axios.get("http://localhost:8007/class/all");
+                const response = await axios.get(`${baseURL}/class/all`);
                 setClasseS(response.data);
             } catch (error) {
                 console.error("Error fetching classes:", error);
@@ -451,7 +451,7 @@ const EditStudent = () => {
             if (selectedClassS) {
                 try {
                     const response = await axios.get(
-                        `http://localhost:8007/class/get/${selectedClassS}`
+                        `${baseURL}/class/get/${selectedClassS}`
                     );
                     console.log('Sections Response:', response.data);
                     setSectionS(response.data.Section || []);
@@ -471,7 +471,7 @@ const EditStudent = () => {
         const fetchStudents = async () => {
             if (selectedClassS && selectedSectionS) {
                 try {
-                    const response = await axios.get("http://localhost:8007/student/all", {
+                    const response = await axios.get(`${baseURL}/student/all`, {
                         params: { classId: selectedClassS, section: selectedSectionS },
                     });
                     console.log('Students Response:', response.data);

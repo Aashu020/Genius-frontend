@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // import test from "../../assets/file/student.xlsx"
 import {FileInput,SubmitButton1,Td,ImageCell,ResponseContainer,CellContent} from "./StudentAdmission"
 import { Title, TableContainer, Table, Th} from "../Subject/SubjectStyle"
-
+import  baseURL from '../utils/Url'; 
 
 // Styled Components
 const Container = styled.div`
@@ -204,7 +204,7 @@ const mapToMongooseModel = (row) => {
     const handleSubmit = async () => {
         try {
             // Send the data to the server
-            const response = await fetch('http://localhost:8007/bulk/save-student', {
+            const response = await fetch(`${baseURL}/bulk/save-student`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

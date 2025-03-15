@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Eye } from 'lucide-react';
 import bg from "../assets/Images/birthdaybg.jpeg"; // Your background image
 import axios from 'axios';
+import  baseURL from './utils/Url'; 
 
 const BirthdayWishesTable = () => {
     const [wishes, setWishes] = useState([]);
@@ -18,7 +19,7 @@ const BirthdayWishesTable = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:8007/schoolsetup/all")
+            .get(`${baseURL}/schoolsetup/all`)
             .then((response) => {
                 if (response.data.length > 0) {
                     setSchool(response.data[0]); // Assuming only one school is returned
@@ -34,7 +35,7 @@ const BirthdayWishesTable = () => {
             try {
                 var id = localStorage.getItem("Id");
 
-                const response = await fetch(`http://localhost:8007/birthday/wishes/${id}`);
+                const response = await fetch(`${baseURL}/birthday/wishes/${id}`);
                 const data = await response.json();
                 if (response.ok) {
                     setWishes(data.data);
@@ -85,7 +86,7 @@ const BirthdayWishesTable = () => {
             // Load the school logo with cross-origin
             const logo = new Image();
             logo.crossOrigin = 'anonymous';  // Enable cross-origin request
-            logo.src = `http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`;
+            logo.src = `${baseURL}/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`;
 
             logo.onload = () => {
                 const logoWidth = 150;

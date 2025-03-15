@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { MainDashboard, Title, Form, Heading, Section ,Main, FormContainer, InputContainer,Label ,Input,Select,SubmitButton} from "./ConsolidateStyle";
-
+import  baseURL from '../utils/Url'; 
 
 const Label2 = styled.span`
     position: absolute;
@@ -137,7 +137,7 @@ const StudentWise = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -150,7 +150,7 @@ const StudentWise = () => {
     const fetchSections = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
+          const response = await axios.get(`${baseURL}/class/get/${selectedClass}`);
           setSections(response.data.Section || []);
         } catch (error) {
           console.error("Error fetching sections:", error);
@@ -166,7 +166,7 @@ const StudentWise = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("http://localhost:8007/student/all", {
+          const response = await axios.get(`${baseURL}/student/all`, {
             params: { classId: selectedClass, section: selectedSection },
           });
           const filteredData = response.data.filter(
@@ -188,7 +188,7 @@ const StudentWise = () => {
     const fetchSubjects = async () => {
       if (selectedClass) {
         try {
-          const response = await axios.get(`http://localhost:8007/class/get/${selectedClass}`);
+          const response = await axios.get(`${baseURL}/class/get/${selectedClass}`);
           setSubjects(response.data.Subjects || []);
           setFormData((prevData) => ({
             ...prevData,
@@ -213,7 +213,7 @@ const StudentWise = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/exam/all");
+        const response = await axios.get("`${baseURL}/exam/all");
         setExams(response.data);
       } catch (error) {
         console.error("Error fetching exams:", error);
@@ -226,7 +226,7 @@ const StudentWise = () => {
     const fetchExamDetails = async () => {
       if (selectedExam) {
         try {
-          const response = await axios.get(`http://localhost:8007/exam/get/${selectedExam}`);
+          const response = await axios.get(`${baseURL}/exam/get/${selectedExam}`);
           const examData = response.data;
           setMinMarks(examData.TheorypassingMarks || 0);
           setMaxMarks(examData.TheoryMaxMarks || 0);
@@ -244,7 +244,7 @@ const StudentWise = () => {
       if (selectedClass && selectedSection && selectedExam && student) {
         try {
           // Fetch the result data for the student and exam
-          const response = await axios.get(`http://localhost:8007/result/get/one/${selectedExam}/${student}`);
+          const response = await axios.get(`${baseURL}/result/get/one/${selectedExam}/${student}`);
           const resultData = response.data;
   
           if (resultData) {
@@ -356,7 +356,7 @@ const StudentWise = () => {
     };
 
     try {
-      await axios.post("http://localhost:8007/result/add", resultData);
+      await axios.post(`${baseURL}/result/add`, resultData);
       alert("Result saved successfully!");
     } catch (error) {
       console.error("Error saving result", error);

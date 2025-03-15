@@ -7,7 +7,7 @@ import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import axios from 'axios';
-
+import  baseURL from '../utils/Url'; 
 Chart.register(ArcElement, Tooltip, Legend);
 
 // Styled Components (same as before)
@@ -101,7 +101,7 @@ const SubjectProgress = () => {
 
     if (studentId) {
       axios
-        .get(`http://localhost:8007/student-attendance/all`)
+        .get(`${baseURL}/student-attendance/all`)
         .then((response) => {
           // Initialize counters for Present, Absent, Leave
           let presentCount = 0;

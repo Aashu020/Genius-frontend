@@ -17,6 +17,7 @@ import {
   QRCodesContainer,
   QRCode,
   Left,} from './StudentProfileStyles';
+  import  baseURL from '../utils/Url'; 
 // Styled Components
 
 
@@ -30,7 +31,7 @@ const StudentProfile = () => {
     if (studentId) {
       const fetchStudent = async () => {
         try {
-          const response = await fetch(`http://localhost:8007/student/get/${studentId}`);
+          const response = await fetch(`${baseURL}/student/get/${studentId}`);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -70,7 +71,7 @@ const StudentProfile = () => {
         </Header>
 
         <PhotoContainer>
-          <Photo src={`http://localhost:8007/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
+          <Photo src={`${baseURL}/uploads/${student?.Document?.StudentPhoto}`} alt="Student" />
         </PhotoContainer>
         <Section1>
           <LeftColumn>

@@ -23,7 +23,7 @@ import Sidebar from "./Sidebar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import FeePaymentsChart from "./FeePaymentsChart";
-
+import  baseURL from './utils/Url'; 
 // Registering necessary chart.js components
 ChartJS.register(
   ArcElement,
@@ -162,7 +162,7 @@ const Dashboard = () => {
       try {
         // Call the API only if 'update' is not set to "Yes"
         if (update !== "Yes") {
-          await axios.post("http://localhost:8007/student/create-fee-data-for-all-students");
+          await axios.post(`${baseURL}/student/create-fee-data-for-all-students`);
           setUpdate("Yes");  // Set update to "Yes" to prevent further calls
         }
       } catch (error) {
@@ -178,7 +178,7 @@ const Dashboard = () => {
     // Fetch the fee data from the API
     const fetchFeeData = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/fee-data/all");
+        const response = await axios.get(`${baseURL}/fee-data/all`);
         // setStudents(response.data); // Assuming the response is an array of student fee data
 
         // Calculate totalFee and remainingFee by iterating over the response data
@@ -215,7 +215,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchTotalStudents = async () => {
       try {
-        const response = await fetch('http://localhost:8007/student/all');
+        const response = await fetch(`${baseURL}/student/all`);
         const data = await response.json();
 
         // Assuming the API returns an array of students
@@ -232,7 +232,7 @@ const Dashboard = () => {
     };
     const fetchTotalStaff = async () => {
       try {
-        const response = await fetch('http://localhost:8007/staff/all');
+        const response = await fetch(`${baseURL}/staff/all`);
         const data = await response.json();
 
         // Assuming the API returns an array of staff members

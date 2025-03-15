@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -40,7 +41,7 @@ const AddClass = () => {
   useEffect(() => {
     const fetchSubjects = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/add-subject/all");
+        const response = await axios.get(`${baseURL}/add-subject/all`);
         setSubjects(response.data);
       } catch (error) {
         console.error("Error fetching subjects:", error);
@@ -59,7 +60,7 @@ const AddClass = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/class/all");
+      const response = await axios.get(`${baseURL}/class/all`);
       setClasses(response.data);
     } catch (error) {
       console.error("Error fetching classes:", error);
@@ -87,7 +88,6 @@ const AddClass = () => {
   const clearSelections = () => {
     setSelectedSubject([]);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -95,17 +95,19 @@ const AddClass = () => {
       Class: className,
       Subjects: selectedSubject.map((subject) => ({ Subject: subject })),
     };
+  console.log(classData)
+
 
     try {
       if (editingClassId) {
-        await axios.put(`https://api.edspride.in/class/update/${editingClassId}`, classData);
+        await axios.put(`${baseURL}/class/update/${editingClassId}`, classData);
       } else {
-        await axios.post("https://api.edspride.in/class/add", classData);
+        await axios.post(`${baseURL}/class/add`, classData);
       }
       resetForm();
       fetchClasses();
     } catch (error) {
-      console.error("Error saving class:", error);
+      console.log("Error saving class:", error);
     }
   };
 
@@ -123,7 +125,7 @@ const AddClass = () => {
 
   const handleDelete = async (classId) => {
     try {
-      await axios.delete(`https://api.edspride.in/class/delete/${classId}`);
+      await axios.delete(`${baseURL}/class/delete/${classId}`);
       fetchClasses();
     } catch (error) {
       console.error("Error deleting class:", error);

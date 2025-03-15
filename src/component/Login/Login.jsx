@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LogoImage from "../../assets/Images/geniuslogo.jpg";
 import BackgroundImage from "../../assets/Images/loginBG.jpg";
-
+import  baseURL from '../utils/Url'; 
 const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +16,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8007/user/login", {
+      const response = await fetch(`${baseURL}/user/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ Id: id, Password: password }),
@@ -33,14 +33,14 @@ const Login = () => {
 
         if (data.role.trim() === "Student") {
           const studentId = localStorage.getItem("Id");
-          const studentResponse = await fetch(`http://localhost:8007/student/get/${studentId}`);
+          const studentResponse = await fetch(`${baseURL}/student/get/${studentId}`);
           const studentData = await studentResponse.json();
           console.log("Student data:", studentData);
           if (studentResponse.ok) localStorage.setItem("StudentData", JSON.stringify(studentData));
           else console.error("Failed to fetch student data");
         } else {
           const employeeId = data.Data.Id;
-          const employeeResponse = await fetch(`http://localhost:8007/staff/get/${employeeId}`);
+          const employeeResponse = await fetch(`${baseURL}/staff/get/${employeeId}`);
           const employeeData = await employeeResponse.json();
           console.log("Employee data:", employeeData);
           if (employeeResponse.ok) localStorage.setItem("EmployeeData", JSON.stringify(employeeData));

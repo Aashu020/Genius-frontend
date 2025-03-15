@@ -8,11 +8,11 @@ import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { Container1, H2, FilterWrapper, Table1, TableHeader, TableRow1, TableData1, TotalPaidFee, DateInput, DropdownWrapper, DateRangeWrapper, DropdownContainer, ButtonWrapper, Button } from "./FeeStyles";
-
+import  baseURL from '../utils/Url'; 
 
 // Define your API endpoints (replace with actual URLs)
-const studentApiUrl = 'http://localhost:8007/student/all';
-const feeApiUrl = 'http://localhost:8007/fee-data/all';
+const studentApiUrl = `${baseURL}/student/all`;
+const feeApiUrl = `${baseURL}/fee-data/all`;
 
 // Utility function to handle null/undefined values
 const getSafeValue = (value, fallback = 'No Data') => {

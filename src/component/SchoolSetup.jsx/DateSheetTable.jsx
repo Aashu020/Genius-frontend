@@ -14,6 +14,7 @@ import {
   PrincipalSign,
   Dropdown,
 } from "./SchoolSetup2Style";
+import  baseURL from '../utils/Url'; 
 
 const DateSheet = () => {
   const [examData, setExamData] = useState([]);
@@ -24,7 +25,7 @@ const DateSheet = () => {
   useEffect(() => {
     const fetchExams = async () => {
       try {
-        const response = await axios.get("https://api.edspride.in/exam/all");
+        const response = await axios.get(`${baseURL}/exam/all`);
         console.log("Fetched exams:", response.data);
         setExams(response.data);
       } catch (error) {
@@ -41,7 +42,7 @@ const DateSheet = () => {
         try {
           console.log(`Fetching data for exam: ${selectedExam}`);
           const response = await axios.get(
-            `http://localhost:8007/datesheet/getByExam/${selectedExam}`
+            `${baseURL}/datesheet/getByExam/${selectedExam}`
           );
           console.log("Fetched date sheet data:", response.data);
 
@@ -91,13 +92,19 @@ const DateSheet = () => {
     <MainDashboard>
       <Heading>Add +</Heading>
       <Wrapper>
-        <Header>Saint G.S. Convent School, Tajoke</Header>
-        <SubHeader>Date Sheet for Final Exam 2023</SubHeader>
+        <Header>Genius Classes</Header>
+        {/* {exams.map = (exam) => {
+          console.log("e",exam.AcademicYear)
+        })} */}
+        <SubHeader>Date Sheet for Final Exam {exams.map((exam)=>(
+          exam.AcademicYear
+        ))}</SubHeader>
 
         <Dropdown value={selectedExam} onChange={handleExamChange}>
           <option value="">Select Exam</option>
           {exams.map((exam) => (
             <option key={exam._id} value={exam.ExamName}>
+              {console.log("exam",exam)}
               {exam.ExamName}
             </option>
           ))}

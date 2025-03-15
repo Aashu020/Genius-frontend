@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Edit, Trash2, PlusCircle } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -32,7 +33,7 @@ const AddDesignation = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/department/all");
+      const response = await axios.get(`${baseURL}/department/all`);
       setDepartments(response.data);
     } catch (error) {
       console.error("Error fetching departments:", error);
@@ -83,7 +84,7 @@ const AddDesignation = () => {
 
     try {
       const payload = { Designation: designationFields };
-      await axios.put(`http://localhost:8007/department/update/${selectedDepartment}`, payload);
+      await axios.put(`${baseURL}/department/update/${selectedDepartment}`, payload);
       toast.success("Designations added successfully!");
       resetForm();
       fetchDepartments();

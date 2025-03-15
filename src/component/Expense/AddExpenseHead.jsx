@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Navbar from "../Navbar";
 import Sidebar from "../Sidebar";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import { 
   Container, MainDashboard, Title, Form, Heading, Main, FormContainer, 
   InputContainer, Label, Input, SubmitButton, Table, Th, Td, 
@@ -21,7 +22,7 @@ const AddExpenseHead = () => {
     const fetchExpenses = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8007/expense-header/all"
+          `${baseURL}/expense-header/all`
         );
         setExpenses(response.data);
       } catch (error) {
@@ -55,7 +56,7 @@ const AddExpenseHead = () => {
     try {
       if (editingExpenseId) {
         await axios.put(
-          `http://localhost:8007/expense-header/update/${editingExpenseId}`,
+          `${baseURL}/expense-header/update/${editingExpenseId}`,
           data
         );
         setExpenses(
@@ -66,7 +67,7 @@ const AddExpenseHead = () => {
         alert("Expense head updated successfully!"); // Alert for update
       } else {
         const response = await axios.post(
-          "http://localhost:8007/expense-header/add",
+          `${baseURL}/expense-header/add`,
           data
         );
         setExpenses([...expenses, response.data]);
@@ -99,7 +100,7 @@ const AddExpenseHead = () => {
 
     try {
       await axios.delete(
-        `http://localhost:8007/expense-header/delete/${id}`
+        `${baseURL}/expense-header/delete/${id}`
       );
       setExpenses(expenses.filter((expense) => expense._id !== id));
     } catch (error) {

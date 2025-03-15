@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 // import styled from "styled-components";
 import { Container, MainDashboard, Title, Form, Heading, Section, Main, FormContainer, InputContainer, Label, ErrorMessage, Label2, Input, Select, SubmitButton, TableContainer, Table, Th, Td, Td1, EditButton, DeleteButton, SelectContainer, Dropdown, CheckboxContainer, Checkbox, ClearButton } from "./FeeStyles";
-
+import  baseURL from '../utils/Url'; 
 const FeeReconciliation = () => {
   const [ReceivedClass, setReceivedClass] = useState("");
   const [ReceivedReceived, setReceivedReceived] = useState("");
@@ -21,7 +21,7 @@ const FeeReconciliation = () => {
     // Fetch the fee data from the API
     const fetchFeeData = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/fee-data/all");
+        const response = await axios.get(`${baseURL}/fee-data/all`);
         setFeeData(response.data); // Assuming the response is an array of student fee data
 
         // Calculate totalFee and remainingFee by iterating over the response data
@@ -47,7 +47,7 @@ const FeeReconciliation = () => {
     // Fetch the fee data from the API
     const fetchStudent = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/student/all");
+        const response = await axios.get(`${baseURL}/student/all`);
         setAllStudent(response.data); 
       } catch (error) {
         console.error("Error fetching Student data:", error);
@@ -94,7 +94,7 @@ const FeeReconciliation = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -109,7 +109,7 @@ const FeeReconciliation = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `http://localhost:8007/class/get/${selectedClass}`
+            `${baseURL}/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -145,7 +145,7 @@ const FeeReconciliation = () => {
   useEffect(() => {
     const fetchMonths = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/academic-year-info/active");
+        const response = await axios.get(`${baseURL}/academic-year-info/active`);
         const academicData = response.data;
 
         const monthNames = [
@@ -186,7 +186,7 @@ const FeeReconciliation = () => {
   useEffect(() => {
     const fetchHouses = async () => {
       try {
-        const response = await axios.get('http://localhost:8007/house/all');
+        const response = await axios.get(`${baseURL}/house/all`);
         setHouses(response.data);
         console.log(response.data);
       } catch (error) {
@@ -200,7 +200,7 @@ const FeeReconciliation = () => {
   useEffect(() => {
     const fetchFines = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/fine-setup/all");
+        const response = await axios.get(`${baseURL}/fine-setup/all`);
         setFines(response.data);
       } catch (error) {
         console.error("Error fetching fines:", error);
@@ -220,7 +220,7 @@ const FeeReconciliation = () => {
   useEffect(() => {
     const fetchDiscounts = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/discount/all");
+        const response = await axios.get(`${baseURL}/discount/all`);
         setDiscounts(response.data); // Assuming the response is an array of discounts
       } catch (error) {
         console.error("Error fetching discounts:", error);

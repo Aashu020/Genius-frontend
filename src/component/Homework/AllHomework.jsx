@@ -7,7 +7,7 @@ import {
   HomeworkListContainer, TableWrapper1,HomeworkListTitle, Table, Th, Td, Td1, EditButton, DeleteButton, ViewButton, ConfirmationModal,  ModalContent, ConfirmButton, DetailModalContent 
 } from "./HomeworkStyle";
 import { TableWrapper } from '../Outerstyle2';
-
+import  baseURL from '../utils/Url'; 
 const AllHomework = () => {
   const [homework, setHomework] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -18,7 +18,7 @@ const AllHomework = () => {
   useEffect(() => {
     const fetchHomework = async () => {
       try {
-        const response = await fetch('http://localhost:8007/homework/all');
+        const response = await fetch(`${baseURL}/homework/all`);
         const data = await response.json();
         setHomework(data);
       } catch (error) {
@@ -31,7 +31,7 @@ const AllHomework = () => {
 
   const handlePublish = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8007/homework/update/${id}`, {
+      const response = await fetch(`${baseURL}/homework/update/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const AllHomework = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:8007/homework/delete/${currentId}`, {
+      const response = await fetch(`${baseURL}/homework/delete/${currentId}`, {
         method: 'DELETE',
       });
 
@@ -75,7 +75,7 @@ const AllHomework = () => {
 
   const handleView = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8007/homework/${id}`);
+      const response = await fetch(`${baseURL}/homework/${id}`);
       const data = await response.json();
       console.log(data)
       if (response.ok) {
@@ -176,7 +176,7 @@ const AllHomework = () => {
             <p><strong>Status:</strong> {homeworkDetails.Status}</p>
             {/* Display image if it exists */}
             {homeworkDetails.Image ? (
-              <p style={{display:"flex", alignItems:"center"}}><strong>File:</strong><a target='_blank' href={`http://localhost:8007/uploads/${homeworkDetails.Image}`}><Eye/></a></p>
+              <p style={{display:"flex", alignItems:"center"}}><strong>File:</strong><a target='_blank' href={`${baseURL}/uploads/${homeworkDetails.Image}`}><Eye/></a></p>
             ) : (
               <p>No File available</p>
             )}

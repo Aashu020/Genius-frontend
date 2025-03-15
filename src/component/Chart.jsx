@@ -7,7 +7,7 @@ import 'jspdf-autotable';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import axios from 'axios';
-
+import  baseURL from './utils/Url'; 
 // Register the required chart.js components
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -73,7 +73,7 @@ const DynamicCharts = () => {
     // Fetch the fee data from the API
     const fetchFeeData = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/fee-data/all");
+        const response = await axios.get(`${baseURL}/fee-data/all`);
         // setStudents(response.data); // Assuming the response is an array of student fee data
 
         // Calculate totalFee and remainingFee by iterating over the response data

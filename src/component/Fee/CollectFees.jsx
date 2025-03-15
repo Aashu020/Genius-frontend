@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ErrorMessage,Heading,MainDashboard,Title,Form,Main,FormContainer,InputContainer,Label ,Input,Select,SubmitButton} from "./FeeStyles";
-
+import  baseURL from '../utils/Url'; 
 const CollectFees = () => {
   var navigate = useNavigate();
   const [student, setStudent] = useState("");
@@ -21,7 +21,7 @@ const CollectFees = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -36,7 +36,7 @@ const CollectFees = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `http://localhost:8007/class/get/${selectedClass}`
+            `${baseURL}/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -56,7 +56,7 @@ const CollectFees = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("http://localhost:8007/student/all", {
+          const response = await axios.get(`${baseURL}/student/all`, {
             params: { classId: selectedClass, section: selectedSection },
           });
           // console.log('Students Response:', response.data);
@@ -99,7 +99,7 @@ const CollectFees = () => {
         StudentId: student
       }
       try {
-        await axios.post("http://localhost:8007/fee-data/create", payload);
+        await axios.post(`${baseURL}/fee-data/create`, payload);
         toast.success("Fee slab added successfully.");
         const role = localStorage.getItem("Role");
         if (role == "Superadmin" || role == "Admin") {

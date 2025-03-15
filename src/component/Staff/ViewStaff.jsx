@@ -4,7 +4,7 @@ import logo from "../../assets/Images/EDSP3.jpg";
 import { BsArrowReturnRight } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-
+import  baseURL from '../utils/Url'; 
 // Styled components
 const Container = styled.div`
   height: calc(100vh - 100px);
@@ -159,7 +159,7 @@ const ViewStaff = () => {
     if (location.state && location.state.Id) {
       const fetchStaff = async () => {
         try {
-          const response = await fetch(`http://localhost:8007/staff/get/${location.state.Id}`);
+          const response = await fetch(`${baseURL}/staff/get/${location.state.Id}`);
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
@@ -182,7 +182,7 @@ const ViewStaff = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/schoolsetup/all")
+      .get(`${baseURL}/schoolsetup/all`)
       .then((response) => {
         if (response.data.length > 0) {
           setSchool(response.data[0]);
@@ -204,7 +204,7 @@ const ViewStaff = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8007/staff/update/${location.state.Id}`, staff); // Fixed endpoint from 'student' to 'staff'
+      const response = await axios.put(`${baseURL}/staff/update/${location.state.Id}`, staff); // Fixed endpoint from 'student' to 'staff'
       if (response.status === 200) {
         alert("Staff data updated successfully!");
       }
@@ -221,7 +221,7 @@ const ViewStaff = () => {
     <Container>
       <AdmissionLetterContainer>
         <Header>
-          <Logo style={{ height: "80px" }} src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, "")}`} alt="School Logo" />
+          <Logo style={{ height: "80px" }} src={`${baseURL}/uploads/${school?.SchoolLogo.replace(/^uploads\//, "")}`} alt="School Logo" />
           <Title>{school?.SchoolName}</Title>
           <p>{school?.EmailId} | {school?.PhoneNo}</p>
           <p>{school?.Website}</p>
@@ -229,7 +229,7 @@ const ViewStaff = () => {
         </Header>
 
         <PhotoContainer>
-          <Photo src={`http://localhost:8007/uploads/${staff?.Documents?.Photo}`} alt="Staff" />
+          <Photo src={`${baseURL}/uploads/${staff?.Documents?.Photo}`} alt="Staff" />
         </PhotoContainer>
 
         <Section1>

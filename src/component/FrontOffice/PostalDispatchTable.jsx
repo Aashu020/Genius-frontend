@@ -11,6 +11,7 @@ import {
   PaginationButton,
   RowsPerPageDropdown,
 } from "./FrontOfficeStyle1";
+import  baseURL from '../utils/Url'; 
 
 const PostalDispatchTable = () => {
   const [tasks, setTasks] = useState([]);
@@ -22,7 +23,7 @@ const PostalDispatchTable = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('http://localhost:8007/postal/all');
+        const response = await fetch(`${baseURL}/postal/all`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

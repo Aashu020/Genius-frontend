@@ -7,15 +7,16 @@ import LeavingStaffTable from "./LeavingStaffTable";
 import Sidebar from "../Sidebar";
 import axios from "axios";
 import LeavingStudentTable from "./LeavingStudentTable";
+import { useNavigate } from "react-router-dom";
 import {
   Container, MainDashboard, Title, Form, Section, Heading, Main,
   FormContainer, InputContainer, InputContainer1, Label, Select,
   PlusButton, ErrorMessage, Input, SubmitButton
 } from './FrontOfficeStyles1';
+import  baseURL from '../utils/Url'; 
 const EarlyLeaving = () => {
   const [activeForm, setActiveForm] = useState("student"); // State to track active form
   const [showInput, setShowInput] = useState(false);
-
   const [formData, setFormData] = useState({
     Name: "",
     Class: "",
@@ -38,6 +39,7 @@ const EarlyLeaving = () => {
     TimeOfLeaving: "",
     ApprovedBy: "",
   });
+  const navigate = useNavigate()
 
   const [formErrors, setFormErrors] = useState({}); // State for errors
   const [staffErrors, setStaffErrors] = useState({}); // State for staff errors
@@ -131,7 +133,7 @@ const EarlyLeaving = () => {
       console.log("Added")
       try {
         const response = await axios.post(
-          "http://localhost:8007/student-leaving/add",
+          `${baseURL}/student-leaving/add`,
           formData
         );
         console.log(response.data);
@@ -164,7 +166,7 @@ const EarlyLeaving = () => {
     if (Object.keys(errors).length === 0) {
       try {
         const response = await axios.post(
-          "http://localhost:8007/staff-leaving/add",
+          `${baseURL}/staff-leaving/add`,
           staffData
         );
         console.log(response.data);
@@ -222,7 +224,7 @@ const EarlyLeaving = () => {
   useEffect(() => {
     // Fetch all departments
     const fetchDepartments = async () => {
-      const response = await fetch('http://localhost:8007/department/all');
+      const response = await fetch(`${baseURL}/department/all`);
       const data = await response.json();
       setDepartments(data);
     };
@@ -232,7 +234,7 @@ const EarlyLeaving = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get('http://localhost:8007/class/all');
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
         console.log(response.data);
       } catch (error) {
@@ -247,7 +249,7 @@ const EarlyLeaving = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `http://localhost:8007/class/get/${selectedClass}`
+            `${baseURL}/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data); // Debugging output
           setSections(response.data.Section || []);
@@ -270,7 +272,7 @@ const EarlyLeaving = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -285,7 +287,7 @@ const EarlyLeaving = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `http://localhost:8007/class/get/${selectedClass}`
+            `${baseURL}/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -305,7 +307,7 @@ const EarlyLeaving = () => {
     const fetchStudents = async () => {
       if (selectedClass && selectedSection) {
         try {
-          const response = await axios.get("http://localhost:8007/student/all", {
+          const response = await axios.get(`${baseURL}/student/all`, {
             params: { classId: selectedClass, section: selectedSection },
           });
           console.log('Students Response:', response.data);
@@ -390,7 +392,7 @@ const EarlyLeaving = () => {
   // Fetch existing approved by data from API
   const fetchApprovedByList = async () => {
     try {
-      const response = await axios.get('http://localhost:8007/approvedby/all');
+      const response = await axios.get(`${baseURL}/approvedby/all`);
       setApprovedByList(response.data);
     } catch (error) {
       console.error('Error fetching approved by list:', error);
@@ -413,7 +415,7 @@ const EarlyLeaving = () => {
 
     try {
       // Send new approved by to API
-      const response = await axios.post('http://localhost:8007/approvedby/add', {
+      const response = await axios.post(`${baseURL}/approvedby/add`, {
         ApprovedByTitle: newApprovedBy,
       });
 

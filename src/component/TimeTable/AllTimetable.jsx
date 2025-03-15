@@ -7,7 +7,7 @@ import html2canvas from "html2canvas";
 import { MainDashboard,Title,Th,Td } from "../StudentAdmission/StudentAdmission";
 // Your existing styled components (no changes needed)
 import { TableContainer,PeriodCell,Header,SubjectCell,RowHeader,TableItem,Table1,Td1,ViewButton,ModalOverlay,ModalContent,YesButton,NoButton,TableHeader,TableItem1,TimetableContainer} from "../Subject/SubjectStyle";
-
+import  baseURL from '../utils/Url'; 
 const Table = styled.table`
   width: 70%;
   border-collapse: collapse;
@@ -34,7 +34,7 @@ const AllTimetable = () => {
   useEffect(() => {
     const fetchTimetable = async () => {
       try {
-        const response = await fetch('http://localhost:8007/timetable/all');
+        const response = await fetch(`${baseURL}/timetable/all`);
         const data = await response.json();
         setTimetable(data);
       } catch (error) {
@@ -47,7 +47,7 @@ const AllTimetable = () => {
   useEffect(() => {
     const fetchPeriods = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/period/all");
+        const response = await axios.get(`${baseURL}/period/all`);
         setPeriods(response.data);
       } catch (err) {
         console.error("Error fetching periods:", err);
@@ -58,7 +58,7 @@ const AllTimetable = () => {
 
   const handleView = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8007/timetable/get/${id}`);
+      const response = await fetch(`${baseURL}/timetable/get/${id}`);
       const data = await response.json();
       if (response.ok) {
         setTimetableDetails(data);

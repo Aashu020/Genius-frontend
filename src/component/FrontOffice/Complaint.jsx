@@ -5,7 +5,7 @@ import { Edit, Trash2 } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { TableWrapper } from "../Outerstyle2";
-
+import  baseURL from '../utils/Url'; 
 const Container = styled.div`
   display: flex;
   background-color: #f4f4f4;
@@ -281,7 +281,7 @@ const Complaint = () => {
   useEffect(() => {
     const fetchComplaints = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/complaint/all");
+        const response = await axios.get(`${baseURL}/complaint/all`);
         setComplaints(response.data);
       } catch (error) {
         console.error("Error fetching complaints:", error.response ? error.response.data : error.message);
@@ -290,7 +290,7 @@ const Complaint = () => {
 
     const fetchComplaintForOptions = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/complaintfor/all");
+        const response = await axios.get(`${baseURL}/complaintfor/all`);
         setComplaintForOptions(response.data);
       } catch (error) {
         console.error("Error fetching complaint for options:", error.response ? error.response.data : error.message);
@@ -316,7 +316,7 @@ const Complaint = () => {
 
     try {
       if (editMode) {
-        await axios.put(`http://localhost:8007/complaint/update/${currentComplaintId}`, {
+        await axios.put(`${baseURL}/complaint/update/${currentComplaintId}`, {
           Source: source,
           Type: type,
           AddComplaint: addComplaint,
@@ -324,7 +324,7 @@ const Complaint = () => {
         });
         toast.success("Edited Successfully!");
       } else {
-        await axios.post("http://localhost:8007/complaint/add", {
+        await axios.post(`${baseURL}/complaint/add`, {
           Source: source,
           Type: type,
           AddComplaint: addComplaint,
@@ -340,7 +340,7 @@ const Complaint = () => {
       setErrors({});
       setEditMode(false);
       setCurrentComplaintId(null);
-      const response = await axios.get("http://localhost:8007/complaint/all");
+      const response = await axios.get(`${baseURL}/complaint/all`);
       setComplaints(response.data);
     } catch (error) {
       console.error("Error submitting form:", error.response ? error.response.data : error.message);
@@ -355,7 +355,7 @@ const Complaint = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8007/complaintfor/add", { ComplaintForName: newComplaintFor });
+      const response = await axios.post(`${baseURL}/complaintfor/add`, { ComplaintForName: newComplaintFor });
       toast.success("Header Added successfully!");
       setComplaintForOptions([...complaintForOptions, response.data]);
       setNewComplaintFor(""); // Clear input after adding
@@ -496,7 +496,7 @@ const Complaint = () => {
                     if (window.confirm("Are you sure you want to delete this complaint?")) {
                       try {
                         // Using CompliantNo from the complaint object
-                        await axios.delete(`http://localhost:8007/complaint/delete/${complaint.CompliantNo}`);
+                        await axios.delete(`${baseURL}/complaint/delete/${complaint.CompliantNo}`);
                         const updatedComplaints = complaints.filter(c => c.CompliantNo !== complaint.CompliantNo); // Filter by CompliantNo
                         setComplaints(updatedComplaints);
                       } catch (error) {

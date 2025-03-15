@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import dayjs from 'dayjs';
-
+import  baseURL from './utils/Url'; 
 const FeePaymentChart = () => {
   const [paymentData, setPaymentData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ const FeePaymentChart = () => {
   // Fetch data from the backend API
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8007/fee-data/all');
+      const response = await axios.get(`${baseURL}/fee-data/all`);
       processPaymentData(response.data);
     } catch (err) {
       setError('Failed to fetch data');

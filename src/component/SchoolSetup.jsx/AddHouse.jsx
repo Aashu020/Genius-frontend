@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Edit, Trash2 } from "lucide-react";
+import baseURL from "../utils/Url";
 import {
   MainDashboard,
   Title,
@@ -41,7 +42,7 @@ const AddHouse = () => {
 
   const fetchHouses = async () => {
     try {
-      const response = await axios.get("http://localhost:8007/house/all");
+      const response = await axios.get(`${baseURL}/house/all`);
       setHouses(response.data);
     } catch (error) {
       console.error("Error fetching houses:", error);
@@ -72,7 +73,7 @@ const AddHouse = () => {
 
     try {
       if (editId) {
-        const response = await axios.put(`https://api.edspride.in/house/update/${editId}`, {
+        const response = await axios.put(`${baseURL}/house/update/${editId}`, {
           HouseName: houseName,
           Color: color,
         });
@@ -80,7 +81,7 @@ const AddHouse = () => {
         toast.success("House updated successfully!");
         setEditId(null);
       } else {
-        const response = await axios.post("https://api.edspride.in/house/add", {
+        const response = await axios.post(`${baseURL}/house/add`, {
           HouseName: houseName,
           Color: color,
         });
@@ -109,7 +110,7 @@ const AddHouse = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8007/house/delete/${deleteId}`);
+      await axios.delete(`${baseURL}/house/delete/${deleteId}`);
       setHouses(houses.filter((dep) => dep._id !== deleteId));
       toast.success("House deleted successfully!");
       setShowModal(false);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 import styled from 'styled-components';
-
+import  baseURL from '../utils/Url'; 
 // Styled Components
 const Container = styled.div`
   padding: 20px;
@@ -190,7 +190,7 @@ const formatDate = (excelDate) => {
         console.log(jsonData);
         try {
             // Send the data to the server
-            const response = await fetch('http://localhost:8007/bulk/save-staff', {
+            const response = await fetch(`${baseURL}/bulk/save-staff`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

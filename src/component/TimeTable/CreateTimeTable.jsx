@@ -5,7 +5,7 @@ import * as XLSX from "xlsx";
 import { FaFilePdf, FaFileExcel, FaPrint } from "react-icons/fa";
 import {Form, MainDashboard,SubmitButton,Select,Section,Label,InputContainer,Title,Heading,Main,FormContainer} from "../StudentAdmission/StudentAdmission";
 import { CheckboxContainer,Th,Td,Heading1,Checkbox,ClearButton,TimetableWrapper,Table} from "../Subject/SubjectStyle";
-
+import  baseURL from '../utils/Url'; 
 
 const Timetable = ({ classId, section }) => {
   const [timetableData, setTimetableData] = useState(null);
@@ -16,7 +16,7 @@ const Timetable = ({ classId, section }) => {
     const fetchTimetable = async () => {
       console.log(`Fetching timetable for classId: ${classId}, section: ${section}`);
       try {
-        const response = await axios.get(`http://localhost:8007/timetable/get/${classId + section}`);
+        const response = await axios.get(`${baseURL}/timetable/get/${classId + section}`);
         console.log("Timetable data received:", response.data);
         setTimetableData(response.data);
         setLoading(false);
@@ -150,7 +150,7 @@ const CreateTimeTable = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         setClasses(response.data);
       } catch (error) {
         console.error("Error fetching classes:", error);
@@ -159,7 +159,7 @@ const CreateTimeTable = () => {
 
     const fetchPeriods = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/period/all");
+        const response = await axios.get(`${baseURL}/period/all`);
         setPeriods(response.data);
       } catch (error) {
         console.error("Error fetching periods:", error);
@@ -168,7 +168,7 @@ const CreateTimeTable = () => {
 
     const fetchStaff = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/staff/all");
+        const response = await axios.get(`${baseURL}/staff/all`);
         setStaff(response.data);
       } catch (error) {
         console.error("Error fetching staff:", error);
@@ -239,7 +239,7 @@ const CreateTimeTable = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8007/timetable/add", {
+      const response = await axios.post(`${baseURL}/timetable/add`, {
         ClassID: formData.Class,
         Class: formData.Class,
         Section: formData.Section,
@@ -269,7 +269,7 @@ const CreateTimeTable = () => {
     }));
 
     try {
-      const response = await axios.post("http://localhost:8007/timetable/add", {
+      const response = await axios.post(`${baseURL}/timetable/add`, {
         ClassID: formData.Class,
         Class: formData.Class,
         Section: formData.Section,

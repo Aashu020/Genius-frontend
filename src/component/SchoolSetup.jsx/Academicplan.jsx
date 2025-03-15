@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -37,7 +38,7 @@ const AcademicPlan = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get('http://localhost:8007/academic-year-plan/all');
+      const response = await axios.get(`${baseURL}/academic-year-plan/all`);
       setEvents(response.data);
     } catch (error) {
       console.error('Error fetching events:', error);
@@ -56,10 +57,10 @@ const AcademicPlan = () => {
     e.preventDefault();
     try {
       if (editingEventId) {
-        const response = await axios.put(`https://api.edspride.in/academic-year-plan/update/${editingEventId}`, formData);
+        const response = await axios.put(`${baseURL}/academic-year-plan/update/${editingEventId}`, formData);
         toast.success("Academic Year Plan updated successfully!");
       } else {
-        const response = await axios.post('https://api.edspride.in/academic-year-plan/add', formData);
+        const response = await axios.post(`${baseURL}/academic-year-plan/add`, formData);
         toast.success("Academic Year Plan saved successfully!");
       }
       setFormData({
@@ -93,7 +94,7 @@ const AcademicPlan = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
-        await axios.delete(`http://localhost:8007/academic-year-plan/delete/${id}`);
+        await axios.delete(`${baseURL}/academic-year-plan/delete/${id}`);
         toast.success("Event deleted successfully!");
         const updatedEvents = events.filter(event => event._id !== id);
         setEvents(updatedEvents);

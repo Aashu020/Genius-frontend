@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import axios from 'axios';
-
+import  baseURL from '../utils/Url'; 
 const Container = styled.div`
   padding: 20px;
   width: 85%;
@@ -203,7 +203,7 @@ const Ledger = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8007/schoolsetup/all")
+      .get(`${baseURL}/schoolsetup/all`)
       .then((response) => {
         if (response.data.length > 0) {
           setSchool(response.data[0])
@@ -216,7 +216,7 @@ const Ledger = () => {
 
   const fetchData = async (start, end) => {
     try {
-      const response = await axios.get('http://localhost:8007/revenue/all');
+      const response = await axios.get(`${baseURL}/revenue/all`);
       const filteredData = response.data.filter(item => {
         const date = new Date(item.Date);
         return date >= new Date(start) && date <= new Date(end);
@@ -264,7 +264,7 @@ const Ledger = () => {
       // Extract and add the school logo image
       if (school?.SchoolLogo) {
         const logoImg = new Image();
-        logoImg.src = `http://localhost:8007/uploads/${school.SchoolLogo}`;
+        logoImg.src = `${baseURL}/uploads/${school.SchoolLogo}`;
         logoImg.onload = () => {
           const logoWidth = 10; // Adjust as necessary
           const logoHeight = 10; // Adjust as necessary
@@ -317,7 +317,7 @@ const Ledger = () => {
           <SchoolHeader>
             {school?.SchoolLogo && (
               <img 
-                src={`http://localhost:8007/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`}
+                src={`${baseURL}/uploads/${school?.SchoolLogo.replace(/^uploads\//, '')}`}
                 alt="School Logo" 
               />
             )}

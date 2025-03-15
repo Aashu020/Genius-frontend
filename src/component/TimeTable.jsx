@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-
+import  baseURL from './utils/Url'; 
 import {
   TableWrapper, HeaderWrapper, InputContainer, Select, TimeTableGrid, TableHeader,
   TableItem, TableItem1
@@ -20,7 +20,7 @@ const TimeTable = () => {
   useEffect(() => {
     const fetchClasses = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/class/all");
+        const response = await axios.get(`${baseURL}/class/all`);
         console.log('Classes Response:', response.data);
         setClasses(response.data);
       } catch (error) {
@@ -34,7 +34,7 @@ const TimeTable = () => {
     // Fetch existing periods
     const fetchPeriods = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/period/all");
+        const response = await axios.get(`${baseURL}/period/all`);
         setPeriods(response.data);
       } catch (err) {
         console.error("Error fetching periods:", err);
@@ -49,7 +49,7 @@ const TimeTable = () => {
       if (selectedClass) {
         try {
           const response = await axios.get(
-            `http://localhost:8007/class/get/${selectedClass}`
+            `${baseURL}/class/get/${selectedClass}`
           );
           console.log('Sections Response:', response.data);
           setSections(response.data.Section || []);
@@ -70,7 +70,7 @@ const TimeTable = () => {
         try {
           const classId = selectedClass + selectedSection; // Combine classId and section
           const response = await axios.get(
-            `http://localhost:8007/timetable/get/${selectedClass}/${selectedSection}`
+            `${baseURL}/timetable/get/${selectedClass}/${selectedSection}`
           );
           console.log('Timetable Response:', response.data);
           setTimetable(response.data);

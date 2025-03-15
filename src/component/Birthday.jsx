@@ -8,6 +8,7 @@ import {
   SendWishesButton, DotsContainer, Dot, EventCard, EventTitle, EventDetails, ConfirmationModal,
   DetailModalContent, ConfirmButton
 } from './Outerstyle';
+import  baseURL from './utils/Url'; 
 
 // Custom Hook for handling the slider logic
 const useSlider = (data) => {
@@ -53,7 +54,7 @@ const DynamicSlider = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/academicevents/all");
+        const response = await axios.get(`${baseURL}/academicevents/all`);
         // Filter events with status 'Publish' and only upcoming events based on StartDate
         const today = new Date();
         const filteredEvents = response.data
@@ -74,7 +75,7 @@ const DynamicSlider = () => {
   useEffect(() => {
     const fetchNotices = async () => {
       try {
-        const response = await axios.get("http://localhost:8007/noticebox/all");
+        const response = await axios.get(`${baseURL}/noticebox/all`);
         // Filter notices with status 'Publish'
         const filteredNotices = response.data.filter((notice) => notice.Status === "Publish");
         setNotices(filteredNotices);
@@ -97,8 +98,8 @@ const DynamicSlider = () => {
     const fetchBirthdays = async () => {
       try {
         // Fetch students' birthdays
-        const studentsResponse = await axios.get("http://localhost:8007/student/all");
-        const staffResponse = await axios.get("http://localhost:8007/staff/all");
+        const studentsResponse = await axios.get(`${baseURL}/student/all`);
+        const staffResponse = await axios.get(`${baseURL}/staff/all`);
 
         // Log the responses to check if data is being fetched
         // console.log("Students:", studentsResponse.data);
@@ -163,7 +164,7 @@ const DynamicSlider = () => {
 
     try {
       // Make a POST request to the backend API to send the birthday wish
-      const response = await axios.post('http://localhost:8007/birthday/send-birthday-wish', wishData);
+      const response = await axios.post(`${baseURL}/birthday/send-birthday-wish`, wishData);
 
       // Handle the success response
       console.log(response.data.message); // Show success message
@@ -194,7 +195,7 @@ const DynamicSlider = () => {
         {birthdayData.length > 0 ? (
           <ProfileContainer>
             <ProfileImage
-              src={birthdayData[currentBirthdayIndex]?.Documents?.Photo && `http://localhost:8007/uploads/${birthdayData[currentBirthdayIndex]?.Documents?.Photo}` || birthdayData[currentBirthdayIndex]?.Document?.StudentPhoto && `http://localhost:8007/uploads/${birthdayData[currentBirthdayIndex]?.Document?.StudentPhoto}` || "https://via.placeholder.com/60"}
+              src={birthdayData[currentBirthdayIndex]?.Documents?.Photo && `${baseURL}/uploads/${birthdayData[currentBirthdayIndex]?.Documents?.Photo}` || birthdayData[currentBirthdayIndex]?.Document?.StudentPhoto && `${baseURL}/uploads/${birthdayData[currentBirthdayIndex]?.Document?.StudentPhoto}` || "https://via.placeholder.com/60"}
               alt="Profile"
             />
             <ProfileInfo>

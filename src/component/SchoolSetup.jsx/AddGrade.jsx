@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Edit, Trash2 } from "lucide-react";
+import  baseURL from '../utils/Url'; 
 import {
   MainDashboard,
   Title,
@@ -40,7 +41,7 @@ const AddGrade = () => {
 
   const fetchGrades = async () => {
     try {
-      const response = await axios.get("https://api.edspride.in/grade/all");
+      const response = await axios.get(`${baseURL}/grade/all`);
       setGrades(response.data);
     } catch (error) {
       console.error("Error fetching grades:", error);
@@ -65,14 +66,14 @@ const AddGrade = () => {
 
     try {
       if (editId) {
-        await axios.put(`https://api.edspride.in/grade/update/${editId}`, {
+        await axios.put(`${baseURL}/grade/update/${editId}`, {
           Title: title,
           Salary: salary,
         });
         toast.success("Grade updated successfully!");
         setEditId(null);
       } else {
-        const response = await axios.post("https://api.edspride.in/grade/add", {
+        const response = await axios.post(`${baseURL}/grade/add`, {
           Title: title,
           Salary: salary,
         });
@@ -102,7 +103,7 @@ const AddGrade = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`https://api.edspride.in/grade/delete/${deleteId}`);
+      await axios.delete(`${baseURL}/grade/delete/${deleteId}`);
       toast.success("Grade deleted successfully!");
       fetchGrades();
     } catch (error) {

@@ -3,17 +3,27 @@ import axios from 'axios';
 import Select from 'react-dropdown-select';
 import DatePicker from 'react-datepicker'; // Correct import for DatePicker
 import "react-datepicker/dist/react-datepicker.css";
-// import styled from 'styled-components'; // Import styled-components
+import styled from 'styled-components'; // Import styled-components
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import { Eye } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { 
-    Container1, Heading, FilterWrapper, Table, TableHeader, TableRow, TableData, TotalPaidFee, DateRangeWrapper, 
+    Container1, Heading, FilterWrapper,  TableHeader, TableRow, TableData, TotalPaidFee, DateRangeWrapper, 
     DatePickerWrapper, DateInput, DropdownWrapper, DropdownContainer, ButtonWrapper, Button 
 } from "./FeeStyles";
-import  baseURL from '../utils/Url';   
+import  baseURL from '../utils/Url'; 
+  export const Table = styled.table`
+  width: 100%; /* ✅ 100% width le, taaki scroll properly aaye */
+  min-width: 600px; /* ✅ Avoid shrinking */
+  border-collapse: collapse;
+  margin-top: 30px;
+  /* white-space: nowrap; ✅ Prevent text wrapping */
+ 
+  
+`;
+
 
 // Define your API endpoints (replace with actual URLs)
 const studentApiUrl = `${baseURL}/student/all`; // Replace with actual student API

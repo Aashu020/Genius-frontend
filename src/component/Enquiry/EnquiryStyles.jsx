@@ -495,10 +495,9 @@ export const CardContainer = styled.div`
   border-radius: 15px;
   background-color: #fff;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  width: calc(100vw - 300px);
-  max-width: 900px;
+  width: 95%;
   @media (max-width: 1024px) {
-    width: calc(100vw - 200px);
+    width: 92%;
   }
   @media (max-width: 768px) {
     width: 90%;

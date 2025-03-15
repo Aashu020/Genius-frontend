@@ -47,6 +47,7 @@ export const MainDashboard = styled.div`
     padding: 10px;
     height: auto;
     min-height: 100vh;
+    overflow-y: auto;
   }
 `;
 

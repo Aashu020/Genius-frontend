@@ -191,12 +191,13 @@ const LoginRight = styled.div`
   align-items: center;
 
   @media (max-width: 480px) {
-    width: 100%;
+    width: 90%;
     padding: 20px;
   }
 
   @media (max-width: 320px) {
     padding: 15px;
+    width: 90%;
   }
 `;
 

@@ -1,11 +1,36 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import styled from "styled-components";
+import styled from "styled-components";
 import { Eye, Edit, Trash2 } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Container, MainDashboard, Title, Form, Main, FormContainer, InputContainer, Label, Input, Select, SubmitButton, ErrorMessage, TableContainer, Table, Th, Td, Td1, EditButton, DeleteButton, ConfirmationModal, ModalContent, ConfirmButton, DetailModalContent } from "./FeeStyles";
-import  baseURL from '../utils/Url'; 
+import { Container, MainDashboard, Title, Form, Main, FormContainer, InputContainer, Label, Input, Select, SubmitButton, ErrorMessage,  Th, Td, Td1, EditButton, DeleteButton, ConfirmationModal, ModalContent, ConfirmButton, DetailModalContent } from "./FeeStyles";
+const TableContainer = styled.div`
+  width: 100%;
+  overflow-x: auto; /* ✅ Ensure scrolling works */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (max-width:480px){
+    justify-content: flex-start;
+  }
+  
+`;
+ const Table = styled.table`
+  width: 100%; /* ✅ 100% width le, taaki scroll properly aaye */
+  min-width: 600px; /* ✅ Avoid shrinking */
+  border-collapse: collapse;
+  margin-top: 30px;
+  /* white-space: nowrap; ✅ Prevent text wrapping */
+  @media (max-width:1023px){
+    margin-left: 14rem;
+  }
+ 
+  @media  (max-width:480px){
+    margin-left: 1rem;
+  }
+  
+`;import  baseURL from '../utils/Url'; 
 const FeeSlab = () => {
   const [classList, setClassList] = useState([]);
   const [feeSlabList, setFeeSlabList] = useState([]);

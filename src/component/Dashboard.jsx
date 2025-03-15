@@ -39,6 +39,7 @@ const MainDashboard = styled.div`
   flex: 1;
   padding: 20px;
   height: calc(100vh - 100px);
+  overflow-y: auto;
   background-color: #f9f9f9;
 `;
 

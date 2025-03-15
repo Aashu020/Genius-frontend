@@ -37,6 +37,7 @@ export const MainDashboard = styled.div`
   @media (max-width: ${breakpoints.mobile}) {
     padding: 10px;
     height: auto;
+    overflow-y: auto;
     min-height: 100vh;
     overflow-x: hidden;
   }

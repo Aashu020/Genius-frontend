@@ -14,7 +14,7 @@ export const TableContainer = styled.div`
   justify-content: center;
   align-items: center;
   
-  @media (max-width:375px){
+  @media (max-width:1023px){
     justify-content: flex-start;
   }
 `;
@@ -25,15 +25,7 @@ export const Table = styled.table`
   border-collapse: collapse;
   margin-top: 30px;
   /* white-space: nowrap; ✅ Prevent text wrapping */
-  @media (max-width:1023px){
-    margin-left: 14rem;
-  }
-  @media (max-width:375px){
-    margin-left: 0;
-  }
-  @media (max-width:480px){
-    margin-left: 17rem;
-  }
+
   
 `;
 import  baseURL from '../utils/Url'; 

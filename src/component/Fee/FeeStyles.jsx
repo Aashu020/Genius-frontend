@@ -207,8 +207,9 @@ export const TableContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  
+  @media (max-width:1023px){
+    justify-content:flex-start;
+  }
 `;
 
 export const Table = styled.table`
@@ -216,17 +217,6 @@ export const Table = styled.table`
   min-width: 600px; /* ✅ Avoid shrinking */
   border-collapse: collapse;
   margin-top: 30px;
-  /* white-space: nowrap; ✅ Prevent text wrapping */
-  @media (max-width:1023px){
-    margin-left: 14rem;
-  }
-  @media (max-width:320px){
-    margin-left: 34rem;
-  }
-  @media (max-width:480px){
-    margin-left: 17rem;
-  }
-  
 `;
 
 export const Th = styled.th`
